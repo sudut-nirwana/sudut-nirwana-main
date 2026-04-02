@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sudutnirwana.com/sitemap.xml
+# Menghalangi bot mengindeks folder sistem Jekyll
+Disallow: /_layouts/
+Disallow: /_includes/
+Disallow: /_posts/
+Disallow: /_config.yml
 
+# Link ke peta situs terbaru
+Sitemap: https://sudutnirwana.com/sitemap.xml
