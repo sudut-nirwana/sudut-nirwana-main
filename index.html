@@ -1,68 +1,40 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudut Nirwana | Digital Studio & Rental Services</title>
-    
-    <meta name="description" content="Sudut Nirwana: Jasa Pembuatan Website, Undangan Digital, CV Online, dan Rental Mobil. Solusi digital kreatif dan profesional untuk kebutuhan Anda.">
-    <meta name="keywords" content="Jasa Website, Undangan Digital, CV Online, Rental Mobil, Sudut Nirwana">
-    
-    <style>
-        :root { --primary: #00d4ff; --bg: #121212; --card: #1e1e1e; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; margin: 0; text-align: center; }
-        .container { padding: 40px 20px; max-width: 800px; margin: auto; }
-        header { margin-bottom: 40px; }
-        h1 { color: var(--primary); font-size: 2.5rem; margin-bottom: 5px; }
-        .tagline { color: #888; font-size: 1rem; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
-        .card { background: var(--card); padding: 25px; border-radius: 15px; text-decoration: none; color: white; border: 1px solid #333; transition: 0.3s; }
-        .card:hover { border-color: var(--primary); transform: translateY(-5px); background: #252525; }
-        .card h3 { color: var(--primary); margin-top: 0; }
-        .card p { font-size: 0.9rem; color: #bbb; line-height: 1.5; }
-        
-        .btn-wa { display: inline-block; margin-top: 40px; background: #25d366; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; }
-        .footer { margin-top: 60px; font-size: 0.8rem; color: #555; }
-    </style>
-</head>
-<body>
+---
+layout: default
+title: Sudut Nirwana - Chord Gitar & Undangan Digital
+---
 
-    <div class="container">
-        <header>
-            <h1>Sudut Nirwana</h1>
-            <p class="tagline">Creative Digital Studio & Professional Services</p>
-        </header>
+<div class="welcome-section">
+    <h1>Sudut Nirwana</h1>
+    <p>Tutorial Gitar Santai & Layanan Digital Profesional</p>
+</div>
 
-        <div class="grid">
-            <a href="#" class="card">
-                <h3>🌐 Jasa Website</h3>
-                <p>Pembuatan Landing Page, Company Profile, dan Toko Online profesional untuk bisnis Anda.</p>
-            </a>
+<div class="services-container">
+    <a href="/chord/" class="service-card">
+        <div class="icon">🎸</div>
+        <h2>Chord Gitar</h2>
+        <p>Koleksi kunci gitar lagu favorit yang mudah dipelajari untuk pemula.</p>
+    </a>
 
-            <a href="#" class="card">
-                <h3>💌 Undangan Digital</h3>
-                <p>Undangan pernikahan digital elegan dengan fitur RSVP, Musik, dan Galeri Foto.</p>
-            </a>
+    <a href="/undangan/" class="service-card">
+        <div class="icon">💌</div>
+        <h2>Undangan Digital</h2>
+        <p>Jasa pembuatan undangan pernikahan online elegan dengan fitur RSVP & Musik.</p>
+    </a>
 
-            <a href="#" class="card">
-                <h3>📄 CV Online</h3>
-                <p>Tingkatkan personal branding Anda dengan CV berbasis website yang interaktif dan modern.</p>
-            </a>
+    <a href="/edukasi/" class="service-card">
+        <div class="icon">📖</div>
+        <h2>Tips & Edukasi</h2>
+        <p>Panduan belajar gitar, teknik dasar, dan tips seputar dunia digital.</p>
+    </a>
+</div>
 
-            <a href="/rental" class="card">
-                <h3>🚗 Rental Mobil</h3>
-                <p>Layanan sewa mobil terpercaya dengan armada bersih dan driver profesional.</p>
-            </a>
-        </div>
-
-        <a href="https://wa.me/62xxxxxxxxxxx" class="btn-wa">Konsultasi via WhatsApp</a>
-
-        <div class="footer">
-            &copy; 2026 Sudut Nirwana. All Rights Reserved.<br>
-            Melayani Jasa Digital se-Indonesia & Rental Mobil Area [Kota Anda].
-        </div>
-    </div>
-
-</body>
-</html>
+<style>
+    .services-container { display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; }
+    .service-card { 
+        flex: 1; min-width: 250px; padding: 25px; border-radius: 15px;
+        background: #1a1a1a; color: white; text-decoration: none;
+        text-align: center; border: 1px solid #333; transition: 0.3s;
+    }
+    .service-card:hover { border-color: #00d4ff; transform: translateY(-5px); }
+    .icon { font-size: 40px; margin-bottom: 15px; }
+</style>
