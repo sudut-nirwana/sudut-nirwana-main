@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | Sudut Nirwana</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo-area">
+            <img src="/assets/img/logo.png" alt="Sudut Nirwana">
+            <span>Creative Digital Studio</span>
+        </div>
+        
+        <nav class="menu">
+            <a href="/"><i class="fas fa-home"></i> Beranda</a>
+            <a href="/chord/"><i class="fas fa-guitar"></i> Chord Gitar</a>
+            <a href="/undangan/"><i class="fas fa-envelope-open-text"></i> Undangan Digital</a>
+            <a href="/edukasi/"><i class="fas fa-book-open"></i> Edukasi</a>
+            <a href="/kontak/"><i class="fas fa-phone"></i> Kontak</a>
+        </nav>
+
+        <div class="social-connect">
+            <p>Let's Connect..!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-header">
+            <button id="menu-toggle">☰</button>
+            <div class="page-title">{{ page.title }}</div>
+        </header>
+
+        <section class="content-wrapper">
+            {{ content }} </section>
+        
+        <footer>
+            <p>&copy; 2026 Sudut Nirwana. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script src="/assets/js/script.js"></script>
+</body>
+</html>
