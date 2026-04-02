@@ -1,0 +1,13 @@
+# Pengaturan Dasar
+title: Sudut Nirwana
+url: "https://sudutnirwana.com"
+description: "Chord Gitar Akurat & Jasa Undangan Digital Profesional"
+
+# Pengaturan Jekyll
+markdown: kramdown
+theme: null # Kita pakai desain sendiri di folder _layouts
+plugins:
+  - jekyll-sitemap # Opsional: jika ingin sitemap otomatis nantinya
+
+# Agar file di folder assets tidak terabaikan
+include: [assets]
