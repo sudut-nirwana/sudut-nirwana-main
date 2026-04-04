@@ -1,35 +1,10 @@
+
 ---
 layout: default
-title: Sudut Nirwana - Chord Gitar Lengkap & Tutorial Kunci Dasar
+title: Beranda
 ---
 
-<div class="welcome-section">
-    <h1>Sudut Nirwana</h1>
-    <p>Tutorial Gitar Santai & Kumpulan Kunci Gitar Lengkap</p>
-</div>
-
-<div class="services-container">
-    <a href="/chord/" class="service-card">
-        <div class="icon">🎸</div>
-        <h2>Chord Gitar</h2>
-        <p>Koleksi kunci gitar lagu favorit yang mudah dipelajari untuk pemula.</p>
-    </a>
-
-
-    <a href="/edukasi/" class="service-card">
-        <div class="icon">📖</div>
-        <h2>Tips & Edukasi</h2>
-        <p>Panduan belajar gitar, teknik dasar, dan tips seputar dunia digital.</p>
-    </a>
-</div>
-
-<style>
-    .services-container { display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; }
-    .service-card { 
-        flex: 1; min-width: 250px; padding: 25px; border-radius: 15px;
-        background: #1a1a1a; color: white; text-decoration: none;
-        text-align: center; border: 1px solid #333; transition: 0.3s;
-    }
-    .service-card:hover { border-color: #00d4ff; transform: translateY(-5px); }
-    .icon { font-size: 40px; margin-bottom: 15px; }
-</style>
+{% include header.html %}
+{% include hero.html %}
+{% include artis-az.html %}
+{% include kategori.html %}
