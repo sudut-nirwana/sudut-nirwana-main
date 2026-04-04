@@ -1,57 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sudut Nirwana: Koleksi Chord Gitar Akurat & Mudah untuk Pemula. Tutorial Belajar Kunci Gitar Dasar terlengkap.">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>{{ page.title }} | Sudut Nirwana</title>
-    
+    <title>{{ page.title }} | Sudut Nirwana - Kunci Gitar & Tablature</title>
+    <meta name="description" content="Sudut Nirwana: Koleksi chord gitar, kunci gitar, dan tablature lagu terlengkap untuk pemula. Dilengkapi fitur auto-scroll dan transpose nada akurat.">
+    <meta name="keywords" content="kunci gitar, chord gitar, tablature, belajar gitar, chord lagu indonesia, chord gitar pemula, sudut nirwana, chord dasar, kunci gitar lagu hits">
+    <meta name="author" content="Sudut Nirwana">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:title" content="Sudut Nirwana | Kunci Gitar & Tablature Terlengkap">
+    <meta property="og:description" content="Temukan chord gitar favoritmu dengan fitur transpose dan auto-scroll gratis hanya di Sudut Nirwana.">
+    <meta property="og:image" content="{{ '/assets/img/logo-sn.jpg' | relative_url }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sudut Nirwana | Kunci Gitar & Tablature">
+    <meta name="twitter:description" content="Pusat belajar kunci gitar termudah dan terlengkap untuk pemula.">
+    <meta name="twitter:image" content="{{ '/assets/img/logo-sn.jpg' | relative_url }}">
+
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+</head>
 <body>
 
-    <aside class="sidebar">
-        <div class="logo-area">
-            <img src="/assets/img/logo.png" alt="Sudut Nirwana">
-            <span>Creative Digital Studio</span>
-        </div>
-        
-        <nav class="menu">
-            <a href="/"><i class="fas fa-home"></i> Beranda</a>
-            <a href="/chord/"><i class="fas fa-guitar"></i> Chord Gitar</a>
-            <a href="/undangan/"><i class="fas fa-envelope-open-text"></i> Undangan Digital</a>
-            <a href="/edukasi/"><i class="fas fa-book-open"></i> Edukasi</a>
-            <a href="/kontak/"><i class="fas fa-phone"></i> Kontak</a>
-        </nav>
+    {% include header.html %}
 
-        <div class="social-connect">
-            <p>Let's Connect..!</p>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-            </div>
-        </div>
-    </aside>
-
-    <main class="main-content">
-        <header class="top-header">
-            <button id="menu-toggle">☰</button>
-            <div class="page-title">{{ page.title }}</div>
-        </header>
-
-        <section class="content-wrapper">
-            {{ content }} </section>
-        
-        <footer>
-            <p>&copy; 2026 Sudut Nirwana. All Rights Reserved.</p>
-        </footer>
+    <main id="main-content">
+        {{ content }}
     </main>
 
-    <script src="/assets/js/script.js"></script>
+    {% include footer.html %}
+
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
