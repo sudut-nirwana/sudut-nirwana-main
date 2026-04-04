@@ -1,13 +1,11 @@
-# Pengaturan Dasar
+
 title: Sudut Nirwana
+description: "Koleksi chord gitar dan tablature lagu terlengkap untuk pemula. Update setiap hari dengan fitur auto-scroll dan transpose nada akurat."
+baseurl: ""
 url: "https://sudutnirwana.com"
-description: "Chord Gitar Akurat & Jasa Undangan Digital Profesional"
 
-# Pengaturan Jekyll
+# Tambahan untuk membantu SEO Jekyll
+permalink: /:title/
 markdown: kramdown
-theme: null # Kita pakai desain sendiri di folder _layouts
-plugins:
-  - jekyll-sitemap # Opsional: jika ingin sitemap otomatis nantinya
-
-# Agar file di folder assets tidak terabaikan
-include: [assets]
+theme: minima # atau biarkan kosong jika kamu pakai CSS sendiri
+exclude: [Gemfile, Gemfile.lock, node_modules]
