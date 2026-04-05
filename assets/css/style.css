@@ -75,7 +75,7 @@ html.no-scroll{
 .space-content-header{
    height: 40px;
    width: 100%;
-   display: none;
+   display: block;
 }
 .main-header{
    width: 100%;
