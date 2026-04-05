@@ -5,35 +5,33 @@ layout: default
 
 <div class="chord-wrapper">
     <nav class="breadcrumb">
-        <a href="/">Beranda</a> &gt; <a href="/chord">Chord</a> &gt; <span>{{ page.title }}</span>
+        <a href="/">Beranda</a> &gt; <span>{{ page.title }}</span>
     </nav>
 
-    <h1>{{ page.title }}</h1>
+    <h1 style="margin-bottom:15px;">{{ page.title }}</h1>
 
     <div class="sticky-controls" id="chord-controls">
-        <div class="control-group">
+        <div style="display:flex; align-items:center; gap:5px;">
             <button onclick="transpose(-1)">-</button>
-            <span class="label">Transpose</span>
+            <span>Transpose</span>
             <button onclick="transpose(1)">+</button>
         </div>
-        
-        <div class="control-group">
+        <div style="display:flex; align-items:center; gap:8px;">
             <button id="scrollBtn" onclick="toggleScroll()">Auto Scroll</button>
-            <input type="range" id="scrollSpeed" min="1" max="10" value="2" title="Kecepatan">
+            <input type="range" id="scrollSpeed" min="1" max="10" value="2" style="width:60px;">
         </div>
     </div>
 
     <pre id="song-content">{{ content }}</pre>
 </div>
 
-<div id="overlay" onclick="closeModal()"></div>
+<div id="overlay-chord" onclick="closeModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1999;"></div>
 <div id="chordModal">
-    <div class="modal-header">
+    <div style="display:flex; justify-content:space-between; font-weight:bold; margin-bottom:10px;">
         <span id="modalTitle"></span>
-        <button onclick="closeModal()" style="border:none; background:none; font-size:24px; cursor:pointer;">&times;</button>
+        <button onclick="closeModal()" style="border:none; background:none; font-size:20px;">&times;</button>
     </div>
-    <img id="chordImg" src="" alt="Kunci Gitar">
-    <button onclick="closeModal()" style="width:100%; padding:10px; margin-top:10px; cursor:pointer;">Tutup</button>
+    <img id="chordImg" src="" alt="Chord Diagram" style="width:100%;">
 </div>
 
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
