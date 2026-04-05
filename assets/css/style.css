@@ -73,7 +73,7 @@ html.no-scroll{
 
 /*header style*/
 .space-content-header{
-   height: 40px;
+   height: 20px;
    width: 100%;
    display: block;
 }
@@ -327,7 +327,7 @@ html.no-scroll{
    height: 100%;
    top: 0;
    left: 0;
-   background: linear-gradient(to top, rgba(255,255,255,1),rgba(255,255,255,.1)),url("{{ site.baseurl }}/assets/img/jumbotron.jpg");
+   background: linear-gradient(to top, rgba(255,255,255,1),rgba(255,255,255,.1)),url("../img/jumbotron.jpg");
    background-size: cover;
    background-position: center;
    opacity: 0.5;
