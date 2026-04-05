@@ -1,43 +1,62 @@
-.chord-wrapper { max-width: 800px; margin: 0 auto; padding: 20px; position: relative; }
-.breadcrumb { font-size: 14px; color: #666; margin-bottom: 10px; }
-.breadcrumb a { color: #007bff; text-decoration: none; }
+/* Container Utama */
+.chord-wrapper { max-width: 800px; margin: 0 auto; padding: 15px; }
 
-/* Sticky Controls Sinkron dengan Header */
+/* Sticky Panel Chord */
 .sticky-controls {
     position: -webkit-sticky;
     position: sticky;
-    top: 0; /* Sebelum header fixed muncul */
-    z-index: 990; 
+    top: 0; /* Posisi awal sebelum scroll */
+    z-index: 996; /* Di bawah Overlay (997), Sidebar (998), & Header (999) */
     background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 12px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    margin-bottom: 25px;
-    transition: top 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin: 10px 0 25px 0;
+    transition: all 0.3s ease; /* Transisi halus saat bergeser */
 }
 
-@media (max-width: 767px) { .sticky-controls { top: 60px; } }
-@media (min-width: 768px) { .sticky-controls { top: 70px; } }
+/* Penyesuaian saat Header Utama muncul (Desktop & Mobile) */
+/* Ganti angka 60/70 sesuai tinggi asli header kamu */
+@media (max-width: 767px) { 
+    .sticky-controls { top: 60px; } 
+}
+@media (min-width: 768px) { 
+    .sticky-controls { top: 70px; } 
+}
 
-.control-group { display: flex; align-items: center; gap: 8px; font-weight: bold; }
-button { cursor: pointer; padding: 8px 12px; border-radius: 5px; border: 1px solid #ccc; background: #fff; }
+/* Styling Chord di dalam Lirik */
+.c { 
+    color: #e63946; 
+    font-weight: bold; 
+    cursor: pointer; 
+    border-bottom: 1px dashed #e63946; 
+    padding: 0 2px;
+}
 
-/* Chord & Lyric */
 pre#song-content {
-    white-space: pre-wrap; font-family: 'Courier New', Courier, monospace; 
-    font-size: 16px; line-height: 2.3; color: #333; background: #fff; padding: 10px;
+    white-space: pre-wrap;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    line-height: 2.4;
+    color: #333;
 }
-.c { color: #e63946; font-weight: bold; cursor: pointer; border-bottom: 1px dashed #e63946; }
 
-/* Modal */
-#overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1500; }
+/* Modal Pop-up (Harus paling tinggi z-index-nya) */
 #chordModal {
-    display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    background: #fff; padding: 20px; border-radius: 12px; z-index: 2000; width: 250px; text-align: center;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000; /* Di atas segalanya */
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    width: 260px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
-#chordImg { width: 100%; height: auto; border-radius: 5px; }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-weight: bold; }
