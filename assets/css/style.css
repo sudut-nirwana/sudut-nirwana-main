@@ -44,39 +44,37 @@
 }
 /*==================================================*/
 
-/* globall styling */
-html{
-   scroll-behavior: smooth;
-}
-html.no-scroll{
-   width: 100%;
-   overflow: hidden;
-}
+
+/*golbal style*/
 *{
    margin: 0;
    padding: 0;
    box-sizing: border-box;
    text-decoration: none;
 }
-
 body{
    width: 100%;
-   background: .fafafa;
+   background: .fff;
    font-family: "Nunito", sans-serif;
    font-size: clamp(1rem, 0.909rem + 0.45vw, 1.25rem);
    color: #444444;
-   height: 4000px;
+}
+html.no-scroll{
+   width: 100%;
+   overflow: hidden;
 }
 .container{
    width: 100%;
    padding: 0 20px;
+   overflow: hidden;
 }
-/*globall style end*/
+/*global style end*/
+
 
 /*header style*/
-html.no-scroll{
+.space-content-header{
+   height: 60px;
    width: 100%;
-   overflow: hidden;
 }
 .main-header{
    width: 100%;
@@ -84,7 +82,7 @@ html.no-scroll{
    position: absolute;
    top: 0; left: 0;
    z-index: 999;
-   background: rgba(239,239,239,0.816);
+   background: rgba(255,255,255,.7);
    backdrop-filter: blur(5px);
    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
    transition: transform 0.4s ease-in-out;
@@ -125,8 +123,8 @@ html.no-scroll{
    line-height: 1.1;
 }
 .name-logo h3{
-   font-size: 16.5px;
-   font-weight: 700;
+   font-size: 16px;
+   font-weight: 800;
    background: linear-gradient(to right top, #ee4e00, #eec400);
    -webkit-background-clip: text;
    background-clip: text;
@@ -135,7 +133,7 @@ html.no-scroll{
    text-shadow: 0 1px 0 rgba(0,0,0,.1);
 }
 .name-logo p{
-   font-size: 12px;
+   font-size: 13.5px;
    color: #983200;
    font-weight: 200;
 }
@@ -314,11 +312,12 @@ html.no-scroll{
 /*header style end*/
 
 
+
 /* style hero section */
 .hero-section{
    width: 100%;
-   padding: 40px 0;
    position: relative;
+   padding: 40px 0;
 }
 #hero-section::before{
    content: '';
@@ -327,7 +326,7 @@ html.no-scroll{
    height: 100%;
    top: 0;
    left: 0;
-   background: linear-gradient(to top, rgba(255,255,255,1),rgba(255,255,255,.1)),url(jumbotron.jpg);
+   background: linear-gradient(to top, rgba(255,255,255,1),rgba(255,255,255,.1)),url(../assets/img/jumbotron.jpg);
    background-size: cover;
    background-position: center;
    opacity: 0.5;
@@ -344,9 +343,8 @@ html.no-scroll{
    line-height: 1.7;
 }
 .hero-section .hero-description h1{
-   font-size: 2rem;
+   font-size: 2.2rem;
    font-weight: 800;
-   margin-bottom: 10px;
 }
 .hero-section h1 span{
    color: #ee6c00;
@@ -359,15 +357,20 @@ html.no-scroll{
 .cta-hero{
    display: flex;
    justify-content: space-between;
-   height: 30px;
+   height: 40px;
    align-items: center;
+   margin-bottom: 30px;
 }
 .cta-kunci-dasar{
-   padding: 8px 20px;
+   width: fit-content;
+   height: 40px;
+   display: flex;
+   align-items: center;
    border: 1px solid #444444;
    border-radius: 50px;
    color: #444444;
    font-weight: bold;
+   padding: 0 10px;
 }
 .cta-kunci-dasar:hover{
    background: #ee9a00;
@@ -390,7 +393,6 @@ html.no-scroll{
    /* Lebar penuh di HP */
    width: 100%; 
    box-sizing: border-box;
-   margin-top: 30px;
 }
 .hero-section .hero-jumbotron .photo{
    overflow: hidden;
@@ -428,6 +430,51 @@ html.no-scroll{
    aspect-ratio: 260 / 200;
 }
 /* style hero section end */
+
+
+
+/*daftar artis style start*/
+.link-artis-name h2 span{
+   color: #ee6c00;
+}
+.link-artis-name h2{
+   margin-bottom: 8px;
+}
+.link-artis-name{
+   padding: 40px 0;
+}
+.alphabet-list {
+   display: grid;
+   /* Memberi instruksi agar kolom menyesuaikan diri, minimal 60px */
+   grid-template-columns: repeat(5, 1fr);
+   gap: 10px;
+   margin-top: 20px;
+}
+
+.alphabet-list a {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: #ffffff;
+   border: 1px solid #e0e0e0;
+   color: #333;
+   height: 40px;
+   padding: 0 5px; /* Memberi ruang di dalam kotak agar teks tidak mepet */
+   text-decoration: none;
+   font-weight: bold;
+   border-radius: 8px;
+   font-size: 14px; /* Ukuran font yang aman untuk 2 huruf */
+   white-space: nowrap; /* Mencegah teks turun ke bawah dalam satu kotak */
+   transition: 0.3s;
+   box-shadow: 0 4px 5px rgba(0,0,0,0.03);
+}
+.alphabet-list a:hover{
+   background: #ee8f00;
+   color: #fff;
+   font-weight: bold;
+   transition: background 0.5s ease-in-out;
+}
+/*daftar artis a-z end*/
 
 
 /*style kategori kuci gitar sesuai genre lagu start*/
@@ -497,15 +544,14 @@ html.no-scroll{
 /*style kategori kuci gitar sesuai genre lagu end*/
 
 
-
 /*media query layar tablet*/
 @media(min-width: 768px){
    .container{
       padding: 0 20px;
       margin: auto;
    }
-   /*header style*/
-   .main-header,.space-content-header{
+/*header style*/
+   .main-header, .space-content-header{
       height: 70px;
    }
    .navigasi{
@@ -527,7 +573,10 @@ html.no-scroll{
    }
 /*header style end*/
 
+
+
 /* style hero section */
+   
    .hero-section .container{
       flex-direction: row;
    }
@@ -541,7 +590,7 @@ html.no-scroll{
       padding-right: 20px;
    }
    .hero-section .hero-description h1{
-      font-size: 2.2rem;
+      font-size: 2.8rem;
       line-height: 1.2;
    }
    .hero-section .hero-description p{
@@ -554,50 +603,16 @@ html.no-scroll{
    .hero-section .photo-right{
       gap: 20px;
    }
+   .cta-hero{
+      margin-bottom: 0;
+   }
 /* style hero section end */
 
 
-/*daftar artis style start*/
-.link-artis-name h2 span{
-   color: #ee6c00;
-}
-.link-artis-name h2{
-   margin-bottom: 8px;
-}
-.link-artis-name{
-   padding: 40px 0;
-}
-.alphabet-list {
-   display: grid;
-   /* Memberi instruksi agar kolom menyesuaikan diri, minimal 60px */
-   grid-template-columns: repeat(5, 1fr);
-   gap: 10px;
-   margin-top: 20px;
-}
-
-.alphabet-list a {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   background-color: #ffffff;
-   border: 1px solid #e0e0e0;
-   color: #333;
-   height: 40px;
-   padding: 0 5px; /* Memberi ruang di dalam kotak agar teks tidak mepet */
-   text-decoration: none;
-   font-weight: bold;
-   border-radius: 8px;
-   font-size: 14px; /* Ukuran font yang aman untuk 2 huruf */
-   white-space: nowrap; /* Mencegah teks turun ke bawah dalam satu kotak */
-   transition: 0.3s;
-   box-shadow: 0 4px 5px rgba(0,0,0,0.03);
-}
-.alphabet-list a:hover{
-   background: #ee8f00;
-   color: #fff;
-   font-weight: bold;
-   transition: background 0.5s ease-in-out;
-}
+/*daftar artis a-z start*/
+   .alphabet-list {
+      grid-template-columns: repeat(7, 1fr);
+   }
 /*daftar artis a-z end*/
 
 
@@ -606,7 +621,6 @@ html.no-scroll{
       grid-template-columns: repeat(4, 1fr);
    }
 /*style kategori kuci gitar sesuai genre lagu end*/
-
 }
 /*media query layar laptop*/
 @media(min-width: 1024px){
@@ -624,17 +638,13 @@ html.no-scroll{
 
 /* style hero section */
    .hero-section .hero-description h1{
-      font-size: 3rem;
+      font-size: 3.3rem;
       line-height: 1.2;
    }
-/* style hero section end */
-
-
-/*daftar artis a-z start*/
-   .alphabet-list {
-      grid-template-columns: repeat(14, 1fr);
+   .cta-chord-baru{
+      margin-right: 40px;
    }
-/*daftar artis a-z end*/
+/* style hero section end */
 
 
 /*style kategori kuci gitar sesuai genre lagu start*/
@@ -643,3 +653,5 @@ html.no-scroll{
    }
 /*style kategori kuci gitar sesuai genre lagu end*/
 }
+
+
