@@ -1,11 +1,24 @@
-
 title: Sudut Nirwana
-description: "Koleksi chord gitar dan tablature lagu terlengkap untuk pemula. Update setiap hari dengan fitur auto-scroll dan transpose nada akurat."
-baseurl: ""
+description: "Koleksi chord gitar dan tablature lagu terlengkap untuk pemula. Update setiap hari dengan fitur auto-scroll dan transpose nada."
 url: "https://sudutnirwana.com"
+baseurl: ""
 
-# Tambahan untuk membantu SEO Jekyll
-permalink: /:title/
+# Struktur URL SEO Friendly
+permalink: /chord/:title/
+
+# Markdown engine
 markdown: kramdown
-theme: minima # atau biarkan kosong jika kamu pakai CSS sendiri
-exclude: [Gemfile, Gemfile.lock, node_modules]
+
+# Plugins wajib untuk Google (Sangat Penting!)
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# File yang tidak perlu diproses
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
