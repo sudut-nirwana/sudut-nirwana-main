@@ -59,6 +59,9 @@ body{
    font-size: clamp(1rem, 0.909rem + 0.45vw, 1.25rem);
    color: #444444;
 }
+html{
+   scroll-behavior: smooth;
+}
 html.no-scroll{
    width: 100%;
    overflow: hidden;
@@ -552,9 +555,9 @@ html.no-scroll{
       margin: auto;
    }
 /*header style*/
-   .main-header, .space-content-header{
+   /*.main-header{
       height: 70px;
-   }
+   }*/
    .navigasi{
       display: flex;
    }
