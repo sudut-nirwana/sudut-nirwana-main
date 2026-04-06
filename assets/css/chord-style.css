@@ -1,5 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100%;
+    font-size: 16px;
+}
+
 /* Container Utama */
-.chord-wrapper { max-width: 800px; margin: 0 auto; padding: 15px; }
+.chord-wrapper {
+    padding: 0 20px; 
+}
 
 /* Sticky Panel Chord */
 .sticky-controls {
@@ -26,6 +38,12 @@
 }
 @media (min-width: 768px) { 
     .sticky-controls { top: 70px; } 
+    .chord-wrapper{
+        max-width: 1200px;
+        padding: 40px;
+        font-size: 20px;
+        margin: auto;
+    }
 }
 
 /* Styling Chord di dalam Lirik */
