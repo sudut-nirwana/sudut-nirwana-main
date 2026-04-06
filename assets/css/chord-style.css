@@ -1,82 +1,78 @@
-*{
-    margin: 0;
-    padding: 0;
+/* --- Base Mobile Style (Default / Lebar HP 100%) --- */
+.chord-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px; /* Padding HP */
     box-sizing: border-box;
 }
-body{
-    width: 100%;
-    font-size: 16px;
-}
 
-/* Container Utama */
-.chord-wrapper {
-    width: 100%;
-    overflow: hidden;
-    padding: 0 20px;
-}
-
-/* Sticky Panel Chord */
-.sticky-controls {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0; /* Posisi awal sebelum scroll */
-    z-index: 996; /* Di bawah Overlay (997), Sidebar (998), & Header (999) */
-    background: #ffffff;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    padding: 12px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    margin: 10px 0 25px 0;
-    transition: all 0.3s ease; /* Transisi halus saat bergeser */
-}
-
-/* Penyesuaian saat Header Utama muncul (Desktop & Mobile) */
-/* Ganti angka 60/70 sesuai tinggi asli header kamu */
-@media (max-width: 767px) { 
-    .sticky-controls { top: 60px; } 
-}
-@media (min-width: 768px) { 
-    .sticky-controls { top: 70px; } 
-    .chord-wrapper{
-        max-width: 1200px;
-        padding: 40px;
-        font-size: 20px;
-        margin: auto;
-    }
-}
-
-/* Styling Chord di dalam Lirik */
-.c { 
-    color: #e63946; 
-    font-weight: bold; 
-    cursor: pointer; 
-    border-bottom: 1px dashed #e63946; 
-    padding: 0 2px;
-}
-
-pre#song-content {
-    white-space: pre-wrap;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    line-height: 2.4;
+.chord-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
     color: #333;
 }
 
-/* Modal Pop-up (Harus paling tinggi z-index-nya) */
-#chordModal {
-    display: none;
+.chord-content {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 1rem;
+    line-height: 1.8;
+    white-space: pre;
+    overflow-x: auto;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* Pewarnaan Chord otomatis jika menggunakan **C** di Markdown */
+.chord-content b, 
+.chord-content strong {
+    color: #d35400;
+    font-weight: bold;
+}
+
+/* --- Tablet Style (min-width: 769px) --- */
+@media (min-width: 769px) {
+    .chord-container {
+        padding: 30px; /* Padding Tablet */
+    }
+    
+    .chord-header h2 {
+        font-size: 2.2rem;
+    }
+    
+    .chord-content {
+        font-size: 1.1rem;
+    }
+}
+
+/* --- Laptop/Desktop Style (max-width: 1200px) --- */
+@media (min-width: 1024px) {
+    .chord-container {
+        max-width: 1200px;
+        padding: 40px; /* Padding Laptop */
+    }
+}
+
+/* --- Floating Tools (Biar enak dilihat di semua device) --- */
+.chord-tools {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2000; /* Di atas segalanya */
-    background: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    width: 260px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 99;
+}
+
+.chord-tools button {
+    border: none;
+    background: #2c3e50;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
 }
