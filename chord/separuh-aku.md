@@ -1,13 +1,60 @@
 ---
 layout: chord
-title: "Keranda Cinta"
-artist: "Rhoma Irama"
+title: "Separuh Aku"
+artist: "Noah"
 ---
 
 [Intro]
-**Am**... **F**... **G**... **Am**
+**D** **Bm** **G** **Em** **A**
+**D** **Bm** **G** **Em** **A**
 
-**Am** **G** **F** **Am**
-Kelamnya malam lukisan cintaku...
-**Am** **G** **Am**
-Penuh cerita yang kelabu...
+**D** **Bm**
+Dan terjadi lagi...
+      **G** **Em** **A**
+Kisah lama yang terulang kembali...
+**D** **Bm**
+Kau hancurkan aku...
+        **G** **Em** **A**
+dengan sikapmu yang tak menentu...
+
+      **G** **A** **D**
+Kau terangkan gelapku...
+      **G** **A** **Bm**
+Kau luluhkan egoku...
+      **G** **A** **D**
+Senyummu...
+
+[Reff]
+         **D** **F#**
+Suara hati ini memanggil namamu...
+           **Bm** **A**
+Karena separuh aku... dirimu...
+           **G** **Em** **A**
+Ku ada di sini... (untukmu...)
+
+           **D** **F#**
+Dan biarkanlah aku memeluk dirimu...
+           **Bm** **A**
+Hingga seluruh aku... milikmu...
+           **G** **Em** **A**
+Ku ada di sini... (bersamamu...)
+
+[Interlude]
+**G** **A** **Bm**
+**G** **A** **D**
+
+**D** **Bm**
+Dan terjadi lagi...
+      **G** **Em** **A**
+Kisah lama yang terulang kembali...
+
+[Reff]
+         **D** **F#**
+Suara hati ini memanggil namamu...
+           **Bm** **A**
+Karena separuh aku... dirimu...
+           **G** **Em** **A**
+Ku ada di sini... (untukmu...)
+
+[Outro]
+**G** **A** **D**
