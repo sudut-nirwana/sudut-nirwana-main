@@ -3,21 +3,19 @@ layout: default
 ---
 
 <div class="chord-container">
-  <header class="chord-header">
-    <h2>{{ page.title }}</h2>
-    <p class="chord-artist">Artis: {{ page.artist | default: "Unknown" }}</p>
-  </header>
+    <header class="chord-header">
+        <h2>{{ page.title }}</h2>
+        <p class="chord-artist">Artis: {{ page.artist }}</p>
+    </header>
 
-  <article class="chord-content">
-{{ content }}
-  </article>
+    <div class="chord-content-wrapper">{{ content }}</div>
 
-  <div class="chord-tools">
-    <button onclick="transposeChord(1)"># Up</button>
-    <button onclick="transposeChord(-1)">b Down</button>
-    <button onclick="handleScroll(this)">Auto Scroll</button>
-  </div>
+    <div class="chord-tools">
+        <button onclick="transposeChord(1)"># Up</button>
+        <button onclick="transposeChord(-1)">b Down</button>
+        <button id="scrollBtn" onclick="toggleAutoScroll()">Auto Scroll</button>
+    </div>
 </div>
 
-<link rel="stylesheet" href="{{ '/assets/chord-style.css' | relative_url }}">
-<script src="{{ '/assets/chord-logic.js' | relative_url }}"></script>
+<link rel="stylesheet" href="/assets/chord-style.css">
+<script src="/assets/chord-logic.js"></script>
