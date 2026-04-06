@@ -1,103 +1,69 @@
 ---
 layout: chord
-title: "Chord Noah - Separuh Aku (Kunci Dasar)"
-description: "Kunci gitar Noah Separuh Aku paling mudah untuk pemula. Lengkap dengan lirik dan fitur transpose nada otomatis."
+title: "Keranda Cinta"
+artist: "Rhoma Irama"
 ---
 
 [Intro]
-<span class="c">Bm</span>  <span class="c">Em</span>  <span class="c">A</span>  <span class="c">D</span>
-<span class="c">G</span>   <span class="c">Em</span>  <span class="c">C#</span>  <span class="c">F#</span>
+**Am**... **F**... **G**... **Am**
+**F**... **G**... **F**... **Am**
+**E**... **F**... **E**... **Am**
 
-[Verse 1]
-<span class="c">Bm</span>           <span class="c">Em</span>
-Dan terjadi lagi
-<span class="c">A</span>             <span class="c">D</span>
-Kisah lama yang terulang kembali
-<span class="c">G</span>            <span class="c">Em</span>
-Kau terluka lagi
-<span class="c">C#</span>                     <span class="c">F#</span>
-Dari cinta rumit yang kau jalani
+**Am** **G** **F** **Am**
+Kelamnya malam lukisan cintaku...
+**Am** **G** **Am**
+Penuh cerita yang kelabu...
+**Am** **G** **F** **Am**
+Walaupun telah lama hanyut ditelan masa...
+**Am** **G** **Am**
+Tapi terkadang menyiksaku...
 
-<span class="c">Bm</span>            <span class="c">Em</span>
-Aku tau engkau
-<span class="c">A</span>                <span class="c">D</span>
-Sebenarnya memiliki rasa cinta
-<span class="c">G</span>               <span class="c">Em</span>
-Yang sama denganku
-<span class="c">C#</span>                    <span class="c">F#</span>
-Hanya saja kau tak menyadarinya
+**G** **F** **Am**
+Slalu kucoba untuk melupakan...
+**G** **F** **Am**
+Percikan bayangan kenangan...
+**Am** **G** **F** **Am**
+Tetapi slalu saja ia datang menggoda...
+**Am** **G** **Am**
+Dengan senyum sejuta siksa...
 
-[Chorus]
-     <span class="c">Bm</span>        <span class="c">Em</span>
-Dengar laraku...
-      <span class="c">A</span>             <span class="c">D</span>
-Suara hati ini memanggil namamu
-       <span class="c">G</span>           <span class="c">Em</span>
-Karena separuh aku...
-      <span class="c">F#</span>
-Dirimu...
+[Reff]
+      **G**
+Mengapa tak juga...
+      **F** **Am**
+Derita selimut cinta...
+      **G**
+Melepas belenggu jiwa...
 
-[Verse 2]
-<span class="c">Bm</span>             <span class="c">Em</span>
-Ku ada di sini
-<span class="c">A</span>               <span class="c">D</span>
-Tegar berdiri jalani waktu
-<span class="c">G</span>               <span class="c">Em</span>
-Aku pun tak mengerti
-<span class="c">C#</span>                 <span class="c">F#</span>
-Mengapa ini harus terjadi
+[Interlude]
+**F**... **G**... **Am**
 
-<span class="c">Bm</span>              <span class="c">Em</span>
-Lepaskanlah semua
-<span class="c">A</span>               <span class="c">D</span>
-Beban di hati yang menyiksamu
-<span class="c">G</span>               <span class="c">Em</span>
-Aku kan menjagamu
-<span class="c">C#</span>                     <span class="c">F#</span>
-Sampai waktu yang kan memisahkan
+      **G**
+Apakah karena...
+      **F** **Am**
+Cinta yang dulu kurasa...
+      **G**
+Sangat tulus bersahaja...
 
-[Chorus]
-     <span class="c">Bm</span>        <span class="c">Em</span>
-Dengar laraku...
-      <span class="c">A</span>             <span class="c">D</span>
-Suara hati ini memanggil namamu
-       <span class="c">G</span>           <span class="c">Em</span>
-Karena separuh aku...
-      <span class="c">F#</span>
-Dirimu...
+         **F**
+Sehingga tiada kata...
+         **G**
+Hati berprasangka...
+          **F** **G** **Am**
+Bahwa dia akan khianat cinta...
+          **F** **G** **Am**
+Bahwa dia akan khianat cinta...
 
-[Bridge]
-<span class="c">Em</span>           <span class="c">A</span>
-Berbagi rasa...
-<span class="c">D</span>           <span class="c">G</span>
-Berbagi cinta...
-<span class="c">Em</span>          <span class="c">F#</span>
-Berbagi hidup...
-
-[Solo]
-<span class="c">Bm</span>  <span class="c">Em</span>  <span class="c">A</span>  <span class="c">D</span>
-<span class="c">G</span>   <span class="c">Em</span>  <span class="c">F#</span>
-
-[Chorus]
-     <span class="c">Bm</span>        <span class="c">Em</span>
-Dengar laraku...
-      <span class="c">A</span>             <span class="c">D</span>
-Suara hati ini memanggil namamu
-       <span class="c">G</span>           <span class="c">Em</span>
-Karena separuh aku...
-      <span class="c">F#</span>
-Dirimu...
-
-     <span class="c">Bm</span>        <span class="c">Em</span>
-Dengar laraku...
-      <span class="c">A</span>             <span class="c">D</span>
-Suara hati ini memanggil namamu
-       <span class="c">G</span>           <span class="c">Em</span>
-Karena separuh aku...
-      <span class="c">F#</span>
-Dirimu...
+**Am** **G** **F** **Am**
+Tinggallah kini hidupku sendiri...
+**Am** **G** **Am**
+Antara ada dan tiada...
+**G** **F**
+Jasat bagai keranda...
+**G** **Am**
+Naungan nafas cinta...
+**F** **G** **Am**
+Abadi terpendam di jiwa...
 
 [Outro]
-<span class="c">Bm</span>  <span class="c">Em</span>  <span class="c">A</span>  <span class="c">D</span>
-<span class="c">G</span>   <span class="c">Em</span>  <span class="c">F#</span>
-<span class="c">Bm</span>
+**F**... **G**... **Am**
