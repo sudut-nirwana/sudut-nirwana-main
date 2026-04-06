@@ -1,78 +1,152 @@
-/* --- Base Mobile Style (Default / Lebar HP 100%) --- */
+/* --- Root Variables untuk Warna --- */
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #e67e22; /* Warna Oranye untuk Chord */
+    --bg-light: #fdfdfd;
+    --border-color: #eeeeee;
+    --text-main: #333333;
+    --text-muted: #666666;
+}
+
+/* --- Container Utama --- */
 .chord-container {
     width: 100%;
     margin: 0 auto;
-    padding: 20px; /* Padding HP */
     box-sizing: border-box;
+    /* Responsive Padding sesuai request kamu */
+    padding: 20px; 
+}
+
+/* --- Header Section --- */
+.chord-header {
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
 }
 
 .chord-header h2 {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #333;
+    color: var(--primary-color);
+    margin: 0 0 5px 0;
+    font-weight: 700;
 }
 
-.chord-content {
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+.chord-artist {
     font-size: 1rem;
-    line-height: 1.8;
-    white-space: pre;
-    overflow-x: auto;
-    background: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
+    color: var(--text-muted);
+    font-style: italic;
 }
 
-/* Pewarnaan Chord otomatis jika menggunakan **C** di Markdown */
+/* --- Content Area (Bagian Kunci Gitar) --- */
+/* Menggunakan pre agar spasi dan baris baru tidak hilang */
+pre.chord-content {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    font-size: 1rem;
+    line-height: 1.8; /* Jarak antar baris agar chord dan lirik tidak dempet */
+    background: var(--bg-light);
+    color: var(--text-main);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    
+    /* Menjaga format spasi tetap asli */
+    white-space: pre; 
+    overflow-x: auto; /* Jika layar HP kekecilan, chord bisa di-slide ke kanan */
+    word-wrap: normal;
+    
+    /* Bayangan halus agar terlihat menonjol */
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+}
+
+/* --- Styling Kunci Gitar (Bold) --- */
 .chord-content b, 
 .chord-content strong {
-    color: #d35400;
+    color: var(--accent-color);
     font-weight: bold;
+    font-size: 1.1rem;
+    /* Memberi sedikit ruang agar tidak menempel lirik bawahnya */
+    display: inline-block;
+    margin-bottom: -5px; 
 }
 
-/* --- Tablet Style (min-width: 769px) --- */
-@media (min-width: 769px) {
-    .chord-container {
-        padding: 30px; /* Padding Tablet */
-    }
-    
-    .chord-header h2 {
-        font-size: 2.2rem;
-    }
-    
-    .chord-content {
-        font-size: 1.1rem;
-    }
-}
-
-/* --- Laptop/Desktop Style (max-width: 1200px) --- */
-@media (min-width: 1024px) {
-    .chord-container {
-        max-width: 1200px;
-        padding: 40px; /* Padding Laptop */
-    }
-}
-
-/* --- Floating Tools (Biar enak dilihat di semua device) --- */
+/* --- Floating Tools (Navigasi Bawah) --- */
 .chord-tools {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 10px;
-    border-radius: 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 99;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
 .chord-tools button {
     border: none;
-    background: #2c3e50;
+    background: var(--primary-color);
     color: white;
-    padding: 8px 15px;
-    border-radius: 20px;
+    padding: 10px 18px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.chord-tools button:hover {
+    background: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.chord-tools button:active {
+    transform: translateY(0);
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+
+/* Tablet (min-width: 769px) */
+@media (min-width: 769px) {
+    .chord-container {
+        padding: 30px; 
+    }
+    .chord-header h2 {
+        font-size: 2.2rem;
+    }
+    pre.chord-content {
+        font-size: 1.1rem;
+    }
+}
+
+/* Laptop/Desktop (max-width: 1200px) */
+@media (min-width: 1024px) {
+    .chord-container {
+        max-width: 1200px; /* Membatasi lebar agar tidak terlalu lebar di monitor besar */
+        padding: 40px; 
+    }
+    
+    /* Posisi Tools di Desktop bisa digeser ke kanan bawah agar tidak menutupi tengah */
+    .chord-tools {
+        left: auto;
+        right: 40px;
+        transform: none;
+    }
+}
+
+/* Penyesuaian Dark Mode (Opsional jika user pakai dark mode sistem) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-light: #1a1a1a;
+        --text-main: #e0e0e0;
+        --border-color: #333;
+    }
+    .chord-tools {
+        background: rgba(40, 40, 40, 0.9);
+    }
 }
