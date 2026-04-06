@@ -1,45 +1,23 @@
 ---
+layout: default
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="{{ '../assets/css/chord-style.css' | relative_url }}">
 
-<body>
-<div class="chord-wrapper">
-    <nav class="breadcrumb">
-        <a href="/">Beranda</a> &gt; <span>{{ page.title }}</span>
-    </nav>
+<div class="chord-container">
+    <header class="chord-header">
+        <h2>{{ page.title }}</h2>
+        <span class="chord-artist">Noah - Chord Gitar</span>
+    </header>
 
-    <h1 style="margin-bottom:15px;">{{ page.title }}</h1>
-
-    <div class="sticky-controls" id="chord-controls">
-        <div style="display:flex; align-items:center; gap:5px;">
-            <button onclick="transpose(-1)">-</button>
-            <span>Transpose</span>
-            <button onclick="transpose(1)">+</button>
-        </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-            <button id="scrollBtn" onclick="toggleScroll()">Auto Scroll</button>
-            <input type="range" id="scrollSpeed" min="1" max="10" value="2" style="width:60px;">
-        </div>
+    <div class="chord-content">
+{{ content }}
     </div>
 
-    <pre id="song-content">{{ content }}</pre>
-</div>
-
-<div id="overlay-chord" onclick="closeModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1999;"></div>
-<div id="chordModal">
-    <div style="display:flex; justify-content:space-between; font-weight:bold; margin-bottom:10px;">
-        <span id="modalTitle"></span>
-        <button onclick="closeModal()" style="border:none; background:none; font-size:20px;">&times;</button>
+    <div class="chord-tools">
+        <button onclick="transposeChord(-1)">♭ Lower</button>
+        <button onclick="transposeChord(1)">♯ Higher</button>
+        <button onclick="toggleAutoScroll()">Auto Scroll</button>
     </div>
-    <img id="chordImg" src="" alt="Chord Diagram" style="width:100%;">
 </div>
 
-<script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
-</body>
-</html>
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/chord-style.css">
+<script src="{{ site.baseurl }}/assets/chord-logic.js"></script>
