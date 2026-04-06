@@ -1,18 +1,22 @@
 const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
 function transposeChord(steps) {
-    const chordElements = document.querySelectorAll('.chord-content b, .chord-content strong');
+    // Ambil semua tag strong atau b di dalam wrapper
+    const chords = document.querySelectorAll('.chord-content-wrapper strong, .chord-content-wrapper b');
     
-    chordElements.forEach(el => {
-        let currentText = el.innerText;
-        // Regex untuk menangkap kunci dasar (misal: Am7, C#m, G)
-        el.innerText = currentText.replace(/[A-G][#b]?/g, (match) => {
-            let index = notes.indexOf(match.replace('b', (m) => {
-                // Konversi flat ke sharp agar sesuai array notes
-                const flats = {'Bb':'A#', 'Eb':'D#', 'Ab':'G#', 'Db':'C#', 'Gb':'F#'};
-                return flats[match] || match;
-            }));
-            
+    chords.forEach(el => {
+        let text = el.innerText;
+        // Ganti notasi kunci (C, Am, G7, D#m dll)
+        el.innerText = text.replace(/[A-G][#b]?/g, (match) => {
+            // Normalisasi Bb ke A#, dsb
+            let note = match;
+            if (note === 'Bb') note = 'A#';
+            if (note === 'Eb') note = 'D#';
+            if (note === 'Ab') note = 'G#';
+            if (note === 'Db') note = 'C#';
+            if (note === 'Gb') note = 'F#';
+
+            let index = notes.indexOf(note);
             if (index === -1) return match;
             
             let newIndex = (index + steps + 12) % 12;
@@ -21,20 +25,20 @@ function transposeChord(steps) {
     });
 }
 
-// Auto Scroll Logic
-let scrollActive = false;
-let scrollInterval;
+let isScrolling = false;
+let interval;
 
-function handleScroll(btn) {
-    if (!scrollActive) {
-        scrollInterval = setInterval(() => window.scrollBy(0, 1), 50);
+function toggleAutoScroll() {
+    const btn = document.getElementById('scrollBtn');
+    if (!isScrolling) {
+        interval = setInterval(() => window.scrollBy(0, 1), 50);
         btn.innerText = "Stop";
         btn.style.background = "#e74c3c";
-        scrollActive = true;
+        isScrolling = true;
     } else {
-        clearInterval(scrollInterval);
+        clearInterval(interval);
         btn.innerText = "Auto Scroll";
         btn.style.background = "#2c3e50";
-        scrollActive = false;
+        isScrolling = false;
     }
 }
