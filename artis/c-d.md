@@ -3,7 +3,7 @@ layout: default
 title: "Chord Gitar Artis C - D"
 permalink: /artis/c-d/
 ---
-
+<link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
 <div class="container alphabet-page">
   <div class="section-header">
     <h2 class="reveal up">Daftar Artis <strong>Inisial C - D</strong></h2>
