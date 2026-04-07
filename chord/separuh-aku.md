@@ -1,8 +1,10 @@
 ---
-layout: chord
+layout: chord-template
 title: "Separuh Aku"
 artist: "Noah"
----​
+viral: true
+popular: true
+---
 [Intro]
 **Am**  **C**  **F**  **Dm**  **E** **(2x)**
 
