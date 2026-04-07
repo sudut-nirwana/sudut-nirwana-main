@@ -5,7 +5,6 @@ artist: "Sheila on 7"
 viral: true
 popular: true
 ---
-
 [Intro]
 **Am** **D** **G** **C**
 **Am** **D** **G**
