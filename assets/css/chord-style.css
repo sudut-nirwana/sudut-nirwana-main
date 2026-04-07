@@ -43,12 +43,12 @@
 
 /* Container khusus halaman A-Z */
 .alphabet-page {
-    padding: 20px;
+    padding-top: 100px; /* Tambah jarak atas agar tidak tertutup header */
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     box-sizing: border-box;
-}
-.space{
-    height: 60px
-    display: block;
+    min-height: 80vh; /* Agar footer tidak naik jika lagunya sedikit */
 }
 
 .section-header {
