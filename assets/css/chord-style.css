@@ -3,6 +3,7 @@
     margin: 0 auto;
     box-sizing: border-box;
     padding: 20px; /* Default HP */
+    padding-top: 70px;
 }
 
 /* Judul H2 */
@@ -20,10 +21,10 @@
 /* AREA CHORD: Ini rahasianya agar tidak berantakan */
 .chord-content-wrapper {
     font-family: 'Courier New', Courier, monospace !important;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     line-height: 1.8;
     background: #fdfdfd;
-    padding: 0 15px;
+    padding: 15px;
     border-radius: 8px;
     border: 1px solid #eee;
     
