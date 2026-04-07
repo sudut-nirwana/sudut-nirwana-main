@@ -1,33 +1,38 @@
 <section class="chordwrapper" id="chordwrapper">
-      <div class="container">
-         <h2 class="reveal up">Update <strong>Kunci Gitar</strong> Terkini</h2>
-         <p class="reveal up">Mainkan juga <strong>chord</strong> lagu terupdate.</p>
-         <div class="box-chord-terbaru reveal up">
-            {% for item in site.chord limit:10 %}
-            <div class="chord-item">
-            <a href="{{ item.url }}">Chord {{ item.title }} - {{ item.artist }}</a>
-            </div>
-            {% endfor %}
-         </div>
-         
-         <h2 class="reveal up">Top Hits <strong>Chord</strong></h2>
-         <p class="reveal up"><strong>Chord gitar</strong> tranding tiktok.</p>
-         <div class="box-chord-trend reveal up">
-            {% for item in site.chord limit:10 %}
-            <div class="chord-item">
-            <a href="{{ item.url }}">Chord {{ item.title }} - {{ item.artist }}</a>
-            </div>
-            {% endfor %}
-         </div>
-         
-         <h2 class="reveal up"><strong>Kunci Gitar</strong> Populer</h2>
-         <p class="reveal up"><strong>Chord Gitar</strong> paling banyak di mainkan.</p>
-         <div class="box-chord-terbanyak reveal up">
-            {% for item in site.chord limit:10 %}
-            <div class="chord-item">
-            <a href="{{ item.url }}">Chord {{ item.title }} - {{ item.artist }}</a>
-            </div>
-            {% endfor %}
-         </div>
+<div class="container">
+
+  <h2 class="reveal up">Update <strong>Kunci Gitar</strong> Terkini</h2>
+  <p class="reveal up">Mainkan juga <strong>chord</strong> lagu terupdate.</p>
+  <div class="box-chord-terbaru reveal up">
+    {% assign terbaru = site.chord | reverse %}
+    {% for item in terbaru limit:10 %}
+      <div class="chord-item">
+        <a href="{{ item.url | relative_url }}">Chord {{ item.title }} - {{ item.artist }}</a>
       </div>
+    {% endfor %}
+  </div>
+
+  <h2 class="reveal up">Top Hits <strong>Chord</strong></h2>
+  <p class="reveal up"><strong>Chord gitar</strong> trending tiktok.</p>
+  <div class="box-chord-trend reveal up">
+    {% assign viral = site.chord | where: "viral", "true" %}
+    {% for item in viral limit:10 %}
+      <div class="chord-item">
+        <a href="{{ item.url | relative_url }}">Chord {{ item.title }} - {{ item.artist }}</a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <h2 class="reveal up"><strong>Kunci Gitar</strong> Populer</h2>
+  <p class="reveal up"><strong>Chord Gitar</strong> paling banyak dimainkan.</p>
+  <div class="box-chord-terbanyak reveal up">
+    {% assign populer = site.chord | where: "popular", "true" %}
+    {% for item in populer limit:10 %}
+      <div class="chord-item">
+        <a href="{{ item.url | relative_url }}">Chord {{ item.title }} - {{ item.artist }}</a>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
 </section>
