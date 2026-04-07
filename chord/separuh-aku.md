@@ -4,64 +4,103 @@ title: "Separuh Aku"
 artist: "Noah"
 ---
 
-[Intro]
-**D** **Bm** **G** **Em** **A**
-**D** **Bm** **G** **Em** **A**
+​[Intro]
+Am  C  F  Dm  E (2x)
 
-**D** **Bm**
-Dan terjadi lagi...
-      **G** **Em** **A**
-Kisah lama yang terulang kembali...
-**D** **Bm**
-Kau hancurkan aku...
-        **G** **Em** **A**
-Dengan sikapmu yang tak menentu...
 
-      **G** **A** **D**
-Kau terangkan gelapku...
-      **G** **A** **Bm**
-Kau luluhkan egoku...
-      **G** **A** **D**
-Senyummu...
+​[Verse 1]
 
-[Reff]
-         **D** **F#**
-Suara hati ini memanggil namamu...
-           **Bm** **A**
-Karena separuh aku... dirimu...
-           **G** **Em** **A**
-Ku ada di sini... (untukmu...)
+Am
+Dan terjadi lagi..
+Dm               F           G
+Kisah lama yang terulang kembali
+Am              C
+Kau terluka lagi..
+Dm               F           G
+Dari cinta rumit yang kau jalani
 
-           **D** **F#**
-Dan biarkanlah aku memeluk dirimu...
-           **Bm** **A**
-Hingga seluruh aku... milikmu...
-           **G** **Em** **A**
-Ku ada di sini... (bersamamu...)
 
-[Interlude]
-**G** **A** **Bm**
-**G** **A** **D**
+​[Pre-Chorus]
 
-**D** **Bm**
-Dan terjadi lagi...
-      **G** **Em** **A**
-Kisah lama yang terulang kembali...
+Dm        G     Am
+Aku ingin.. kau me..rasa..
+G       C         G         Am
+Kamu mengerti aku mengerti kamu
+Dm        G     C
+Aku ingin.. kau sa..dari
+F      Bb       E
+Cinta..mu bukanlah dia..
 
-[Reff]
-         **D** **F#**
-Suara hati ini memanggil namamu...
-           **Bm** **A**
-Karena separuh aku... dirimu...
-           **G** **Em** **A**
-Ku ada di sini... (untukmu...)
 
-           **D** **F#**
-Dan biarkanlah aku memeluk dirimu...
-           **Bm** **A**
-Hingga seluruh aku... milikmu...
-           **G** **Em** **A**
-Ku ada di sini... (bersamamu...)
+​[Reff]
 
-[Outro]
-**G** **A** **D**
+A    C#m F#m
+Dengar laraku..
+E      A         C#m        D
+Suara hati ini memanggil namamu..
+C#m    Bm     E
+Karena separuh a..ku dirimu..
+
+
+​[Musik]
+Am G-C G-C Dm F
+
+u u.. u u.. aa aa aha..
+
+
+​[Verse 2]
+
+Am
+Ku ada di sini
+Dm               F           G
+Pahamilah, kau tak pernah sendiri
+Am              C
+Kar'na aku s'lalu
+Dm               F           G
+Di dekatmu saat engkau terjatuh
+
+
+​[Pre-Chorus]
+
+Dm        G     Am
+Aku ingin kau merasa
+G       C         G         Am
+Kamu mengerti aku mengerti kamu
+Dm        G     C
+Aku ingin kau pahami
+F      Bb       E
+Cinta..mu bukanlah dia..
+
+
+​[Reff]
+
+A    C#m F#m
+Dengar laraku..
+E      A         C#m        D
+Suara hati ini memanggil namamu..
+C#m    Bm     E
+Karena separuh a..ku dirimu..
+
+
+​[Bridge]
+
+F  C  F  G
+F  C  Dm E
+
+(Ah-ah, oh-oh...)
+
+
+​[Reff Akhir]
+
+A    C#m F#m
+Dengar laraku..
+E      A         C#m        D
+Suara hati ini memanggil namamu..
+C#m    Bm     E
+Karena separuh a..ku menyentuh laramu
+A      C#m        F#m
+Semua lukamu t'lah menjadi lirihku
+E      A         C#m        D
+Karena separuh a..ku..
+A
+Dirimu
