@@ -4,6 +4,7 @@ title: "Chord Gitar Artis A - B"
 permalink: /artis/a-b/
 ---
 <div class="container alphabet-page">
+  <div class="space"></div>
   <div class="section-header">
     <h2 class="reveal up">Daftar Artis <strong>Inisial A - B</strong></h2>
     <p class="reveal up">Menampilkan semua koleksi chord berdasarkan nama artis.</p>
