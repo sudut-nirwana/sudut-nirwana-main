@@ -1,5 +1,5 @@
 ---
-layout: chord-template
+layout: chord
 title: "Separuh Aku"
 artist: "Noah"
 viral: true
