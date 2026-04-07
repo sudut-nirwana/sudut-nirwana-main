@@ -13,12 +13,23 @@
             </span>
          </a>
          <div class="navigasi">
-            <a href="https://sudutnirwana.com/#hero-section" class="home hover-underline active"><i class="fa-solid fa-house"></i>Beranda</a>
-            <a href="https://sudutnirwana.com/#chord-section" class="chord hover-underline"><i class="fa-solid fa-solid fa-music"></i>Chord</a>
-            <a href="https://sudutnirwana.com/#katalog" class="katalog hover-underline"><i class="fa-solid fa-book-open"></i>Katalog</a>
-            <a href="https://sudutnirwana.com/#" class="blog hover-underline"><i class="fa-solid fa-newspaper"></i>Blog</a>
-            <a href="https://sudutnirwana.com/#" class="content hover-underline"><i class="fa-solid fa-envelope"></i>Kontak</a>
-         </div>
+             <a href="{{ '/' | relative_url }}" class="home hover-underline active">
+                <i class="fa-solid fa-house"></i> Beranda
+              </a>
+
+              <a href="{{ '/#chordwrapper' | relative_url }}" class="chord hover-underline">
+                <i class="fa-solid fa-music"></i> Chord
+              </a>
+
+            <a href="{{ '/#link-artis-name' | relative_url }}" class="katalog hover-underline">
+                 <i class="fa-solid fa-book-open"></i> Katalog
+            </a>
+
+             <a href="{{ '/blog' | relative_url }}" class="blog hover-underline">
+                <i class="fa-solid fa-newspaper"></i> Blog
+              </a>
+          </div>
+
          <div class="hamburger-menu">
             <span></span>
             <span></span>
