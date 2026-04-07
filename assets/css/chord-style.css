@@ -44,6 +44,7 @@
 /* Container khusus halaman A-Z */
 .alphabet-page {
     padding: 40px 20px;
+    padding-top: 70px;
 }
 
 .section-header {
