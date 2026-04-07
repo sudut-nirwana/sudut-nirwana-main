@@ -22,3 +22,8 @@ exclude:
   - node_modules
   - vendor
 
+# Daftar koleksi folder chord
+collections:
+  chord:
+    output: true
+    permalink: /chord/:title/
