@@ -1,6 +1,6 @@
 ---
 layout: chord
-title: "Sephia-Shela On7 | Kunci Dasar Mudah untuk Pemula"
+title: "Sephia-Shela On7 | Kunci Dasar Mudah"
 artist: "Sheila on 7"
 viral: true
 popular: true
