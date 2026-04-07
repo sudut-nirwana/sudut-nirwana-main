@@ -1,6 +1,6 @@
 ---
 layout: chord
-title: "Chord Gitar Sephia-Shela On7 | Kunci Dasar Mudah untuk Pemula"
+title: "Sephia-Shela On7 | Kunci Dasar Mudah untuk Pemula"
 artist: "Sheila on 7"
 viral: true
 popular: true
