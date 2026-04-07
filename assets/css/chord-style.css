@@ -4,7 +4,7 @@
     box-sizing: border-box;
     /* Ubah padding-top ini untuk mengatur jarak judul ke header */
     padding: 20px; 
-    padding-top: 70px; /* Coba di 70px dulu, kalau masih kejauhan, turunkan ke 60px */
+    padding-top: 60px; /* Coba di 70px dulu, kalau masih kejauhan, turunkan ke 60px */
 }
 
 
@@ -110,7 +110,7 @@
 
 /* RESPONSIVE */
 @media (min-width: 769px) {
-    .chord-container { padding: 0 30px; padding-top: 80px;}
+    .chord-container { padding: 0 30px; padding-top: 60px;}
     .chord-header h2 { font-size: 2rem; }
     
     .chord-grid-container {
@@ -123,6 +123,6 @@
     .chord-container {
         max-width: 1200px;
         padding: 0 40px;
-        padding-top: 80px
+        padding-top: 70px
     }
 }
