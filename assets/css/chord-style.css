@@ -3,7 +3,7 @@
     margin: 0 auto;
     box-sizing: border-box;
     padding: 20px; /* Default HP */
-    padding-top: 70px;
+    padding-top: 60px;
 }
 
 /* Judul H2 */
@@ -23,6 +23,7 @@
     font-family: 'Courier New', Courier, monospace !important;
     font-size: 1.2rem;
     line-height: 1.8;
+    font-weight: 500;
     background: #fdfdfd;
     padding: 15px;
     border-radius: 8px;
@@ -38,7 +39,7 @@
 .chord-content-wrapper strong, 
 .chord-content-wrapper b {
     color: #e67e22;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 /* Container khusus halaman A-Z */
