@@ -3,8 +3,8 @@ layout: default
 title: "Chord Gitar Artis A - B"
 permalink: /artis/a-b/
 ---
+<link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
 <div class="container alphabet-page">
-  <div style="display: block; margin-top: 100px; height: 5px;"></div>
   <div class="section-header">
     <h2 class="reveal up">Daftar Artis <strong>Inisial A - B</strong></h2>
     <p class="reveal up">Menampilkan semua koleksi chord berdasarkan nama artis.</p>
