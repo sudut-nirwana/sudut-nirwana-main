@@ -8,7 +8,9 @@ layout: default
         <p class="chord-artist">Artis: {{ page.artist }}</p>
     </header>
 
-    <div class="chord-content-wrapper">{{ content }}</div>
+    <div class="chord-content-wrapper">
+        <pre>{{ content }}</pre>
+    </div>
 
     <div class="chord-tools">
         <button onclick="transposeChord(1)"># Up</button>
