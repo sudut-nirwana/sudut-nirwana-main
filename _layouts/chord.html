@@ -1,7 +1,39 @@
 ---
 layout: default
 ---
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <title>{{ page.title }} | Sudut Nirwana - Kunci Gitar & Tablature</title>
+    <meta name="description" content="Sudut Nirwana: Koleksi chord gitar, kunci gitar, dan tablature lagu terlengkap untuk pemula. Dilengkapi fitur auto-scroll dan transpose nada akurat.">
+    <meta name="keywords" content="kunci gitar, chord gitar, tablature, belajar gitar, chord lagu indonesia, chord gitar pemula, sudut nirwana, chord dasar, kunci gitar lagu hits">
+    <meta name="author" content="Sudut Nirwana">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:title" content="Sudut Nirwana | Kunci Gitar & Tablature Terlengkap">
+    <meta property="og:description" content="Temukan chord gitar favoritmu dengan fitur transpose dan auto-scroll gratis hanya di Sudut Nirwana.">
+    <meta property="og:image" content="{{ '../img/sudut-nirwana-logo.webp' | relative_url }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sudut Nirwana | Kunci Gitar & Tablature">
+    <meta name="twitter:description" content="Pusat belajar kunci gitar termudah dan terlengkap untuk pemula.">
+    <meta name="twitter:image" content="{{ '../img/sudut-nirwana-logo.webp' | relative_url }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
+    
+</head>
+<body>
 <div class="chord-container">
     <header class="chord-header">
         <h2>{{ page.title }}</h2>
@@ -19,5 +51,7 @@ layout: default
     </div>
 </div>
 
-<link rel="stylesheet" href="/assets/chord-style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="/assets/chord-logic.js"></script>
+</body>
+</html>
