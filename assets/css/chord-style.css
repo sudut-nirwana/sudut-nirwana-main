@@ -43,8 +43,12 @@
 
 /* Container khusus halaman A-Z */
 .alphabet-page {
-    padding: 40px 20px;
-    padding-top: 70px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.space{
+    height: 60px
+    display: block;
 }
 
 .section-header {
