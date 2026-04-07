@@ -41,11 +41,74 @@
     font-weight: bold;
 }
 
+/* Container khusus halaman A-Z */
+.alphabet-page {
+    padding: 40px 20px;
+}
+
+.section-header {
+    margin-bottom: 30px;
+    border-left: 5px solid #ff5722; /* Aksen Orange di samping judul */
+    padding-left: 15px;
+}
+
+/* Grid System: 1 kolom di HP, 2 kolom di Desktop */
+.chord-grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+/* Desain Card sesuai warna website */
+.chord-item-card a {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background: #f9f9f9; /* Abu-abu sangat muda seperti box di landing page */
+    border: 1px solid #eee;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.chord-item-card a:hover {
+    background: #fff;
+    border-color: #ff5722;
+    box-shadow: 0 4px 15px rgba(255, 87, 34, 0.1);
+    transform: translateY(-3px);
+}
+
+.artist-name {
+    font-weight: 700;
+    color: #2c3e50; /* Warna gelap header */
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.song-title {
+    color: #7f8c8d; /* Warna teks sekunder */
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.view-chord {
+    color: #ff5722; /* Warna Orange utama */
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+
 
 /* RESPONSIVE */
 @media (min-width: 769px) {
     .chord-container { padding: 0 30px; }
     .chord-header h2 { font-size: 2.2rem; }
+    
+    .chord-grid-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
 }
 
 @media (min-width: 1024px) {
