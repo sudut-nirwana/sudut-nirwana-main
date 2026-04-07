@@ -2,7 +2,8 @@
 layout: chord
 title: "Separuh Aku"
 artist: "Noah"
----​[Intro]
+---​
+[Intro]
 **Am**  **C**  **F**  **Dm**  **E** **(2x)**
 
 ​[Verse 1]
