@@ -83,10 +83,8 @@ Karena separuh a..ku dirimu..
 
 
 ​[Bridge]
-
 F  C  F  G
 F  C  Dm E
-
 (Ah-ah, oh-oh...)
 
 
