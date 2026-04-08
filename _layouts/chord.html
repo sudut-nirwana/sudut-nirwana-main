@@ -9,23 +9,27 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <script src="https://unpkg.com/chordsheetjs/dist/index.bundle.js"></script>
-    <script src="https://unpkg.com/vexchord/dist/vexchord.bundle.js"></script>
     
     <style>
-        body { font-family: 'Nunito', sans-serif; background-color: #fdfaf5; /* Warna background hangat sesuai gambar */ }
+        body { font-family: 'Nunito', sans-serif; background-color: #fdfaf5; /* Background sesuai gambar target */ }
         .chord { color: #ee6c00 !important; font-weight: 800; font-family: 'Fira Code', monospace; font-size: 1.1rem; }
-        .lyrics { color: #4b5563; line-height: 2.2; font-size: 1.1rem; margin-top: -5px; display: block; }
+        .lyrics { color: #4b5563; line-height: 2.2; font-size: 1.1rem; }
         .container-custom { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .content-wrapper { padding-top: 80px; }
         
         /* Styling untuk area diagram chord */
-        #chord-diagrams { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px; }
+        #chord-diagrams { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px; border-top: 1px solid #ddd; padding-top: 20px; }
         .chord-diagram-box { width: 100px; text-align: center; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: white; }
         .chord-diagram-name { font-weight: bold; color: #ee6c00; margin-bottom: 5px; font-size: 1.1rem; }
+        
+        /* Mengatur tampilan tombol alfabet saat aktif */
+        .nav-btn.active {
+            background-color: #ee6c00 !important;
+            color: white !important;
+            border-color: #ee6c00 !important;
+        }
     </style>
-    
 </head>
 <body>
 
@@ -33,13 +37,18 @@
 
     <div class="content-wrapper">
         <main class="container-custom py-8">
-            <header class="mb-8 border-l-8 border-[#ee6c00] pl-6 bg-white p-6 rounded-2xl shadow-sm">
+            <header class="mb-8 border-l-8 border-[#ee6c00] pl-6 bg-white p-6 rounded-2xl shadow-sm relative">
                 <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Song Header</p>
-                <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tighter">{{ page.title }} | Kunci dasar Mudah untuk pemula</h1>
-                <p class="text-gray-500 font-bold mt-3">Artis: <span class="text-[#ee6c00]">{{ page.artist }}</span> | Genre: {{ page.genre }}</p>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tighter">
+                    {{ page.title }} | Kunci dasar Mudah untuk pemula
+                </h1>
+                <p class="text-gray-500 font-bold mt-2">
+                    Artis: <span class="text-[#ee6c00]">{{ page.artist }}</span> | Genre: {{ page.genre }}
+                </p>
+                <div class="absolute top-0 bottom-0 left-0 w-2 bg-[#ee6c00] rounded-l-2xl"></div>
             </header>
 
-            <div class="mb-8 rounded-[2.5rem] overflow-hidden bg-gray-100 aspect-video shadow-lg flex items-center justify-center border border-gray-100 relative">
+            <div class="mb-8 rounded-[2.5rem] overflow-hidden bg-gray-100 aspect-video shadow-lg flex items-center justify-center border border-gray-100">
                 {% if page.video_id %}
                     <iframe class="w-full h-full" src="https://www.youtube.com/embed/{{ page.video_id }}" frameborder="0" allowfullscreen></iframe>
                 {% else %}
@@ -49,12 +58,12 @@
 
             <div class="sticky top-[70px] z-40 py-4 mb-8 bg-white/95 backdrop-blur-md border-y border-gray-100 rounded-xl shadow-sm px-4">
                 <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">Sticky Tools</p>
-                <div class="flex items-center justify-start gap-3">
+                <div class="flex items-center justify-between gap-2 px-2">
                     <div class="flex gap-2">
-                        <button onclick="changeTranspose(-1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition">♭ Trans Nada -</button>
-                        <button onclick="changeTranspose(1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition">♯ Trans Nada +</button>
+                        <button onclick="changeTranspose(-1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">♭ Trans Nada -</button>
+                        <button onclick="changeTranspose(1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">♯ Trans Nada +</button>
                     </div>
-                    <button id="scroll-btn" onclick="toggleAutoScroll()" class="px-6 py-2 bg-[#ee6c00] text-white rounded-xl font-bold text-xs shadow-md transition-all">Auto Scroll</button>
+                    <button id="scroll-btn" onclick="toggleAutoScroll()" class="px-6 py-2 bg-[#ee6c00] text-white rounded-xl font-bold text-xs shadow-md active:scale-95 transition-all">Auto Scroll</button>
                 </div>
             </div>
 
@@ -76,23 +85,25 @@
 
     <script>
         const ChordSheetJS = window.ChordSheetJS;
-        const VexChord = window.VexChord; // Panggil library diagram
         let currentTranspose = 0;
         let isScrolling = false;
         let scrollInterval;
 
-        // Definisi diagram kunci gitar dasar (Anda bisa tambahkan kunci lain di sini)
+        // Definisi diagram kunci gitar dasar (Untuk kunci gitar utama Sephia)
         const chordDefinitions = {
             "Am": [ [1, 1], [2, 2], [3, 2] ], // Senar, Fret
-            "C": [ [1, 1], [3, 2], [5, 3] ],
             "D": [ [1, 2], [2, 3], [3, 2] ],
             "G": [ [1, 3], [5, 2], [6, 3] ],
-            "F": [ [1, 1], [2, 1], [3, 2], [4, 3], [5, 3] ]
+            "C": [ [1, 1], [3, 2], [5, 3] ]
         };
 
         function renderChord() {
             try {
-                const rawData = document.getElementById('raw-data').textContent.trim();
+                // Menggunakan textContent agar lebih akurat mengambil data bersih dari Jekyll
+                const rawElement = document.getElementById('raw-data');
+                if (!rawElement) return;
+
+                const rawData = rawElement.textContent.trim();
                 if (!rawData) return;
 
                 const parser = new ChordSheetJS.ChordSheetParser();
@@ -102,45 +113,49 @@
                     song = song.transpose(currentTranspose);
                 }
 
+                // Menggunakan HtmlTableFormatter agar tampilan lirik/chord rapi dan tahan spasi
                 const formatter = new ChordSheetJS.HtmlTableFormatter();
                 document.getElementById('chord-display').innerHTML = formatter.format(song);
                 
-                // --- BAGIAN DIAGRAM CHORD ---
-                // 1. Ambil semua kunci unik yang ada di lagu
-                const uniqueChords = song.getChords().filter((value, index, self) => self.indexOf(value) === index);
-                
-                // 2. Bersihkan area diagram lama
-                const diagramsContainer = document.getElementById('chord-diagrams');
-                diagramsContainer.innerHTML = '';
+                // Tambahan: Logika untuk menggambar diagram kunci gitar (VexChord)
+                renderChordDiagrams(song);
 
-                // 3. Gambar diagram untuk setiap kunci unik
-                uniqueChords.forEach(chordName => {
-                    if (chordDefinitions[chordName]) {
-                        // Buat kotak diagram
-                        const box = document.createElement('div');
-                        box.className = 'chord-diagram-box';
-                        box.innerHTML = `<div class="chord-diagram-name">${chordName}</div>`;
-                        
-                        // Gambar diagram gitar menggunakan VexChord
-                        const diagram = document.createElement('div');
-                        diagram.id = `chord-${chordName}`;
-                        box.appendChild(diagram);
-                        diagramsContainer.appendChild(box);
-
-                        VexChord.draw(`#chord-${chordName}`, chordDefinitions[chordName], {
-                            width: 80, height: 100, // Ukuran diagram
-                            fretNumberStyle: { font: 'bold 10pt Arial' } // Ukuran nomor fret
-                        });
-                    }
-                });
-                
             } catch (e) {
                 console.error(e);
-                document.getElementById('chord-display').innerHTML = "<p class='text-red-500'>Format lirik salah atau library diagram belum dimuat.</p>";
+                document.getElementById('chord-display').innerHTML = "<p class='text-red-500 italic'>Format lirik di file .md salah. Pastikan tidak ada spasi di baris chord atau karakter Markdown bold/italic.</p>";
             }
         }
 
-        // Fungsi Transpose & Scroll (Tetap)
+        // Fungsi opsional untuk menggambar diagram kunci gitar
+        function renderChordDiagrams(song) {
+            const VexChord = window.VexChord;
+            if (!VexChord) return; // Berhenti jika library diagram tidak ada
+
+            const diagramsContainer = document.getElementById('chord-diagrams');
+            diagramsContainer.innerHTML = ''; // Bersihkan diagram lama
+
+            // Ambil semua kunci unik yang ada di lagu
+            const uniqueChords = song.getChords().filter((value, index, self) => self.indexOf(value) === index);
+
+            // Gambar diagram untuk setiap kunci unik
+            uniqueChords.forEach(chordName => {
+                if (chordDefinitions[chordName]) {
+                    const box = document.createElement('div');
+                    box.className = 'chord-diagram-box';
+                    box.innerHTML = `<div class="chord-diagram-name">${chordName}</div>`;
+                    
+                    const diagram = document.createElement('div');
+                    diagram.id = `chord-${chordName}`;
+                    box.appendChild(diagram);
+                    diagramsContainer.appendChild(box);
+
+                    VexChord.draw(`#chord-${chordName}`, chordDefinitions[chordName], {
+                        width: 80, height: 100, // Ukuran diagram
+                    });
+                }
+            });
+        }
+
         function changeTranspose(val) { currentTranspose += val; renderChord(); }
         function toggleAutoScroll() {
             if (isScrolling) { clearInterval(scrollInterval); document.getElementById('scroll-btn').innerText = "Auto Scroll"; }
@@ -148,7 +163,7 @@
             isScrolling = !isScrolling;
         }
 
-        // Render otomatis
+        // Render otomatis saat halaman siap
         document.addEventListener('DOMContentLoaded', renderChord);
     </script>
 </body>
