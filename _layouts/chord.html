@@ -6,7 +6,7 @@ layout: default
 <div class="container chord-page-wrapper">
     
     <section class="song-header">
-        <span class="label">Song Header</span>
+        <span class="label" style="background:#ff9800; color:#fff; padding:2px 8px; border-radius:4px; font-size:12px;">Chord Dasar</span>
         <h1>{{ page.title }}</h1>
         <p>Artis: <strong>{{ page.artist }}</strong> | Genre: {{ page.genre }}</p>
         
@@ -14,7 +14,8 @@ layout: default
     </section>
 
     <div class="sticky-tools">
-        <button onclick="transpose(-1)">♭ Transpose</button>
+        <button onclick="transpose(-1)">♭ Transpose -</button>
+        <button onclick="transpose(1)"># Transpose +</button>
         <button onclick="autoScroll()">Auto Scroll</button>
         <button onclick="stopScroll()">Stop</button>
     </div>
@@ -33,9 +34,9 @@ layout: default
             <ul id="related-list">
                 {% assign songs = site.chord | where: "artist", page.artist %}
                 {% for song in songs limit: 5 %}
-                {% if song.url != page.url %}
-                <li><a href="{{ song.url | relative_url }}">{{ song.title }}</a></li>
-                {% endif %}
+                    {% if song.url != page.url %}
+                        <li><a href="{{ song.url | relative_url }}">{{ song.title }}</a></li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>
@@ -44,8 +45,9 @@ layout: default
 </div>
 
 <script>
-  // Mengirim data daftar kunci dari Jekyll ke JavaScript
-  const songChords = {{ page.chords | jsonify }};
+  // Mengirim data array chords dari MD ke JavaScript
+  const songChords = {{ page.chords | jsonify | default: '[]' }};
 </script>
+
 <script src="https://unpkg.com/chord-canvas/dist/chord-canvas.js"></script>
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
