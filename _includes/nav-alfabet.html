@@ -1,15 +1,49 @@
-<div class="w-full bg-white p-5 rounded-[2rem] border border-gray-100 my-8 shadow-sm">
-    <h3 class="font-extrabold text-gray-800 mb-4 text-left text-[16px] uppercase tracking-wider text-[#ee6c00]">
-        Cari Artis Berdasarkan Inisial
-    </h3>
-    
-    <div class="grid grid-cols-7 gap-1.5">
-        {% assign navs = "A-B,C-D,E-F,G-H,I-J,K-L,M-N,O-P,Q-R,S-T,U-V,W-X,Y-Z,#" | split: "," %}
-        {% for nav in navs %}
-        <a href="/artis/{{ nav | slugify }}/" 
-           class="aspect-square flex items-center justify-center border border-gray-100 rounded-lg hover:bg-[#ee6c00] hover:text-white hover:border-[#ee6c00] transition-all duration-300 font-bold text-[10px] shadow-sm">
-            {{ nav }}
-        </a>
-        {% endfor %}
+<div class="flex flex-wrap justify-center gap-2 mb-8">
+  {% assign letters = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,#" | split: "," %}
+  {% for letter in letters %}
+    <a href="/huruf/{{ letter | slugify }}" class="nav-btn w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 font-bold text-sm hover:bg-[#ee6c00] hover:text-white transition-all">
+      {{ letter }}
+    </a>
+  {% endfor %}
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+    <div class="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+        <h3 class="text-[#ee6c00] font-black text-sm uppercase mb-4 flex items-center gap-2">
+            <span>🔥</span> Lagu Viral
+        </h3>
+        <ul class="space-y-3">
+            {% comment %} 
+               Cek koleksi kamu. Jika lagu ada di folder _posts, pakai site.posts. 
+               Jika di folder _chord, pakai site.chord.
+            {% endcomment %}
+            {% assign viral_list = site.posts | where: "viral", true | limit: 5 %}
+            {% for song in viral_list %}
+            <li>
+                <a href="{{ song.url }}" class="group flex justify-between items-center">
+                    <span class="text-sm font-bold text-gray-700 group-hover:text-[#ee6c00] transition-colors">{{ song.title }}</span>
+                    <span class="text-[10px] text-gray-400 font-medium">{{ song.artist }}</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="text-xs text-gray-300 italic">Belum ada data lagu viral.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+        <h3 class="text-[#ee6c00] font-black text-sm uppercase mb-4 flex items-center gap-2">
+            <span>✨</span> Lagu Terbaru
+        </h3>
+        <ul class="space-y-3">
+            {% for song in site.posts limit: 5 %}
+            <li>
+                <a href="{{ song.url }}" class="group flex justify-between items-center">
+                    <span class="text-sm font-bold text-gray-700 group-hover:text-[#ee6c00] transition-colors">{{ song.title }}</span>
+                    <span class="text-[10px] text-gray-400 font-medium">{{ song.artist }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 </div>
