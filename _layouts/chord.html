@@ -1,112 +1,39 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} - Sudut Nirwana</title>
+---
+layout: default
+---
+<link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
+
+<div class="chord-page-wrapper">
+  
+  <section class="song-header">
+    <span class="label">Song Header</span>
+    <h1>{{ page.title }}</h1>
+    <p>Artis: <strong>{{ page.artist }}</strong> | Genre: {{ page.genre }}</p>
     
-    <link rel="stylesheet" href="/assets/css/style.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/chordsheetjs/dist/index.bundle.js"></script>
-    
-    <style>
-        body { font-family: 'Nunito', sans-serif; background-color: #fdfaf5; /* Background sesuai gambar target */ }
-        .chord { color: #ee6c00 !important; font-weight: 800; font-family: 'Fira Code', monospace; font-size: 1.1rem; }
-        .lyrics { color: #4b5563; line-height: 2.2; font-size: 1.1rem; }
-        .container-custom { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .content-wrapper { padding-top: 80px; }
-        
-        /* Styling untuk area diagram chord */
-        #chord-diagrams { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px; border-top: 1px solid #ddd; padding-top: 20px; }
-        .chord-diagram-box { width: 100px; text-align: center; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: white; }
-        .chord-diagram-name { font-weight: bold; color: #ee6c00; margin-bottom: 5px; font-size: 1.1rem; }
-        
-        /* Mengatur tampilan tombol alfabet saat aktif */
-        .nav-btn.active {
-            background-color: #ee6c00 !important;
-            color: white !important;
-            border-color: #ee6c00 !important;
-        }
-    </style>
-</head>
-<body>
+    <div id="chord-diagrams" class="diagram-container"></div>
+  </section>
 
-    {% include header.html %}
+  <div class="sticky-tools">
+    <button onclick="transpose(-1)">♭ Transpose</button>
+    <button onclick="autoScroll()">Auto Scroll</button>
+    <button onclick="stopScroll()">Stop</button>
+  </div>
 
-    <div class="content-wrapper">
-        <main class="container-custom py-8">
-            <header class="mb-8 border-l-8 border-[#ee6c00] pl-6 bg-white p-6 rounded-2xl shadow-sm relative">
-                <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Song Header</p>
-                <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tighter">
-                    {{ page.title }} | Kunci dasar Mudah untuk pemula
-                </h1>
-                <p class="text-gray-500 font-bold mt-2">
-                    Artis: <span class="text-[#ee6c00]">{{ page.artist }}</span> | Genre: {{ page.genre }}
-                </p>
-                <div class="absolute top-0 bottom-0 left-0 w-2 bg-[#ee6c00] rounded-l-2xl"></div>
-            </header>
-
-            <div class="mb-8 rounded-[2.5rem] overflow-hidden bg-gray-100 aspect-video shadow-lg flex items-center justify-center border border-gray-100">
-                {% if page.video_id %}
-                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/{{ page.video_id }}" frameborder="0" allowfullscreen></iframe>
-                {% else %}
-                    <p class="text-gray-400 font-bold italic text-sm">Video Tutorial Belum Tersedia</p>
-                {% endif %}
-            </div>
-
-            <div class="sticky top-[70px] z-40 py-4 mb-8 bg-white/95 backdrop-blur-md border-y border-gray-100 rounded-xl shadow-sm px-4">
-                <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">Sticky Tools</p>
-                <div class="flex items-center justify-between gap-2 px-2">
-                    <div class="flex gap-2">
-                        <button onclick="changeTranspose(-1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">♭ Trans Nada -</button>
-                        <button onclick="changeTranspose(1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">♯ Trans Nada +</button>
-                    </div>
-                    <button id="scroll-btn" onclick="toggleAutoScroll()" class="px-6 py-2 bg-[#ee6c00] text-white rounded-xl font-bold text-xs shadow-md active:scale-95 transition-all">Auto Scroll</button>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 md:p-10 rounded-[2rem] border border-gray-100 shadow-sm mb-12">
-                <div id="chord-display" class="whitespace-pre overflow-x-auto text-lg leading-relaxed">
-                    </div>
-                
-                <div id="chord-diagrams">
-                    </div>
-            </div>
-
-            {% include nav-alfabet.html %}
-        </main>
+  <article class="chord-card">
+    <div class="chord-content">
+      {{ content }}
     </div>
+  </article>
 
-    {% include footer.html %}
+  <section class="footer-extra">
+    {% include artis-a-z.html %}
+    
+    <div class="related-songs">
+      <h3>Lagu lainnya dari {{ page.artist }}</h3>
+      </div>
+  </section>
 
-    <div id="raw-data" style="display:none;">{{ content | strip_html }}</div>
-<textarea id="raw-chord-data" style="display:none;">{{ content }}</textarea>
+</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Ambil data dari textarea (sangat aman dari tag HTML)
-        const rawData = document.getElementById('raw-chord-data').value.trim();
-        const display = document.getElementById('chord-display');
-
-        try {
-            const parser = new ChordSheetJS.ChordSheetParser();
-            const song = parser.parse(rawData);
-            const formatter = new ChordSheetJS.HtmlTableFormatter();
-            display.innerHTML = formatter.format(song);
-            
-            // Panggil diagram jika ada
-            if (typeof renderChordDiagrams === "function") {
-                renderChordDiagrams(song);
-            }
-        } catch (e) {
-            console.error("Gagal Render:", e);
-            // Jika error, tampilkan apa adanya tapi rapi
-            display.innerHTML = `<pre class="font-mono text-sm leading-relaxed">${rawData}</pre>`;
-        }
-    });
-</script>
-
-</body>
-</html>
+<script src="https://unpkg.com/chord-canvas/dist/chord-canvas.js"></script>
+<script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
