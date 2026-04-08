@@ -19,6 +19,8 @@
 </head>
 <body>
 
+    {% include header.html %}
+
     <main class="container-custom py-8">
         <header class="mb-8 border-l-8 border-[#ee6c00] pl-6">
             <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tighter">{{ page.title }}</h1>
@@ -50,6 +52,7 @@
 
         {% include nav-alfabet.html %}
     </main>
+    {% include footer.html %}
 
     <div id="raw-data" style="display:none;">{{ content }}</div>
 
