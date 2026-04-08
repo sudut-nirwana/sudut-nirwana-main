@@ -41,68 +41,90 @@ body{
 }
 /* --- Chord Page Specific Style --- */
 
-/* Wrapper untuk judul agar teks berada di tengah */
-.song-header {
-    text-align: center;
-    margin: 20px 0 30px;
+/* Container utama - Menghindari double padding */
+.chord-page-wrapper {
+    padding-top: 80px; /* Jarak dari header agar tidak tertutup */
+    padding-bottom: 40px;
+    text-align: left;
 }
 
-.song-header h1 {
-    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.2rem);
-    color: #333;
+/* Header & Judul */
+.song-title {
+    font-weight: 800;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
     margin-bottom: 5px;
+    line-height: 1.2;
 }
 
-/* Area Diagram 50px */
+.song-meta {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Diagram Kunci - Berbaris ke kiri */
 .diagram-container {
     display: flex;
-    justify-content: center;
-    gap: 15px;
+    justify-content: flex-start;
+    gap: 10px;
     flex-wrap: wrap;
-    padding: 15px 0;
-}
-
-.chord-box {
-    width: 50px; /* Sesuai request kamu */
-    text-align: center;
-}
-
-.chord-box span {
-    display: block;
-    font-size: 10px;
-    font-weight: bold;
-    margin-bottom: 3px;
+    margin: 15px 0;
 }
 
 /* Kotak Lirik "Clean Paper" */
-/* Kita masukkan ke dalam .container milikmu di HTML nanti */
 .chord-card {
     background: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    padding: clamp(15px, 2vw, 30px);
-    margin-bottom: 40px;
-    overflow-x: auto; /* Penting agar lirik tidak pecah di mobile */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    padding: 15px; /* Padding minimal agar tidak sempit di HP */
+    margin: 20px 0;
+    border: 1px solid #f0f0f0;
+    overflow-x: auto; /* Biar kalau lirik panjang bisa di-swipe, bukan bergeser satu layar */
 }
 
-/* Format Teks Lirik */
+/* Teks Lirik & Chord */
 .chord-content {
-    font-family: 'Courier New', Courier, monospace; /* Monospace agar chord presisi */
-    line-height: 2.4; /* Ruang untuk chord di atas lirik */
-    white-space: pre; /* Menjaga spasi dari file MD */
-    font-size: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700; /* Font lirik tebal */
+    font-size: 15px;
+    line-height: 2.4;
+    white-space: pre;
     color: #333;
+    text-align: left;
 }
 
-/* Styling Chord Otomatis (Tag <b> di file MD) */
+/* Chord Warna Oranye & Sangat Tebal */
 .chord-content b {
-    color: #ff9800; /* Oranye khas Sudut Nirwana */
-    font-weight: 700;
+    color: #ff9800;
+    font-weight: 900;
 }
 
-/* Navigasi Rekomendasi & A-Z Section */
-.footer-extra {
-    margin-top: 50px;
-    padding-top: 30px;
-    border-top: 1px dashed #ddd;
+/* Tombol Tools */
+.sticky-tools {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
 }
+
+.sticky-tools button {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* List lagu terkait */
+.related-songs {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.related-list {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
