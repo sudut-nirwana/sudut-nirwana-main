@@ -1,0 +1,76 @@
+<script src="https://unpkg.com/chordsheetjs/dist/index.bundle.js"></script>
+<script src="https://unpkg.com/vexchords/dist/vexchords.dev.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="bg-[#121212] text-white p-6 rounded-xl font-sans shadow-2xl border border-gray-800">
+    
+    <div class="flex flex-wrap gap-4 mb-8 items-center bg-[#1e1e1e] p-4 rounded-lg">
+        <button onclick="changeTranspose(-1)" class="bg-gray-700 hover:bg-orange-500 px-4 py-2 rounded transition">♭ Transpose -</button>
+        <button onclick="changeTranspose(1)" class="bg-gray-700 hover:bg-orange-500 px-4 py-2 rounded transition">♯ Transpose +</button>
+        <div id="key-display" class="ml-auto text-orange-400 font-bold">Key: C</div>
+    </div>
+
+    <div id="chord-diagrams" class="flex flex-wrap gap-4 mb-8 p-4 bg-[#181818] rounded-lg border border-dashed border-gray-700">
+        </div>
+
+    <div id="chord-display" class="leading-relaxed text-lg overflow-x-auto whitespace-pre font-mono">
+        </div>
+</div>
+
+<script>
+// Data lirik mentah dari Jekyll (Format ChordPro)
+const rawChordPro = `{{ content | strip_html }}`; 
+
+let currentTranspose = 0;
+const ChordSheetJS = window.ChordSheetJS;
+
+function renderSheet() {
+    const parser = new ChordSheetJS.ChordProParser();
+    let song = parser.parse(rawChordPro);
+    
+    // Proses Transpose
+    if (currentTranspose !== 0) {
+        song = song.transpose(currentTranspose);
+    }
+
+    // Render Lirik ke HTML
+    const formatter = new ChordSheetJS.HtmlTableFormatter();
+    document.getElementById('chord-display').innerHTML = formatter.format(song);
+
+    // Ambil semua chord unik untuk digambar diagramnya
+    renderDiagrams(song.getChords());
+}
+
+function renderDiagrams(chords) {
+    const container = document.getElementById('chord-diagrams');
+    container.innerHTML = ''; // Reset
+
+    chords.forEach(chordName => {
+        const div = document.createElement('div');
+        div.className = "text-center bg-[#252525] p-2 rounded";
+        div.innerHTML = `<p class="text-xs font-bold mb-1 text-orange-400">${chordName}</p><div id="chart-${chordName}"></div>`;
+        container.appendChild(div);
+
+        // Gambar Diagram pake VexChords (Contoh sederhana untuk C)
+        // Catatan: Kamu butuh mapping database koordinat jari untuk tiap kunci
+        const selector = `#chart-${chordName}`;
+        // VexChords.draw(selector, { chord: [[1, 0], [2, 1]] }); // Logic mapping jari bisa ditambah di sini
+    });
+}
+
+function changeTranspose(val) {
+    currentTranspose += val;
+    document.getElementById('key-display').innerText = `Transpose: ${currentTranspose}`;
+    renderSheet();
+}
+
+// Jalankan saat startup
+window.onload = renderSheet;
+</script>
+
+<style>
+    /* Styling agar chord di atas lirik rapi */
+    .chord { color: #fb923c !important; font-weight: bold; margin-bottom: -5px; display: block; }
+    table { border-collapse: collapse; margin-bottom: 1rem; }
+    td { padding: 0 4px; vertical-align: bottom; }
+</style>
