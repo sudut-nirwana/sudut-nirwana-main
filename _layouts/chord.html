@@ -12,73 +12,43 @@
         body { font-family: 'Nunito', sans-serif; background-color: #ffffff; }
         .chord { color: #ee6c00 !important; font-weight: 800; font-family: 'Fira Code', monospace; }
         .lyrics { color: #4b5563; line-height: 2.5; font-size: 1.1rem; }
-        .sticky-panel { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); }
-        /* Mengatur lebar maksimal dan padding sesuai permintaan */
         .container-custom { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        /* Menghilangkan scrollbar pada tombol navigasi */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
 
     <main class="container-custom py-8">
         <header class="mb-8 border-l-8 border-[#ee6c00] pl-6">
-            <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tighter">
-                {{ page.title }}
-            </h1>
-            <p class="text-gray-500 font-bold mt-2">
-                Artis: <span class="text-[#ee6c00]">{{ page.artist }}</span> | Genre: {{ page.genre | default: "Pop" }}
-            </p>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tighter">{{ page.title }}</h1>
+            <p class="text-gray-500 font-bold mt-2">Artis: <span class="text-[#ee6c00]">{{ page.artist }}</span> | Genre: {{ page.genre | default: "Pop" }}</p>
         </header>
 
-        {% if page.video_id %}
-        <div class="mb-8 rounded-3xl overflow-hidden bg-black aspect-video shadow-xl">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/{{ page.video_id }}" frameborder="0" allowfullscreen></iframe>
-        </div>
-        {% endif %}
-        
-
-        <div class="mb-8 rounded-3xl overflow-hidden bg-gray-100 aspect-video flex items-center justify-center border-2 border-gray-200">
-             <span class="text-gray-400 font-bold italic text-xl">Video Player Placeholder</span>
+        <div class="mb-8 rounded-[2.5rem] overflow-hidden bg-gray-100 aspect-video shadow-lg border border-gray-200 flex items-center justify-center">
+            {% if page.video_id %}
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/{{ page.video_id }}" frameborder="0" allowfullscreen></iframe>
+            {% else %}
+                <p class="text-gray-400 font-bold italic">Video Tutorial Belum Tersedia</p>
+            {% endif %}
         </div>
 
-        <div class="sticky-panel border-y border-gray-100 py-4 mb-8 bg-white/95 backdrop-blur-md">
-            <div class="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar px-2">
+        <div class="sticky top-0 z-50 py-4 mb-8 bg-white/95 backdrop-blur-md border-y border-gray-100">
+            <div class="flex items-center justify-between gap-2 px-2">
                 <div class="flex gap-2">
-                    <button onclick="changeTranspose(-1)" class="whitespace-nowrap px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">
-                ♭ Trans -
-                    </button>
-                    <button onclick="changeTranspose(1)" class="whitespace-nowrap px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">
-                ♯ Trans +
-                    </button>
+                    <button onclick="changeTranspose(-1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00]">♭ Trans -</button>
+                    <button onclick="changeTranspose(1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00]">♯ Trans +</button>
                 </div>
-                <button id="scroll-btn" onclick="toggleAutoScroll()" class="whitespace-nowrap px-6 py-2.5 bg-[#ee6c00] text-white rounded-xl font-bold text-xs shadow-lg shadow-orange-200 active:scale-95 transition-all">
-                    Auto Scroll
-                </button>
+                <button id="scroll-btn" onclick="toggleAutoScroll()" class="px-6 py-2 bg-[#ee6c00] text-white rounded-xl font-bold text-xs shadow-md">Auto Scroll</button>
             </div>
         </div>
 
-
-        <div class="bg-gray-50/50 p-6 md:p-12 rounded-[3rem] border border-gray-100 mb-12">
+        <div class="bg-white p-6 md:p-10 rounded-[2rem] border border-gray-100 shadow-sm mb-12">
             <div id="chord-display" class="whitespace-pre overflow-x-auto">
                 </div>
         </div>
 
         {% include nav-alfabet.html %}
-
-        <div class="grid md:grid-cols-2 gap-12 mt-12 pt-12 border-t border-gray-100">
-            <div>
-                <h3 class="text-2xl font-extrabold text-gray-800 mb-6 flex items-center">
-                    <span class="w-2 h-8 bg-[#ee6c00] rounded-full mr-3"></span> Chord Terbaru
-                </h3>
-                <div class="space-y-4">
-                    {% for post in site.posts limit:5 %}
-                    <a href="{{ post.url }}" class="block p-4 bg-white border border-gray-100 rounded-2xl hover:border-[#ee6c00] transition shadow-sm">
-                        <h4 class="font-bold text-gray-800 uppercase text-sm">{{ post.title }}</h4>
-                        <p class="text-xs text-[#ee6c00] font-bold">{{ post.artist }}</p>
-                    </a>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
     </main>
 
     <div id="raw-data" style="display:none;">{{ content }}</div>
@@ -89,7 +59,7 @@
         let isScrolling = false;
         let scrollInterval;
 
-        function render() {
+        function renderChord() {
             const raw = document.getElementById('raw-data').innerText;
             const parser = new ChordSheetJS.ChordSheetParser();
             let song = parser.parse(raw);
@@ -98,7 +68,7 @@
             document.getElementById('chord-display').innerHTML = formatter.format(song);
         }
 
-        function changeTranspose(val) { currentTranspose += val; render(); }
+        function changeTranspose(val) { currentTranspose += val; renderChord(); }
 
         function toggleAutoScroll() {
             if (isScrolling) {
@@ -110,7 +80,7 @@
             }
             isScrolling = !isScrolling;
         }
-        window.onload = render;
+        window.onload = renderChord;
     </script>
 </body>
 </html>
