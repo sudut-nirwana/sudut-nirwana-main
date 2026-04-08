@@ -1,16 +1,34 @@
 ---
-layout: default
+layout: null
 ---
-<link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
+</head>
+<body>
 
-<div class="container chord-page-wrapper">
+<div class="chord-site-wrapper">
     
     <header class="song-header">
+        <span class="label">Song Chord</span>
         <h1 class="song-title">{{ page.title }}</h1>
         <p class="song-meta">Artis: <strong>{{ page.artist }}</strong> | Genre: {{ page.genre }}</p>
-        
-        <div id="chord-diagrams" class="diagram-container"></div>
     </header>
+
+    <div class="media-section">
+        {% if page.youtube_id %}
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+        {% endif %}
+        
+        <div id="chord-diagrams" class="diagram-container">
+            </div>
+    </div>
 
     <div class="sticky-tools">
         <button onclick="transpose(-1)">♭ Trans -</button>
@@ -19,36 +37,30 @@ layout: default
         <button onclick="stopScroll()">Stop</button>
     </div>
 
-    <article class="chord-card">
+    <article class="chord-main-card">
         <div class="chord-content">
             {{ content }}
         </div>
     </article>
 
-    <section class="footer-extra">
-        {% include artis-a-z.html %}
-        
-        <div class="related-songs">
-            <h3>Lagu lainnya dari {{ page.artist }}</h3>
-            <ul class="related-list">
-                {% assign songs = site.chord | where: "artist", page.artist %}
-                {% for song in songs limit: 5 %}
-                    {% if song.url != page.url %}
-                        <li><a href="{{ song.url | relative_url }}">{{ song.title }}</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+    <section class="alphabet-nav">
+        <h3>Temukan Chord Berdasarkan Inisial Artis</h3>
+        <div class="alphabet-list">
+            {% assign letters = "A-B,C-D,E-F,G-H,I-J,K-M,N,O-R,S-T,U-V,W-X,Y-Z,#" | split: "," %}
+            {% for group in letters %}
+                <a href="/artis/{{ group | slugify }}" class="btn-az">{{ group }}</a>
+            {% endfor %}
         </div>
     </section>
 
+    <footer class="simple-footer">
+        <p>&copy; 2026 Sudut Nirwana. All Rights Reserved.</p>
+    </footer>
 </div>
 
-<script>
-  // 1. Variabel Data
-  const songChords = {{ page.chords | jsonify | default: '[]' }};
-</script>
-
+<script>const songChords = {{ page.chords | jsonify | default: '[]' }};</script>
 <script src="https://unpkg.com/chord-canvas/dist/chord-canvas.js"></script>
-
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
 
+</body>
+</html>
