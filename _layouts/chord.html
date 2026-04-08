@@ -63,10 +63,14 @@
         let scrollInterval;
 
         function renderChord() {
-            const raw = document.getElementById('raw-data').innerText;
+            // Menggunakan textContent agar lebih akurat mengambil data dari Jekyll
+            const raw = document.getElementById('raw-data').textContent.trim();
+            if (!raw) return; // Berhenti jika data kosong
             const parser = new ChordSheetJS.ChordSheetParser();
             let song = parser.parse(raw);
-            if (currentTranspose !== 0) song = song.transpose(currentTranspose);
+            if (currentTranspose !== 0) {
+                song = song.transpose(currentTranspose);
+            }
             const formatter = new ChordSheetJS.HtmlTableFormatter();
             document.getElementById('chord-display').innerHTML = formatter.format(song);
         }
