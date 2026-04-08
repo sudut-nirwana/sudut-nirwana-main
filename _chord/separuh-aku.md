@@ -2,87 +2,94 @@
 layout: chord
 title: "Separuh Aku"
 artist: "Noah"
+genre: "Pop"
+video_id: mZp59W2Y_Y8
 viral: true
 popular: true
 ---
-[Intro]
-**Am**  **C**  **F**  **Dm**  **E** **(2x)**
 
-​[Verse 1]
-  **Am**
-Dan terjadi lagi..
-**Dm**               **F**           **G**
+[Intro]
+Am  C  F  Dm  E  (2x)
+
+[Verse 1]
+Am
+Dan terjadi lagi
+Dm             F         G
 Kisah lama yang terulang kembali
-**Am**              **C**
-Kau terluka lagi..
-**Dm**               **F**           **G**
+Am             C
+Kau terluka lagi
+Dm             F         G
 Dari cinta rumit yang kau jalani
 
-​[Pre-Chorus]
-**Dm**        **G**     **Am**
-Aku ingin.. kau me..rasa..
-**G**       **C**         **G**         **Am**
+[Pre-Chorus]
+Dm        G      Am
+Aku ingin kau merasa
+G         C         G        Am
 Kamu mengerti aku mengerti kamu
-**Dm**        **G**     **C**
-Aku ingin.. kau sa..dari
-**F**      **Bb**       **E**
-Cinta..mu bukanlah dia..
+Dm        G      C
+Aku ingin kau sadari
+F         Bb        E
+Cintamu bukanlah dia..
 
-​[Reff]
-**A    C#m F#m**
+[Chorus]
+A      C#m    F#m
 Dengar laraku..
-**E      A         C#m        D**
+E      A        C#m       D
 Suara hati ini memanggil namamu..
-**C#m    Bm     E**
-Karena separuh a..ku dirimu..
+C#m    Bm     E
+Karena separuh aku dirimu..
 
-​[Musik]
-**Am G-C G-C Dm F**
-u u.. u u.. aa aa aha..
+[Interlude]
+Am G-C G-C Dm F
 
-​[Verse 2]
-**Am**
+[Verse 2]
+Am
 Ku ada di sini
-**Dm               F           G**
-Pahamilah, kau tak pernah sendiri
-Am              C
-Kar'na aku s'lalu
-**Dm               F           G**
+Dm             F           G
+Pahamilah kau tak pernah sendiri
+Am             C
+Karena aku selalu
+Dm             F           G
 Di dekatmu saat engkau terjatuh
 
-​[Pre-Chorus]
-**Dm        G     Am**
+[Pre-Chorus]
+Dm        G      Am
 Aku ingin kau merasa
-**G       C         G         Am**
+G         C         G        Am
 Kamu mengerti aku mengerti kamu
-**Dm        G     C**
+Dm        G      C
 Aku ingin kau pahami
-**F      Bb       E**
-Cinta..mu bukanlah dia..
+F         Bb        E
+Cintamu bukanlah dia..
 
-​[Reff]
-**A    C#m F#m**
+[Chorus]
+A      C#m    F#m
 Dengar laraku..
-**E      A         C#m        D**
+E      A        C#m       D
 Suara hati ini memanggil namamu..
-**C#m    Bm     E**
-Karena separuh a..ku dirimu..
+C#m    Bm     E
+Karena separuh aku dirimu..
 
-​[Bridge]
-**F  C  F  G
-F  C  Dm E**
+[Bridge]
+F  C  F  G
+F  C  Dm E
 (Ah-ah, oh-oh...)
 
-​[Reff Akhir]
-**A**    **C#m** **F#m**
+[Chorus Final]
+A      C#m    F#m
 Dengar laraku..
-**E**      **A**         **C#m**        **D**
+E      A        C#m       D
 Suara hati ini memanggil namamu..
-**C#m**    **Bm**     **E**
-Karena separuh a..ku menyentuh laramu
-**A**      **C#m**        **F#m**
-Semua lukamu t'lah menjadi lirihku
-**E**      **A**         **C#m**        **D**
-Karena separuh a..ku..
-**A**
-Dirimu
+C#m    Bm     E
+Karena separuh aku..
+
+A      C#m    F#m
+Dengar laraku..
+E      A        C#m       D
+Suara hati ini memanggil namamu..
+C#m    Bm     E            A
+Karena separuh aku... dirimu...
+
+[Outro]
+A C#m F#m E D
+A
