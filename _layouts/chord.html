@@ -30,8 +30,14 @@ layout: default
         
         <div class="related-songs">
             <h3>Lagu lainnya dari {{ page.artist }}</h3>
-            <div id="related-list">
-                </div>
+            <ul id="related-list">
+                {% assign songs = site.chord | where: "artist", page.artist %}
+                {% for song in songs limit: 5 %}
+                {% if song.url != page.url %}
+                <li><a href="{{ song.url | relative_url }}">{{ song.title }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
         </div>
     </section>
 
