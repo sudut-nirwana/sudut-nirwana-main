@@ -1,12 +1,11 @@
 ---
 layout: chord
-title: "Sephia | Kunci Dasar Mudah Untuk Pemula"
+title: "Sephia | "
 artist: "Sheila on 7"
 genre: "pop"
 tags: [pop, 90an]
 viral: true
 popular: true
-permalink: /chord/sephia/
 ---
 
 [Intro]
