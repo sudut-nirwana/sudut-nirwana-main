@@ -1,50 +1,98 @@
----
-layout: default
----
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <title>{{ page.title }} | Sudut Nirwana - Kunci Gitar & Tablature</title>
-    <meta name="description" content="Sudut Nirwana: Koleksi chord gitar, kunci gitar, dan tablature lagu terlengkap untuk pemula. Dilengkapi fitur auto-scroll dan transpose nada akurat.">
-    <meta name="keywords" content="kunci gitar, chord gitar, tablature, belajar gitar, chord lagu indonesia, chord gitar pemula, sudut nirwana, chord dasar, kunci gitar lagu hits">
-    <meta name="author" content="Sudut Nirwana">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:title" content="Sudut Nirwana | Kunci Gitar & Tablature Terlengkap">
-    <meta property="og:description" content="Temukan chord gitar favoritmu dengan fitur transpose dan auto-scroll gratis hanya di Sudut Nirwana.">
-    <meta property="og:image" content="{{ '../img/sudut-nirwana-logo.webp' | relative_url }}">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Sudut Nirwana | Kunci Gitar & Tablature">
-    <meta name="twitter:description" content="Pusat belajar kunci gitar termudah dan terlengkap untuk pemula.">
-    <meta name="twitter:image" content="{{ '../img/sudut-nirwana-logo.webp' | relative_url }}">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
+    <title>{{ page.title }} - Sudut Nirwana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/chordsheetjs/dist/index.bundle.js"></script>
     
+    <style>
+        body { font-family: 'Nunito', sans-serif; background-color: #ffffff; }
+        .chord { color: #ee6c00 !important; font-weight: 800; font-family: 'Fira Code', monospace; }
+        .lyrics { color: #4b5563; line-height: 2.5; font-size: 1.1rem; }
+        .sticky-panel { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); }
+        /* Mengatur lebar maksimal dan padding sesuai permintaan */
+        .container-custom { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    </style>
 </head>
 <body>
-<br><br>
-<div class="chord-container">
-    <header class="chord-header">
-        <h2>{{ page.title }}</h2>
-        <p class="chord-artist">Artis: {{ page.artist }} | Genre: {{ page.genre }}</p>
-    </header>
 
-    <div class="chord-content-wrapper">{{ content }}</div>
-</div>
+    <main class="container-custom py-8">
+        <header class="mb-8 border-l-8 border-[#ee6c00] pl-6">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tighter">
+                {{ page.title }}
+            </h1>
+            <p class="text-gray-500 font-bold mt-2">
+                Artis: <span class="text-[#ee6c00]">{{ page.artist }}</span> | Genre: {{ page.genre | default: "Pop" }}
+            </p>
+        </header>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="/assets/js/chord-logic.js | relative_url"></script>
+        <div class="mb-8 rounded-3xl overflow-hidden bg-gray-100 aspect-video flex items-center justify-center border-2 border-gray-200">
+             <span class="text-gray-400 font-bold italic text-xl">Video Player Placeholder</span>
+        </div>
+
+        <div class="sticky-panel py-4 border-y border-gray-100 mb-8 flex flex-wrap gap-4 items-center">
+            <button onclick="changeTranspose(-1)" class="bg-gray-50 border-2 border-gray-200 px-4 py-2 rounded-2xl font-bold hover:border-[#ee6c00] transition">♭ Transpose -</button>
+            <button onclick="changeTranspose(1)" class="bg-gray-50 border-2 border-gray-200 px-4 py-2 rounded-2xl font-bold hover:border-[#ee6c00] transition">♯ Transpose +</button>
+            <button id="scroll-btn" onclick="toggleAutoScroll()" class="ml-auto bg-[#ee6c00] text-white px-6 py-2 rounded-2xl font-bold shadow-lg shadow-orange-200">Auto Scroll</button>
+        </div>
+
+        <div class="bg-gray-50/50 p-6 md:p-12 rounded-[3rem] border border-gray-100 mb-12">
+            <div id="chord-display" class="whitespace-pre overflow-x-auto">
+                </div>
+        </div>
+
+        {% include nav-alfabet.html %}
+
+        <div class="grid md:grid-cols-2 gap-12 mt-12 pt-12 border-t border-gray-100">
+            <div>
+                <h3 class="text-2xl font-extrabold text-gray-800 mb-6 flex items-center">
+                    <span class="w-2 h-8 bg-[#ee6c00] rounded-full mr-3"></span> Chord Terbaru
+                </h3>
+                <div class="space-y-4">
+                    {% for post in site.posts limit:5 %}
+                    <a href="{{ post.url }}" class="block p-4 bg-white border border-gray-100 rounded-2xl hover:border-[#ee6c00] transition shadow-sm">
+                        <h4 class="font-bold text-gray-800 uppercase text-sm">{{ post.title }}</h4>
+                        <p class="text-xs text-[#ee6c00] font-bold">{{ post.artist }}</p>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="raw-data" style="display:none;">{{ content }}</div>
+
+    <script>
+        const ChordSheetJS = window.ChordSheetJS;
+        let currentTranspose = 0;
+        let isScrolling = false;
+        let scrollInterval;
+
+        function render() {
+            const raw = document.getElementById('raw-data').innerText;
+            const parser = new ChordSheetJS.ChordSheetParser();
+            let song = parser.parse(raw);
+            if (currentTranspose !== 0) song = song.transpose(currentTranspose);
+            const formatter = new ChordSheetJS.HtmlTableFormatter();
+            document.getElementById('chord-display').innerHTML = formatter.format(song);
+        }
+
+        function changeTranspose(val) { currentTranspose += val; render(); }
+
+        function toggleAutoScroll() {
+            if (isScrolling) {
+                clearInterval(scrollInterval);
+                document.getElementById('scroll-btn').innerText = "Auto Scroll";
+            } else {
+                scrollInterval = setInterval(() => { window.scrollBy(0, 1); }, 40);
+                document.getElementById('scroll-btn').innerText = "Stop Scroll";
+            }
+            isScrolling = !isScrolling;
+        }
+        window.onload = render;
+    </script>
 </body>
 </html>
