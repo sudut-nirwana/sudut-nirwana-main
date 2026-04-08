@@ -2,12 +2,10 @@
 layout: chord
 title: "Separuh Aku"
 artist: "Noah"
-genre: "Pop"
 video_id: mZp59W2Y_Y8
 viral: true
 popular: true
 ---
-
 [Intro]
 Am  C  F  Dm  E  (2x)
 
