@@ -76,12 +76,12 @@ body{
 
 /* Kotak Lirik "Clean Paper" */
 .chord-card {
-    background: #ffffff;
+    /*background: #ffffff;*/
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    padding: clamp(12px, 3vw, 25px); /* Padding minimal agar tidak sempit */
+    /*padding: clamp(12px, 3vw, 25px);  Padding minimal agar tidak sempit */
     margin: 20px 0;
-    border: 1px solid #f0f0f0;
+    /*border: 1px solid #f0f0f0;*/
     overflow-x: auto; /* Handle lirik panjang agar tidak bergeser halaman */
     text-align: left;
 }
@@ -90,7 +90,7 @@ body{
 .chord-content {
     font-family: 'Courier New', Courier, monospace;
     font-weight: 700; /* Font lirik tebal tegas */
-    font-size: 15px;
+    font-size: 17px;
     line-height: 2.5;
     white-space: pre;
     color: #333;
