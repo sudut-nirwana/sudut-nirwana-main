@@ -42,55 +42,58 @@ body{
 /* --- Chord Page Specific Style --- */
 
 /* Container utama - Menghindari double padding */
+/* Container utama - Mengandalkan padding dari .container default kamu */
 .chord-page-wrapper {
-    padding-top: 80px; /* Jarak dari header agar tidak tertutup */
+    padding-top: 90px; /* Jarak aman dari header navbar */
     padding-bottom: 40px;
-    text-align: left;
+    text-align: left; /* Mutlak rata kiri */
 }
 
-/* Header & Judul */
+/* Header & Judul - Teks Kiri */
 .song-title {
     font-weight: 800;
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-size: clamp(1.6rem, 5vw, 2.3rem);
     margin-bottom: 5px;
     line-height: 1.2;
+    text-align: left;
 }
 
 .song-meta {
     font-size: 14px;
     color: #666;
     margin-bottom: 20px;
+    text-align: left;
 }
 
 /* Diagram Kunci - Berbaris ke kiri */
 .diagram-container {
     display: flex;
-    justify-content: flex-start;
-    gap: 10px;
+    justify-content: flex-start; /* Mutlak rata kiri */
+    gap: 12px;
     flex-wrap: wrap;
-    margin: 15px 0;
+    margin: 15px 0 25px 0;
 }
 
 /* Kotak Lirik "Clean Paper" */
 .chord-card {
     background: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    padding: 15px; /* Padding minimal agar tidak sempit di HP */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    padding: clamp(12px, 3vw, 25px); /* Padding minimal agar tidak sempit */
     margin: 20px 0;
     border: 1px solid #f0f0f0;
-    overflow-x: auto; /* Biar kalau lirik panjang bisa di-swipe, bukan bergeser satu layar */
+    overflow-x: auto; /* Handle lirik panjang agar tidak bergeser halaman */
+    text-align: left;
 }
 
-/* Teks Lirik & Chord */
+/* Teks Lirik & Chord - Tebal */
 .chord-content {
     font-family: 'Courier New', Courier, monospace;
-    font-weight: 700; /* Font lirik tebal */
+    font-weight: 700; /* Font lirik tebal tegas */
     font-size: 15px;
-    line-height: 2.4;
+    line-height: 2.5;
     white-space: pre;
     color: #333;
-    text-align: left;
 }
 
 /* Chord Warna Oranye & Sangat Tebal */
@@ -102,29 +105,32 @@ body{
 /* Tombol Tools */
 .sticky-tools {
     display: flex;
-    gap: 5px;
+    gap: 6px;
     margin-bottom: 15px;
     flex-wrap: wrap;
+    justify-content: flex-start; /* Mutlak rata kiri */
 }
 
 .sticky-tools button {
     background: #fff;
     border: 1px solid #ddd;
-    padding: 6px 12px;
-    border-radius: 6px;
+    padding: 7px 14px;
+    border-radius: 8px;
     font-size: 13px;
     font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
 }
 
-/* List lagu terkait */
-.related-songs {
-    margin-top: 30px;
+/* Menghilangkan Padding Ganda pada Footer A-Z & Related */
+.footer-extra {
+    margin-top: 40px;
     text-align: left;
+    padding: 0; /* JANGAN kasih padding di sini, biar ikut padding .container default */
 }
 
-.related-list {
-    padding-left: 20px;
-    margin-top: 10px;
+/* Jarak tombol alfabet */
+.artis-a-z-wrapper .btn-az {
+    margin: 3px !important;
 }
 
