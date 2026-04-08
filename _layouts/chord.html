@@ -33,11 +33,23 @@
              <span class="text-gray-400 font-bold italic text-xl">Video Player Placeholder</span>
         </div>
 
-        <div class="sticky-panel py-4 border-y border-gray-100 mb-8 flex flex-wrap gap-4 items-center">
-            <button onclick="changeTranspose(-1)" class="bg-gray-50 border-2 border-gray-200 px-4 py-2 rounded-2xl font-bold hover:border-[#ee6c00] transition">♭ Transpose -</button>
-            <button onclick="changeTranspose(1)" class="bg-gray-50 border-2 border-gray-200 px-4 py-2 rounded-2xl font-bold hover:border-[#ee6c00] transition">♯ Transpose +</button>
-            <button id="scroll-btn" onclick="toggleAutoScroll()" class="ml-auto bg-[#ee6c00] text-white px-6 py-2 rounded-2xl font-bold shadow-lg shadow-orange-200">Auto Scroll</button>
+        <div class="sticky-panel border-y border-gray-100 py-4 mb-8 bg-white/95 backdrop-blur-md">
+    <div class="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar px-2">
+        <div class="flex gap-2">
+            <button onclick="changeTranspose(-1)" class="whitespace-nowrap px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">
+                ♭ Trans -
+            </button>
+            <button onclick="changeTranspose(1)" class="whitespace-nowrap px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">
+                ♯ Trans +
+            </button>
         </div>
+
+        <button id="scroll-btn" onclick="toggleAutoScroll()" class="whitespace-nowrap px-6 py-2.5 bg-[#ee6c00] text-white rounded-xl font-bold text-xs shadow-lg shadow-orange-200 active:scale-95 transition-all">
+            Auto Scroll
+        </button>
+    </div>
+</div>
+
 
         <div class="bg-gray-50/50 p-6 md:p-12 rounded-[3rem] border border-gray-100 mb-12">
             <div id="chord-display" class="whitespace-pre overflow-x-auto">
