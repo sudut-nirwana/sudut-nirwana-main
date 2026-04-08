@@ -554,6 +554,9 @@ html.no-scroll{
    width: 100%;
    padding: 40px 0;
 }
+.chordweapper a{
+   color: #ee5c00;
+}
 .box-chord-terbaru, .box-chord-trend, .box-chord-terbanyak{
    width: 100%;
    display: grid;
