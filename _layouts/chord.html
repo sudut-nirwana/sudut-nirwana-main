@@ -5,18 +5,17 @@ layout: default
 
 <div class="container chord-page-wrapper">
     
-    <section class="song-header">
-        <span class="label" style="background:#ff9800; color:#fff; padding:2px 8px; border-radius:4px; font-size:12px;">Chord Dasar</span>
-        <h1>{{ page.title }}</h1>
-        <p>Artis: <strong>{{ page.artist }}</strong> | Genre: {{ page.genre }}</p>
+    <header class="song-header">
+        <h1 class="song-title">{{ page.title }}</h1>
+        <p class="song-meta">Artis: <strong>{{ page.artist }}</strong> | Genre: {{ page.genre }}</p>
         
         <div id="chord-diagrams" class="diagram-container"></div>
-    </section>
+    </header>
 
     <div class="sticky-tools">
-        <button onclick="transpose(-1)">♭ Transpose -</button>
-        <button onclick="transpose(1)"># Transpose +</button>
-        <button onclick="autoScroll()">Auto Scroll</button>
+        <button onclick="transpose(-1)">♭ Trans -</button>
+        <button onclick="transpose(1)"># Trans +</button>
+        <button onclick="autoScroll()">Scroll</button>
         <button onclick="stopScroll()">Stop</button>
     </div>
 
@@ -31,7 +30,7 @@ layout: default
         
         <div class="related-songs">
             <h3>Lagu lainnya dari {{ page.artist }}</h3>
-            <ul id="related-list">
+            <ul class="related-list">
                 {% assign songs = site.chord | where: "artist", page.artist %}
                 {% for song in songs limit: 5 %}
                     {% if song.url != page.url %}
@@ -45,9 +44,7 @@ layout: default
 </div>
 
 <script>
-  // Mengirim data array chords dari MD ke JavaScript
   const songChords = {{ page.chords | jsonify | default: '[]' }};
 </script>
-
 <script src="https://unpkg.com/chord-canvas/dist/chord-canvas.js"></script>
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
