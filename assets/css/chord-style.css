@@ -1,128 +1,41 @@
-.chord-container {
-    width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-    /* Ubah padding-top ini untuk mengatur jarak judul ke header */
-    padding: 20px; 
-     /* Coba di 70px dulu, kalau masih kejauhan, turunkan ke 60px */
+/*golbal style*/
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   text-decoration: none;
 }
 
-
-/* Judul H2 */
-.chord-header h2 {
-    font-size: 1.8rem;
-    margin-bottom: 5px;
-    color: #2c3e50;
+body{
+   width: 100%;
+   background: .fff;
+   font-family: "Nunito", sans-serif;
+   font-size: clamp(1rem, 0.909rem + 0.45vw, 1.25rem);
+   color: #444444;
 }
 
-.chord-artist {
-    color: #7f8c8d;
-    margin-bottom: 20px;
+.container{
+   width: 100%;
+   padding: 0 20px;
+   overflow: hidden;
 }
-
-/* AREA CHORD: Ini rahasianya agar tidak berantakan */
-.chord-content-wrapper {
-    font-family: 'Courier New', Courier, monospace !important;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    /* Tambahkan ini agar lirik lebih tegas */
-    font-weight: 700; 
-    background: #eee;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #eee;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    color: #333;
-}
-
-/* Membuat Chord (di dalam tag strong) jadi jauh lebih menonjol */
-.chord-content-wrapper strong {
-    color: #ee4c00; /* Warna Orange khas Sudut Nirwana */
-    font-weight: 900; /* Paling tebal */
-    font-style: normal;
-}
+/*global style end*/
 
 
-/* Container khusus halaman A-Z */
-.alphabet-page {
-    padding-top: 80px ! important; /* Tambah jarak atas agar tidak tertutup header */
-    padding-bottom: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
-    box-sizing: border-box;
-    min-height: 80vh; /* Agar footer tidak naik jika lagunya sedikit */
-}
-
-.section-header {
-    margin-bottom: 30px;
-    border-left: 5px solid #ff5722; /* Aksen Orange di samping judul */
-    padding-left: 15px;
-}
-
-/* Grid System: 1 kolom di HP, 2 kolom di Desktop */
-.chord-grid-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-}
-
-/* Desain Card sesuai warna website */
-.chord-item-card a {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    background: #f9f9f9; /* Abu-abu sangat muda seperti box di landing page */
-    border: 1px solid #eee;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.chord-item-card a:hover {
-    background: #fff;
-    border-color: #ff5722;
-    box-shadow: 0 4px 15px rgba(255, 87, 34, 0.1);
-    transform: translateY(-3px);
-}
-
-.artist-name {
-    font-weight: 700;
-    color: #2c3e50; /* Warna gelap header */
-    font-size: 1.1rem;
-    margin-bottom: 4px;
-}
-
-.song-title {
-    color: #7f8c8d; /* Warna teks sekunder */
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-}
-
-.view-chord {
-    color: #ff5722; /* Warna Orange utama */
-    font-weight: bold;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-}
-
-
-
-/* RESPONSIVE */
-@media (min-width: 769px) {
-    .chord-container { padding: 0 30px; padding-top: ;}
-    .chord-header h2 { font-size: 2rem; }
-    
-    .chord-grid-container {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
+/* media query tablet */
+@media(min-width: 768px){
+    .container{
+        width: 100%;
+        padding: 0 30px;
     }
 }
 
-@media (min-width: 1024px) {
-    .chord-container {
+
+/* media query laptop */
+@media(min-width: 1024px){
+    .container{
         max-width: 1200px;
-        padding: 0 40px;
-        padding-top: ;
+        margin: auto;
+        padding: 40px;
     }
 }
