@@ -115,7 +115,31 @@
         }
 
         // Render chord setelah konten HTML siap
-        window.addEventListener('DOMContentLoaded', renderChord);
+        document.addEventListener('DOMContentLoaded', function() {
+            renderChord();
+        });
+        
+        function renderChord() {
+            // Gunakan textContent untuk keamanan data
+            const rawElement = document.getElementById('raw-data');
+            if (!rawElement) return;
+            const raw = rawElement.textContent.trim();
+            if (!raw) return;
+            try {
+                const parser = new ChordSheetJS.ChordSheetParser();
+                let song = parser.parse(raw);
+                if (currentTranspose !== 0) {
+                    song = song.transpose(currentTranspose);
+                }
+                
+                const formatter = new ChordSheetJS.HtmlTableFormatter();
+                document.getElementById('chord-display').innerHTML = formatter.format(song);
+            } catch (err) {
+                console.error(err);
+                document.getElementById('chord-display').innerHTML = "<p style='color:red'>Format salah di file MD!</p>";
+            }
+        }
+
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
