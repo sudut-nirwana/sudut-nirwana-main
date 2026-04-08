@@ -29,26 +29,32 @@
             </p>
         </header>
 
+        {% if page.video_id %}
+        <div class="mb-8 rounded-3xl overflow-hidden bg-black aspect-video shadow-xl">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/{{ page.video_id }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+        {% endif %}
+        
+
         <div class="mb-8 rounded-3xl overflow-hidden bg-gray-100 aspect-video flex items-center justify-center border-2 border-gray-200">
              <span class="text-gray-400 font-bold italic text-xl">Video Player Placeholder</span>
         </div>
 
         <div class="sticky-panel border-y border-gray-100 py-4 mb-8 bg-white/95 backdrop-blur-md">
-    <div class="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar px-2">
-        <div class="flex gap-2">
-            <button onclick="changeTranspose(-1)" class="whitespace-nowrap px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">
+            <div class="flex items-center justify-between gap-2 overflow-x-auto no-scrollbar px-2">
+                <div class="flex gap-2">
+                    <button onclick="changeTranspose(-1)" class="whitespace-nowrap px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">
                 ♭ Trans -
-            </button>
-            <button onclick="changeTranspose(1)" class="whitespace-nowrap px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">
+                    </button>
+                    <button onclick="changeTranspose(1)" class="whitespace-nowrap px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">
                 ♯ Trans +
-            </button>
+                    </button>
+                </div>
+                <button id="scroll-btn" onclick="toggleAutoScroll()" class="whitespace-nowrap px-6 py-2.5 bg-[#ee6c00] text-white rounded-xl font-bold text-xs shadow-lg shadow-orange-200 active:scale-95 transition-all">
+                    Auto Scroll
+                </button>
+            </div>
         </div>
-
-        <button id="scroll-btn" onclick="toggleAutoScroll()" class="whitespace-nowrap px-6 py-2.5 bg-[#ee6c00] text-white rounded-xl font-bold text-xs shadow-lg shadow-orange-200 active:scale-95 transition-all">
-            Auto Scroll
-        </button>
-    </div>
-</div>
 
 
         <div class="bg-gray-50/50 p-6 md:p-12 rounded-[3rem] border border-gray-100 mb-12">
