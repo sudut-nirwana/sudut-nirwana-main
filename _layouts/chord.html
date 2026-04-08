@@ -4,55 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} - Sudut Nirwana</title>
+    
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/chordsheetjs/dist/index.bundle.js"></script>
     
     <style>
         body { font-family: 'Nunito', sans-serif; background-color: #ffffff; }
+        /* Styling Chord agar otomatis berwarna oranye */
         .chord { color: #ee6c00 !important; font-weight: 800; font-family: 'Fira Code', monospace; }
-        .lyrics { color: #4b5563; line-height: 2.5; font-size: 1.1rem; }
         .container-custom { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        /* Menghilangkan scrollbar pada tombol navigasi */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        /* Container untuk mengompensasi Header Absolute/Fixed */
+        .content-wrapper {
+            padding-top: 80px; /* Menyesuaikan agar judul tidak tertutup header */
+        }
+        #chord-display table { border-collapse: separate; border-spacing: 0 4px; width: 100%; }
     </style>
 </head>
 <body>
 
     {% include header.html %}
 
-    <main class="container-custom py-8">
-        <header class="mb-8 border-l-8 border-[#ee6c00] pl-6">
-            <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tighter">{{ page.title }}</h1>
-            <p class="text-gray-500 font-bold mt-2">Artis: <span class="text-[#ee6c00]">{{ page.artist }}</span> | Genre: {{ page.genre | default: "Pop" }}</p>
-        </header>
+    <div class="content-wrapper">
+        <main class="container-custom py-8">
+            <header class="mb-8 border-l-8 border-[#ee6c00] pl-6">
+                <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 uppercase tracking-tighter">
+                    {{ page.title }}
+                </h1>
+                <p class="text-gray-500 font-bold mt-2">
+                    Artis: <span class="text-[#ee6c00]">{{ page.artist }}</span>
+                </p>
+            </header>
 
-        <div class="mb-8 rounded-[2.5rem] overflow-hidden bg-gray-100 aspect-video shadow-lg border border-gray-200 flex items-center justify-center">
-            {% if page.video_id %}
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/{{ page.video_id }}" frameborder="0" allowfullscreen></iframe>
-            {% else %}
-                <p class="text-gray-400 font-bold italic">Video Tutorial Belum Tersedia</p>
-            {% endif %}
-        </div>
-
-        <div class="sticky top-0 z-50 py-4 mb-8 bg-white/95 backdrop-blur-md border-y border-gray-100">
-            <div class="flex items-center justify-between gap-2 px-2">
-                <div class="flex gap-2">
-                    <button onclick="changeTranspose(-1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00]">♭ Trans -</button>
-                    <button onclick="changeTranspose(1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00]">♯ Trans +</button>
-                </div>
-                <button id="scroll-btn" onclick="toggleAutoScroll()" class="px-6 py-2 bg-[#ee6c00] text-white rounded-xl font-bold text-xs shadow-md">Auto Scroll</button>
+            <div class="mb-8 rounded-[2.5rem] overflow-hidden bg-gray-100 aspect-video shadow-lg flex items-center justify-center border border-gray-100">
+                {% if page.video_id %}
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/{{ page.video_id }}" frameborder="0" allowfullscreen></iframe>
+                {% else %}
+                    <p class="text-gray-400 font-bold italic text-sm">Video Tutorial Belum Tersedia</p>
+                {% endif %}
             </div>
-        </div>
 
-        <div class="bg-white p-6 md:p-10 rounded-[2rem] border border-gray-100 shadow-sm mb-12">
-            <div id="chord-display" class="whitespace-pre overflow-x-auto">
+            <div class="sticky top-[70px] z-40 py-4 mb-8 bg-white/95 backdrop-blur-md border-y border-gray-100">
+                <div class="flex items-center justify-between gap-2 px-2">
+                    <div class="flex gap-2">
+                        <button onclick="changeTranspose(-1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">♭ Trans -</button>
+                        <button onclick="changeTranspose(1)" class="px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl font-bold text-xs hover:border-[#ee6c00] transition active:scale-95">♯ Trans +</button>
+                    </div>
+                    <button id="scroll-btn" onclick="toggleAutoScroll()" class="px-6 py-2 bg-[#ee6c00] text-white rounded-xl font-bold text-xs shadow-md active:scale-95 transition-all">Auto Scroll</button>
                 </div>
-        </div>
+            </div>
 
-        {% include nav-alfabet.html %}
-    </main>
+            <div class="bg-white p-6 md:p-10 rounded-[2rem] border border-gray-100 shadow-sm mb-12">
+                <div id="chord-display" class="whitespace-pre overflow-x-auto text-lg leading-relaxed">
+                    </div>
+            </div>
+
+            {% include nav-alfabet.html %}
+        </main>
+    </div>
+
     {% include footer.html %}
 
     <div id="raw-data" style="display:none;">{{ content }}</div>
@@ -64,19 +77,31 @@
         let scrollInterval;
 
         function renderChord() {
-            // Menggunakan textContent agar lebih akurat mengambil data dari Jekyll
-            const raw = document.getElementById('raw-data').textContent.trim();
-            if (!raw) return; // Berhenti jika data kosong
-            const parser = new ChordSheetJS.ChordSheetParser();
-            let song = parser.parse(raw);
-            if (currentTranspose !== 0) {
-                song = song.transpose(currentTranspose);
+            try {
+                // Mengambil data mentah dari div raw-data
+                const rawData = document.getElementById('raw-data').textContent.trim();
+                if (!rawData) return;
+
+                const parser = new ChordSheetJS.ChordSheetParser();
+                let song = parser.parse(rawData);
+
+                // Fitur Transpose
+                if (currentTranspose !== 0) {
+                    song = song.transpose(currentTranspose);
+                }
+
+                // Format ke tabel HTML agar rapi antara chord dan lirik
+                const formatter = new ChordSheetJS.HtmlTableFormatter();
+                document.getElementById('chord-display').innerHTML = formatter.format(song);
+            } catch (e) {
+                document.getElementById('chord-display').innerHTML = "<p class='text-red-500 italic'>Format chord salah. Pastikan tidak ada tanda ** (bold) di baris chord.</p>";
             }
-            const formatter = new ChordSheetJS.HtmlTableFormatter();
-            document.getElementById('chord-display').innerHTML = formatter.format(song);
         }
 
-        function changeTranspose(val) { currentTranspose += val; renderChord(); }
+        function changeTranspose(val) {
+            currentTranspose += val;
+            renderChord();
+        }
 
         function toggleAutoScroll() {
             if (isScrolling) {
@@ -88,7 +113,9 @@
             }
             isScrolling = !isScrolling;
         }
-        window.onload = renderChord;
+
+        // Render chord setelah konten HTML siap
+        window.addEventListener('DOMContentLoaded', renderChord);
     </script>
 </body>
 </html>
