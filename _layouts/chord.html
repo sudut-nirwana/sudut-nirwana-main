@@ -3,37 +3,43 @@ layout: default
 ---
 <link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
 
-<div class="chord-page-wrapper">
-  
-  <section class="song-header">
-    <span class="label">Song Header</span>
-    <h1>{{ page.title }}</h1>
-    <p>Artis: <strong>{{ page.artist }}</strong> | Genre: {{ page.genre }}</p>
+<div class="container chord-page-wrapper">
     
-    <div id="chord-diagrams" class="diagram-container"></div>
-  </section>
+    <section class="song-header">
+        <span class="label">Song Header</span>
+        <h1>{{ page.title }}</h1>
+        <p>Artis: <strong>{{ page.artist }}</strong> | Genre: {{ page.genre }}</p>
+        
+        <div id="chord-diagrams" class="diagram-container"></div>
+    </section>
 
-  <div class="sticky-tools">
-    <button onclick="transpose(-1)">♭ Transpose</button>
-    <button onclick="autoScroll()">Auto Scroll</button>
-    <button onclick="stopScroll()">Stop</button>
-  </div>
-
-  <article class="chord-card">
-    <div class="chord-content">
-      {{ content }}
+    <div class="sticky-tools">
+        <button onclick="transpose(-1)">♭ Transpose</button>
+        <button onclick="autoScroll()">Auto Scroll</button>
+        <button onclick="stopScroll()">Stop</button>
     </div>
-  </article>
 
-  <section class="footer-extra">
-    {% include artis-a-z.html %}
-    
-    <div class="related-songs">
-      <h3>Lagu lainnya dari {{ page.artist }}</h3>
-      </div>
-  </section>
+    <article class="chord-card">
+        <div class="chord-content">
+            {{ content }}
+        </div>
+    </article>
+
+    <section class="footer-extra">
+        {% include artis-a-z.html %}
+        
+        <div class="related-songs">
+            <h3>Lagu lainnya dari {{ page.artist }}</h3>
+            <div id="related-list">
+                </div>
+        </div>
+    </section>
 
 </div>
 
+<script>
+  // Mengirim data daftar kunci dari Jekyll ke JavaScript
+  const songChords = {{ page.chords | jsonify }};
+</script>
 <script src="https://unpkg.com/chord-canvas/dist/chord-canvas.js"></script>
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
