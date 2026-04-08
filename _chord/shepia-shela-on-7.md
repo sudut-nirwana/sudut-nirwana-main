@@ -1,13 +1,12 @@
 ---
 layout: chord
-title: "Chord Sephia - Sheila On 7 | Kunci Dasar Mudah"
+title: "Chord Sephia - Sheila On 7 | Kunci Dasar"
 artist: "Sheila On 7"
 genre: "Pop"
-video_id: "mZp59W2Y_Y8"
-chords: ["Am", "D", "G", "C"]
-viral: true
-popular: true
+youtube_id: "m8-ZBe_p4Xk"  # Ambil ID dari URL YouTube: youtube.com/watch?v=m8-ZBe_p4Xk
+chords: ["Am", "D", "G", "C", "Em"]
 ---
+
 
 <pre class="chord-content">
 [Intro]
