@@ -1,7 +1,7 @@
 ---
 layout: chord
-title: "Sephia | "
-artist: "Sheila on 7"
+title: "Sephia 🎸"
+artist: "sheila on 7"
 genre: "pop"
 tags: [pop, 90an]
 viral: true
