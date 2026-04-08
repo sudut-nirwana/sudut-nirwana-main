@@ -44,7 +44,11 @@ layout: default
 </div>
 
 <script>
+  // 1. Variabel Data
   const songChords = {{ page.chords | jsonify | default: '[]' }};
 </script>
+
 <script src="https://unpkg.com/chord-canvas/dist/chord-canvas.js"></script>
+
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
+
