@@ -1,35 +1,35 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // FUNGSI UTAMA UNTUK MENGGAMBAR
-    function drawChordDiagrams() {
+    // Fungsi untuk menggambar (diisolasi agar bisa dipanggil nanti)
+    function initializeChordDiagrams() {
         const container = document.getElementById('chord-diagrams');
         
         // Cek data dan elemen wadah
-        if (typeof songChords === 'undefined' || !songChords || !container) {
-            console.warn("Data songChords atau wadah #chord-diagrams tidak ditemukan.");
+        if (typeof songChords === 'undefined' || !songChords || songChords.length === 0 || !container) {
+            console.log("Data kunci tidak ada atau wadah #chord-diagrams tidak ditemukan.");
             return;
         }
 
-        // Cek apakah library ChordCanvas sudah siap
+        // Cek apakah library ChordCanvas sudah siap (krusial!)
         if (!window.ChordCanvas) {
-            console.error("Library ChordCanvas belum ter-load.");
+            console.error("Library ChordCanvas belum siap.");
             return;
         }
 
-        // Bersihkan wadah jika sudah ada isinya (mencegah duplikat)
+        // Bersihkan wadah agar tidak double saat hard refresh
         container.innerHTML = '';
 
-        // Looping data kunci dari Jekyll
-        songChords.forEach(chordName => {
+        // Looping untuk membuat elemen canvas dan menggambar
+        songChords.forEach(chord => {
             const box = document.createElement('div');
             box.className = 'chord-box';
             box.style.width = "50px";
             box.style.textAlign = "center";
-            box.style.display = "inline-block";
-            box.style.marginRight = "5px";
-            
+            box.style.display = "inline-block"; // Membuatnya berbaris ke samping
+            box.style.marginRight = "8px"; // Memberi jarak antar kotak
+
             const label = document.createElement('div');
-            label.innerText = chordName;
+            label.innerText = chord;
             label.style.fontSize = "12px";
             label.style.fontWeight = "bold";
             label.style.color = "#333";
@@ -43,24 +43,24 @@ document.addEventListener("DOMContentLoaded", function() {
             box.appendChild(canvas);
             container.appendChild(box);
 
-            // Coba gambar
+            // Coba menggambar dengan library
             try {
-                window.ChordCanvas.draw(canvas, chordName, {
-                    strokeColor: '#444',
-                    dotColor: '#ff9800', // Warna titik jari oranye
-                    stringColor: '#888',
-                    fretColor: '#888',
-                    textColor: '#fff'
+                // Kita tambahkan jeda lagi di sini untuk memastikan library siap
+                requestAnimationFrame(() => {
+                    window.ChordCanvas.draw(canvas, chord, {
+                        strokeColor: '#444',
+                        dotColor: '#ff9800' // Titik jari oranye khas Sudut Nirwana
+                    });
                 });
-            } catch (e) {
-                console.error("Gagal menggambar chord:", chordName, e);
+            } catch (error) {
+                console.error("Gagal menggambar kunci:", chord, error);
             }
         });
     }
 
-    // Eksekusi fungsi gambar setelah halaman & library siap
-    // Kita tambahkan jeda kecil (setTimeout) sebagai pengaman load library
-    setTimeout(drawChordDiagrams, 300); 
+    // Eksekusi fungsi gambar dengan jeda 200ms (safety time)
+    // Trik ini sering berhasil mengatasi masalah load di mobile
+    setTimeout(initializeChordDiagrams, 200);
 
     // === LOGIKA TRANSPOSE & SCROLL (SAMA SEPERTI SEBELUMNYA) ===
     window.transpose = function(n) {
