@@ -39,3 +39,70 @@ body{
         padding: 40px;
     }
 }
+/* --- Chord Page Specific Style --- */
+
+/* Wrapper untuk judul agar teks berada di tengah */
+.song-header {
+    text-align: center;
+    margin: 20px 0 30px;
+}
+
+.song-header h1 {
+    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.2rem);
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Area Diagram 50px */
+.diagram-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 15px 0;
+}
+
+.chord-box {
+    width: 50px; /* Sesuai request kamu */
+    text-align: center;
+}
+
+.chord-box span {
+    display: block;
+    font-size: 10px;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+/* Kotak Lirik "Clean Paper" */
+/* Kita masukkan ke dalam .container milikmu di HTML nanti */
+.chord-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    padding: clamp(15px, 2vw, 30px);
+    margin-bottom: 40px;
+    overflow-x: auto; /* Penting agar lirik tidak pecah di mobile */
+}
+
+/* Format Teks Lirik */
+.chord-content {
+    font-family: 'Courier New', Courier, monospace; /* Monospace agar chord presisi */
+    line-height: 2.4; /* Ruang untuk chord di atas lirik */
+    white-space: pre; /* Menjaga spasi dari file MD */
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Styling Chord Otomatis (Tag <b> di file MD) */
+.chord-content b {
+    color: #ff9800; /* Oranye khas Sudut Nirwana */
+    font-weight: 700;
+}
+
+/* Navigasi Rekomendasi & A-Z Section */
+.footer-extra {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px dashed #ddd;
+}
