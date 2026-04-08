@@ -1,89 +1,92 @@
 ---
 layout: chord
-title: "Sephia 🎸"
-artist: "sheila on 7"
-genre: "pop"
-tags: [pop, 90an]
+title: Sephia
+artist: Sheila On 7
+genre: Pop
+video_id: mZp59W2Y_Y8
 viral: true
 popular: true
 ---
 
 [Intro]
-**Am** **D** **G** **C**
-**Am** **D** **G**
+Am D G C
+Am D G
 
 [Verse 1]
-**Am** **D**
+Am         D
 Hey, Sephia...
-**G** **C**
+G          C
 Malam ini ku takkan datang
-**Am** **D**
+Am           D             G
 Mencoba tuk berpaling sayang
-       **G**
+            G
 Dari cintamu...
 
 [Verse 2]
-**Am** **D**
+Am         D
 Hey, Sephia...
-**G** **C**
+G          C
 Malam ini ku takkan pulang
-**Am** **D**
+Am           D
 Tak usah kau mencari aku
-       **G**
+G           G
 Demi cintamu...
 
 [Bridge]
-**Em** **B**
+Em           B
 Hadapilah ini...
-**Em** **A**
+Em           A
 Kisah kita takkan abadi...
 
 [Chorus]
-**D** **F#m**
+D            F#m
 Selamat tidur kekasih gelapku
-**Bm** **A** **G**
+Bm           A         G
 Semoga cepat kau lupakan aku
-       **Em** **A** **D**
+D            F#m                        Em        A    D
 Kekasih sejatimu takkan pernah sanggup untuk melupakanmu
-**D** **F#m**
+
+[Chorus 2]
+D            F#m
 Selamat tinggal kasih tak terungkap
-**Bm** **A** **G**
+Bm           A         G
 Semoga kau lupakan aku cepat
-       **Em** **A** **D**
+D            F#m                        Em        A    D
 Kekasih sejatimu takkan pernah sanggup untuk meninggalkanmu
 
 [Verse 3]
-**Am** **D**
+Am         D
 Hey, Sephia...
-**G** **C**
+G          C
 Jangan pernah panggil namaku
-**Am** **D**
+Am           D
 Bila kita bertemu lagi
-       **G**
+G           G
 Di lain hari...
 
 [Bridge]
-**Em** **B**
+Em           B
 Hadapilah ini...
-**Em** **A**
+Em           A
 Kisah kita takkan abadi...
 
 [Chorus]
-**D** **F#m**
-Selamat tidur kekasih gelapku
-**Bm** **A** **G**
-Semoga cepat kau lupakan aku
-       **Em** **A** **D**
+D            F#m
+Selamat tidur kekasih gelapku (oh sephia)
+Bm           A         G
+Semoga cepat kau lupakan aku (oh sephia)
+D            F#m                        Em        A    D
 Kekasih sejatimu takkan pernah sanggup untuk melupakanmu
-**D** **F#m**
-Selamat tinggal kasih tak terungkap
-**Bm** **A** **G**
-Semoga kau lupakan aku cepat
-       **Em** **A** **D**
+
+[Chorus 2]
+D            F#m
+Selamat tinggal kasih tak terungkap (oh sephia)
+Bm           A         G
+Semoga kau lupakan aku cepat (oh sephia)
+D            F#m                        Em        A    D
 Kekasih sejatimu takkan pernah sanggup untuk meninggalkanmu
 
 [Outro]
-**D** **F#m** **Bm** **A** **G**
-**Em** **A** **D**
-**D**
-
+D F#m Bm A G
+D F#m Em A D
+Oh sephia... Oh sephia...
