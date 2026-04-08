@@ -562,6 +562,7 @@ html.no-scroll{
    padding: 20px;
    background: #eee;
    border: 1px solid #ddd;
+   border-left: 8px solid #ee6c00;
    border-radius: 10px;
    margin: 20px 0;
    margin-bottom: 40px;
