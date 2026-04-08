@@ -1,7 +1,9 @@
 ---
 layout: chord
-title: "Sephia-Shela On7 | Kunci Dasar Mudah"
+title: "Sephia | Kunci Dasar Mudah"
 artist: "Sheila on 7"
+genre: "pop"
+tags: "pop, 90an"
 viral: true
 popular: true
 ---
