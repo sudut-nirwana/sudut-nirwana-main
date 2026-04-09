@@ -1,55 +1,45 @@
-:root { --p-orange: #ee6c00; --blur-bg: rgba(255, 255, 255, 0.9); }
+:root { --p-orange: #ee6c00; --blur-bg: rgba(255, 255, 255, 0.95); }
 
-/* Base Layout */
-.chord-main-wrapper { padding-top: 80px; width: 100%; box-sizing: border-box; }
-.chord-container { margin: 0 auto; padding: 0 20px; max-width: 1200px; }
+.chord-main-wrapper { padding-top: 20px; width: 100%; }
+.chord-container { margin: 0 auto; padding: 0 15px; max-width: 800px; }
 
-.song-title { font-size: 26px; margin: 10px 0; color: #333; }
-.artist-name { color: var(--p-orange); font-weight: bold; margin-bottom: 25px; }
-
-/* Control Panel Sticky Blur */
+/* Sticky Panel Fix */
 .control-panel { 
-    background: #fff; border: 1px solid #eee; border-radius: 15px; 
-    position: sticky; top: 70px; z-index: 1000; 
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    background: var(--blur-bg); box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    margin-bottom: 25px; overflow: hidden;
+    background: var(--blur-bg); border: 1px solid #ddd; border-radius: 12px; 
+    position: sticky; 
+    top: 60px; /* Jarak dari atas layar agar tidak menabrak header */
+    z-index: 900; /* Di bawah header (999) & sidebar (998) */
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    margin: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.panel-tabs { display: flex; border-bottom: 1px solid rgba(0,0,0,0.05); }
-.tab-btn { flex: 1; padding: 15px; border: none; background: none; font-weight: bold; color: #999; cursor: pointer; transition: 0.3s; }
+.panel-tabs { display: flex; border-bottom: 1px solid #eee; }
+.tab-btn { flex: 1; padding: 12px; border: none; background: none; font-weight: bold; color: #888; cursor: pointer; }
 .tab-btn.active { color: var(--p-orange); border-bottom: 3px solid var(--p-orange); }
 
-.panel-body { padding: 20px; text-align: center; }
+.panel-body { padding: 15px; text-align: center; }
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
 
-/* Modern UI Buttons */
-.modern-ctrl, .scroll-wrapper { display: inline-flex; align-items: center; background: #1a1a1a; padding: 10px 20px; border-radius: 50px; gap: 12px; color: #fff; }
-.btn-round, .btn-speed { background: rgba(255,255,255,0.15); border: none; color: #fff; width: 35px; height: 35px; border-radius: 50%; font-size: 20px; cursor: pointer; }
-.btn-play-scroll { background: var(--p-orange); border: none; color: #fff; padding: 10px 20px; border-radius: 50px; font-weight: bold; cursor: pointer; }
-#current-key, #speed-val { color: var(--p-orange); font-weight: bold; min-width: 25px; font-size: 18px; }
+/* Control Elements */
+.modern-ctrl, .scroll-wrapper { display: inline-flex; align-items: center; background: #222; padding: 8px 18px; border-radius: 30px; gap: 10px; color: #fff; }
+.btn-round, .btn-speed { background: #444; border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 18px; }
+.btn-play-scroll { background: var(--p-orange); border: none; color: #fff; padding: 8px 15px; border-radius: 20px; font-weight: bold; }
 
-/* Chord Content */
+/* Lirik Sheet */
 .chord-content pre { 
-    font-family: 'Courier New', monospace; font-size: 16px; line-height: 2.2; 
-    white-space: pre-wrap; background: #fffaf2; padding: 25px; border-radius: 12px; 
-    color: #333; border: 1px solid #f0e6d6;
+    font-family: 'Courier New', Courier, monospace; font-size: 15px; line-height: 2.4; 
+    white-space: pre-wrap; background: #fffcf5; padding: 20px; border-radius: 8px; 
+    border: 1px solid #f0e6d6; overflow-x: auto;
 }
 
-/* Diagram Grid */
-.chord-grid-images { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 12px; margin-top: 15px; }
-.chord-grid-images img { width: 100%; border: 1px solid #eee; border-radius: 8px; background: #fff; padding: 5px; }
+/* Diagram */
+.chord-grid-images { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; margin-top: 15px; }
+.chord-grid-images img { width: 100%; border: 1px solid #eee; border-radius: 5px; }
 
-/* Recommendation & Section Titles */
-.section-title { font-size: 18px; border-left: 4px solid var(--p-orange); padding-left: 12px; margin: 35px 0 15px; color: #333; }
-.chord-recommendation { display: flex; flex-wrap: wrap; gap: 30px; }
-.rec-column { flex: 1; min-width: 280px; }
+.section-title { font-size: 17px; border-left: 4px solid var(--p-orange); padding-left: 10px; margin: 30px 0 10px; }
+.chord-recommendation { display: flex; flex-wrap: wrap; gap: 20px; }
+.rec-column { flex: 1; min-width: 250px; }
 .chord-list { list-style: none; padding: 0; }
-.chord-list li { padding: 10px 0; border-bottom: 1px solid #eee; }
-.chord-list li a { text-decoration: none; color: #555; font-size: 15px; }
-
-/* Video Section */
-.video-card { background: #f9f9f9; border-radius: 15px; margin-bottom: 15px; border: 1px dashed #ccc; overflow: hidden; }
-.video-placeholder { padding: 30px; text-align: center; cursor: pointer; }
-.yt-play-btn { font-size: 40px; color: red; }
+.chord-list li { padding: 8px 0; border-bottom: 1px dotted #ccc; }
+.chord-list li a { text-decoration: none; color: #444; display: block; }
