@@ -5,12 +5,9 @@ layout: default
 
 <div class="chord-main-wrapper">
     <div class="chord-container">
-        
         <div class="chord-col-main">
             <nav class="chord-breadcrumbs">
-                <a href="/">Beranda</a> <span>/</span> 
-                <a href="/chord">Chord</a> <span>/</span> 
-                {{ page.artist }}
+                <a href="/">Beranda</a> / <a href="/chord">Chord</a> / {{ page.artist }}
             </nav>
 
             <header class="chord-header">
@@ -18,86 +15,59 @@ layout: default
                 <p class="artist-name">{{ page.artist }}</p>
             </header>
 
+            <div class="chord-top-controls">
+                <div id="video-box" class="video-card">
+                    <div id="video-placeholder" class="video-placeholder" data-video-id="{{ page.youtube_id }}">
+                        <div class="yt-play-btn">▶</div>
+                        <p>Tonton Video Tutorial <span>{{ page.artist }}</span></p>
+                    </div>
+                    <div id="video-player-container"></div>
+                </div>
+
+                <div id="control-panel" class="control-panel">
+                    <div class="panel-tabs">
+                        <button class="tab-btn" data-tab="tempo">Tempo</button>
+                        <button class="tab-btn active" data-tab="transpose">Transpose</button>
+                        <button class="tab-btn" data-tab="scroll">Scroll</button>
+                    </div>
+                    <div class="panel-body">
+                        <div id="tab-transpose" class="tab-pane active">
+                            <div class="modern-ctrl">
+                                <button class="btn-round" id="dec-ch">−</button>
+                                <span id="current-key">C</span>
+                                <button class="btn-round" id="inc-ch">+</button>
+                            </div>
+                            <p class="hint-text">Transpose Nada</p>
+                        </div>
+                        
+                        <div id="tab-tempo" class="tab-pane">
+                            <input type="range" min="60" max="200" value="120" id="tempo-slider" class="orange-slider">
+                            <p id="tempo-val" class="val-text">120 BPM</p>
+                        </div>
+
+                        <div id="tab-scroll" class="tab-pane">
+                            <div class="scroll-wrapper">
+                                <button id="start-scroll" class="btn-play-scroll">▶️ Mulai</button>
+                                <div class="speed-ctrl">
+                                    <button class="btn-speed" id="speed-down">−</button>
+                                    <span id="speed-val">1x</span>
+                                    <button class="btn-speed" id="speed-up">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="chord-content">
                 <pre id="chord-sheet">{{ content }}</pre>
             </div>
 
-            <section class="chord-diagram-section">
-                <h3 class="section-title">Diagram Kunci Gitar</h3>
-                <div id="chord-images-container" class="chord-grid-images">
-                    </div>
-            </section>
-
-            <hr class="separator">
-
-            <section class="recommendation-section">
-                <h3 class="section-title">Chord {{ page.artist }} Lainnya</h3>
-                <ul class="chord-list">
-                    {% assign related_songs = site.posts | where: "artist", page.artist | limit: 6 %}
-                    {% for post in related_songs %}
-                        {% if post.url != page.url %}
-                            <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </section>
-
-            <section class="recommendation-section">
-                <h3 class="section-title">Chord Gitar Terbaru</h3>
-                <ul class="chord-list">
-                    {% for post in site.posts limit: 5 %}
-                        <li><a href="{{ post.url | relative_url }}">{{ post.title }} - {{ post.artist }}</a></li>
-                    {% endfor %}
-                </ul>
-            </section>
-
-            <section class="alphabet-section">
-                <h3 class="section-title">Cari Berdasarkan Artis</h3>
+            <div class="chord-footer-info">
+                <hr>
                 {% include artis-a-z.html %}
-            </section>
+            </div>
         </div>
-
-        <aside class="chord-col-side">
-            
-            <div id="video-box" class="video-card">
-                <div id="video-placeholder" class="video-placeholder" data-video-id="{{ page.youtube_id }}">
-                    <div class="yt-play-btn">▶</div>
-                    <p>Tonton Video Tutorial<br><span>{{ page.artist }}</span></p>
-                </div>
-                <div id="video-player-container"></div>
-            </div>
-
-            <div id="chord-control-panel" class="control-panel">
-                <div class="panel-tabs">
-                    <button class="tab-btn" data-tab="tempo">Tempo</button>
-                    <button class="tab-btn active" data-tab="transpose">Transpose</button>
-                    <button class="tab-btn" data-tab="scroll">Scroll</button>
-                </div>
-
-                <div class="panel-body">
-                    <div id="tab-transpose" class="tab-pane active">
-                        <div class="transpose-control">
-                            <button class="btn-ctrl" id="dec-ch">-</button>
-                            <span id="current-key">C</span>
-                            <button class="btn-ctrl" id="inc-ch">+</button>
-                        </div>
-                        <p class="panel-hint">Transpose Nadanya</p>
-                    </div>
-
-                    <div id="tab-tempo" class="tab-pane">
-                        <div class="tempo-control">
-                            <input type="range" min="60" max="200" value="120" class="slider" id="tempo-slider">
-                            <span id="tempo-val">120 BPM</span>
-                        </div>
-                    </div>
-
-                    <div id="tab-scroll" class="tab-pane">
-                        <button class="btn-scroll-start" id="start-scroll">Mulai Auto Scroll</button>
-                    </div>
-                </div>
-            </div>
-
-        </aside>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
