@@ -1,234 +1,36 @@
-/* --- VARIABLE WARNA SUDUT NIRWANA --- */
-:root {
-    --primary-orange: #ee6c00; /* Warna utama Anda */
-    --soft-cream: #fffaf2;     /* Background hangat */
-    --dark-text: #333333;      /* Warna teks utama */
-    --light-gray: #f4f4f4;     /* Background panel */
-    --border-color: #eeeeee;   /* Warna garis halus */
-    --white: #ffffff;
+:root { --p-orange: #ee6c00; --blur-bg: rgba(255, 255, 255, 0.8); }
+
+.chord-main-wrapper { padding-top: 80px; width: 100%; }
+.chord-container { margin: 0 auto; padding: 0 20px; max-width: 1200px; }
+
+/* Control Panel Sticky dengan Efek Blur */
+.control-panel { 
+    background: #fff; border: 1px solid #eee; border-radius: 15px; 
+    position: sticky; top: 70px; z-index: 100; transition: all 0.3s ease;
 }
 
-/* --- CONTAINER UTAMA & RESPONSIVE PADDING --- */
-.chord-main-wrapper {
-    width: 100%;
-    /* Kompensasi Header Sticky/Absolute: 
-       Sesuaikan 100px ini dengan tinggi header asli Anda agar tidak tertutup */
-    padding-top: 100px; 
-    box-sizing: border-box;
-    background: var(--white);
-}
-
-.chord-container {
-    display: flex;
-    flex-direction: column; /* Mobile: Tumpuk ke bawah */
-    margin: 0 auto;
-    width: 100%;
-    /* Aturan Padding Mobile */
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-
-/* Tablet (Min-width 768px) */
-@media (min-width: 768px) {
-    .chord-container {
-        padding: 0 30px;
-        flex-direction: row; /* Tablet ke atas: 2 Kolom */
-        gap: 30px;
-    }
-}
-
-/* Laptop (Min-width 1200px) */
-@media (min-width: 1200px) {
-    .chord-container {
-        max-width: 1200px;
-        padding: 0 40px;
-        gap: 50px;
-    }
-}
-
-/* --- KOLOM LAYOUT --- */
-.chord-col-main {
-    flex: 1; /* Kolom lirik lebih lebar */
-    min-width: 0; /* Hindari overflow pada pre tag */
-}
-
-.chord-col-side {
-    width: 100%; /* Mobile: Lebar penuh */
-}
-
-@media (min-width: 768px) {
-    .chord-col-side {
-        width: 320px; /* Lebar Sidebar di Tablet/Laptop */
-    }
-}
-
-/* --- BREADCRUMBS --- */
-.chord-breadcrumbs {
-    font-size: 13px;
-    color: #888;
-    margin-bottom: 20px;
-}
-.chord-breadcrumbs a {
-    color: var(--primary-orange);
-    text-decoration: none;
-}
-.chord-breadcrumbs span { margin: 0 5px; }
-
-/* --- HEADER LAGU --- */
-.song-title {
-    font-size: 28px;
-    margin: 0 0 5px 0;
-    color: var(--dark-text);
-}
-.artist-name {
-    font-size: 18px;
-    color: var(--primary-orange);
-    font-weight: bold;
-    margin-bottom: 30px;
-}
-
-/* --- AREA CHORD & LIRIK (MONOSPACE) --- */
-.chord-content pre {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    line-height: 2; /* Spasi antar baris agar chord dan lirik tidak rapat */
-    white-space: pre-wrap; /* Agar tidak meluber ke samping di HP */
-    background: var(--soft-cream);
-    padding: 15px;
-    border-radius: 8px;
-    color: var(--dark-text);
-    overflow-x: auto;
-}
-
-/* --- CONTROL PANEL (STICKY & ACCORDION) --- */
+/* Aktif saat user scroll (Glassmorphism) */
 .control-panel {
-    background: var(--white);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    /* Sticky Logic */
-    position: -webkit-sticky;
-    position: sticky;
-    top: 80px; /* Akan menempel di bawah header saat scroll */
-    z-index: 100;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: var(--blur-bg);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
 
-/* Tabs Navigasi */
-.panel-tabs {
-    display: flex;
-    border-bottom: 1px solid var(--border-color);
-}
-.tab-btn {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    background: none;
-    font-weight: bold;
-    font-size: 13px;
-    color: #999;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.tab-btn.active {
-    color: var(--primary-orange);
-    border-bottom: 2px solid var(--primary-orange);
-}
+.panel-tabs { display: flex; border-bottom: 1px solid rgba(0,0,0,0.05); }
+.tab-btn { flex: 1; padding: 15px; border: none; background: none; font-weight: bold; color: #999; font-size: 14px; }
+.tab-btn.active { color: var(--p-orange); border-bottom: 3px solid var(--p-orange); }
 
-/* Isi Panel (Accordion Body) */
-.panel-body {
-    padding: 20px;
-    text-align: center;
-}
-.tab-pane {
-    display: none; /* Sembunyikan semua awal */
-}
-.tab-pane.active {
-    display: block; /* Tampilkan yang aktif */
-}
+/* UI Buttons Modern */
+.modern-ctrl, .scroll-wrapper { display: inline-flex; align-items: center; background: #1a1a1a; padding: 10px 20px; border-radius: 50px; gap: 15px; color: #fff; }
 
-/* UI Transpose (Box Gelap) */
-.transpose-control {
-    display: inline-flex;
-    align-items: center;
-    background: #222; /* Kontras seperti di gambar opsi 1 */
-    padding: 10px 25px;
-    border-radius: 50px;
-    gap: 20px;
-}
-.btn-ctrl {
-    background: rgba(255,255,255,0.1);
-    border: none;
-    color: var(--white);
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-}
-.btn-ctrl:hover { background: var(--primary-orange); }
-#current-key {
-    color: var(--primary-orange);
-    font-size: 22px;
-    font-weight: bold;
-}
-.panel-hint { font-size: 11px; color: #888; margin-top: 10px; }
+.btn-round, .btn-speed { background: rgba(255,255,255,0.15); border: none; color: #fff; width: 35px; height: 35px; border-radius: 50%; font-size: 18px; cursor: pointer; }
+.btn-round:active, .btn-speed:active { background: var(--p-orange); }
 
-/* --- VIDEO TUTORIAL CARD --- */
-.video-card {
-    background: #f9f9f9;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    border: 1px dashed var(--border-color);
-}
-.video-placeholder {
-    padding: 30px 20px;
-    text-align: center;
-    cursor: pointer;
-}
-.yt-play-btn {
-    font-size: 40px;
-    color: red;
-    margin-bottom: 10px;
-}
-.video-placeholder p { font-weight: bold; font-size: 14px; }
-.video-placeholder span { color: var(--primary-orange); }
+.btn-play-scroll { background: var(--p-orange); border: none; color: #fff; padding: 8px 18px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-right: 10px; }
 
-/* --- DIAGRAM CHORD SECTION --- */
-.chord-diagram-section { margin-top: 40px; }
-.section-title {
-    font-size: 18px;
-    border-left: 4px solid var(--primary-orange);
-    padding-left: 10px;
-    margin-bottom: 20px;
-}
-.chord-grid-images {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 15px;
-}
-.chord-grid-images img {
-    width: 100%;
-    height: auto;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-}
+#current-key, #speed-val { color: var(--p-orange); font-size: 18px; font-weight: bold; min-width: 30px; }
+.hint-text { font-size: 11px; color: #888; margin-top: 8px; }
 
-/* --- REKOMENDASI LIST --- */
-.chord-list {
-    list-style: none;
-    padding: 0;
-}
-.chord-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border-color);
-}
-.chord-list li a {
-    text-decoration: none;
-    color: var(--dark-text);
-    transition: 0.2s;
-}
-.chord-list li a:hover { color: var(--primary-orange); }
-
-.separator { border: 0; border-top: 1px solid var(--border-color); margin: 40px 0; }
+/* Area Lirik */
+.chord-content pre { font-family: 'Courier New', monospace; font-size: 16px; line-height: 2.2; white-space: pre-wrap; background: #fffaf2; padding: 20px; border-radius: 10px; color: #333; }
