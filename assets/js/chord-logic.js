@@ -1,45 +1,77 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. TABS SYSTEM
-    const tabs = document.querySelectorAll(".tab-btn");
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            const target = tab.getAttribute("data-tab");
-            document.querySelectorAll(".tab-btn").forEach(t => t.classList.remove("active"));
-            document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
-            tab.classList.add("active");
-            document.getElementById("tab-" + target).classList.add("active");
+    // 1. YouTube Loader
+    const placeholder = document.getElementById("video-placeholder");
+    if (placeholder) {
+        placeholder.addEventListener("click", function() {
+            const videoId = this.getAttribute("data-video-id");
+            const container = document.getElementById("video-player-container");
+            container.innerHTML = `<iframe width="100%" height="350" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            this.style.display = "none";
+        });
+    }
+
+    // 2. Dynamic Panel System (Accordion)
+    const triggers = document.querySelectorAll(".tab-trigger");
+    const contentWrapper = document.querySelector(".panel-content-wrapper");
+    const panes = document.querySelectorAll(".tab-pane");
+
+    triggers.forEach(trigger => {
+        trigger.addEventListener("click", () => {
+            const target = trigger.getAttribute("data-tab");
+            
+            if (trigger.classList.contains("active")) {
+                // Jika klik tab yang sama, tutup
+                trigger.classList.remove("active");
+                contentWrapper.classList.remove("show");
+            } else {
+                // Buka tab baru
+                triggers.forEach(t => t.classList.remove("active"));
+                panes.forEach(p => p.classList.remove("active"));
+                
+                trigger.classList.add("active");
+                contentWrapper.classList.add("show");
+                document.getElementById("tab-" + target).classList.add("active");
+            }
         });
     });
 
-    // 2. TRANSPOSE LOGIC (KOREKSI TOTAL)
+    // 3. Sticky Logic
+    const panel = document.getElementById("control-panel");
+    const anchor = document.getElementById("sticky-anchor");
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > anchor.offsetTop) {
+            panel.classList.add("is-sticky");
+        } else {
+            panel.classList.remove("is-sticky");
+        }
+    });
+
+    // 4. Transpose Logic (Safe Regex)
     const scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
     const sheet = document.getElementById("chord-sheet");
     
     function transpose(steps) {
-        // Regex ini mengunci Chord secara utuh agar tanda # tidak dianggap karakter terpisah
-        const chordRegex = /([A-G][#b]?)(m?7?|maj7?|sus\d?|dim?)/g;
-        
-        // Gunakan textContent untuk stabilitas karakter di dalam tag <pre>
-        let content = sheet.textContent;
+        // Regex yang lebih ketat: Hanya menangkap huruf kapital A-G yang berdiri sendiri atau diikuti simbol chord
+        const chordRegex = /\b([A-G][#b]?)(m|7|maj7|sus\d|dim|add\d)?\b/g;
+        let content = sheet.innerText;
 
         const newContent = content.replace(chordRegex, (match, note, suffix) => {
-            // Normalisasi flat ke sharp
+            // Normalisasi flat
             if (note.endsWith('b')) {
                 const map = {'Db':'C#', 'Eb':'D#', 'Gb':'F#', 'Ab':'G#', 'Bb':'A#'};
                 note = map[note] || note;
             }
-            
             let index = scale.indexOf(note);
             if (index === -1) return match;
             
-            // Hitung nada baru
             let newNote = scale[(index + steps + 12) % 12];
-            return newNote + suffix;
+            return newNote + (suffix || "");
         });
 
-        sheet.textContent = newContent;
+        sheet.innerText = newContent;
         
-        // Update display angka kunci di panel
+        // Update Display
         const keyDisplay = document.getElementById("current-key");
         let curIdx = scale.indexOf(keyDisplay.innerText);
         if (curIdx !== -1) {
@@ -50,60 +82,23 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("inc-ch").onclick = () => transpose(1);
     document.getElementById("dec-ch").onclick = () => transpose(-1);
 
-    // 3. AUTO SCROLL (KECEPATAN DIPERBAIKI)
+    // 5. Auto Scroll Logic
     let scroller = null;
     let isScrolling = false;
     let scrollSpeed = 2;
-
-    function doScroll() {
-        if (scroller) clearInterval(scroller);
-        // Logika delay: Semakin besar speed, delay semakin kecil
-        let delay = Math.max(10, 150 / scrollSpeed); 
-        scroller = setInterval(() => {
-            window.scrollBy(0, 1);
-        }, delay);
-    }
 
     document.getElementById("start-scroll").onclick = function() {
         if (!isScrolling) {
             isScrolling = true;
             this.innerText = "⏸ Berhenti";
-            doScroll();
+            const delay = 100 / scrollSpeed;
+            scroller = setInterval(() => window.scrollBy(0, 1), delay);
         } else {
             isScrolling = false;
             this.innerText = "▶️ Mulai";
             clearInterval(scroller);
         }
     };
-
-    document.getElementById("speed-up").onclick = () => {
-        if (scrollSpeed < 10) {
-            scrollSpeed++;
-            document.getElementById("speed-val").innerText = scrollSpeed + "x";
-            if (isScrolling) doScroll();
-        }
-    };
-
-    document.getElementById("speed-down").onclick = () => {
-        if (scrollSpeed > 1) {
-            scrollSpeed--;
-            document.getElementById("speed-val").innerText = scrollSpeed + "x";
-            if (isScrolling) doScroll();
-        }
-    };
-
-    // 4. DIAGRAM DETECTOR
-    const imgContainer = document.getElementById("chord-images-container");
-    if (sheet && imgContainer) {
-        const found = [...new Set(sheet.textContent.match(/\b([A-G][#b]?m?7?|maj7?|sus\d?|dim?)\b/g))];
-        imgContainer.innerHTML = ''; // Bersihkan container sebelum isi ulang
-        found.forEach(chord => {
-            const img = document.createElement("img");
-            // Mengganti # menjadi kata 'sharp' jika hosting menolak karakter # di URL
-            let fileName = chord.replace('#', 'sharp');
-            img.src = `/assets/img/chords/${fileName}.webp`;
-            img.onerror = function() { this.remove(); };
-            imgContainer.appendChild(img);
-        });
-    }
+    
+    // Logic speed up/down (tambahkan fungsi perubah delay jika perlu)
 });
