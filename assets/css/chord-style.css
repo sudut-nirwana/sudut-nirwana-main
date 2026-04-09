@@ -1,84 +1,36 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // 1. TABS SYSTEM
-    const tabs = document.querySelectorAll(".tab-btn");
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            const target = tab.getAttribute("data-tab");
-            document.querySelectorAll(".tab-btn").forEach(t => t.classList.remove("active"));
-            document.querySelectorAll(".tab-pane").forEach(p => p.classList.remove("active"));
-            tab.classList.add("active");
-            document.getElementById("tab-" + target).classList.add("active");
-        });
-    });
+:root { --p-orange: #ee6c00; --blur-bg: rgba(255, 255, 255, 0.8); }
 
-    // 2. VIDEO LOADER
-    const vPlace = document.getElementById("video-placeholder");
-    if (vPlace) {
-        vPlace.addEventListener("click", function() {
-            const id = this.dataset.videoId;
-            document.getElementById("video-player-container").innerHTML = `<div style="position:relative;padding-bottom:56.25%;height:0;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe></div>`;
-            this.style.display = "none";
-        });
-    }
+.chord-main-wrapper { padding-top: 80px; width: 100%; }
+.chord-container { margin: 0 auto; padding: 0 20px; max-width: 1200px; }
 
-    // 3. TRANSPOSE LOGIC
-    const scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-    const sheet = document.getElementById("chord-sheet");
-    
-    function transpose(steps) {
-        const chordRegex = /\b([A-G][#b]?m?7?|maj7?|sus\d?|dim?)\b/g;
-        sheet.innerHTML = sheet.innerHTML.replace(chordRegex, (chord) => {
-            return chord.replace(/^[A-G][#b]?/, (note) => {
-                if (note.endsWith('b')) {
-                    const f2s = {'Db':'C#', 'Eb':'D#', 'Gb':'F#', 'Ab':'G#', 'Bb':'A#'};
-                    note = f2s[note] || note;
-                }
-                let index = scale.indexOf(note);
-                return index === -1 ? note : scale[(index + steps + 12) % 12];
-            });
-        });
-        let curKey = document.getElementById("current-key");
-        curKey.innerText = scale[(scale.indexOf(curKey.innerText) + steps + 12) % 12];
-    }
-    document.getElementById("inc-ch").onclick = () => transpose(1);
-    document.getElementById("dec-ch").onclick = () => transpose(-1);
+/* Control Panel Sticky dengan Efek Blur */
+.control-panel { 
+    background: #fff; border: 1px solid #eee; border-radius: 15px; 
+    position: sticky; top: 70px; z-index: 100; transition: all 0.3s ease;
+}
 
-    // 4. AUTO SCROLL WITH SPEED CONTROL
-    let scroller;
-    let isScrolling = false;
-    let scrollSpeed = 2; // Default speed
-    const speedVal = document.getElementById("speed-val");
+/* Aktif saat user scroll (Glassmorphism) */
+.control-panel {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: var(--blur-bg);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
 
-    function startScrolling() {
-        clearInterval(scroller);
-        scroller = setInterval(() => window.scrollBy(0, 1), 100 / scrollSpeed);
-    }
+.panel-tabs { display: flex; border-bottom: 1px solid rgba(0,0,0,0.05); }
+.tab-btn { flex: 1; padding: 15px; border: none; background: none; font-weight: bold; color: #999; font-size: 14px; }
+.tab-btn.active { color: var(--p-orange); border-bottom: 3px solid var(--p-orange); }
 
-    document.getElementById("start-scroll").onclick = function() {
-        if (!isScrolling) {
-            isScrolling = true;
-            this.innerText = "⏸ Berhenti";
-            startScrolling();
-        } else {
-            isScrolling = false;
-            this.innerText = "▶️ Mulai";
-            clearInterval(scroller);
-        }
-    };
+/* UI Buttons Modern */
+.modern-ctrl, .scroll-wrapper { display: inline-flex; align-items: center; background: #1a1a1a; padding: 10px 20px; border-radius: 50px; gap: 15px; color: #fff; }
 
-    document.getElementById("speed-up").onclick = () => {
-        if (scrollSpeed < 10) {
-            scrollSpeed++;
-            speedVal.innerText = scrollSpeed + "x";
-            if(isScrolling) startScrolling();
-        }
-    };
+.btn-round, .btn-speed { background: rgba(255,255,255,0.15); border: none; color: #fff; width: 35px; height: 35px; border-radius: 50%; font-size: 18px; cursor: pointer; }
+.btn-round:active, .btn-speed:active { background: var(--p-orange); }
 
-    document.getElementById("speed-down").onclick = () => {
-        if (scrollSpeed > 1) {
-            scrollSpeed--;
-            speedVal.innerText = scrollSpeed + "x";
-            if(isScrolling) startScrolling();
-        }
-    };
-});
+.btn-play-scroll { background: var(--p-orange); border: none; color: #fff; padding: 8px 18px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-right: 10px; }
+
+#current-key, #speed-val { color: var(--p-orange); font-size: 18px; font-weight: bold; min-width: 30px; }
+.hint-text { font-size: 11px; color: #888; margin-top: 8px; }
+
+/* Area Lirik */
+.chord-content pre { font-family: 'Courier New', monospace; font-size: 16px; line-height: 2.2; white-space: pre-wrap; background: #fffaf2; padding: 20px; border-radius: 10px; color: #333; }
