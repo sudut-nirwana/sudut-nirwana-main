@@ -1,3 +1,8 @@
+---
+layout: default
+---
+<link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
+
 <div class="chord-main-wrapper">
     <div class="chord-container">
         
@@ -6,64 +11,68 @@
             <p class="artist-name">{{ page.artist }}</p>
         </header>
 
-        <div class="main-grid">
-            <div class="content-left">
+        <div class="chord-grid-layout">
+            <div class="chord-left-col">
                 
                 <div id="control-panel" class="control-panel">
                     <div class="panel-tabs">
-                        <button class="tab-btn active" data-target="transpose">Transpose</button>
-                        <button class="tab-btn" data-target="tempo">Tempo</button>
-                        <button class="tab-btn" data-target="scroll">Scroll</button>
+                        <div class="tab-item active" data-target="transpose">Transpose <span class="arrow">▼</span></div>
+                        <div class="tab-item" data-target="tempo">Tempo <span class="arrow">▼</span></div>
+                        <div class="tab-item" data-target="scroll">Scroll <span class="arrow">▼</span></div>
                     </div>
-                    
-                    <div class="panel-body active" id="pane-transpose">
-                        <div class="ui-row">
-                            <button class="btn-modern" id="dec-ch">−</button>
-                            <div class="display-box">
-                                <span id="current-key">C</span>
-                                <small>Kunci</small>
+
+                    <div class="panel-content">
+                        <div id="pane-transpose" class="tab-pane active">
+                            <div class="modern-box-blue">
+                                <button class="btn-action" id="dec-ch">−</button>
+                                <div class="key-info">
+                                    <span id="current-key">C</span>
+                                    <small>TRANSPOSE NADANYA</small>
+                                </div>
+                                <button class="btn-action" id="inc-ch">+</button>
                             </div>
-                            <button class="btn-modern" id="inc-ch">+</button>
                         </div>
-                    </div>
 
-                    <div class="panel-body" id="pane-tempo">
-                        <div class="ui-row">
-                            <input type="range" min="60" max="200" value="120" id="tempo-slider" style="width:70%; accent-color:var(--p-orange);">
-                            <span id="tempo-val" style="font-weight:800; color:var(--p-orange)">120 BPM</span>
+                        <div id="pane-tempo" class="tab-pane">
+                            <div class="tempo-ui">
+                                <input type="range" min="60" max="200" value="120" id="tempo-slider" class="grad-slider">
+                                <span id="tempo-val">120 BPM</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="panel-body" id="pane-scroll">
-                        <div class="ui-row">
-                            <button id="start-scroll" class="btn-modern" style="width:auto; padding:0 20px;">▶️ Mulai</button>
-                            <div class="display-box" style="flex-direction: row; display: flex; gap: 10px; align-items: center;">
-                                <button class="btn-small" id="speed-down" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">−</button>
-                                <span id="speed-val" style="font-size:18px">2x</span>
-                                <button class="btn-small" id="speed-up" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">+</button>
+                        <div id="pane-scroll" class="tab-pane">
+                            <div class="scroll-ui">
+                                <button id="start-scroll" class="btn-play-scroll">▶️ Mulai</button>
+                                <div class="speed-control">
+                                    <button id="speed-down">−</button>
+                                    <span id="speed-val">2x</span>
+                                    <button id="speed-up">+</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="chord-content">
+                <div class="chord-sheet-area">
                     <pre id="chord-sheet">{{ content }}</pre>
-                </div>
-            </div>
-
-            <aside class="sidebar-right">
-                <div class="video-card">
-                    <div class="video-container-inner">
-                        <iframe src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-                    </div>
                 </div>
 
                 <div class="chord-diagram-section">
-                    <h3 style="color:#fff; font-size:18px;">Diagram Chord</h3>
-                    <div id="chord-images-container" class="chord-grid"></div>
+                    <h3 class="side-title">Diagram Chord</h3>
+                    <div id="chord-images-container" class="chord-img-grid"></div>
+                </div>
+            </div>
+
+            <aside class="chord-sidebar">
+                <div id="video-sidebar" class="sticky-video">
+                    <div class="video-container">
+                        <iframe width="100%" height="200" src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
             </aside>
         </div>
-
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
