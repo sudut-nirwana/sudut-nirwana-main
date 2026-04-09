@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (vPlace) {
         vPlace.addEventListener("click", function() {
             const id = this.dataset.videoId;
-            document.getElementById("video-player-container").innerHTML = `<div style="position:relative;padding-bottom:56.25%;height:0;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe></div>`;
+            document.getElementById("video-player-container").innerHTML = `<div style="position:relative;padding-bottom:56.25%;height:0;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe></div>`;
             this.style.display = "none";
         });
     }
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 4. AUTO SCROLL WITH SPEED CONTROL
     let scroller;
     let isScrolling = false;
-    let scrollSpeed = 2; // Default speed
+    let scrollSpeed = 2; 
     const speedVal = document.getElementById("speed-val");
 
     function startScrolling() {
@@ -66,19 +66,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    document.getElementById("speed-up").onclick = () => {
-        if (scrollSpeed < 10) {
-            scrollSpeed++;
-            speedVal.innerText = scrollSpeed + "x";
-            if(isScrolling) startScrolling();
-        }
-    };
+    document.getElementById("speed-up").onclick = () => { if (scrollSpeed < 10) { scrollSpeed++; speedVal.innerText = scrollSpeed + "x"; if(isScrolling) startScrolling(); } };
+    document.getElementById("speed-down").onclick = () => { if (scrollSpeed > 1) { scrollSpeed--; speedVal.innerText = scrollSpeed + "x"; if(isScrolling) startScrolling(); } };
 
-    document.getElementById("speed-down").onclick = () => {
-        if (scrollSpeed > 1) {
-            scrollSpeed--;
-            speedVal.innerText = scrollSpeed + "x";
-            if(isScrolling) startScrolling();
-        }
-    };
+    // 5. AUTO DIAGRAM DETECTOR
+    const imgContainer = document.getElementById("chord-images-container");
+    if (sheet && imgContainer) {
+        const chordsFound = [...new Set(sheet.innerText.match(/\b([A-G][#b]?m?7?|maj7?|sus\d?|dim?)\b/g))];
+        chordsFound.forEach(chord => {
+            const img = document.createElement("img");
+            img.src = `/assets/img/chords/${chord}.webp`;
+            img.onerror = function() { this.remove(); };
+            imgContainer.appendChild(img);
+        });
+    }
 });
