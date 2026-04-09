@@ -86,6 +86,54 @@ body {
     font-size: 16px; font-weight: 800; /* Extra Bold */
     line-height: 2.5; white-space: pre-wrap; color: #222; margin: 0;
 }
+/* 1. RESET PADDING DEFAULT KHUSUS HALAMAN CHORD */
+/* Pastikan class .content-area disesuaikan dengan class pembungkus di default.html kamu */
+.main-content, .content-area { 
+    padding: 0 !important; 
+    margin: 0 !important;
+    max-width: 100% !important;
+}
+
+/* 2. PERBAIKAN TEKS KELUAR CONTAINER */
+.chord-sheet-area {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+    overflow-x: auto; /* Agar jika teks kepanjangan, bisa di-scroll ke samping, tidak pecah */
+    word-wrap: break-word; /* Memaksa kata panjang untuk patah */
+}
+
+#chord-sheet {
+    font-family: 'Courier New', monospace;
+    font-size: 16px; 
+    line-height: 2.5;
+    white-space: pre; /* Menjaga struktur lirik tetap rapi */
+}
+
+/* 3. LAYOUT RESPONSIVE */
+.chord-grid-layout {
+    display: flex;
+    flex-direction: column; /* Default HP: Berurutan ke bawah */
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .chord-grid-layout {
+        display: grid;
+        grid-template-columns: 1fr 350px; /* Laptop: Kiri lebar, Kanan Sidebar */
+        gap: 30px;
+        padding: 0 40px; /* Padding Container Laptop */
+    }
+}
+
+/* 4. MODERN GRADIENT SLIDER & BUTTONS */
+.grad-slider {
+    background: linear-gradient(to right, #ee6c00, #ff9800);
+    height: 8px;
+    border-radius: 5px;
+    accent-color: #ee6c00;
+}
+
 
 /* Slider & Speed UI */
 .grad-slider { width: 100%; accent-color: var(--p-orange); }
