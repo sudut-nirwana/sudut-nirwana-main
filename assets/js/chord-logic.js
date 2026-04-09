@@ -1,4 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+    // Tambahkan fungsi ini di dalam DOMContentLoaded
+    function detectOriginalKey() {
+        const sheet = document.getElementById("chord-sheet");
+        // Regex mencari chord pertama
+        const firstChordMatch = sheet.innerText.match(/\b([A-G][#b]?m?7?|maj7?|sus\d?|dim?)\b/);
+        if (firstChordMatch) {
+            let detected = firstChordMatch[1];
+            // Bersihkan suffix minor/7 dsb hanya untuk display key utama
+            let baseNote = detected.match(/[A-G][#b]?/)[0];
+        
+            // Update tampilan di box biru
+            document.getElementById("current-key").innerText = baseNote;
+            // Set offset transpose awal agar sinkron dengan 'C' di array scale
+            // Jika nada dasar aslinya G, kita set offset awal ke posisi G
+            const scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+            offset = scale.indexOf(baseNote);
+            if (offset === -1) offset = 0; // fallback ke C jika tidak ketemu
+        }
+    }
+    
     // 1. Panel Tab System (Single Open)
     const tabs = document.querySelectorAll(".tab-item");
     const contentArea = document.querySelector(".panel-content");
