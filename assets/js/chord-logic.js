@@ -16,18 +16,21 @@ document.addEventListener("DOMContentLoaded", function () {
     if (vPlace) {
         vPlace.addEventListener("click", function() {
             const id = this.dataset.videoId;
-            document.getElementById("video-player-container").innerHTML = `<div style="position:relative;padding-bottom:56.25%;height:0;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe></div>`;
+            document.getElementById("video-player-container").innerHTML = `<div style="position:relative;padding-bottom:56.25%;height:0;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;" src="https://www.youtube.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe></div>`;
             this.style.display = "none";
         });
     }
 
-    // 3. TRANSPOSE LOGIC
+    // 3. TRANSPOSE LOGIC (KOREKSI: Menggunakan innerText untuk mencegah bug #)
     const scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
     const sheet = document.getElementById("chord-sheet");
     
     function transpose(steps) {
+        if (!sheet) return;
+        let content = sheet.innerText;
         const chordRegex = /\b([A-G][#b]?m?7?|maj7?|sus\d?|dim?)\b/g;
-        sheet.innerHTML = sheet.innerHTML.replace(chordRegex, (chord) => {
+
+        const newContent = content.replace(chordRegex, (chord) => {
             return chord.replace(/^[A-G][#b]?/, (note) => {
                 if (note.endsWith('b')) {
                     const f2s = {'Db':'C#', 'Eb':'D#', 'Gb':'F#', 'Ab':'G#', 'Bb':'A#'};
@@ -37,13 +40,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 return index === -1 ? note : scale[(index + steps + 12) % 12];
             });
         });
+
+        sheet.innerText = newContent;
+        
         let curKey = document.getElementById("current-key");
-        curKey.innerText = scale[(scale.indexOf(curKey.innerText) + steps + 12) % 12];
+        let keyIdx = scale.indexOf(curKey.innerText);
+        if (keyIdx !== -1) curKey.innerText = scale[(keyIdx + steps + 12) % 12];
     }
+
     document.getElementById("inc-ch").onclick = () => transpose(1);
     document.getElementById("dec-ch").onclick = () => transpose(-1);
 
-    // 4. AUTO SCROLL WITH SPEED CONTROL
+    // 4. AUTO SCROLL SPEED
     let scroller;
     let isScrolling = false;
     let scrollSpeed = 2; 
@@ -69,11 +77,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("speed-up").onclick = () => { if (scrollSpeed < 10) { scrollSpeed++; speedVal.innerText = scrollSpeed + "x"; if(isScrolling) startScrolling(); } };
     document.getElementById("speed-down").onclick = () => { if (scrollSpeed > 1) { scrollSpeed--; speedVal.innerText = scrollSpeed + "x"; if(isScrolling) startScrolling(); } };
 
-    // 5. AUTO DIAGRAM DETECTOR
+    // 5. DIAGRAM CHORD DETECTOR
     const imgContainer = document.getElementById("chord-images-container");
     if (sheet && imgContainer) {
-        const chordsFound = [...new Set(sheet.innerText.match(/\b([A-G][#b]?m?7?|maj7?|sus\d?|dim?)\b/g))];
-        chordsFound.forEach(chord => {
+        const found = [...new Set(sheet.innerText.match(/\b([A-G][#b]?m?7?|maj7?|sus\d?|dim?)\b/g))];
+        found.forEach(chord => {
             const img = document.createElement("img");
             img.src = `/assets/img/chords/${chord}.webp`;
             img.onerror = function() { this.remove(); };
