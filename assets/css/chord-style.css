@@ -1,45 +1,87 @@
-:root { --p-orange: #ee6c00; --blur-bg: rgba(255, 255, 255, 0.95); }
-
-.chord-main-wrapper { padding-top: 20px; width: 100%; }
-.chord-container { margin: 0 auto; padding: 0 15px; max-width: 800px; }
-
-/* Sticky Panel Fix */
-.control-panel { 
-    background: var(--blur-bg); border: 1px solid #ddd; border-radius: 12px; 
-    position: sticky; 
-    top: 60px; /* Jarak dari atas layar agar tidak menabrak header */
-    z-index: 900; /* Di bawah header (999) & sidebar (998) */
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    margin: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+:root {
+    --p-orange: #ee6c00;
+    --dark-blue: #0d2e5c;
+    --nunito: 'Nunito', sans-serif;
 }
 
-.panel-tabs { display: flex; border-bottom: 1px solid #eee; }
-.tab-btn { flex: 1; padding: 12px; border: none; background: none; font-weight: bold; color: #888; cursor: pointer; }
-.tab-btn.active { color: var(--p-orange); border-bottom: 3px solid var(--p-orange); }
+body { font-family: var(--nunito); margin: 0; padding: 0; }
 
-.panel-body { padding: 15px; text-align: center; }
-.tab-pane { display: none; }
-.tab-pane.active { display: block; }
+/* Mencegah Konten Tenggelam di bawah Header Fixed */
+.chord-main-wrapper { padding-top: 80px; background: #fff; }
 
-/* Control Elements */
-.modern-ctrl, .scroll-wrapper { display: inline-flex; align-items: center; background: #222; padding: 8px 18px; border-radius: 30px; gap: 10px; color: #fff; }
-.btn-round, .btn-speed { background: #444; border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 18px; }
-.btn-play-scroll { background: var(--p-orange); border: none; color: #fff; padding: 8px 15px; border-radius: 20px; font-weight: bold; }
+.chord-container { margin: 0 auto; padding: 0 20px; max-width: 850px; }
 
-/* Lirik Sheet */
+.song-title { font-size: 28px; font-weight: 800; color: #333; margin-bottom: 5px; }
+.artist-name { font-size: 18px; color: var(--p-orange); font-weight: 600; margin-bottom: 25px; }
+
+/* YouTube Box Style */
+.video-card { 
+    background: #f9f9f9; border-radius: 12px; overflow: hidden; 
+    margin-bottom: 25px; border: 1px solid #eee; position: relative; min-height: 150px;
+}
+.video-placeholder { 
+    display: flex; flex-direction: column; align-items: center; 
+    justify-content: center; padding: 40px 20px; cursor: pointer; transition: 0.3s;
+}
+.video-placeholder:hover { background: #f0f0f0; }
+.yt-play-btn { 
+    width: 60px; height: 60px; background: red; border-radius: 50%; 
+    position: relative; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.yt-play-btn::after {
+    content: ''; position: absolute; top: 50%; left: 55%; 
+    transform: translate(-50%, -50%); border-style: solid; 
+    border-width: 10px 0 10px 18px; border-color: transparent transparent transparent white;
+}
+
+/* Dynamic Control Panel */
+.control-panel {
+    background: #fff; border: 1px solid #ddd; border-radius: 12px;
+    margin: 20px 0; transition: all 0.3s ease; overflow: hidden;
+}
+
+/* Keadaan saat Sticky */
+.control-panel.is-sticky {
+    position: fixed; top: 70px; /* Di bawah header 60px + gap */
+    left: 50%; transform: translateX(-50%);
+    width: 90%; max-width: 800px; z-index: 1000;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 1px solid var(--p-orange);
+}
+
+.panel-header-tabs { display: flex; background: #fdfdfd; border-bottom: 1px solid #eee; }
+.tab-trigger { 
+    flex: 1; padding: 12px; text-align: center; font-weight: 700; 
+    cursor: pointer; color: #555; border-right: 1px solid #eee; transition: 0.2s;
+}
+.tab-trigger:last-child { border-right: none; }
+.tab-trigger.active { color: var(--p-orange); background: #fff; }
+.tab-trigger .arrow { font-size: 10px; margin-left: 5px; transition: 0.3s; }
+.tab-trigger.active .arrow { transform: rotate(180deg); }
+
+.panel-content-wrapper { display: none; background: #fff; padding: 20px; }
+.panel-content-wrapper.show { display: block; }
+
+/* Transpose UI sesuai Gambar 1 */
+.transpose-ui {
+    background: var(--dark-blue); border-radius: 12px; 
+    display: flex; align-items: center; justify-content: space-around;
+    padding: 15px; color: white;
+}
+.key-info { text-align: center; border-left: 1px solid rgba(255,255,255,0.2); border-right: 1px solid rgba(255,255,255,0.2); padding: 0 30px; }
+.key-info #current-key { font-size: 32px; font-weight: 800; display: block; line-height: 1; }
+.key-info small { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; }
+.btn-ctrl { background: transparent; border: none; color: white; font-size: 30px; cursor: pointer; width: 50px; }
+
+/* Chord Sheet & Lyrics */
 .chord-content pre { 
-    font-family: 'Courier New', Courier, monospace; font-size: 15px; line-height: 2.4; 
-    white-space: pre-wrap; background: #fffcf5; padding: 20px; border-radius: 8px; 
-    border: 1px solid #f0e6d6; overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace; 
+    font-size: 16px; font-weight: 700; /* Dibuat Tebal sesuai permintaan */
+    line-height: 2.6; white-space: pre-wrap; background: #fffef9; 
+    padding: 25px; border-radius: 10px; border: 1px solid #f0e6d6; 
+    overflow-x: auto; color: #222;
 }
 
-/* Diagram */
-.chord-grid-images { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; margin-top: 15px; }
-.chord-grid-images img { width: 100%; border: 1px solid #eee; border-radius: 5px; }
-
-.section-title { font-size: 17px; border-left: 4px solid var(--p-orange); padding-left: 10px; margin: 30px 0 10px; }
-.chord-recommendation { display: flex; flex-wrap: wrap; gap: 20px; }
-.rec-column { flex: 1; min-width: 250px; }
-.chord-list { list-style: none; padding: 0; }
-.chord-list li { padding: 8px 0; border-bottom: 1px dotted #ccc; }
-.chord-list li a { text-decoration: none; color: #444; display: block; }
+/* Speed & Tempo Styles */
+.scroll-ui { display: flex; align-items: center; justify-content: center; gap: 20px; }
+.speed-box { display: flex; align-items: center; background: #eee; border-radius: 20px; padding: 5px 15px; gap: 10px; }
+.btn-speed { border: none; background: #ddd; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; }
