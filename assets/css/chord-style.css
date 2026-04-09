@@ -1,125 +1,95 @@
 :root {
     --p-orange: #ee6c00;
-    --grad: linear-gradient(135deg, #ee6c00 0%, #ff9800 100%);
+    --grad-orange: linear-gradient(135deg, #ee6c00 0%, #ff9800 100%);
     --nunito: 'Nunito', sans-serif;
 }
 
-/* Background & Body */
 body { 
-    font-family: var(--nunito); 
     background: url('/assets/img/jumbotron.jpg') no-repeat center center fixed; 
     background-size: cover;
-    margin: 0;
+    font-family: var(--nunito);
 }
 
-.chord-main-wrapper { padding-top: 100px; min-height: 100vh; }
+/* Container Settings */
+.chord-container { width: 100%; margin: 0 auto; box-sizing: border-box; }
 
-/* Responsive Container */
-.chord-container { 
-    margin: 0 auto; 
-    max-width: 1200px; 
-    padding: 0 20px; 
+/* Mobile: Default */
+@media (max-width: 767px) {
+    .chord-main-wrapper { padding-top: 80px; }
+    .chord-container { padding: 0 20px; }
+    .chord-sidebar { display: none; } /* Video pindah atau sembunyi di mobile jika perlu */
 }
 
+/* Tablet: min 768px */
 @media (min-width: 768px) {
     .chord-container { padding: 0 30px; }
-    .main-grid { 
-        display: grid; 
-        grid-template-columns: 1fr 350px; /* Kolom kiri lebar, kanan (sidebar) 350px */
-        gap: 30px; 
-        align-items: start;
-    }
+    .chord-grid-layout { display: flex; gap: 30px; }
+    .chord-left-col { flex: 1; }
+    .chord-sidebar { width: 300px; }
 }
 
+/* Laptop: max 1200px */
 @media (min-width: 1024px) {
-    .chord-container { padding: 0 40px; }
+    .chord-container { max-width: 1200px; padding: 0 40px; }
+    .chord-sidebar { width: 350px; }
 }
 
-/* Song Info & Header */
-.chord-header { margin-bottom: 20px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-.song-title { font-size: 32px; font-weight: 800; margin: 0; }
-
-/* YouTube Popup (Modern & Compact) */
-.video-card {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    padding: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-}
-.video-container-inner {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 ratio */
-    height: 0; overflow: hidden; border-radius: 10px;
-}
-.video-container-inner iframe {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-}
+/* Header */
+.song-title { font-weight: 800; font-size: 26px; color: #333; margin: 0; }
+.artist-name { color: var(--p-orange); font-weight: 700; margin-bottom: 20px; }
 
 /* Control Panel Modern */
 .control-panel {
-    background: #fff;
-    border-radius: 15px;
-    margin-bottom: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    overflow: hidden;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px; border: 1px solid #ddd;
+    margin-bottom: 20px; overflow: hidden;
     transition: 0.3s;
 }
 
+/* Sticky Fix */
 .control-panel.is-sticky {
-    position: fixed; top: 70px; left: 50%;
-    transform: translateX(-50%); width: 90%; max-width: 800px;
-    z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: fixed; top: 70px; left: 0; right: 0;
+    width: calc(100% - 40px); /* Menjaga padding tetap 20px kiri-kanan */
+    max-width: 760px; margin: 0 auto;
+    z-index: 1000; box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
-.panel-tabs { display: flex; background: #f8f8f8; border-bottom: 1px solid #eee; }
-.tab-btn { 
-    flex: 1; padding: 15px; border: none; background: none; 
-    font-weight: 700; cursor: pointer; color: #666; font-family: var(--nunito);
+.panel-tabs { display: flex; background: #fff; border-bottom: 1px solid #eee; }
+.tab-item { 
+    flex: 1; padding: 12px; text-align: center; font-weight: 700; 
+    cursor: pointer; font-size: 14px; border-right: 1px solid #eee;
 }
-.tab-btn.active { color: var(--p-orange); position: relative; }
-.tab-btn.active::after {
-    content: ''; position: absolute; bottom: 0; left: 20%; right: 20%;
-    height: 3px; background: var(--grad); border-radius: 10px;
+.tab-item.active { color: var(--p-orange); background: #fafafa; }
+
+.panel-content { display: none; padding: 20px; }
+.panel-content.show { display: block; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* Transpose Box Blue (Sesuai Gambar 1) */
+.modern-box-blue {
+    background: #0d2e5c; color: #fff; border-radius: 12px;
+    display: flex; align-items: center; justify-content: space-around; padding: 15px;
 }
+.key-info { text-align: center; }
+.key-info span { font-size: 36px; font-weight: 800; display: block; line-height: 1; }
+.key-info small { font-size: 10px; opacity: 0.7; letter-spacing: 1px; }
+.btn-action { background: none; border: none; color: #fff; font-size: 32px; cursor: pointer; }
 
-.panel-body { padding: 20px; display: none; }
-.panel-body.active { display: block; }
-
-/* UI Elements inside Panels */
-.ui-row { display: flex; align-items: center; justify-content: center; gap: 15px; }
-
-.btn-modern {
-    background: var(--grad); border: none; color: #fff;
-    width: 45px; height: 45px; border-radius: 12px;
-    font-size: 20px; cursor: pointer; box-shadow: 0 4px 10px rgba(238, 108, 0, 0.3);
-}
-
-.display-box {
-    background: #1a1a1a; color: #fff; padding: 10px 25px;
-    border-radius: 12px; text-align: center; min-width: 80px;
-}
-.display-box span { font-size: 24px; font-weight: 800; display: block; }
-.display-box small { font-size: 10px; text-transform: uppercase; opacity: 0.7; }
-
-/* Chord Content Area */
-.chord-content {
-    background: rgba(255, 255, 255, 0.85); /* Putih Transparan */
-    backdrop-filter: blur(5px);
-    padding: 25px; border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.3);
+/* Chord & Lyrics (Lebih Tebal) */
+.chord-sheet-area { 
+    background: rgba(255, 255, 255, 0.7); 
+    padding: 20px; border-radius: 12px; backdrop-filter: blur(5px);
 }
 #chord-sheet {
-    font-family: 'Courier New', monospace;
-    font-size: 17px; font-weight: 700; line-height: 2.8;
-    white-space: pre-wrap; margin: 0; color: #111;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px; font-weight: 800; /* Extra Bold */
+    line-height: 2.5; white-space: pre-wrap; color: #222; margin: 0;
 }
 
-/* Diagram Chord */
-.chord-diagram-section { margin-top: 30px; }
-.chord-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; }
-.chord-box { 
-    background: #fff; border: 1px solid #eee; border-radius: 8px; 
-    padding: 5px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-.chord-box img { width: 100%; height: auto; border-radius: 4px; }
+/* Slider & Speed UI */
+.grad-slider { width: 100%; accent-color: var(--p-orange); }
+.scroll-ui { display: flex; align-items: center; justify-content: center; gap: 20px; }
+.btn-play-scroll { background: var(--grad-orange); color: #fff; border: none; padding: 10px 20px; border-radius: 20px; font-weight: 700; cursor: pointer; }
+.speed-control { display: flex; align-items: center; background: #eee; border-radius: 20px; padding: 5px 15px; gap: 10px; }
+.speed-control button { background: none; border: none; font-size: 20px; cursor: pointer; }
