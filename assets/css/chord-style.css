@@ -1,37 +1,234 @@
-/* Reset & Base */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #fdfbf7; color: #333; line-height: 1.6; }
+/* --- VARIABLE WARNA SUDUT NIRWANA --- */
+:root {
+    --primary-orange: #ee6c00; /* Warna utama Anda */
+    --soft-cream: #fffaf2;     /* Background hangat */
+    --dark-text: #333333;      /* Warna teks utama */
+    --light-gray: #f4f4f4;     /* Background panel */
+    --border-color: #eeeeee;   /* Warna garis halus */
+    --white: #ffffff;
+}
 
-.chord-site-wrapper { max-width: 800px; margin: 0 auto; padding: 20px; }
+/* --- CONTAINER UTAMA & RESPONSIVE PADDING --- */
+.chord-main-wrapper {
+    width: 100%;
+    /* Kompensasi Header Sticky/Absolute: 
+       Sesuaikan 100px ini dengan tinggi header asli Anda agar tidak tertutup */
+    padding-top: 100px; 
+    box-sizing: border-box;
+    background: var(--white);
+}
 
-/* Header */
-.song-header { margin-bottom: 20px; text-align: left; }
-.label { background: #ff9800; color: #fff; padding: 2px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; }
-.song-title { font-size: 24px; font-weight: 800; margin: 10px 0 5px; color: #4e342e; }
-.song-meta { font-size: 14px; color: #757575; }
+.chord-container {
+    display: flex;
+    flex-direction: column; /* Mobile: Tumpuk ke bawah */
+    margin: 0 auto;
+    width: 100%;
+    /* Aturan Padding Mobile */
+    padding: 0 20px;
+    box-sizing: border-box;
+}
 
-/* Video & Media Section */
-.media-section { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
-.video-container { width: 100%; max-width: 400px; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-.video-container iframe { width: 100%; height: 100%; }
+/* Tablet (Min-width 768px) */
+@media (min-width: 768px) {
+    .chord-container {
+        padding: 0 30px;
+        flex-direction: row; /* Tablet ke atas: 2 Kolom */
+        gap: 30px;
+    }
+}
 
-.diagram-container { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-start; }
+/* Laptop (Min-width 1200px) */
+@media (min-width: 1200px) {
+    .chord-container {
+        max-width: 1200px;
+        padding: 0 40px;
+        gap: 50px;
+    }
+}
 
-/* Tools */
-.sticky-tools { display: flex; gap: 8px; margin-bottom: 15px; }
-.sticky-tools button { flex: 1; padding: 10px; border: 1px solid #ddd; background: #fff; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-.sticky-tools button:hover { background: #ff9800; color: #fff; border-color: #ff9800; }
+/* --- KOLOM LAYOUT --- */
+.chord-col-main {
+    flex: 1; /* Kolom lirik lebih lebar */
+    min-width: 0; /* Hindari overflow pada pre tag */
+}
 
-/* Card Lirik */
-.chord-main-card { background: #fff; border-radius: 15px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; overflow-x: auto; }
-.chord-content { font-family: 'Courier New', Courier, monospace; font-size: 16px; font-weight: 700; line-height: 2.6; white-space: pre; }
-.chord-content b { color: #ff9800; font-weight: 900; }
+.chord-col-side {
+    width: 100%; /* Mobile: Lebar penuh */
+}
 
-/* Alphabet Nav */
-.alphabet-nav { margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; }
-.alphabet-nav h3 { font-size: 16px; margin-bottom: 15px; }
-.alphabet-list { display: flex; flex-wrap: wrap; gap: 8px; }
-.btn-az { text-decoration: none; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; color: #333; font-size: 13px; font-weight: bold; background: #fff; }
-.btn-az:hover { border-color: #ff9800; color: #ff9800; }
+@media (min-width: 768px) {
+    .chord-col-side {
+        width: 320px; /* Lebar Sidebar di Tablet/Laptop */
+    }
+}
 
-.simple-footer { text-align: center; margin-top: 50px; font-size: 12px; color: #aaa; }
+/* --- BREADCRUMBS --- */
+.chord-breadcrumbs {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 20px;
+}
+.chord-breadcrumbs a {
+    color: var(--primary-orange);
+    text-decoration: none;
+}
+.chord-breadcrumbs span { margin: 0 5px; }
+
+/* --- HEADER LAGU --- */
+.song-title {
+    font-size: 28px;
+    margin: 0 0 5px 0;
+    color: var(--dark-text);
+}
+.artist-name {
+    font-size: 18px;
+    color: var(--primary-orange);
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* --- AREA CHORD & LIRIK (MONOSPACE) --- */
+.chord-content pre {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    line-height: 2; /* Spasi antar baris agar chord dan lirik tidak rapat */
+    white-space: pre-wrap; /* Agar tidak meluber ke samping di HP */
+    background: var(--soft-cream);
+    padding: 15px;
+    border-radius: 8px;
+    color: var(--dark-text);
+    overflow-x: auto;
+}
+
+/* --- CONTROL PANEL (STICKY & ACCORDION) --- */
+.control-panel {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    /* Sticky Logic */
+    position: -webkit-sticky;
+    position: sticky;
+    top: 80px; /* Akan menempel di bawah header saat scroll */
+    z-index: 100;
+}
+
+/* Tabs Navigasi */
+.panel-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+}
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: none;
+    font-weight: bold;
+    font-size: 13px;
+    color: #999;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.tab-btn.active {
+    color: var(--primary-orange);
+    border-bottom: 2px solid var(--primary-orange);
+}
+
+/* Isi Panel (Accordion Body) */
+.panel-body {
+    padding: 20px;
+    text-align: center;
+}
+.tab-pane {
+    display: none; /* Sembunyikan semua awal */
+}
+.tab-pane.active {
+    display: block; /* Tampilkan yang aktif */
+}
+
+/* UI Transpose (Box Gelap) */
+.transpose-control {
+    display: inline-flex;
+    align-items: center;
+    background: #222; /* Kontras seperti di gambar opsi 1 */
+    padding: 10px 25px;
+    border-radius: 50px;
+    gap: 20px;
+}
+.btn-ctrl {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: var(--white);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+}
+.btn-ctrl:hover { background: var(--primary-orange); }
+#current-key {
+    color: var(--primary-orange);
+    font-size: 22px;
+    font-weight: bold;
+}
+.panel-hint { font-size: 11px; color: #888; margin-top: 10px; }
+
+/* --- VIDEO TUTORIAL CARD --- */
+.video-card {
+    background: #f9f9f9;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px dashed var(--border-color);
+}
+.video-placeholder {
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.yt-play-btn {
+    font-size: 40px;
+    color: red;
+    margin-bottom: 10px;
+}
+.video-placeholder p { font-weight: bold; font-size: 14px; }
+.video-placeholder span { color: var(--primary-orange); }
+
+/* --- DIAGRAM CHORD SECTION --- */
+.chord-diagram-section { margin-top: 40px; }
+.section-title {
+    font-size: 18px;
+    border-left: 4px solid var(--primary-orange);
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+.chord-grid-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+}
+.chord-grid-images img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+/* --- REKOMENDASI LIST --- */
+.chord-list {
+    list-style: none;
+    padding: 0;
+}
+.chord-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.chord-list li a {
+    text-decoration: none;
+    color: var(--dark-text);
+    transition: 0.2s;
+}
+.chord-list li a:hover { color: var(--primary-orange); }
+
+.separator { border: 0; border-top: 1px solid var(--border-color); margin: 40px 0; }
