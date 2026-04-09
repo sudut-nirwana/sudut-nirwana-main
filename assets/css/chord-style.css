@@ -1,55 +1,55 @@
-:root { --p-orange: #ee6c00; --blur-bg: rgba(255, 255, 255, 0.85); }
+:root { --p-orange: #ee6c00; --blur-bg: rgba(255, 255, 255, 0.9); }
 
-/* Layout Dasar */
+/* Base Layout */
 .chord-main-wrapper { padding-top: 80px; width: 100%; box-sizing: border-box; }
 .chord-container { margin: 0 auto; padding: 0 20px; max-width: 1200px; }
 
-/* Header Lagu */
 .song-title { font-size: 26px; margin: 10px 0; color: #333; }
-.artist-name { color: var(--p-orange); font-weight: bold; margin-bottom: 25px; font-size: 18px; }
+.artist-name { color: var(--p-orange); font-weight: bold; margin-bottom: 25px; }
 
-/* Panel Kontrol Sticky Blur */
+/* Control Panel Sticky Blur */
 .control-panel { 
     background: #fff; border: 1px solid #eee; border-radius: 15px; 
     position: sticky; top: 70px; z-index: 1000; 
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     background: var(--blur-bg); box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    margin-bottom: 25px;
+    margin-bottom: 25px; overflow: hidden;
 }
 
-/* Tabs & Body */
 .panel-tabs { display: flex; border-bottom: 1px solid rgba(0,0,0,0.05); }
-.tab-btn { flex: 1; padding: 15px; border: none; background: none; font-weight: bold; color: #999; cursor: pointer; }
+.tab-btn { flex: 1; padding: 15px; border: none; background: none; font-weight: bold; color: #999; cursor: pointer; transition: 0.3s; }
 .tab-btn.active { color: var(--p-orange); border-bottom: 3px solid var(--p-orange); }
+
 .panel-body { padding: 20px; text-align: center; }
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
 
-/* Modern UI Elements */
-.modern-ctrl, .scroll-wrapper { display: inline-flex; align-items: center; background: #1a1a1a; padding: 10px 25px; border-radius: 50px; gap: 15px; color: #fff; }
-.btn-round, .btn-speed { background: rgba(255,255,255,0.15); border: none; color: #fff; width: 38px; height: 38px; border-radius: 50%; font-size: 20px; cursor: pointer; transition: 0.2s; }
-.btn-round:active, .btn-speed:active { background: var(--p-orange); }
+/* Modern UI Buttons */
+.modern-ctrl, .scroll-wrapper { display: inline-flex; align-items: center; background: #1a1a1a; padding: 10px 20px; border-radius: 50px; gap: 12px; color: #fff; }
+.btn-round, .btn-speed { background: rgba(255,255,255,0.15); border: none; color: #fff; width: 35px; height: 35px; border-radius: 50%; font-size: 20px; cursor: pointer; }
 .btn-play-scroll { background: var(--p-orange); border: none; color: #fff; padding: 10px 20px; border-radius: 50px; font-weight: bold; cursor: pointer; }
+#current-key, #speed-val { color: var(--p-orange); font-weight: bold; min-width: 25px; font-size: 18px; }
 
-/* Lirik */
+/* Chord Content */
 .chord-content pre { 
     font-family: 'Courier New', monospace; font-size: 16px; line-height: 2.2; 
-    white-space: pre-wrap; background: #fffaf2; padding: 25px; border-radius: 12px; border: 1px solid #f0e6d6;
+    white-space: pre-wrap; background: #fffaf2; padding: 25px; border-radius: 12px; 
+    color: #333; border: 1px solid #f0e6d6;
 }
 
-/* Diagram Chord Grid */
+/* Diagram Grid */
 .chord-grid-images { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 12px; margin-top: 15px; }
-.chord-grid-images img { width: 100%; border: 1px solid #eee; border-radius: 8px; background: #fff; }
+.chord-grid-images img { width: 100%; border: 1px solid #eee; border-radius: 8px; background: #fff; padding: 5px; }
 
-/* Rekomendasi 2 Kolom */
-.chord-recommendation { display: flex; flex-wrap: wrap; gap: 30px; margin-top: 30px; }
+/* Recommendation & Section Titles */
+.section-title { font-size: 18px; border-left: 4px solid var(--p-orange); padding-left: 12px; margin: 35px 0 15px; color: #333; }
+.chord-recommendation { display: flex; flex-wrap: wrap; gap: 30px; }
 .rec-column { flex: 1; min-width: 280px; }
-.section-title { font-size: 18px; border-left: 4px solid var(--p-orange); padding-left: 12px; margin-bottom: 15px; }
 .chord-list { list-style: none; padding: 0; }
 .chord-list li { padding: 10px 0; border-bottom: 1px solid #eee; }
 .chord-list li a { text-decoration: none; color: #555; font-size: 15px; }
 
-/* Video Card */
-.video-card { background: #f9f9f9; border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px dashed #ccc; }
+/* Video Section */
+.video-card { background: #f9f9f9; border-radius: 15px; margin-bottom: 15px; border: 1px dashed #ccc; overflow: hidden; }
 .video-placeholder { padding: 30px; text-align: center; cursor: pointer; }
-.yt-play-btn { font-size: 40px; color: red; margin-bottom: 5px; }
+.yt-play-btn { font-size: 40px; color: red; }
