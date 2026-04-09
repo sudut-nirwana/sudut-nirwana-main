@@ -11,52 +11,7 @@ layout: default
 </head>
 <body>
 
-<div class="chord-site-wrapper">
-    
-    <header class="song-header">
-        <span class="label">Song Chord</span>
-        <h1 class="song-title">{{ page.title }}</h1>
-        <p class="song-meta">Artis: <strong>{{ page.artist }}</strong> | Genre: {{ page.genre }}</p>
-    </header>
 
-    <div class="media-section">
-        {% if page.youtube_id %}
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-        </div>
-        {% endif %}
-        
-        <div id="chord-diagrams" class="diagram-container">
-            </div>
-    </div>
-
-    <div class="sticky-tools">
-        <button onclick="transpose(-1)">♭ Trans -</button>
-        <button onclick="transpose(1)"># Trans +</button>
-        <button onclick="autoScroll()">Scroll</button>
-        <button onclick="stopScroll()">Stop</button>
-    </div>
-
-    <article class="chord-main-card">
-        <div class="chord-content">
-            {{ content }}
-        </div>
-    </article>
-
-    <section class="alphabet-nav">
-        <h3>Temukan Chord Berdasarkan Inisial Artis</h3>
-        <div class="alphabet-list">
-            {% assign letters = "A-B,C-D,E-F,G-H,I-J,K-M,N,O-R,S-T,U-V,W-X,Y-Z,#" | split: "," %}
-            {% for group in letters %}
-                <a href="/artis/{{ group | slugify }}" class="btn-az">{{ group }}</a>
-            {% endfor %}
-        </div>
-    </section>
-
-    <footer class="simple-footer">
-        <p>&copy; 2026 Sudut Nirwana. All Rights Reserved.</p>
-    </footer>
-</div>
 
 <script>const songChords = {{ page.chords | jsonify | default: '[]' }};</script>
 <script src="https://unpkg.com/chord-canvas/dist/chord-canvas.js"></script>
