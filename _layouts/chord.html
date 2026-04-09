@@ -38,10 +38,12 @@ layout: default
                                 <button class="btn-round" id="inc-ch">+</button>
                             </div>
                         </div>
+                        
                         <div id="tab-tempo" class="tab-pane">
                             <input type="range" min="60" max="200" value="120" id="tempo-slider" class="orange-slider">
                             <p id="tempo-val" class="val-text">120 BPM</p>
                         </div>
+
                         <div id="tab-scroll" class="tab-pane">
                             <div class="scroll-wrapper">
                                 <button id="start-scroll" class="btn-play-scroll">▶️ Mulai</button>
@@ -91,7 +93,6 @@ layout: default
 
             <div class="chord-footer-info">
                 <hr>
-                <h3 class="section-title">Cari Berdasarkan Artis</h3>
                 {% include artis-a-z.html %}
             </div>
         </div>
