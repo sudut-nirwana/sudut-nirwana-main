@@ -2,6 +2,7 @@
 layout: default
 ---
 <link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <div class="chord-main-wrapper">
     <div class="chord-container">
@@ -14,41 +15,44 @@ layout: default
             <p class="artist-name">{{ page.artist }}</p>
         </header>
 
-        <div class="chord-top-controls">
-            <div id="video-box" class="video-card">
-                <div id="video-placeholder" class="video-placeholder" data-video-id="{{ page.youtube_id }}">
-                    <div class="yt-play-btn">▶</div>
-                    <p>Tonton Video Tutorial <span>{{ page.artist }}</span></p>
-                </div>
-                <div id="video-player-container"></div>
+        <div id="video-box" class="video-card">
+            <div id="video-placeholder" class="video-placeholder" data-video-id="{{ page.youtube_id }}">
+                <div class="yt-play-btn"></div>
+                <p>Tonton Video Tutorial <span>{{ page.artist }}</span></p>
             </div>
+            <div id="video-player-container"></div>
+        </div>
 
-            <div id="control-panel" class="control-panel">
-                <div class="panel-tabs">
-                    <button class="tab-btn" data-tab="tempo">Tempo</button>
-                    <button class="tab-btn active" data-tab="transpose">Transpose</button>
-                    <button class="tab-btn" data-tab="scroll">Scroll</button>
-                </div>
-                <div class="panel-body">
-                    <div id="tab-transpose" class="tab-pane active">
-                        <div class="modern-ctrl">
-                            <button class="btn-round" id="dec-ch">−</button>
+        <div id="sticky-anchor"></div>
+        <div id="control-panel" class="control-panel">
+            <div class="panel-header-tabs">
+                <div class="tab-trigger" data-tab="tempo">Tempo <span class="arrow">▼</span></div>
+                <div class="tab-trigger" data-tab="transpose">Transpose <span class="arrow">▼</span></div>
+                <div class="tab-trigger" data-tab="scroll">Scroll <span class="arrow">▼</span></div>
+            </div>
+            
+            <div class="panel-content-wrapper">
+                <div id="tab-transpose" class="tab-pane">
+                    <div class="transpose-ui">
+                        <button class="btn-ctrl" id="dec-ch">−</button>
+                        <div class="key-info">
                             <span id="current-key">C</span>
-                            <button class="btn-round" id="inc-ch">+</button>
+                            <small>Transpose Nadanya</small>
                         </div>
+                        <button class="btn-ctrl" id="inc-ch">+</button>
                     </div>
-                    <div id="tab-tempo" class="tab-pane">
-                        <input type="range" min="60" max="200" value="120" id="tempo-slider" class="orange-slider">
-                        <p id="tempo-val" class="val-text">120 BPM</p>
-                    </div>
-                    <div id="tab-scroll" class="tab-pane">
-                        <div class="scroll-wrapper">
-                            <button id="start-scroll" class="btn-play-scroll">▶️ Mulai</button>
-                            <div class="speed-ctrl">
-                                <button class="btn-speed" id="speed-down">−</button>
-                                <span id="speed-val">2x</span>
-                                <button class="btn-speed" id="speed-up">+</button>
-                            </div>
+                </div>
+                <div id="tab-tempo" class="tab-pane">
+                    <input type="range" min="60" max="200" value="120" id="tempo-slider" class="orange-slider">
+                    <p id="tempo-val" class="val-text">120 BPM</p>
+                </div>
+                <div id="tab-scroll" class="tab-pane">
+                    <div class="scroll-ui">
+                        <button id="start-scroll" class="btn-play-scroll">▶️ Mulai</button>
+                        <div class="speed-box">
+                            <button class="btn-speed" id="speed-down">−</button>
+                            <span id="speed-val">2x</span>
+                            <button class="btn-speed" id="speed-up">+</button>
                         </div>
                     </div>
                 </div>
@@ -86,11 +90,6 @@ layout: default
                     {% endfor %}
                 </ul>
             </div>
-        </div>
-
-        <div class="chord-footer-info">
-            <hr>
-            {% include artis-a-z.html %}
         </div>
     </div>
 </div>
