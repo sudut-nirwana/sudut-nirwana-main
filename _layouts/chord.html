@@ -5,96 +5,92 @@ layout: default
 
 <div class="chord-main-wrapper">
     <div class="chord-container">
-        <div class="chord-col-main">
-            <nav class="chord-breadcrumbs">
-                <a href="/">Beranda</a> / <a href="/chord">Chord</a> / {{ page.artist }}
-            </nav>
+        <nav class="chord-breadcrumbs">
+            <a href="/">Beranda</a> / <a href="/chord">Chord</a> / {{ page.artist }}
+        </nav>
 
-            <header class="chord-header">
-                <h1 class="song-title">{{ page.title }}</h1>
-                <p class="artist-name">{{ page.artist }}</p>
-            </header>
+        <header class="chord-header">
+            <h1 class="song-title">{{ page.title }}</h1>
+            <p class="artist-name">{{ page.artist }}</p>
+        </header>
 
-            <div class="chord-top-controls">
-                <div id="video-box" class="video-card">
-                    <div id="video-placeholder" class="video-placeholder" data-video-id="{{ page.youtube_id }}">
-                        <div class="yt-play-btn">▶</div>
-                        <p>Tonton Video Tutorial <span>{{ page.artist }}</span></p>
-                    </div>
-                    <div id="video-player-container"></div>
+        <div class="chord-top-controls">
+            <div id="video-box" class="video-card">
+                <div id="video-placeholder" class="video-placeholder" data-video-id="{{ page.youtube_id }}">
+                    <div class="yt-play-btn">▶</div>
+                    <p>Tonton Video Tutorial <span>{{ page.artist }}</span></p>
                 </div>
+                <div id="video-player-container"></div>
+            </div>
 
-                <div id="control-panel" class="control-panel">
-                    <div class="panel-tabs">
-                        <button class="tab-btn" data-tab="tempo">Tempo</button>
-                        <button class="tab-btn active" data-tab="transpose">Transpose</button>
-                        <button class="tab-btn" data-tab="scroll">Scroll</button>
+            <div id="control-panel" class="control-panel">
+                <div class="panel-tabs">
+                    <button class="tab-btn" data-tab="tempo">Tempo</button>
+                    <button class="tab-btn active" data-tab="transpose">Transpose</button>
+                    <button class="tab-btn" data-tab="scroll">Scroll</button>
+                </div>
+                <div class="panel-body">
+                    <div id="tab-transpose" class="tab-pane active">
+                        <div class="modern-ctrl">
+                            <button class="btn-round" id="dec-ch">−</button>
+                            <span id="current-key">C</span>
+                            <button class="btn-round" id="inc-ch">+</button>
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        <div id="tab-transpose" class="tab-pane active">
-                            <div class="modern-ctrl">
-                                <button class="btn-round" id="dec-ch">−</button>
-                                <span id="current-key">C</span>
-                                <button class="btn-round" id="inc-ch">+</button>
-                            </div>
-                        </div>
-                        
-                        <div id="tab-tempo" class="tab-pane">
-                            <input type="range" min="60" max="200" value="120" id="tempo-slider" class="orange-slider">
-                            <p id="tempo-val" class="val-text">120 BPM</p>
-                        </div>
-
-                        <div id="tab-scroll" class="tab-pane">
-                            <div class="scroll-wrapper">
-                                <button id="start-scroll" class="btn-play-scroll">▶️ Mulai</button>
-                                <div class="speed-ctrl">
-                                    <button class="btn-speed" id="speed-down">−</button>
-                                    <span id="speed-val">2x</span>
-                                    <button class="btn-speed" id="speed-up">+</button>
-                                </div>
+                    <div id="tab-tempo" class="tab-pane">
+                        <input type="range" min="60" max="200" value="120" id="tempo-slider" class="orange-slider">
+                        <p id="tempo-val" class="val-text">120 BPM</p>
+                    </div>
+                    <div id="tab-scroll" class="tab-pane">
+                        <div class="scroll-wrapper">
+                            <button id="start-scroll" class="btn-play-scroll">▶️ Mulai</button>
+                            <div class="speed-ctrl">
+                                <button class="btn-speed" id="speed-down">−</button>
+                                <span id="speed-val">2x</span>
+                                <button class="btn-speed" id="speed-up">+</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="chord-content">
-                <pre id="chord-sheet">{{ content }}</pre>
+        <div class="chord-content">
+            <pre id="chord-sheet">{{ content }}</pre>
+        </div>
+
+        <div class="chord-diagram-section">
+            <h3 class="section-title">Diagram Chord</h3>
+            <div id="chord-images-container" class="chord-grid-images"></div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="chord-recommendation">
+            <div class="rec-column">
+                <h3 class="section-title">Lagu {{ page.artist }} Lainnya</h3>
+                <ul class="chord-list">
+                    {% assign related = site.posts | where: "artist", page.artist | limit: 6 %}
+                    {% for post in related %}
+                        {% if post.url != page.url %}
+                            <li><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
             </div>
-
-            <div class="chord-diagram-section">
-                <h3 class="section-title">Diagram Chord</h3>
-                <div id="chord-images-container" class="chord-grid-images"></div>
+            <div class="rec-column">
+                <h3 class="section-title">Chord Terbaru</h3>
+                <ul class="chord-list">
+                    {% for post in site.posts limit: 5 %}
+                        <li><a href="{{ post.url | absolute_url }}">{{ post.title }} - {{ post.artist }}</a></li>
+                    {% endfor %}
+                </ul>
             </div>
+        </div>
 
-            <hr class="separator">
-
-            <div class="chord-recommendation">
-                <div class="rec-column">
-                    <h3 class="section-title">Lagu {{ page.artist }} Lainnya</h3>
-                    <ul class="chord-list">
-                        {% assign related = site.posts | where: "artist", page.artist | limit: 6 %}
-                        {% for post in related %}
-                            {% if post.url != page.url %}
-                                <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="rec-column">
-                    <h3 class="section-title">Chord Terbaru</h3>
-                    <ul class="chord-list">
-                        {% for post in site.posts limit: 5 %}
-                            <li><a href="{{ post.url | relative_url }}">{{ post.title }} - {{ post.artist }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-
-            <div class="chord-footer-info">
-                <hr>
-                {% include artis-a-z.html %}
-            </div>
+        <div class="chord-footer-info">
+            <hr>
+            {% include artis-a-z.html %}
         </div>
     </div>
 </div>
