@@ -1,50 +1,62 @@
-.chord-main-wrapper {
-    padding: 40px 0;
+:root {
+    --p-orange: #ee6c00;
+    --navy-pro: #0d2e5c;
+    --nunito: 'Nunito', sans-serif;
 }
 
-.chord-container {
-    max-width: 1200px;
-    margin: 0 auto;
+/* 1. Reset Body & Gradient (3-4 Warna Selaras) */
+body { 
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%), 
+                linear-gradient(to bottom, rgba(238, 108, 0, 0.05), transparent);
+    background-attachment: fixed;
+    font-family: var(--nunito);
+    margin: 0; padding: 0;
 }
 
-.chord-grid-layout {
-    display: grid;
-    grid-template-columns: 1fr 350px;
-    gap: 40px;
-}
+/* Reset Padding Default */
+main, .main-content, .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
 
-.control-panel {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-}
+.chord-container { width: 92%; max-width: 1100px; margin: 0 auto; box-sizing: border-box; }
+.breadcrumb-chord { padding: 15px 20px; font-size: 13px; color: #888; }
+.breadcrumb-chord a { color: var(--p-orange); text-decoration: none; }
 
-.panel-tabs {
-    display: flex;
-    border-bottom: 1px solid #eee;
-}
+/* 2. Video Panel Toggle (Tinggi 50px awal) */
+.video-expand-panel { background: var(--navy-pro); border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
+.v-bar { height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; cursor: pointer; color: #fff; font-weight: 700; }
+.v-content { display: none; background: #000; padding: 10px; }
+.video-responsive { position: relative; padding-bottom: 56.25%; height: 0; }
+.video-responsive iframe { position: absolute; top:0; left:0; width:100%; height:100%; }
+.btn-close-v { width: 100%; padding: 8px; margin-top: 10px; background: #333; border: none; color: #fff; cursor: pointer; border-radius: 5px; }
 
-.tab-item {
-    padding: 15px;
-    cursor: pointer;
-}
+/* 3. Control Panel (Background Transparan Tipis) */
+.control-panel { background: rgba(255, 255, 255, 0.8); border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); margin-bottom: 20px; overflow: hidden; backdrop-filter: blur(10px); }
+.panel-tabs { display: flex; background: rgba(255,255,255,0.5); border-bottom: 1px solid #eee; }
+.tab-item { flex: 1; padding: 12px; text-align: center; font-weight: 700; cursor: pointer; border-right: 1px solid #eee; font-size: 13px; }
+.tab-item.active { color: var(--p-orange); background: #fff; }
+.panel-content { display: none; padding: 15px; }
+.panel-content.show { display: block; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
 
-.tab-item.active {
-    border-bottom: 2px solid #ee6c00;
-    color: #ee6c00;
-}
+/* Box Blue Transpose */
+.modern-box-blue { background: var(--navy-pro); color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: space-around; padding: 15px; }
+.key-info span { font-size: 32px; font-weight: 800; display: block; line-height: 1; }
+.btn-action { background: none; border: none; color: #fff; font-size: 30px; cursor: pointer; }
 
-.modern-box-blue {
-    background: #0d2e5c;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+/* 4. Chord Sheet (Tanpa Background Pekat) */
+.chord-sheet-area { background: rgba(255, 255, 255, 0.4); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(5px); }
+#chord-sheet pre { 
+    font-family: 'Courier New', Courier, monospace; font-size: 16px; font-weight: 800; 
+    line-height: 2.2; /* Spasi diperbaiki agar tidak terlalu jauh */
+    white-space: pre-wrap; color: #222; margin: 0; background: none; border: none; padding: 0;
 }
+.c-h { color: var(--p-orange); font-weight: 900; } /* Untuk Auto-Highlight */
 
-#chord-sheet {
-    font-family: 'Courier New', Courier, monospace;
-    white-space: pre;
-    overflow-x: auto;
+/* Diagram Grid */
+.chord-img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 15px; margin-top: 15px; }
+.chord-box-img { background: #fff; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #eee; }
+.chord-box-img img { width: 100%; height: auto; }
+
+@media (min-width: 768px) {
+    .chord-grid-layout { display: grid; grid-template-columns: 1fr 300px; gap: 30px; }
 }
