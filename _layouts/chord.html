@@ -6,6 +6,12 @@ layout: default
 <div class="chord-page-wrapper">
     <div class="chord-container">
         
+        <nav class="breadcrumb">
+            <a href="/">Beranda</a> <span>&rsaquo;</span> 
+            <a href="/chord">Chord</a> <span>&rsaquo;</span> 
+            <span class="active">{{ page.title | truncate: 30 }}</span>
+        </nav>
+
         <header class="chord-header">
             <h1 class="song-title">{{ page.title }}</h1>
             <p class="artist-name">{{ page.artist }}</p>
@@ -14,35 +20,45 @@ layout: default
         <div class="chord-grid-layout">
             <div class="chord-left-col">
                 
-                <div id="control-panel" class="control-panel">
-                    <div class="panel-tabs">
-                        <div class="tab-item active" data-target="transpose">Transpose <span class="arrow">▼</span></div>
-                        <div class="tab-item" data-target="tempo">Tempo <span class="arrow">▼</span></div>
-                        <div class="tab-item" data-target="scroll">Scroll <span class="arrow">▼</span></div>
+                <div class="video-widget-modern">
+                    <div class="video-bar-toggle" id="video-toggle">
+                        <span class="v-title">📺 Lihat Video Tutorial</span>
+                        <span class="v-icon">▼</span>
                     </div>
+                    <div class="video-expand-area" id="video-content">
+                        <div class="video-ratio">
+                            <iframe id="yt-frame" width="100%" src="https://www.youtube.com/embed/{{ page.youtube_id }}?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="panel-content">
-                        <div id="pane-transpose" class="tab-pane active">
-                            <div class="modern-box-blue">
-                                <button class="btn-action" id="dec-ch">−</button>
-                                <div class="key-info">
-                                    <span id="current-key">?</span> <small id="key-label">ORIGINAL KEY</small>
+                <div class="main-control-panel">
+                    <div class="tabs-header">
+                        <div class="t-item active" data-target="transpose">Transpose ▼</div>
+                        <div class="t-item" data-target="tempo">Tempo ▼</div>
+                        <div class="t-item" data-target="scroll">Scroll ▼</div>
+                    </div>
+                    <div class="tabs-body">
+                        <div id="pane-transpose" class="t-pane active">
+                            <div class="control-box-gradient">
+                                <button class="btn-ctrl" id="dec-ch">−</button>
+                                <div class="key-display">
+                                    <span id="current-key">?</span>
+                                    <small>KEY</small>
                                 </div>
-                                <button class="btn-action" id="inc-ch">+</button>
+                                <button class="btn-ctrl" id="inc-ch">+</button>
                             </div>
                         </div>
-
-                        <div id="pane-tempo" class="tab-pane">
-                            <div class="tempo-ui">
-                                <input type="range" min="60" max="200" value="120" id="tempo-slider" class="grad-slider">
+                        <div id="pane-tempo" class="t-pane">
+                            <div class="control-box-simple">
+                                <input type="range" min="60" max="200" value="120" id="tempo-slider" class="range-orange">
                                 <span id="tempo-val">120 BPM</span>
                             </div>
                         </div>
-
-                        <div id="pane-scroll" class="tab-pane">
-                            <div class="scroll-ui">
-                                <button id="start-scroll" class="btn-play-scroll">▶️ Mulai</button>
-                                <div class="speed-control">
+                        <div id="pane-scroll" class="t-pane">
+                            <div class="control-box-simple">
+                                <button id="start-scroll" class="btn-scroll-action">▶️ Mulai</button>
+                                <div class="speed-wrap">
                                     <button id="speed-down">−</button>
                                     <span id="speed-val">2x</span>
                                     <button id="speed-up">+</button>
@@ -52,38 +68,25 @@ layout: default
                     </div>
                 </div>
 
-                <div class="chord-sheet-area">
+                <article class="chord-sheet-card">
                     <pre id="chord-sheet">{{ content }}</pre>
+                </article>
+
+                <div class="diagram-section">
+                    <h4 class="section-label">Diagram Chord</h4>
+                    <div id="chord-images-container" class="diagram-grid"></div>
                 </div>
 
-                <div class="chord-diagram-section">
-                    <h3 class="side-title">Diagram Chord</h3>
-                    <div id="chord-images-container" class="chord-img-grid"></div>
-                </div>
-
-                <div class="alphabet-nav">
+                <div class="alphabet-nav-wrapper">
                     {% include artis-a-z.html %}
                 </div>
             </div>
 
             <aside class="chord-sidebar">
-                <div id="video-widget" class="video-widget">
-                    <div class="video-bar" id="video-toggle">
-                        <span>📺 Lihat Video Tutorial</span>
-                        <span class="icon">▼</span>
-                    </div>
-                    <div class="video-player" id="video-content">
-                        <div class="video-responsive">
-                            <iframe id="yt-iframe" width="100%" src="https://www.youtube.com/embed/{{ page.youtube_id }}?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <button id="close-video" class="btn-close-video">Tutup Video ×</button>
-                    </div>
-                </div>
-            </aside>
+                </aside>
         </div>
     </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
-    
