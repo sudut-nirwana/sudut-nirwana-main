@@ -3,9 +3,7 @@
     display: grid; /* Gunakan Grid agar mudah diatur kolomnya */
     grid-template-columns: 1fr; /* Default 1 kolom untuk HP */
     gap: 12px;
-    margin-top: 20px;
     width: 100%;
-    padding: 0 20px;
     padding-top: 70px;
 }
 
