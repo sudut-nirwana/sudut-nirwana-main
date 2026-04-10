@@ -256,7 +256,7 @@ body{
 
 /* Styling Chord & Lirik */
 .chord-content {
-   font-family: 'Courier New', Courier, monospace;
+   font-family: "Azeret Mono", monospace;
    font-size: 17px;
    line-height: 2;
    white-space: pre-wrap;
