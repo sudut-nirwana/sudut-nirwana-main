@@ -5,6 +5,8 @@
     gap: 12px;
     margin-top: 20px;
     width: 100%;
+    padding: 0 20px;
+    padding-top: 70px;
 }
 
 /* Responsif: Jika layar 768px atau lebih luas, bagi jadi 2 kolom */
