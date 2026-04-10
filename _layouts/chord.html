@@ -3,7 +3,7 @@ layout: default
 ---
 <link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
 
-<div class="chord-main-wrapper page-chord-layout">
+<div class="chord-page-wrapper">
     <div class="chord-container">
         
         <header class="chord-header">
@@ -61,28 +61,29 @@ layout: default
                     <div id="chord-images-container" class="chord-img-grid"></div>
                 </div>
 
-                <div class="alphabet-section">
+                <div class="alphabet-nav">
                     {% include artis-a-z.html %}
                 </div>
             </div>
 
             <aside class="chord-sidebar">
-                <div id="video-widget" class="video-widget-container">
-                    <div class="video-header" id="video-toggle">
-                        <span>📺 Tutorial Video</span>
-                        <span class="toggle-icon">▼</span>
+                <div id="video-widget" class="video-widget">
+                    <div class="video-bar" id="video-toggle">
+                        <span>📺 Lihat Video Tutorial</span>
+                        <span class="icon">▼</span>
                     </div>
-                    <div class="video-body" id="video-content">
-                        <div class="iframe-ratio">
-                            <iframe width="100%" src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-player" id="video-content">
+                        <div class="video-responsive">
+                            <iframe id="yt-iframe" width="100%" src="https://www.youtube.com/embed/{{ page.youtube_id }}?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
                         </div>
+                        <button id="close-video" class="btn-close-video">Tutup Video ×</button>
                     </div>
                 </div>
-
-                </aside>
+            </aside>
         </div>
     </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
+    
