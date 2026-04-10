@@ -1,41 +1,24 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const widgetElement = document.getElementById('bt-element');
-    const wrapper = document.getElementById('bt-widget-wrapper');
-    
-    if (widgetElement) {
-        const artistName = widgetElement.getAttribute('data-artist-name');
+/**
+ * Chord Logic & Transpose System
+ * Deskripsi: Mendeteksi chord secara otomatis dan mengubah nada (transpose).
+ */
 
-        // Sembunyikan jika nama artis kosong atau masih berupa tag template
-        if (!artistName || artistName.trim() === "" || artistName.includes("{{")) {
-            wrapper.style.display = 'none';
-        } else {
-            wrapper.style.display = 'block';
-        }
-    }
-    
-    
-    // Konfigurasi Nada
-const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+// 1. Variabel Global (Wajib di luar agar bisa diakses tombol HTML)
 let currentPitch = 0;
+const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
-// 1. Fungsi Mendeteksi Chord Otomatis (Jalankan saat awal load)
-function initializeChords() {
-    const container = document.getElementById('chord-content');
-    let rawText = container.innerHTML;
-    
-    // Regex cerdas untuk mencari chord tanpa merusak lirik
-    const chordRegex = /\b([A-G][b#]?(maj|min|m|M|add|sus|dim|aug|maj7|7|m7|sus4)?[0-9]*)\b/g;
-    
-    container.innerHTML = rawText.replace(chordRegex, '<span class="chord-node">$1</span>');
-}
-
-// 2. Fungsi Transpose
+// 2. Fungsi Transpose (Dipanggil oleh onclick="transpose(1)" di HTML)
 function transpose(steps) {
     currentPitch += steps;
-    document.getElementById('pitch-indicator').innerText = (currentPitch > 0 ? '+' : '') + currentPitch;
     
+    // Update angka indikator nada di layar
+    const indicator = document.getElementById('pitch-indicator');
+    if (indicator) {
+        indicator.innerText = (currentPitch > 0 ? '+' : '') + currentPitch;
+    }
+
+    // Ambil semua elemen chord yang sudah dibungkus span
     const chordNodes = document.querySelectorAll('.chord-node');
-    
     chordNodes.forEach(node => {
         node.innerText = shiftChord(node.innerText, steps);
     });
@@ -43,27 +26,57 @@ function transpose(steps) {
 
 // 3. Logika Perubahan Nada
 function shiftChord(chord, steps) {
-    return chord.replace(/[A-G][b#]?/g, function(match) {
-        let i = notes.indexOf(match);
-        if (i === -1) { // Jika flat (Bb), ubah dulu ke Sharp (A#)
-            if (match === 'Bb') i = 10;
-            if (match === 'Eb') i = 3;
-            if (match === 'Ab') i = 8;
-            if (match === 'Db') i = 1;
-            if (match === 'Gb') i = 6;
-        }
-        i = (i + steps + 12) % 12;
-        return notes[i];
+    return chord.replace(/([A-G][b#]?)/g, function(match) {
+        let i = notes.indexOf(match.replace('bb', 'A').replace('Eb', 'D#').replace('Ab', 'G#').replace('Db', 'C#').replace('Bb', 'A#'));
+        
+        // Handle jika chord menggunakan Flat (b) yang tidak ada di array notes
+        if (match === 'Gb') i = 6;
+        if (match === 'Eb') i = 3;
+        if (match === 'Ab') i = 8;
+        if (match === 'Db') i = 1;
+        if (match === 'Bb') i = 10;
+
+        if (i === -1) return match;
+        
+        let newIndex = (i + steps) % 12;
+        while (newIndex < 0) newIndex += 12;
+        return notes[newIndex];
     });
 }
 
+// 4. Fungsi Reset Nada
 function resetTranspose() {
     transpose(-currentPitch);
     currentPitch = 0;
-    document.getElementById('pitch-indicator').innerText = '0';
+    const indicator = document.getElementById('pitch-indicator');
+    if (indicator) indicator.innerText = '0';
 }
 
-// Jalankan inisialisasi saat web siap
-document.addEventListener("DOMContentLoaded", initializeChords);
+// 5. Inisialisasi Otomatis saat Halaman Dimuat
+function initializeChords() {
+    const container = document.getElementById('chord-content');
+    if (!container) return;
 
+    let rawText = container.innerHTML;
+    
+    // Regex untuk mendeteksi chord (A, Am, C#m7, dll)
+    const chordRegex = /\b([A-G][b#]?(m|maj|dim|aug|sus|add)?(2|4|5|6|7|9|11|13)?)\b/g;
+
+    // Bungkus chord dengan span agar bisa dimanipulasi
+    container.innerHTML = rawText.replace(chordRegex, '<span class="chord-node">$1</span>');
+}
+
+// 6. Jalankan fungsi saat browser selesai memuat HTML
+document.addEventListener("DOMContentLoaded", function() {
+    initializeChords();
+    
+    // Sembunyikan widget Bandsintown jika artis kosong (Universal Check)
+    const widgetElement = document.getElementById('bt-element');
+    const wrapper = document.getElementById('bt-widget-wrapper');
+    if (widgetElement && wrapper) {
+        const artistName = widgetElement.getAttribute('data-artist-name');
+        if (!artistName || artistName.includes('{{')) {
+            wrapper.style.display = 'none';
+        }
+    }
 });
