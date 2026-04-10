@@ -11,7 +11,6 @@ body{
    font-family: "Nunito", sans-serif;
    font-size: clamp(1rem, 0.909rem + 0.45vw, 1.25rem);
    color: #444444;
-   height: 4000px;
 }
 .container{
    width: 100%;
@@ -26,7 +25,7 @@ body{
 }
 
 .colom1{
-   padding-top: 80px;
+   padding-top: 70px;
 }
 
 .breadcrumb-nav {
@@ -258,28 +257,28 @@ body{
 /* Styling Chord & Lirik */
 .chord-content {
    font-family: 'Courier New', Courier, monospace;
-   font-size: 16px;
+   font-size: 17px;
    line-height: 2;
    white-space: pre-wrap;
    color: var(--dark-grey);
    border-radius: 10px;
    border-left: 5px solid #ee4c00;
-   background: rgba(238,76,0,0.1);
-   padding: 8px;
+   background: rgba(238,76,0,0.05);
+   padding: 15px;
    margin-bottom: 40px;
+   font-weight: bold;
 }
 
 /* Ini adalah class yang otomatis dibuat oleh JS */
 .chord-node {
    color: var(--primary-orange);
-   font-weight: bold;
+   font-weight: 900;
    transition: all 0.3s ease;
 }
 
 
 #bt-widget-wrapper{
    width: 100%;
-   background: pink;
 }
 
 @media(min-width: 768px){
@@ -291,6 +290,6 @@ body{
    }
    .colom2{
       flex: 1;
-      padding-top: 80px;
+      padding-top: 70px;
    }
 }
