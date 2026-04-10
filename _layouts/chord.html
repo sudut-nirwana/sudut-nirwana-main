@@ -3,88 +3,91 @@ layout: default
 ---
 <link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
 
-<div class="chord-main-wrapper">
-    <nav class="breadcrumb-chord">
-        <a href="/">Beranda</a> <span>&rsaquo;</span> <a href="/chord">Chord</a> <span>&rsaquo;</span> {{ page.title | truncate: 30 }}
-    </nav>
+{% include header.html %}
 
-    <div class="chord-container">
-        <header class="chord-header">
-            <h1 class="song-title">{{ page.title }}</h1>
-            <p class="artist-name">{{ page.artist }}</p>
-        </header>
-
-        <div class="chord-grid-layout">
-            <div class="chord-left-col">
-                
-                <div class="video-expand-panel">
-                    <div id="video-toggle-bar" class="v-bar">
-                        <span>📺 Lihat Video Tutorial</span>
-                        <span id="v-icon">▼</span>
-                    </div>
-                    <div id="video-content-area" class="v-content">
-                        <div class="video-responsive">
-                            <iframe id="yt-iframe" width="100%" height="315" src="https://www.youtube.com/embed/{{ page.youtube_id }}?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <button id="close-v" class="btn-close-v">Tutup Video ×</button>
-                    </div>
-                </div>
-
-                <div id="control-panel" class="control-panel">
-                    <div class="panel-tabs">
-                        <div class="tab-item active" data-target="transpose">Transpose <span class="arrow">▼</span></div>
-                        <div class="tab-item" data-target="tempo">Tempo <span class="arrow">▼</span></div>
-                        <div class="tab-item" data-target="scroll">Scroll <span class="arrow">▼</span></div>
-                    </div>
-
-                    <div class="panel-content">
-                        <div id="pane-transpose" class="tab-pane active">
-                            <div class="modern-box-blue">
-                                <button class="btn-action" id="dec-ch">−</button>
-                                <div class="key-info">
-                                    <span id="current-key">?</span> <small id="key-label">KEY</small>
-                                </div>
-                                <button class="btn-action" id="inc-ch">+</button>
-                            </div>
-                        </div>
-
-                        <div id="pane-tempo" class="tab-pane">
-                            <div class="tempo-ui">
-                                <input type="range" min="60" max="200" value="120" id="tempo-slider" class="grad-slider">
-                                <span id="tempo-val">120 BPM</span>
-                            </div>
-                        </div>
-
-                        <div id="pane-scroll" class="tab-pane">
-                            <div class="scroll-ui">
-                                <button id="start-scroll" class="btn-play-scroll">▶️ Mulai</button>
-                                <div class="speed-control">
-                                    <button id="speed-down">−</button>
-                                    <span id="speed-val">2x</span>
-                                    <button id="speed-up">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="chord-sheet-area">
-                    <div id="chord-sheet">{{ content }}</div>
-                </div>
-
-                <div class="chord-diagram-section">
-                    <h3 class="side-title">Diagram Chord</h3>
-                    <div id="chord-images-container" class="chord-img-grid"></div>
-                </div>
-
-                {% include artis-a-z.html %}
+<section class="content-chord" id="content-chord">
+   <div class="colom1">
+      <div class="container">
+         
+         <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+            <div class="breadcrumb-container">
+               <ul class="breadcrumb-list">
+                  <li><a href="/"><i class="fa-solid fa-house"></i> Beranda</a></li>
+                  
+                  <li><a href="/chord">Chord</a></li>
+                  
+                  <li class="active" aria-current="page">{{ artist }}</li>
+               </ul>
             </div>
+         </nav>
+         
+         <!--menampilkan judul kontent dan title artis di bawah judul chord pada layout chord -->
+         <header class="entry-header">
+            <h2 class="chord-title">{{ title }}</h2>
+            <div class="artist-subtitle">
+               <i class="fa-solid fa-microphone-lines"></i> Chord Gitar & Lirik: <span>{{ artist }}</span>
+            </div>
+         </header>
+      
+         <!--untuk menampilkan google ads harus daftar dulu untuk mendapat code iklan nya di google.com/addsense-->
+         <div class="ad-container">
+            <small>Advertisement</small>
+            <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-12345"
+               data-ad-slot="67890"
+               data-ad-format="auto">
+            </ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+         </div>
+         
+         <!--mengambil wiget template dari bandsintown untuk menampilkan follow artis yg kunci gitar nya sednag di mainkan-->
+         <div id="bt-widget-wrapper" class="bandsintown-layout">
+            <a class="bit-widget-initializer" 
+               id="bt-element"
+               data-artist-name="{{ artist }}" 
+               data-background-color="transparent"
+               data-separator-color="#E1E1E1" 
+               data-text-color="#333333"
+               data-font="Arial, sans-serif"
+               data-auto-style="true">
+               Follow {{ artist }} on Bandsintown
+            </a>
+         </div>
+      
+         <!-- panel transpose nada-->
+         <div class="chord-controls">
+            <span class="control-label"><i class="fa-solid fa-music"></i> Nada Dasar</span>
+            <div class="control-group">
+               <div class="transpose-buttons">
+                  <button onclick="transpose(-1)" class="btn-transpose" title="Turunkan Nada"><i class="fa-solid fa-minus"></i>
+                  </button>
+         
+                  <span id="pitch-indicator">0</span>
+                  <button onclick="transpose(1)" class="btn-transpose" title="Naikkan Nada"><i class="fa-solid fa-plus"></i>
+                  </button>
+               </div>
+            </div>
+            <button id="reset-btn" onclick="resetTranspose()" class="btn-reset"><i class="fa-solid fa-rotate-right"></i> Reset
+            </button>
+         </div>
+         
+         <!--isi dari kontent untama lirik lagu dan chord gitar mengambil dari file md-->
+         <pre class="chord-content" id="chord-content">{{ content }}</pre>
+      </div>
+   </div>
+   
+   <!--menampilkan menu lain nya seperti lagu update dan nav alfabet-->
+   <div class="colom2">
+      <div id="bt-widget-wrapper">
+         <div class="container">
+            
+         </div>
+      </div>
+   </div>
+</section>
 
-            <aside class="chord-sidebar">
-                </aside>
-        </div>
-    </div>
-</div>
+{% include footer.html %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
