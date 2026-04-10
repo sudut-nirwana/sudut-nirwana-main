@@ -5,10 +5,18 @@
     --nunito: 'Nunito', sans-serif;
 }
 
-/* 1. RESET & PADDING FIX (Agar tidak double padding dari default.html) */
-.page-chord-layout {
-    padding: 0 !important;
+/* 1. FIX PADDING: Menghilangkan padding dari file default.html khusus di halaman ini */
+/* Ganti .main-content-wrapper dengan class yang ada di file default.html kamu jika berbeda */
+main, .content, .main-content-wrapper { 
+    padding: 0 !important; 
+    max-width: 100% !important; 
     margin: 0 !important;
+}
+
+/* Namun kita beri padding kembali pada container agar header/footer web aslimu tidak terganggu */
+.chord-page-wrapper {
+    padding-top: 20px;
+    padding-bottom: 50px;
 }
 
 body { 
@@ -17,83 +25,78 @@ body {
     font-family: var(--nunito);
 }
 
+/* 2. LAYOUT GRID (2 KOLOM) */
 .chord-container { width: 100%; margin: 0 auto; box-sizing: border-box; }
 
-/* 2. LAYOUT RESPONSIVE (2 KOLOM) */
-@media (max-width: 991px) {
-    .chord-main-wrapper { padding-top: 20px; }
-    .chord-container { padding: 0 15px; }
-    .chord-sidebar { margin-top: 30px; }
-    .chord-grid-layout { display: flex; flex-direction: column; }
+@media (min-width: 1024px) {
+    .chord-container { max-width: 1200px; padding: 0 40px; }
+    .chord-grid-layout { display: grid; grid-template-columns: 1fr 350px; gap: 30px; align-items: start; }
 }
 
-@media (min-width: 992px) {
-    .chord-container { max-width: 1200px; padding: 40px; }
-    .chord-grid-layout { display: grid; grid-template-columns: 1fr 350px; gap: 40px; }
+@media (max-width: 1023px) {
+    .chord-container { padding: 0 20px; }
+    .chord-grid-layout { display: flex; flex-direction: column; gap: 20px; }
+    .chord-sidebar { order: -1; } /* Video tampil di atas pada mobile */
 }
 
-/* 3. CHORD SHEET & AUTO COLOR */
+/* 3. CHORD SHEET (No Horizontal Scroll) */
 .chord-sheet-area { 
-    background: rgba(255, 255, 255, 0.9); 
-    padding: 30px; border-radius: 15px; 
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.85); 
+    padding: 25px; border-radius: 12px; backdrop-filter: blur(5px);
+    overflow: hidden; /* Menghilangkan scroll samping */
 }
 
 #chord-sheet {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 17px; line-height: 2.8; 
-    white-space: pre-wrap; /* Mencegah scroll samping, lirik akan turun kebawah */
+    font-family: 'Courier New', monospace;
+    font-size: 17px; font-weight: 800;
+    line-height: 2.8; color: #222; margin: 0;
+    white-space: pre-wrap; /* Lirik otomatis turun jika terlalu panjang */
     word-wrap: break-word;
-    color: #444; margin: 0;
 }
 
-/* Class ini akan dipasang oleh JS secara otomatis */
-.c-h { 
-    color: var(--p-orange); 
-    font-weight: 800; 
-    font-style: normal;
+/* Warna otomatis untuk chord */
+.c-h { color: var(--p-orange); font-weight: 900; }
+
+/* 4. VIDEO PANEL (Tinggi 50px awal) */
+.video-widget {
+    background: #fff; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    position: sticky; top: 80px;
 }
 
-/* 4. YOUTUBE TOGGLE WIDGET */
-.video-widget-container {
-    background: #fff; border-radius: 12px; overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    position: sticky; top: 100px;
-}
-
-.video-header {
+.video-bar {
     background: var(--dark-blue); color: #fff;
-    padding: 15px 20px; cursor: pointer;
-    display: flex; justify-content: space-between; align-items: center;
-    font-weight: 700; height: 50px; box-sizing: border-box;
+    height: 50px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 20px; cursor: pointer; font-weight: 700;
 }
 
-.video-body {
-    display: none; /* Sembunyi awal */
-    padding: 0; background: #000;
+.video-player {
+    display: none; /* Sembunyi */
+    padding: 10px; background: #f9f9f9;
 }
 
-.video-body.show { display: block; }
+.video-player.show { display: block; }
 
-.iframe-ratio {
-    position: relative; padding-bottom: 56.25%; height: 0;
+.video-responsive {
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+    border-radius: 5px; background: #000;
 }
 
-.iframe-ratio iframe {
+.video-responsive iframe {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 }
 
-/* 5. ALPHABET LIST STYLE (Dari include) */
-.alphabet-section { margin-top: 40px; border-top: 2px solid #eee; padding-top: 20px; }
-.chord-grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
-.chord-item-card { background: #fff; padding: 15px; border-radius: 10px; border-left: 4px solid var(--p-orange); transition: 0.3s; }
-.chord-item-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-.chord-item-card a { text-decoration: none; display: flex; flex-direction: column; }
-.artist-name-card { font-size: 12px; color: #888; text-transform: uppercase; }
-.song-title-card { font-size: 16px; font-weight: 700; color: #333; }
+.btn-close-video {
+    width: 100%; margin-top: 10px; background: #eee; border: none;
+    padding: 8px; border-radius: 5px; cursor: pointer; font-weight: 600;
+}
 
-/* Control Panel & Others tetap menggunakan style sebelumnya (disesuaikan) */
-.modern-box-blue { background: var(--dark-blue); color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: space-around; padding: 15px; }
-.btn-action { background: none; border: none; color: #fff; font-size: 30px; cursor: pointer; }
-.key-info span { font-size: 32px; font-weight: 800; display: block; }
+/* Control Panel */
+.control-panel { background: #fff; border-radius: 10px; margin-bottom: 20px; border: 1px solid #ddd; overflow: hidden; }
+.panel-tabs { display: flex; border-bottom: 1px solid #eee; }
+.tab-item { flex: 1; padding: 12px; text-align: center; cursor: pointer; font-weight: 700; font-size: 13px; }
+.tab-item.active { color: var(--p-orange); border-bottom: 2px solid var(--p-orange); }
+.panel-content { display: none; padding: 15px; }
+.panel-content.show { display: block; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
