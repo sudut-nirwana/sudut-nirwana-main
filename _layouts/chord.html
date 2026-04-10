@@ -4,6 +4,10 @@ layout: default
 <link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
 
 <div class="chord-main-wrapper">
+    <nav class="breadcrumb-chord">
+        <a href="/">Beranda</a> <span>&rsaquo;</span> <a href="/chord">Chord</a> <span>&rsaquo;</span> {{ page.title | truncate: 30 }}
+    </nav>
+
     <div class="chord-container">
         <header class="chord-header">
             <h1 class="song-title">{{ page.title }}</h1>
@@ -12,6 +16,20 @@ layout: default
 
         <div class="chord-grid-layout">
             <div class="chord-left-col">
+                
+                <div class="video-expand-panel">
+                    <div id="video-toggle-bar" class="v-bar">
+                        <span>📺 Lihat Video Tutorial</span>
+                        <span id="v-icon">▼</span>
+                    </div>
+                    <div id="video-content-area" class="v-content">
+                        <div class="video-responsive">
+                            <iframe id="yt-iframe" width="100%" height="315" src="https://www.youtube.com/embed/{{ page.youtube_id }}?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <button id="close-v" class="btn-close-v">Tutup Video ×</button>
+                    </div>
+                </div>
+
                 <div id="control-panel" class="control-panel">
                     <div class="panel-tabs">
                         <div class="tab-item active" data-target="transpose">Transpose <span class="arrow">▼</span></div>
@@ -24,41 +42,46 @@ layout: default
                             <div class="modern-box-blue">
                                 <button class="btn-action" id="dec-ch">−</button>
                                 <div class="key-info">
-                                    <span id="current-key">?</span> <small id="key-label">ORIGINAL KEY</small>
+                                    <span id="current-key">?</span> <small id="key-label">KEY</small>
                                 </div>
                                 <button class="btn-action" id="inc-ch">+</button>
                             </div>
                         </div>
 
                         <div id="pane-tempo" class="tab-pane">
-                            <input type="range" min="60" max="200" value="120" id="tempo-slider">
-                            <span id="tempo-val">120 BPM</span>
+                            <div class="tempo-ui">
+                                <input type="range" min="60" max="200" value="120" id="tempo-slider" class="grad-slider">
+                                <span id="tempo-val">120 BPM</span>
+                            </div>
                         </div>
 
                         <div id="pane-scroll" class="tab-pane">
-                            <button id="start-scroll">Start Scroll</button>
-                            <button id="speed-down">−</button>
-                            <span id="speed-val">2x</span>
-                            <button id="speed-up">+</button>
+                            <div class="scroll-ui">
+                                <button id="start-scroll" class="btn-play-scroll">▶️ Mulai</button>
+                                <div class="speed-control">
+                                    <button id="speed-down">−</button>
+                                    <span id="speed-val">2x</span>
+                                    <button id="speed-up">+</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="chord-sheet-area">
-                    <pre id="chord-sheet">{{ content }}</pre>
+                    <div id="chord-sheet">{{ content }}</div>
                 </div>
 
                 <div class="chord-diagram-section">
                     <h3 class="side-title">Diagram Chord</h3>
                     <div id="chord-images-container" class="chord-img-grid"></div>
                 </div>
+
+                {% include artis-a-z.html %}
             </div>
 
             <aside class="chord-sidebar">
-                <div class="video-container">
-                    <iframe width="100%" src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </aside>
+                </aside>
         </div>
     </div>
 </div>
