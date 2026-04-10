@@ -1,38 +1,44 @@
 /* Container Utama */
 .alphabet-page-content {
-    /* Tambahkan padding top agar tidak tenggelam di bawah header fixed */
-    /* Sesuaikan 80px dengan tinggi header kamu */
-    padding-top: 80px; 
+    padding-top: 100px; 
     padding-bottom: 40px;
-    min-height: 80vh; /* Memastikan konten cukup tinggi agar footer terdorong ke bawah */
+    min-height: 80vh;
     width: 100%;
-    box-sizing: border-box;
+    /* Rata kiri untuk seluruh konten di dalam container ini */
+    text-align: left; 
 }
 
 /* Judul Halaman */
 .section-header {
-    text-align: center;
     margin-bottom: 30px;
+    text-align: left; /* Memastikan header rata kiri */
 }
 
-.section-header h2 {
+.main-title {
     margin: 0;
     font-weight: 700;
+    color: #333; /* Warna Hitam untuk teks utama */
+    font-size: 1.5rem;
 }
 
-/* Wrapper List */
+/* Warna Orange untuk bagian inisial */
+.main-title .highlight {
+    color: #ee6c00; 
+}
+
+/* Memastikan wrapper list juga rata kiri */
 .chord-list-wrapper {
     display: grid;
     grid-template-columns: 1fr;
     gap: 15px;
     width: 100%;
+    text-align: left;
 }
 
-/* Responsif: 2 Kolom untuk Tablet/Desktop (min-width: 768px) */
+/* Responsif: 2 Kolom untuk Tablet/Desktop */
 @media screen and (min-width: 768px) {
     .chord-list-wrapper {
         grid-template-columns: 1fr 1fr;
-        gap: 20px;
     }
 }
 
