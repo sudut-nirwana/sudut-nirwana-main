@@ -15,16 +15,16 @@ layout: default
                   
                   <li><a href="/chord">Chord</a></li>
                   
-                  <li class="active" aria-current="page">{{ artist }}</li>
+                  <li class="active" aria-current="page">{{ page.artist }}</li>
                </ul>
             </div>
          </nav>
          
          <!--menampilkan judul kontent dan title artis di bawah judul chord pada layout chord -->
          <header class="entry-header">
-            <h2 class="chord-title">{{ title }}</h2>
+            <h2 class="chord-title">{{ page.title }}</h2>
             <div class="artist-subtitle">
-               <i class="fa-solid fa-microphone-lines"></i> Chord Gitar & Lirik: <span>{{ artist }}</span>
+               <i class="fa-solid fa-microphone-lines"></i> Chord Gitar & Lirik: <span>{{ page.artist }}</span>
             </div>
          </header>
       
@@ -50,7 +50,7 @@ layout: default
                data-text-color="#333333"
                data-font="Arial, sans-serif"
                data-auto-style="true">
-               Follow {{ artist }} on Bandsintown
+               Follow {{ page.artist }} on Bandsintown
             </a>
          </div>
       
