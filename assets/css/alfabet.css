@@ -1,0 +1,82 @@
+/* Wrapper List */
+.chord-list-wrapper {
+    display: grid; /* Gunakan Grid agar mudah diatur kolomnya */
+    grid-template-columns: 1fr; /* Default 1 kolom untuk HP */
+    gap: 12px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Responsif: Jika layar 768px atau lebih luas, bagi jadi 2 kolom */
+@media screen and (min-width: 768px) {
+    .chord-list-wrapper {
+        grid-template-columns: 1fr 1fr; /* Menjadi 2 kolom sejajar */
+        gap: 15px;
+    }
+}
+
+/* Item List */
+.chord-list-item {
+    background: #ffffff;
+    border-radius: 8px;
+    border-left: 5px solid #ee6c00; 
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    height: fit-content; /* Pastikan tinggi mengikuti isi */
+}
+
+.chord-list-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    background: #fffcf9;
+}
+
+.chord-list-item a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 18px; 
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Teks & Icon */
+.artist-name {
+    margin: 0;
+    font-weight: 700;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.song-title {
+    color: inherit;
+    opacity: 0.8;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.icon-artist {
+    color: #ee6c00;
+    margin-right: 10px;
+    width: 1.2em;
+    text-align: center;
+}
+
+.fa-music {
+    margin-right: 10px;
+    width: 1.2em;
+    text-align: center;
+    opacity: 0.6;
+}
+
+.view-icon {
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+.chord-list-item:hover .view-icon {
+    opacity: 1;
+    color: #ee6c00;
+}
