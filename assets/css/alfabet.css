@@ -1,33 +1,54 @@
-/* Wrapper List */
-.chord-list-wrapper {
-    display: grid; /* Gunakan Grid agar mudah diatur kolomnya */
-    grid-template-columns: 1fr; /* Default 1 kolom untuk HP */
-    gap: 12px;
+/* Container Utama */
+.alphabet-page-content {
+    /* Tambahkan padding top agar tidak tenggelam di bawah header fixed */
+    /* Sesuaikan 80px dengan tinggi header kamu */
+    padding-top: 80px; 
+    padding-bottom: 40px;
+    min-height: 80vh; /* Memastikan konten cukup tinggi agar footer terdorong ke bawah */
     width: 100%;
-    padding-top: 70px;
+    box-sizing: border-box;
 }
 
-/* Responsif: Jika layar 768px atau lebih luas, bagi jadi 2 kolom */
+/* Judul Halaman */
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Wrapper List */
+.chord-list-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Responsif: 2 Kolom untuk Tablet/Desktop (min-width: 768px) */
 @media screen and (min-width: 768px) {
     .chord-list-wrapper {
-        grid-template-columns: 1fr 1fr; /* Menjadi 2 kolom sejajar */
-        gap: 15px;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
     }
 }
 
-/* Item List */
+/* Item List / Card */
 .chord-list-item {
     background: #ffffff;
     border-radius: 8px;
     border-left: 5px solid #ee6c00; 
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
-    height: fit-content; /* Pastikan tinggi mengikuti isi */
+    height: auto;
 }
 
 .chord-list-item:hover {
-    transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     background: #fffcf9;
 }
 
@@ -35,48 +56,50 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 18px; 
+    padding: 20px; /* Padding dalam kartu agar lega */
     text-decoration: none;
     color: inherit;
 }
 
-/* Teks & Icon */
+/* Teks Artis & Lagu */
 .artist-name {
     margin: 0;
     font-weight: 700;
-    color: inherit;
     display: flex;
     align-items: center;
+    line-height: 1.2;
 }
 
 .song-title {
-    color: inherit;
+    margin-top: 6px;
     opacity: 0.8;
-    margin-top: 4px;
     display: flex;
     align-items: center;
+    font-size: 0.9em;
 }
 
+/* Icon */
 .icon-artist {
     color: #ee6c00;
-    margin-right: 10px;
-    width: 1.2em;
+    margin-right: 12px;
+    width: 20px;
     text-align: center;
 }
 
 .fa-music {
-    margin-right: 10px;
-    width: 1.2em;
+    margin-right: 12px;
+    width: 20px;
     text-align: center;
     opacity: 0.6;
 }
 
 .view-icon {
-    opacity: 0.5;
+    color: #ccc;
     transition: 0.3s;
+    margin-left: 10px;
 }
 
 .chord-list-item:hover .view-icon {
-    opacity: 1;
     color: #ee6c00;
+    transform: translateX(3px);
 }
