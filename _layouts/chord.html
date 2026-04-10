@@ -3,7 +3,7 @@ layout: default
 ---
 <link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
 
-<div class="chord-main-wrapper">
+<div class="chord-main-wrapper page-chord-layout">
     <div class="chord-container">
         
         <header class="chord-header">
@@ -28,7 +28,6 @@ layout: default
                                 <div class="key-info">
                                     <span id="current-key">?</span> <small id="key-label">ORIGINAL KEY</small>
                                 </div>
-
                                 <button class="btn-action" id="inc-ch">+</button>
                             </div>
                         </div>
@@ -62,16 +61,25 @@ layout: default
                     <div id="chord-images-container" class="chord-img-grid"></div>
                 </div>
 
-                {% include artis-a-z.html %}
+                <div class="alphabet-section">
+                    {% include artis-a-z.html %}
+                </div>
             </div>
 
             <aside class="chord-sidebar">
-                <div id="video-sidebar" class="sticky-video">
-                    <div class="video-container">
-                        <iframe width="100%" height="200" src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+                <div id="video-widget" class="video-widget-container">
+                    <div class="video-header" id="video-toggle">
+                        <span>📺 Tutorial Video</span>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="video-body" id="video-content">
+                        <div class="iframe-ratio">
+                            <iframe width="100%" src="https://www.youtube.com/embed/{{ page.youtube_id }}" frameborder="0" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
-            </aside>
+
+                </aside>
         </div>
     </div>
 </div>
