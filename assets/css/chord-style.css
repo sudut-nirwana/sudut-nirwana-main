@@ -1,75 +1,50 @@
-:root {
-    --p-orange: #ee6c00;
-    --navy-mix: #1a2a44; /* Biru yang lebih menyatu */
-    --glass-white: rgba(255, 255, 255, 0.7);
+.chord-main-wrapper {
+    padding: 40px 0;
 }
 
-/* 1. RESET PADDING DEFAULT */
-main, .main-content, .content { padding: 0 !important; margin: 0 !important; }
-
-/* 2. BACKGROUND GRADASI (Saran: 4 Warna Selaras) */
-body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%),
-                linear-gradient(to bottom, rgba(238, 108, 0, 0.03), transparent);
-    background-attachment: fixed;
-    font-family: 'Nunito', sans-serif;
+.chord-container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.chord-container { width: 92%; max-width: 1100px; margin: 0 auto; padding: 20px 0; }
-
-/* Breadcrumb */
-.breadcrumb-nav { font-size: 13px; margin-bottom: 15px; color: #666; }
-.breadcrumb-nav a { color: var(--p-orange); text-decoration: none; }
-.breadcrumb-nav span { margin: 0 5px; }
-
-/* Video Toggle Panel */
-.video-action-bar { 
-    background: var(--navy-mix); border-radius: 10px; 
-    margin-bottom: 20px; overflow: hidden; color: #fff;
+.chord-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
 }
-.video-bar-header { 
-    height: 50px; display: flex; align-items: center; justify-content: space-between; 
-    padding: 0 20px; cursor: pointer; font-weight: 700;
-}
-.video-bar-body { display: none; background: #000; }
-.video-bar-body.show { display: block; }
-.video-responsive { position: relative; padding-bottom: 56.25%; height: 0; }
-.video-responsive iframe { position: absolute; top:0; left:0; width:100%; height:100%; }
 
-/* 3. CHORD SHEET (Background Transparan & Spasi Rapat) */
-.chord-sheet-area { 
-    background: var(--glass-white);
-    padding: 30px; border-radius: 15px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.05);
-    border: 1px solid rgba(255,255,255,0.3);
+.control-panel {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
+
+.panel-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-item {
+    padding: 15px;
+    cursor: pointer;
+}
+
+.tab-item.active {
+    border-bottom: 2px solid #ee6c00;
+    color: #ee6c00;
+}
+
+.modern-box-blue {
+    background: #0d2e5c;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
 #chord-sheet {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 17px; font-weight: 800;
-    line-height: 2.2; /* Diperkecil agar chord & lirik tidak jauh */
-    white-space: pre-wrap; /* Mencegah horizontal scroll */
-    color: #333; margin: 0;
+    white-space: pre;
+    overflow-x: auto;
 }
-/* Auto-Highlight Chord Color */
-.c-h { color: var(--p-orange); font-weight: 900; }
-
-/* Control Panel */
-.control-panel { background: #fff; border-radius: 12px; margin-bottom: 25px; border: 1px solid #eee; overflow: hidden; }
-.panel-tabs { display: flex; background: #fafafa; border-bottom: 1px solid #eee; }
-.tab-item { flex: 1; padding: 12px; text-align: center; cursor: pointer; font-weight: 700; font-size: 13px; color: #666; }
-.tab-item.active { color: var(--p-orange); background: #fff; border-bottom: 2px solid var(--p-orange); }
-.panel-content { display: none; padding: 15px; }
-.panel-content.show { display: block; }
-.tab-pane { display: none; }
-.tab-pane.active { display: block; }
-
-/* Modern Box Blue */
-.modern-box-blue {
-    background: linear-gradient(135deg, var(--navy-mix) 0%, #0a1526 100%);
-    border-radius: 10px; display: flex; align-items: center; justify-content: space-around; padding: 15px; color: #fff;
-}
-.btn-action { background: rgba(255,255,255,0.1); border: none; color: #fff; font-size: 28px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; }
-
-/* Grid A-Z */
-.alphabet-nav-container { margin-top: 30px; }
