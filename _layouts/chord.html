@@ -3,13 +3,13 @@ layout: default
 ---
 <link rel="stylesheet" href="{{ '/assets/css/chord-style.css' | relative_url }}">
 
-<div class="chord-page-wrapper">
+<div class="chord-main-wrapper">
     <div class="chord-container">
         
-        <nav class="breadcrumb">
+        <nav class="breadcrumb-nav">
             <a href="/">Beranda</a> <span>&rsaquo;</span> 
             <a href="/chord">Chord</a> <span>&rsaquo;</span> 
-            <span class="active">{{ page.title | truncate: 30 }}</span>
+            <span class="current">{{ page.title | truncate: 25 }}</span>
         </nav>
 
         <header class="chord-header">
@@ -20,45 +20,47 @@ layout: default
         <div class="chord-grid-layout">
             <div class="chord-left-col">
                 
-                <div class="video-widget-modern">
-                    <div class="video-bar-toggle" id="video-toggle">
-                        <span class="v-title">📺 Lihat Video Tutorial</span>
-                        <span class="v-icon">▼</span>
+                <div class="video-action-bar" id="video-widget">
+                    <div class="video-bar-header" id="video-toggle">
+                        <span>📺 Lihat Video Tutorial</span>
+                        <span class="v-arrow">▼</span>
                     </div>
-                    <div class="video-expand-area" id="video-content">
-                        <div class="video-ratio">
-                            <iframe id="yt-frame" width="100%" src="https://www.youtube.com/embed/{{ page.youtube_id }}?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-bar-body" id="video-content">
+                        <div class="video-responsive">
+                            <iframe id="yt-iframe" width="100%" src="https://www.youtube.com/embed/{{ page.youtube_id }}?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
 
-                <div class="main-control-panel">
-                    <div class="tabs-header">
-                        <div class="t-item active" data-target="transpose">Transpose ▼</div>
-                        <div class="t-item" data-target="tempo">Tempo ▼</div>
-                        <div class="t-item" data-target="scroll">Scroll ▼</div>
+                <div id="control-panel" class="control-panel">
+                    <div class="panel-tabs">
+                        <div class="tab-item active" data-target="transpose">Transpose ▼</div>
+                        <div class="tab-item" data-target="tempo">Tempo ▼</div>
+                        <div class="tab-item" data-target="scroll">Scroll ▼</div>
                     </div>
-                    <div class="tabs-body">
-                        <div id="pane-transpose" class="t-pane active">
-                            <div class="control-box-gradient">
-                                <button class="btn-ctrl" id="dec-ch">−</button>
-                                <div class="key-display">
-                                    <span id="current-key">?</span>
-                                    <small>KEY</small>
+
+                    <div class="panel-content">
+                        <div id="pane-transpose" class="tab-pane active">
+                            <div class="modern-box-blue">
+                                <button class="btn-action" id="dec-ch">−</button>
+                                <div class="key-info">
+                                    <span id="current-key">?</span> <small>KEY</small>
                                 </div>
-                                <button class="btn-ctrl" id="inc-ch">+</button>
+                                <button class="btn-action" id="inc-ch">+</button>
                             </div>
                         </div>
-                        <div id="pane-tempo" class="t-pane">
-                            <div class="control-box-simple">
-                                <input type="range" min="60" max="200" value="120" id="tempo-slider" class="range-orange">
+
+                        <div id="pane-tempo" class="tab-pane">
+                            <div class="tempo-ui">
+                                <input type="range" min="60" max="200" value="120" id="tempo-slider" class="grad-slider">
                                 <span id="tempo-val">120 BPM</span>
                             </div>
                         </div>
-                        <div id="pane-scroll" class="t-pane">
-                            <div class="control-box-simple">
-                                <button id="start-scroll" class="btn-scroll-action">▶️ Mulai</button>
-                                <div class="speed-wrap">
+
+                        <div id="pane-scroll" class="tab-pane">
+                            <div class="scroll-ui">
+                                <button id="start-scroll" class="btn-play-scroll">▶️ Mulai</button>
+                                <div class="speed-control">
                                     <button id="speed-down">−</button>
                                     <span id="speed-val">2x</span>
                                     <button id="speed-up">+</button>
@@ -68,16 +70,16 @@ layout: default
                     </div>
                 </div>
 
-                <article class="chord-sheet-card">
+                <div class="chord-sheet-area">
                     <pre id="chord-sheet">{{ content }}</pre>
-                </article>
-
-                <div class="diagram-section">
-                    <h4 class="section-label">Diagram Chord</h4>
-                    <div id="chord-images-container" class="diagram-grid"></div>
                 </div>
 
-                <div class="alphabet-nav-wrapper">
+                <div class="chord-diagram-section">
+                    <h3 class="side-title">Diagram Chord</h3>
+                    <div id="chord-images-container" class="chord-img-grid"></div>
+                </div>
+
+                <div class="alphabet-nav-container">
                     {% include artis-a-z.html %}
                 </div>
             </div>
