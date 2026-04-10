@@ -1,62 +1,296 @@
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   text-decoration: none;
+}
+
+body{
+   width: 100%;
+   background: .fafafa;
+   font-family: "Nunito", sans-serif;
+   font-size: clamp(1rem, 0.909rem + 0.45vw, 1.25rem);
+   color: #444444;
+   height: 4000px;
+}
+.container{
+   width: 100%;
+   padding: 0 20px;
+}
+
+/*globall style end*/
+
+.content-chord{
+   display: flex;
+   flex-direction: column;
+}
+
+.colom1{
+   padding-top: 80px;
+}
+
+.breadcrumb-nav {
+   background-color: #ffffff; /* Latar belakang putih bersih */
+   padding: 12px 0;
+   border-bottom: 1px solid #f0f0f0; /* Garis tipis pemisah dengan konten */
+   margin-bottom: 20px;
+}
+
+.breadcrumb-container {
+   width: 100%;
+}
+
+.breadcrumb-list {
+   list-style: none;
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   margin: 0;
+   padding: 0;
+   font-size: 14px;
+}
+
+.breadcrumb-list li {
+   display: flex;
+   align-items: center;
+   color: #888; /* Warna teks pemisah */
+}
+
+/* Membuat simbol '>' otomatis di antara item */
+.breadcrumb-list li:not(:last-child)::after {
+   content: "\f105"; /* Kode ikon angle-right Font Awesome */
+   font-family: "Font Awesome 6 Free";
+   font-weight: 900;
+   margin-left: 10px;
+   font-size: 12px;
+   color: #ccc;
+}
+
+.breadcrumb-list li a {
+   text-decoration: none;
+   color: #555;
+   transition: color 0.2s;
+}
+
+/* Warna Oranye Pekat Anda saat di-hover */
+.breadcrumb-list li a:hover {
+   color: #ee6c00;
+}
+
+.breadcrumb-list li a i {
+   font-size: 13px;
+   margin-right: 5px;
+}
+
+/* Style untuk halaman yang sedang dibuka (tidak bisa diklik) */
+.breadcrumb-list li.active {
+   color: #ee6c00; /* Menggunakan warna kebanggaan Anda */
+   font-weight: 600;
+}
+
+
+.entry-header .artist-subtitle i{
+   color: #666666;
+}
+
+/*style bagian addsense google / penampil iklan*/
+.ad-container{
+   height: auto;
+   text-align: center; 
+   margin: 20px 0;
+   background: #eee;
+}
+.ad-container:empty {
+    display: none;
+}
+
+/* Container untuk background putih */
+.bandsintown-layout {
+    width: 100%;
+    max-width: 800px;
+    margin: 25px auto;
+    padding: 15px 0;
+    min-height: 0;
+    display: block;
+    background-color: #FFFFFF; /* Memastikan background tetap putih */
+    border-top: 1px solid #F5F5F5; /* Garis halus opsional di atas widget */
+    border-bottom: 1px solid #F5F5F5; /* Garis halus opsional di bawah widget */
+}
+
+/* Menghilangkan gaya link default sebelum widget muncul */
+.bit-widget-initializer {
+    text-decoration: none;
+    color: #666666; /* Warna teks placeholder */
+    font-size: 14px;
+    font-family: sans-serif;
+    display: block;
+    text-align: center;
+}
+
+.chord-title {
+   font-size: 2.2rem; /* Ukuran besar dan tegas */
+   font-weight: 800;
+   color: #333;
+   margin-bottom: 8px;
+   line-height: 1.2;
+   text-transform: capitalize; /* Otomatis huruf besar di awal kata */
+}
+
+.artist-subtitle {
+   font-size: 1.1rem;
+   color: #666;
+   display: flex;
+   align-items: center;
+   gap: 8px;
+}
+
+.artist-subtitle i {
+   color: #ee6c00; /* Warna aksen oranye pada ikon */
+   font-size: 0.9rem;
+}
+
+.artist-subtitle span {
+   color: #ee6c00;
+   font-weight: 700;
+   text-transform: uppercase; /* Nama artis dibuat huruf besar semua agar menonjol */
+   letter-spacing: 0.5px;
+}
+
+/* Responsif untuk layar HP */
+@media (max-width: 600px) {
+   .chord-title {
+      font-size: 1.8rem;
+   }
+   .artist-subtitle {
+      font-size: 1rem;
+   }
+}
+
+/*styling kontent chord dan Transpose nada*/
 :root {
-    --p-orange: #ee6c00;
-    --navy-pro: #0d2e5c;
-    --nunito: 'Nunito', sans-serif;
+   --primary-orange: #ee6c00;
+   --light-orange: #ff9d47;
+   --dark-grey: #333333;
+}
+/* Panel Kontrol */
+.chord-controls {
+   max-width: 450px;
+   margin: auto;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 30px;
+   padding: 10px;
+   background: rgba(255,255,255,.4);
+   backdrop-filter: blur(5px);
+   border-radius: 12px;
+   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+   border: 1px solid #f0f0f0;
 }
 
-/* 1. Reset Body & Gradient (3-4 Warna Selaras) */
-body { 
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%), 
-                linear-gradient(to bottom, rgba(238, 108, 0, 0.05), transparent);
-    background-attachment: fixed;
-    font-family: var(--nunito);
-    margin: 0; padding: 0;
+.control-group {
+   display: flex;
+   align-items: center;
 }
 
-/* Reset Padding Default */
-main, .main-content, .content-area { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
-
-.chord-container { width: 92%; max-width: 1100px; margin: 0 auto; box-sizing: border-box; }
-.breadcrumb-chord { padding: 15px 20px; font-size: 13px; color: #888; }
-.breadcrumb-chord a { color: var(--p-orange); text-decoration: none; }
-
-/* 2. Video Panel Toggle (Tinggi 50px awal) */
-.video-expand-panel { background: var(--navy-pro); border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
-.v-bar { height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; cursor: pointer; color: #fff; font-weight: 700; }
-.v-content { display: none; background: #000; padding: 10px; }
-.video-responsive { position: relative; padding-bottom: 56.25%; height: 0; }
-.video-responsive iframe { position: absolute; top:0; left:0; width:100%; height:100%; }
-.btn-close-v { width: 100%; padding: 8px; margin-top: 10px; background: #333; border: none; color: #fff; cursor: pointer; border-radius: 5px; }
-
-/* 3. Control Panel (Background Transparan Tipis) */
-.control-panel { background: rgba(255, 255, 255, 0.8); border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); margin-bottom: 20px; overflow: hidden; backdrop-filter: blur(10px); }
-.panel-tabs { display: flex; background: rgba(255,255,255,0.5); border-bottom: 1px solid #eee; }
-.tab-item { flex: 1; padding: 12px; text-align: center; font-weight: 700; cursor: pointer; border-right: 1px solid #eee; font-size: 13px; }
-.tab-item.active { color: var(--p-orange); background: #fff; }
-.panel-content { display: none; padding: 15px; }
-.panel-content.show { display: block; }
-.tab-pane { display: none; }
-.tab-pane.active { display: block; }
-
-/* Box Blue Transpose */
-.modern-box-blue { background: var(--navy-pro); color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: space-around; padding: 15px; }
-.key-info span { font-size: 32px; font-weight: 800; display: block; line-height: 1; }
-.btn-action { background: none; border: none; color: #fff; font-size: 30px; cursor: pointer; }
-
-/* 4. Chord Sheet (Tanpa Background Pekat) */
-.chord-sheet-area { background: rgba(255, 255, 255, 0.4); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(5px); }
-#chord-sheet pre { 
-    font-family: 'Courier New', Courier, monospace; font-size: 16px; font-weight: 800; 
-    line-height: 2.2; /* Spasi diperbaiki agar tidak terlalu jauh */
-    white-space: pre-wrap; color: #222; margin: 0; background: none; border: none; padding: 0;
+.control-label {
+   font-weight: 600;
+   color: var(--dark-grey);
+   font-size: 15px;
 }
-.c-h { color: var(--p-orange); font-weight: 900; } /* Untuk Auto-Highlight */
+.control-label i{
+   color: var(--primary-orange);
+   font-size: 1.2rem;
+}
 
-/* Diagram Grid */
-.chord-img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 15px; margin-top: 15px; }
-.chord-box-img { background: #fff; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #eee; }
-.chord-box-img img { width: 100%; height: auto; }
+/* Tombol Transpose */
+.transpose-buttons {
+   display: flex;
+   align-items: center;
+   background: #efefef;
+   padding: 5px;
+   border-radius: 50px;
+}
 
-@media (min-width: 768px) {
-    .chord-grid-layout { display: grid; grid-template-columns: 1fr 300px; gap: 30px; }
+.btn-transpose {
+   background: linear-gradient(135deg, var(--primary-orange), var(--light-orange));
+   color: white;
+   border: none;
+   width: 35px;
+   height: 35px;
+   border-radius: 50%;
+   cursor: pointer;
+   transition: transform 0.2s, box-shadow 0.2s;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.btn-transpose:hover {
+   transform: scale(1.1);
+   box-shadow: 0 4px 10px rgba(238, 108, 0, 0.3);
+}
+
+#pitch-indicator {
+   padding: 0 15px;
+   font-weight: bold;
+   min-width: 35px;
+   text-align: center;
+   color: var(--primary-orange);
+}
+
+.btn-reset {
+   width: 100px;
+   background: transparent;
+   border: 1px solid #666;
+   padding: 8px 15px;
+   border-radius: 8px;
+   cursor: pointer;
+   font-size: 13px;
+   color: #444444;
+}
+
+.btn-reset:hover {
+   background: #f5f5f5;
+   color: var(--primary-orange);
+}
+
+/* Styling Chord & Lirik */
+.chord-content {
+   font-family: 'Courier New', Courier, monospace;
+   font-size: 16px;
+   line-height: 2;
+   white-space: pre-wrap;
+   color: var(--dark-grey);
+   border-radius: 10px;
+   border-left: 5px solid #ee4c00;
+   background: rgba(238,76,0,0.1);
+   padding: 8px;
+   margin-bottom: 40px;
+}
+
+/* Ini adalah class yang otomatis dibuat oleh JS */
+.chord-node {
+   color: var(--primary-orange);
+   font-weight: bold;
+   transition: all 0.3s ease;
+}
+
+
+#bt-widget-wrapper{
+   width: 100%;
+   background: pink;
+}
+
+@media(min-width: 768px){
+   .content-chord{
+      flex-direction: row;
+   }
+   .colom1{
+      flex: 1.5;
+   }
+   .colom2{
+      flex: 1;
+      padding-top: 80px;
+   }
 }
