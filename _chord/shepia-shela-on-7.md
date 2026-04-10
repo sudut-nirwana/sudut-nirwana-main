@@ -3,33 +3,30 @@ layout: chord
 title: "Chord Sephia - Sheila On 7 | Kunci Dasar"
 artist: "Sheila On 7"
 genre: "Pop"
-youtube_id: "m8-ZBe_p4Xk"  # Ambil ID dari URL YouTube: youtube.com/watch?v=m8-ZBe_p4Xk
+youtube_id: "m8-ZBe_p4Xk"
 chords: ["Am", "D", "G", "C", "Em"]
 ---
 
-
-<pre class="chord-content">
 [Intro]
-<b>Am</b>   <b>D</b>   <b>G</b>   <b>C</b>
-<b>Am</b>   <b>D</b>   <b>G</b>
+Am   D   G   C
+Am   D   G
 
 [Verse 1]
-<b>Am</b>            <b>D</b>
+Am            D
 Hey, Sephia...
-<b>G</b>                    <b>C</b>
+G                    C
 Malam ini ku takkan datang
-<b>Am</b>            <b>D</b>           <b>G</b>
+Am            D           G
 Mencoba tuk berpaling sayang
-             <b>G</b>
+             G
 Dari cintamu...
 
 [Chorus]
-          <b>C</b>      <b>D</b>         <b>G</b>
+          C      D         G
 Selamat tidur kekasih gelapku
-      <b>Am</b>     <b>D</b>          <b>G</b>
+      Am     D          G
 Oh Sephia... moga kau lupakan aku
-            <b>C</b>      <b>D</b>          <b>G</b>     <b>Em</b>
+            C      D          G     Em
 Cepat lupakan aku matikan cintamu dariku
-      <b>Am</b>         <b>D</b>        <b>G</b>
+      Am         D        G
 Moga kau relakan kepergianku
-</pre>
