@@ -293,3 +293,93 @@ body{
       padding-top: 70px;
    }
 }
+
+
+#autoscroll-container {
+  position: fixed;
+  right: 6px;
+  bottom: 20%;
+  display: flex;
+  flex-direction: column-reverse; /* Biar expand ke atas */
+  align-items: center;
+  background: rgba(238, 95, 0, 0.4); /* Transparan saat standby */
+  border-radius: 10px 0 0 10px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 999;
+  padding: 8px 5px;
+  color: white;
+  font-family: sans-serif;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+}
+
+/* Saat Autoscroll Aktif (Stop Scroll) */
+#autoscroll-container.active {
+  background: linear-gradient(to top, #ee5f00, #ff8c00);
+  opacity: 1;
+  box-shadow: -3px 5px 15px rgba(238, 95, 0, 0.4);
+}
+
+/* Teks Vertikal di Pinggir */
+#scroll-trigger {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding: 8px 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 1px;
+  user-select: none;
+  text-transform: uppercase;
+}
+
+/* Wrapper Kontrol yang akan memanjang ke atas */
+.controls-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+}
+
+/* State Terbuka */
+#autoscroll-container.open .controls-wrapper {
+  height: auto;
+  opacity: 1;
+  margin-bottom: 15px;
+}
+
+/* Slider Vertikal */
+.slider-box {
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+#speed-slider {
+  appearance: slider-vertical;
+  width: 6px;
+  height: 90px;
+  cursor: pointer;
+}
+
+/* Tombol + dan - */
+.speed-btn {
+  background: white;
+  border: none;
+  border-radius: 50px;
+  width: 18px;
+  height: 18px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #ee5f00;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.speed-btn:active { transform: scale(0.85); }
