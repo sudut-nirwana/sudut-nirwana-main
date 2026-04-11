@@ -82,58 +82,84 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     //fungsi autoscroll
-    function startScroll() {
-    isScrolling = true;
-    container.classList.add('active');
-    $(text).html('<i class="fas fa-stop"></i>').css({
-       fontSize: "1.2rem",
-    });
-    requestAnimationFrame(updateScroll); // Mulai animasi halus
-}
+// 1. Inisialisasi Variabel & Selektor
+const scrollTrigger = document.getElementById('scroll-trigger');
+const triggerText = document.getElementById('trigger-text');
+const autoscrollContainer = document.getElementById('autoscroll-container');
+const speedSlider = document.getElementById('speed-slider');
+const btnPlus = document.getElementById('btn-plus');
+const btnMinus = document.getElementById('btn-minus');
 
-function stopScroll() {
-    isScrolling = false;
-    container.classList.remove('active');
-    $(text).html('<i class="fas fa-gear"></i>').css({
-       fontSize: "1.2rem",
-    });
-    cancelAnimationFrame(scrollRequest); // Hentikan animasi
-}
+let isScrolling = false;
+let scrollRequest;
 
-// FUNGSI RAHASIA AGAR HALUS: requestAnimationFrame
+// 2. Daftar Kecepatan (Level 1 - 5)
+const speeds = {
+    1: 0.3,
+    2: 0.7,
+    3: 1.2,
+    4: 2.0,
+    5: 3.5
+};
+
+// 3. Fungsi Update Scroll (Animasi Halus)
 function updateScroll() {
     if (!isScrolling) return;
 
-    // Kita gunakan angka desimal untuk kecepatan agar gerakan tidak "loncat" 1 pixel
-    // Level 1: sangat pelan, Level 5: cukup cepat
-    const speeds = {
-        1: 0.3, 
-        2: 0.7,
-        3: 1.2,
-        4: 2.0,
-        5: 3.5 
-    };
-    
-    const speed = speeds[parseInt(slider.value)] || 1;
-    
-    // Scroll dengan angka desimal didukung oleh browser modern untuk sub-pixel rendering
+    const speed = speeds[parseInt(speedSlider.value)] || 1;
     window.scrollBy(0, speed);
-    
+
     scrollRequest = requestAnimationFrame(updateScroll);
 }
 
-// Kontrol Tombol
-btnPlus.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (parseInt(slider.value) < 5) {
-        slider.value = parseInt(slider.value) + 1;
+// 4. Fungsi Start Scroll
+function startScroll() {
+    isScrolling = true;
+    autoscrollContainer.classList.add('active');
+    triggerText.innerHTML = '<i class="fas fa-stop"></i>'; // Ubah icon jadi STOP
+    updateScroll();
+}
+
+// 5. Fungsi Stop Scroll
+function stopScroll() {
+    isScrolling = false;
+    autoscrollContainer.classList.remove('active');
+    triggerText.innerHTML = '<i class="fas fa-gear"></i>'; // Kembali ke icon GEAR
+    cancelAnimationFrame(scrollRequest);
+}
+
+// 6. Event Listener untuk Tombol Utama (Gear)
+scrollTrigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!isScrolling) {
+        startScroll();
+    } else {
+        stopScroll();
     }
 });
 
-btnMinus.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (parseInt(slider.value) > 1) {
-        slider.value = parseInt(slider.value) - 1;
+// 7. Kontrol Tombol Plus (+)
+btnPlus.addEventListener('click', (e) => {
+    e.stopPropagation(); // Agar tidak memicu klik pada parent
+    let val = parseInt(speedSlider.value);
+    if (val < 5) {
+        speedSlider.value = val + 1;
     }
 });
+
+// 8. Kontrol Tombol Minus (-)
+btnMinus.addEventListener('click', (e) => {
+    e.stopPropagation();
+    let val = parseInt(speedSlider.value);
+    if (val > 1) {
+        speedSlider.value = val - 1;
+    }
+});
+
+// 9. Reset Otomatis saat user scroll manual secara kasar (Opsional)
+// Jika kamu ingin autoscroll mati saat user scroll manual, tambahkan ini:
+window.addEventListener('wheel', () => {
+    if (isScrolling) stopScroll();
+}, { passive: true });
+    
 });
