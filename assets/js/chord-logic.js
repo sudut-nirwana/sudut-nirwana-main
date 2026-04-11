@@ -67,69 +67,82 @@ function initializeChords() {
 }
 
 // 6. Jalankan fungsi saat browser selesai memuat HTML
-    document.addEventListener('DOMContentLoaded', function() {
-    
-    // --- KODE LAMA KAMU (Misal: inisialisasi chord, dll) ---
-    initializeChords(); 
-    // ... kode lama lainnya ...
+// Jalankan inisialisasi saat web siap
+document.addEventListener("DOMContentLoaded", initializeChords);
 
+const container = document.getElementById('autoscroll-container');
+const trigger = document.getElementById('scroll-trigger');
+const text = document.getElementById('trigger-text');
+const slider = document.getElementById('speed-slider');
+const btnPlus = document.getElementById('btn-plus');
+const btnMinus = document.getElementById('btn-minus');
 
-    // --- TAMBAHKAN KODE AUTOSCROLL DI SINI ---
-    const scrollTrigger = document.getElementById('scroll-trigger');
-    const textSpan = document.getElementById('trigger-text');
-    const container = document.getElementById('autoscroll-container');
-    const slider = document.getElementById('speed-slider');
-    const btnPlus = document.getElementById('btn-plus');
-    const btnMinus = document.getElementById('btn-minus');
+let scrollRequest = null;
+let isScrolling = false;
 
-    let isScrolling = false;
-    let scrollRequest;
-
-    const speeds = { 1: 0.3, 2: 0.7, 3: 1.2, 4: 2.0, 5: 3.5 };
-
-    function updateScroll() {
-        if (!isScrolling) return;
-        const speed = speeds[parseInt(slider.value)] || 1;
-        window.scrollBy(0, speed);
-        scrollRequest = requestAnimationFrame(updateScroll);
+// Fungsi utama untuk toggle
+trigger.addEventListener('click', () => {
+    const isOpen = container.classList.toggle('open');
+    if (isOpen) {
+        startScroll();
+    } else {
+        stopScroll();
     }
+});
 
-    // Event Klik Gear
-    if (scrollTrigger) {
-        scrollTrigger.addEventListener('click', function() {
-            if (!isScrolling) {
-                isScrolling = true;
-                if(container) container.classList.add('active');
-                if(textSpan) textSpan.innerHTML = '<i class="fas fa-stop"></i>';
-                updateScroll();
-            } else {
-                isScrolling = false;
-                if(container) container.classList.remove('active');
-                if(textSpan) textSpan.innerHTML = '<i class="fas fa-gear"></i>';
-                cancelAnimationFrame(scrollRequest);
-            }
-        });
-    }
+function startScroll() {
+    isScrolling = true;
+    container.classList.add('active');
+    $(text).html('<i class="fas fa-stop"></i>').css({
+       fontSize: "1.2rem",
+    });
+    requestAnimationFrame(updateScroll); // Mulai animasi halus
+}
 
-    // Event Plus/Minus
-    if (btnPlus) {
-        btnPlus.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (parseInt(slider.value) < 5) slider.value = parseInt(slider.value) + 1;
-        });
-    }
+function stopScroll() {
+    isScrolling = false;
+    container.classList.remove('active');
+    $(text).html('<i class="fas fa-gear"></i>').css({
+       fontSize: "1.2rem",
+    });
+    cancelAnimationFrame(scrollRequest); // Hentikan animasi
+}
+
+// FUNGSI RAHASIA AGAR HALUS: requestAnimationFrame
+function updateScroll() {
+    if (!isScrolling) return;
+
+    // Kita gunakan angka desimal untuk kecepatan agar gerakan tidak "loncat" 1 pixel
+    // Level 1: sangat pelan, Level 5: cukup cepat
+    const speeds = {
+        1: 0.3, 
+        2: 0.7,
+        3: 1.2,
+        4: 2.0,
+        5: 3.5 
+    };
     
-    if (btnMinus) {
-        btnMinus.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (parseInt(slider.value) > 1) slider.value = parseInt(slider.value) - 1;
-        });
+    const speed = speeds[parseInt(slider.value)] || 1;
+    
+    // Scroll dengan angka desimal didukung oleh browser modern untuk sub-pixel rendering
+    window.scrollBy(0, speed);
+    
+    scrollRequest = requestAnimationFrame(updateScroll);
+}
+
+// Kontrol Tombol
+btnPlus.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (parseInt(slider.value) < 5) {
+        slider.value = parseInt(slider.value) + 1;
     }
+});
 
-}); // Tutup DOMContentLoaded
-    
-
- 
-    
+btnMinus.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (parseInt(slider.value) > 1) {
+        slider.value = parseInt(slider.value) - 1;
+    }
+});
     
 });
