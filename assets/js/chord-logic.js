@@ -67,77 +67,69 @@ function initializeChords() {
 }
 
 // 6. Jalankan fungsi saat browser selesai memuat HTML
-document.addEventListener("DOMContentLoaded", function() {
-    initializeChords();
-
-    function startScroll() {
-    isScrolling = true;
-    container.classList.add('active');
-    $(text).html('<i class="fas fa-stop"></i>').css({
-       fontSize: "1.2rem",
-    });
-    requestAnimationFrame(updateScroll); // Mulai animasi halus
-}
-
-function stopScroll() {
-    isScrolling = false;
-    container.classList.remove('active');
-    $(text).html('<i class="fas fa-gear"></i>').css({
-       fontSize: "1.2rem",
-    });
-    cancelAnimationFrame(scrollRequest); // Hentikan animasi
-}
-
-// FUNGSI RAHASIA AGAR HALUS: requestAnimationFrame
-function updateScroll() {
-    if (!isScrolling) return;
-
-    // Kita gunakan angka desimal untuk kecepatan agar gerakan tidak "loncat" 1 pixel
-    // Level 1: sangat pelan, Level 5: cukup cepat
-    const speeds = {
-        1: 0.3, 
-        2: 0.7,
-        3: 1.2,
-        4: 2.0,
-        5: 3.5 
-    };
+    document.addEventListener('DOMContentLoaded', function() {
     
-    const speed = speeds[parseInt(slider.value)] || 1;
-    
-    // Scroll dengan angka desimal didukung oleh browser modern untuk sub-pixel rendering
-    window.scrollBy(0, speed);
-    
-    scrollRequest = requestAnimationFrame(updateScroll);
-}
+    // --- KODE LAMA KAMU (Misal: inisialisasi chord, dll) ---
+    initializeChords(); 
+    // ... kode lama lainnya ...
 
-// Kontrol Tombol
-btnPlus.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (parseInt(slider.value) < 5) {
-        slider.value = parseInt(slider.value) + 1;
-    }
-});
 
-btnMinus.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (parseInt(slider.value) > 1) {
-        slider.value = parseInt(slider.value) - 1;
-    }
-});
-    
-    
-    // Sembunyikan widget Bandsintown jika artis kosong (Universal Check)
-    const widgetElement = document.getElementById('bt-element');
-    const wrapper = document.getElementById('bt-widget-wrapper');
-    if (widgetElement && wrapper) {
-        const artistName = widgetElement.getAttribute('data-artist-name');
-        if (!artistName || artistName.includes('{{')) {
-            wrapper.style.display = 'none';
-        }
+    // --- TAMBAHKAN KODE AUTOSCROLL DI SINI ---
+    const scrollTrigger = document.getElementById('scroll-trigger');
+    const textSpan = document.getElementById('trigger-text');
+    const container = document.getElementById('autoscroll-container');
+    const slider = document.getElementById('speed-slider');
+    const btnPlus = document.getElementById('btn-plus');
+    const btnMinus = document.getElementById('btn-minus');
+
+    let isScrolling = false;
+    let scrollRequest;
+
+    const speeds = { 1: 0.3, 2: 0.7, 3: 1.2, 4: 2.0, 5: 3.5 };
+
+    function updateScroll() {
+        if (!isScrolling) return;
+        const speed = speeds[parseInt(slider.value)] || 1;
+        window.scrollBy(0, speed);
+        scrollRequest = requestAnimationFrame(updateScroll);
     }
 
+    // Event Klik Gear
+    if (scrollTrigger) {
+        scrollTrigger.addEventListener('click', function() {
+            if (!isScrolling) {
+                isScrolling = true;
+                if(container) container.classList.add('active');
+                if(textSpan) textSpan.innerHTML = '<i class="fas fa-stop"></i>';
+                updateScroll();
+            } else {
+                isScrolling = false;
+                if(container) container.classList.remove('active');
+                if(textSpan) textSpan.innerHTML = '<i class="fas fa-gear"></i>';
+                cancelAnimationFrame(scrollRequest);
+            }
+        });
+    }
 
+    // Event Plus/Minus
+    if (btnPlus) {
+        btnPlus.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (parseInt(slider.value) < 5) slider.value = parseInt(slider.value) + 1;
+        });
+    }
     
+    if (btnMinus) {
+        btnMinus.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (parseInt(slider.value) > 1) slider.value = parseInt(slider.value) - 1;
+        });
+    }
+
+}); // Tutup DOMContentLoaded
+    
+
+ 
     
     
 });
