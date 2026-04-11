@@ -14,13 +14,13 @@ layout: default
             <div class="breadcrumb-container">
                <ul class="breadcrumb-list">
                   <li><a href="/"><i class="fa-solid fa-house"></i> Beranda</a></li>
-                  
-                  <li><a href="/chord">Chord</a></li>
-                  
-                  <li class="active" aria-current="page">{{ page.artist }}</li>
+                  <li><a href="/chord/">Chord</a></li>
+                  <li><a href="/chord/{{ page.artist_slug }}">{{ page.artist }}</a></li>
+                  <li class="active" aria-current="page">{{ page.title }}</li>
                </ul>
             </div>
          </nav>
+
          
          <!--menampilkan judul kontent dan title artis di bawah judul chord pada layout chord -->
          <header class="entry-header">
