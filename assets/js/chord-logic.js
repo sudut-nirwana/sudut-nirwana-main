@@ -82,84 +82,65 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     //fungsi autoscroll
-// 1. Inisialisasi Variabel & Selektor
+    // 1. Ambil elemen sesuai ID asli di HTML kamu
 const scrollTrigger = document.getElementById('scroll-trigger');
-const triggerText = document.getElementById('trigger-text');
-const autoscrollContainer = document.getElementById('autoscroll-container');
-const speedSlider = document.getElementById('speed-slider');
+const triggerText = document.getElementById('trigger-text'); // Tempat icon gear/stop
+const speedSlider = document.getElementById('speed-slider'); // Slider kamu
 const btnPlus = document.getElementById('btn-plus');
 const btnMinus = document.getElementById('btn-minus');
 
 let isScrolling = false;
 let scrollRequest;
 
-// 2. Daftar Kecepatan (Level 1 - 5)
+// 2. Gunakan angka kecepatan asli (bisa kamu sesuaikan sendiri angkanya)
 const speeds = {
-    1: 0.3,
-    2: 0.7,
-    3: 1.2,
-    4: 2.0,
-    5: 3.5
+    1: 0.5,
+    2: 1.0,
+    3: 1.5,
+    4: 2.5,
+    5: 4.0
 };
 
-// 3. Fungsi Update Scroll (Animasi Halus)
 function updateScroll() {
     if (!isScrolling) return;
-
-    const speed = speeds[parseInt(speedSlider.value)] || 1;
-    window.scrollBy(0, speed);
-
+    // Ambil nilai dari slider kamu (1-5)
+    const currentSpeed = speeds[speedSlider.value] || 1;
+    window.scrollBy(0, currentSpeed);
     scrollRequest = requestAnimationFrame(updateScroll);
 }
 
-// 4. Fungsi Start Scroll
-function startScroll() {
-    isScrolling = true;
-    autoscrollContainer.classList.add('active');
-    triggerText.innerHTML = '<i class="fas fa-stop"></i>'; // Ubah icon jadi STOP
-    updateScroll();
-}
-
-// 5. Fungsi Stop Scroll
-function stopScroll() {
-    isScrolling = false;
-    autoscrollContainer.classList.remove('active');
-    triggerText.innerHTML = '<i class="fas fa-gear"></i>'; // Kembali ke icon GEAR
-    cancelAnimationFrame(scrollRequest);
-}
-
-// 6. Event Listener untuk Tombol Utama (Gear)
-scrollTrigger.addEventListener('click', (e) => {
-    e.preventDefault();
+// 3. Fungsi On/Off (Tanpa merusak CSS)
+function toggleScroll() {
     if (!isScrolling) {
-        startScroll();
+        isScrolling = true;
+        // Hanya ganti icon-nya saja, tidak merubah struktur div
+        triggerText.innerHTML = '<i class="fas fa-stop"></i>';
+        updateScroll();
     } else {
-        stopScroll();
+        isScrolling = false;
+        triggerText.innerHTML = '<i class="fas fa-gear"></i>';
+        cancelAnimationFrame(scrollRequest);
     }
-});
+}
 
-// 7. Kontrol Tombol Plus (+)
+// 4. Pasang Event Listener
+scrollTrigger.addEventListener('click', toggleScroll);
+
+// Tombol Plus (+) tetap pakai slider kamu agar CSS slider-nya tetap jalan
 btnPlus.addEventListener('click', (e) => {
-    e.stopPropagation(); // Agar tidak memicu klik pada parent
-    let val = parseInt(speedSlider.value);
-    if (val < 5) {
-        speedSlider.value = val + 1;
+    e.stopPropagation();
+    if (parseInt(speedSlider.value) < 5) {
+        speedSlider.value = parseInt(speedSlider.value) + 1;
     }
 });
 
-// 8. Kontrol Tombol Minus (-)
+// Tombol Minus (-)
 btnMinus.addEventListener('click', (e) => {
     e.stopPropagation();
-    let val = parseInt(speedSlider.value);
-    if (val > 1) {
-        speedSlider.value = val - 1;
+    if (parseInt(speedSlider.value) > 1) {
+        speedSlider.value = parseInt(speedSlider.value) - 1;
     }
 });
-
-// 9. Reset Otomatis saat user scroll manual secara kasar (Opsional)
-// Jika kamu ingin autoscroll mati saat user scroll manual, tambahkan ini:
-window.addEventListener('wheel', () => {
-    if (isScrolling) stopScroll();
-}, { passive: true });
+    
     
 });
