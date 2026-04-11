@@ -81,64 +81,58 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
-    //fungsi autoscroll
-    // 1. Ambil elemen sesuai ID asli di HTML kamu
-const scrollTrigger = document.getElementById('scroll-trigger');
-const triggerText = document.getElementById('trigger-text'); // Tempat icon gear/stop
-const speedSlider = document.getElementById('speed-slider'); // Slider kamu
-const btnPlus = document.getElementById('btn-plus');
-const btnMinus = document.getElementById('btn-minus');
+    function startScroll() {
+    isScrolling = true;
+    container.classList.add('active');
+    $(text).html('<i class="fas fa-stop"></i>').css({
+       fontSize: "1.2rem",
+    });
+    requestAnimationFrame(updateScroll); // Mulai animasi halus
+}
 
-let isScrolling = false;
-let scrollRequest;
+function stopScroll() {
+    isScrolling = false;
+    container.classList.remove('active');
+    $(text).html('<i class="fas fa-gear"></i>').css({
+       fontSize: "1.2rem",
+    });
+    cancelAnimationFrame(scrollRequest); // Hentikan animasi
+}
 
-// 2. Gunakan angka kecepatan asli (bisa kamu sesuaikan sendiri angkanya)
-const speeds = {
-    1: 0.5,
-    2: 1.0,
-    3: 1.5,
-    4: 2.5,
-    5: 4.0
-};
-
+// FUNGSI RAHASIA AGAR HALUS: requestAnimationFrame
 function updateScroll() {
     if (!isScrolling) return;
-    // Ambil nilai dari slider kamu (1-5)
-    const currentSpeed = speeds[speedSlider.value] || 1;
-    window.scrollBy(0, currentSpeed);
+
+    // Kita gunakan angka desimal untuk kecepatan agar gerakan tidak "loncat" 1 pixel
+    // Level 1: sangat pelan, Level 5: cukup cepat
+    const speeds = {
+        1: 0.3, 
+        2: 0.7,
+        3: 1.2,
+        4: 2.0,
+        5: 3.5 
+    };
+    
+    const speed = speeds[parseInt(slider.value)] || 1;
+    
+    // Scroll dengan angka desimal didukung oleh browser modern untuk sub-pixel rendering
+    window.scrollBy(0, speed);
+    
     scrollRequest = requestAnimationFrame(updateScroll);
 }
 
-// 3. Fungsi On/Off (Tanpa merusak CSS)
-function toggleScroll() {
-    if (!isScrolling) {
-        isScrolling = true;
-        // Hanya ganti icon-nya saja, tidak merubah struktur div
-        triggerText.innerHTML = '<i class="fas fa-stop"></i>';
-        updateScroll();
-    } else {
-        isScrolling = false;
-        triggerText.innerHTML = '<i class="fas fa-gear"></i>';
-        cancelAnimationFrame(scrollRequest);
-    }
-}
-
-// 4. Pasang Event Listener
-scrollTrigger.addEventListener('click', toggleScroll);
-
-// Tombol Plus (+) tetap pakai slider kamu agar CSS slider-nya tetap jalan
+// Kontrol Tombol
 btnPlus.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (parseInt(speedSlider.value) < 5) {
-        speedSlider.value = parseInt(speedSlider.value) + 1;
+    if (parseInt(slider.value) < 5) {
+        slider.value = parseInt(slider.value) + 1;
     }
 });
 
-// Tombol Minus (-)
 btnMinus.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (parseInt(speedSlider.value) > 1) {
-        speedSlider.value = parseInt(speedSlider.value) - 1;
+    if (parseInt(slider.value) > 1) {
+        slider.value = parseInt(slider.value) - 1;
     }
 });
     
