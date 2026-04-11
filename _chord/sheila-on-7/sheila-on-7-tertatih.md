@@ -1,7 +1,8 @@
 ---
 layout: chord
 artis: "Sheila On 7"
-title: "Tertatih  |  Kunci Dasar Mudah"
+title: "Tertatih Sheila On 7 | Kunci Dasar Mudah"
+genre: "pop 90an"
 permalink: /chord/sheila-on-7/Tertatih/
 ---
 
@@ -79,8 +80,7 @@ D7            F     E
 Iringi canda tawa
 
 Chorus / Reff 2 :
-
-       C
+            C
 Walau tertatih
        D
 walau tercabik
@@ -100,3 +100,8 @@ Tertatih tertatih
 Khilafkan putih
               C
 Hanya kau mimpiku
+==============================
+Interlude :
+C    D     F     C   3x
+Am     G     D     A 
+==============================
