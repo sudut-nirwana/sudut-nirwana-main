@@ -69,18 +69,8 @@ function initializeChords() {
 // 6. Jalankan fungsi saat browser selesai memuat HTML
 document.addEventListener("DOMContentLoaded", function() {
     initializeChords();
-    
-    // Sembunyikan widget Bandsintown jika artis kosong (Universal Check)
-    const widgetElement = document.getElementById('bt-element');
-    const wrapper = document.getElementById('bt-widget-wrapper');
-    if (widgetElement && wrapper) {
-        const artistName = widgetElement.getAttribute('data-artist-name');
-        if (!artistName || artistName.includes('{{')) {
-            wrapper.style.display = 'none';
-        }
 
-
-        function startScroll() {
+    function startScroll() {
     isScrolling = true;
     container.classList.add('active');
     $(text).html('<i class="fas fa-stop"></i>').css({
@@ -134,6 +124,16 @@ btnMinus.addEventListener('click', (e) => {
         slider.value = parseInt(slider.value) - 1;
     }
 });
+    
+    
+    // Sembunyikan widget Bandsintown jika artis kosong (Universal Check)
+    const widgetElement = document.getElementById('bt-element');
+    const wrapper = document.getElementById('bt-widget-wrapper');
+    if (widgetElement && wrapper) {
+        const artistName = widgetElement.getAttribute('data-artist-name');
+        if (!artistName || artistName.includes('{{')) {
+            wrapper.style.display = 'none';
+        }
     }
 
 
