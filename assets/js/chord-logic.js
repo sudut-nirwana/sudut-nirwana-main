@@ -79,4 +79,61 @@ document.addEventListener("DOMContentLoaded", function() {
             wrapper.style.display = 'none';
         }
     }
+
+
+    //fungsi autoscroll
+    function startScroll() {
+    isScrolling = true;
+    container.classList.add('active');
+    $(text).html('<i class="fas fa-stop"></i>').css({
+       fontSize: "1.2rem",
+    });
+    requestAnimationFrame(updateScroll); // Mulai animasi halus
+}
+
+function stopScroll() {
+    isScrolling = false;
+    container.classList.remove('active');
+    $(text).html('<i class="fas fa-gear"></i>').css({
+       fontSize: "1.2rem",
+    });
+    cancelAnimationFrame(scrollRequest); // Hentikan animasi
+}
+
+// FUNGSI RAHASIA AGAR HALUS: requestAnimationFrame
+function updateScroll() {
+    if (!isScrolling) return;
+
+    // Kita gunakan angka desimal untuk kecepatan agar gerakan tidak "loncat" 1 pixel
+    // Level 1: sangat pelan, Level 5: cukup cepat
+    const speeds = {
+        1: 0.3, 
+        2: 0.7,
+        3: 1.2,
+        4: 2.0,
+        5: 3.5 
+    };
+    
+    const speed = speeds[parseInt(slider.value)] || 1;
+    
+    // Scroll dengan angka desimal didukung oleh browser modern untuk sub-pixel rendering
+    window.scrollBy(0, speed);
+    
+    scrollRequest = requestAnimationFrame(updateScroll);
+}
+
+// Kontrol Tombol
+btnPlus.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (parseInt(slider.value) < 5) {
+        slider.value = parseInt(slider.value) + 1;
+    }
+});
+
+btnMinus.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (parseInt(slider.value) > 1) {
+        slider.value = parseInt(slider.value) - 1;
+    }
+});
 });
