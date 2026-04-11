@@ -78,10 +78,9 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!artistName || artistName.includes('{{')) {
             wrapper.style.display = 'none';
         }
-    }
 
 
-    function startScroll() {
+        function startScroll() {
     isScrolling = true;
     container.classList.add('active');
     $(text).html('<i class="fas fa-stop"></i>').css({
@@ -135,6 +134,10 @@ btnMinus.addEventListener('click', (e) => {
         slider.value = parseInt(slider.value) - 1;
     }
 });
+    }
+
+
+    
     
     
 });
