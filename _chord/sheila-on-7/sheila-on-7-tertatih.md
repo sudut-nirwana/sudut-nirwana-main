@@ -1,7 +1,7 @@
 ---
 layout: chord
-artis: "Sheila On 7"
-title: "Tertatih Sheila On 7 | Kunci Dasar Mudah"
+artist: "Sheila On 7"
+title: "Tertatih"
 genre: "pop 90an"
 permalink: /chord/sheila-on-7/Tertatih/
 ---
