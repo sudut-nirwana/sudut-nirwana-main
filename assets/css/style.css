@@ -81,7 +81,7 @@ html.no-scroll{
    display: block;
 }*/
 .main-header{
-   width: 100%;
+   width: 100% !important;
    height: 60px;
    position: absolute;
    top: 0; left: 0;
