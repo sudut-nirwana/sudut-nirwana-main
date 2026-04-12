@@ -165,6 +165,32 @@ body{
    }
 }
 
+/* Gaya Khusus Kontainer Bandsintown Sudut Nirwana */
+.custom-bit-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    border-top: 1px dashed #ccc;
+    border-bottom: 1px dashed #ccc;
+    padding: 15px 0;
+    margin: 20px 0;
+}
+
+.bit-icon {
+    width: 42px;
+    height: 42px;
+    background: #666; /* Warna lingkaran ikon */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+
 /*styling kontent chord dan Transpose nada*/
 :root {
    --primary-orange: #ee6c00;
