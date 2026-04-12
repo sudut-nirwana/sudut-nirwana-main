@@ -69,57 +69,54 @@
     padding: 15px;
 }
 
+/* --- Perbaikan List Lagu Agar Sejajar & Berjarak --- */
+
 .chord-list-item {
     background: #ffffff;
     border-radius: 10px;
     border-left: 5px solid #ee6c00;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    transition: 0.3s;
-}
-
-.chord-list-item:hover {
-    transform: translateY(-2px);
-    background: #fffcf9;
+    
+    /* KUNCI UTAMA: Biar panah gak turun & ada jarak */
+    display: flex !important; 
+    flex-direction: row !important; /* Paksa satu baris */
+    justify-content: space-between !important;
+    align-items: center !important;
+    
+    padding: 15px 20px !important; /* Padding biar gak mepet */
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box; /* Biar padding gak nambah lebar box */
 }
 
 .song-info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
+    flex: 1; /* Biar dia ngambil sisa ruang yang ada */
+    padding-right: 10px; /* Jarak antara teks judul dan panah */
 }
 
 .song-title {
-    margin: 0;
+    margin: 0 !important;
     font-size: 1.1rem;
     font-weight: 700;
-    color: #333 !important; /* Judul Lagu Hitam */
+    color: #333 !important;
+    line-height: 1.2;
 }
 
 .artist-name {
-    margin: 0;
+    margin: 0 !important;
     font-size: 0.9rem;
-    color: #666 !important; /* Nama Artis Abu-abu */
+    color: #666 !important;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
+/* --- Panah Tetap di Kanan --- */
 .view-icon {
     color: #ccc;
     font-size: 1.2rem;
-}
-
-/* 6. Tombol Kembali */
-.btn-back {
-    display: inline-block;
-    padding: 10px 25px;
-    color: #ee6c00 !important;
-    border: 2px solid #ee6c00;
-    border-radius: 25px;
-    font-weight: 600;
-    margin-top: 20px;
+    flex-shrink: 0; /* JANGAN biarkan panah mengecil atau turun */
 }
