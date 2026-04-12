@@ -189,6 +189,30 @@ body{
     font-size: 1.1rem;
     flex-shrink: 0;
 }
+/* Memaksa widget Bandsintown jadi transparan dan tanpa border box */
+#bt-widget-wrapper iframe, 
+.bit-widget-initializer,
+.bandsintown-layout {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Menghilangkan header bawaan Bandsintown jika ada */
+.bit-details, .bit-nav {
+    display: none !important;
+}
+
+/* Memastikan wrapper kita yang pegang kendali */
+.custom-bit-wrapper {
+    background: transparent;
+    border-top: 1px dashed #ddd; /* Ini garis putus-putus atas */
+    border-bottom: 1px dashed #ddd; /* Ini garis putus-putus bawah */
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
 
 
 /*styling kontent chord dan Transpose nada*/
