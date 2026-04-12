@@ -166,52 +166,45 @@ body{
 }
 
 /* Gaya Khusus Kontainer Bandsintown Sudut Nirwana */
-.custom-bit-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    border-top: 1px dashed #ccc;
-    border-bottom: 1px dashed #ccc;
-    padding: 15px 0;
-    margin: 20px 0;
-}
+/* --- CSS "Penembus Iframe" Bandsintown yang Lebih Agresif --- */
 
-.bit-icon {
-    width: 42px;
-    height: 42px;
-    background: #666; /* Warna lingkaran ikon */
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-}
-/* Memaksa widget Bandsintown jadi transparan dan tanpa border box */
-#bt-widget-wrapper iframe, 
-.bit-widget-initializer,
-.bandsintown-layout {
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-/* Menghilangkan header bawaan Bandsintown jika ada */
-.bit-details, .bit-nav {
+/* 1. Paksa Iframe Menghilang (Karena isinya tidak bisa kita kontrol) */
+#bt-widget-wrapper iframe,
+.bit-top-bar,
+.bit-nav,
+.bit-header,
+.bit-footer {
     display: none !important;
 }
 
-/* Memastikan wrapper kita yang pegang kendali */
+/* 2. Sembunyikan Placeholder Asli Jika Widget Muncul (Script default mereka) */
+.bit-widget-initializer {
+    display: none !important;
+}
+
+/* 3. Tampilkan Placeholder Kita Saja Sejajar dengan Ikon */
+.bit-placeholder {
+    font-size: 14px;
+    font-weight: bold;
+    color: #444; /* Sesuaikan warna teksnya */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 10px; /* Jarak dari ikon bulat */
+}
+
+/* 4. Atur Wrapper Kita (Ini yang Pegang Kendali Garis Putus-putus) */
 .custom-bit-wrapper {
-    background: transparent;
-    border-top: 1px dashed #ddd; /* Ini garis putus-putus atas */
-    border-bottom: 1px dashed #ddd; /* Ini garis putus-putus bawah */
     display: flex;
     align-items: center;
-    padding: 10px 0;
+    justify-content: center; /* Teks di tengah */
+    gap: 15px;
+    border-top: 1px dashed #ddd; /* Garis tipis atas */
+    border-bottom: 1px dashed #ddd; /* Garis tipis bawah */
+    padding: 15px 0;
+    margin: 15px 0;
+    background: transparent;
 }
+
 
 
 
