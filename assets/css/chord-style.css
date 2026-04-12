@@ -267,6 +267,8 @@ body{
    padding: 15px;
    margin-bottom: 40px;
    font-weight: 300;
+   touch-action: none; /* Mencegah browser men-zoom seluruh halaman saat box disentuh */
+   user-select: none;  /* Mencegah teks ter-blok saat mencubit */
 }
 
 /* Ini adalah class yang otomatis dibuat oleh JS */
