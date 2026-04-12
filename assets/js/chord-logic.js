@@ -163,47 +163,49 @@ document.addEventListener("DOMContentLoaded", function() {
     checkArtistWidget();
     initializeChords();
 
+    //agar layar kontent bisa di zoom tanpa kena semua body
     const el = document.querySelector('.chord-content');
 let scale = 1;
 let initialDist = 0;
+let baseFontSize = 15; // Sesuaikan dengan font-size awal di CSS kamu
 
 el.addEventListener('touchstart', (e) => {
     if (e.touches.length === 2) {
-        // Menghitung jarak awal antara dua jari
+        // Matikan scroll hanya saat dua jari menempel
         initialDist = Math.hypot(
             e.touches[0].pageX - e.touches[1].pageX,
             e.touches[0].pageY - e.touches[1].pageY
         );
     }
-});
+}, { passive: false });
 
 el.addEventListener('touchmove', (e) => {
     if (e.touches.length === 2) {
-        e.preventDefault(); // Stop body agar tidak ikut goyang/zoom
+        // Cegah zoom seluruh body saat sedang mencubit area box
+        e.preventDefault(); 
 
         const currentDist = Math.hypot(
             e.touches[0].pageX - e.touches[1].pageX,
             e.touches[0].pageY - e.touches[1].pageY
         );
 
-        // Hitung perubahan jarak
         const diff = currentDist / initialDist;
-        
-        // Update font size berdasarkan cubitan
         let newScale = scale * diff;
-        
-        // Batasi zoom (min 0.5x, max 3x)
-        if (newScale > 0.5 && newScale < 3) {
-            el.style.fontSize = `calc(15px * ${newScale})`;
+
+        // Batasi zoom agar tidak terlalu kecil atau raksasa
+        if (newScale > 0.6 && newScale < 3) {
+            el.style.fontSize = `${baseFontSize * newScale}px`;
         }
     }
-});
+    // Jika e.touches.length === 1, browser akan menjalankan scroll default
+}, { passive: false });
 
 el.addEventListener('touchend', (e) => {
-    // Simpan skala terakhir saat jari dilepas
-    const style = window.getComputedStyle(el).getPropertyValue('font-size');
-    scale = parseFloat(style) / 15; // 15 adalah font-size dasar kamu
+    // Simpan posisi skala terakhir agar saat nyubit lagi tidak lompat ukurannya
+    const currentFontSize = window.getComputedStyle(el).getPropertyValue('font-size');
+    scale = parseFloat(currentFontSize) / baseFontSize;
 });
+    
                     
 
 });
