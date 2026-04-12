@@ -1,16 +1,20 @@
-/* 1. Container Utama - Menghindari Header Tenggelam */
+/* ==========================================
+   DAFTAR ARTIS & LAGU - SUDUT NIRWANA
+   ========================================== */
+
+/* 1. Container Utama - Biar Gak Tertutup Header */
 .alphabet-page-content {
-    padding-top: 75px !important; /* Ditambah agar tidak tertutup header */
+    padding-top: 75px !important; /* Jarak aman dari header fixed */
     padding-bottom: 40px;
     min-height: 80vh;
     width: 100%;
     text-align: left; 
 }
 
-/* 2. Reset Warna Link - Menghilangkan Warna Biru */
+/* 2. Reset Link - Menghilangkan Warna Biru Browser */
 .alphabet-page-content a {
     text-decoration: none !important;
-    color: inherit !important; /* Paksa mengikuti warna elemen induk (hitam/abu) */
+    color: inherit !important;
 }
 
 /* 3. Header Section */
@@ -30,17 +34,17 @@
     color: #ee6c00 !important; 
 }
 
-/* 4. Grid Artis (Tampilan A-B, S-T, dst) */
+/* 4. Grid Artis (Tampilan Inisial A-Z) */
 .artist-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* Mobile: 2 Kolom */
     gap: 15px;
     padding: 15px;
 }
 
 @media (min-width: 768px) {
     .artist-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 1fr); /* Desktop: 4 Kolom */
     }
 }
 
@@ -61,52 +65,48 @@
     font-size: 1.5rem;
 }
 
-/* 5. Daftar Lagu Artis (Saat Artis Diklik) */
+/* 5. Daftar Lagu Artis (Tampilan List Lagu) */
 .artist-songs-grid {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
     padding: 15px;
 }
 
-/* --- Perbaikan List Lagu Agar Sejajar & Berjarak --- */
-
-/*.chord-list-item {
-    background: #ffffff;
-    border-radius: 10px;
-    border-left: 5px solid #ee6c00;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    
-    
-    display: flex !important; 
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    
-    padding: 15px 20px !important;
-    margin-bottom: 15px;
-    width: 100%;
-    box-sizing: border-box;
-}*/
+/* Responsif: Daftar Lagu jadi 2 Kolom di Desktop */
+@media screen and (min-width: 768px) {
+    .artist-songs-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; /* 2 Kolom Sejajar */
+        gap: 20px !important;
+    }
+}
 
 .chord-list-item {
     display: flex !important;
+    flex-direction: row !important;
     justify-content: space-between !important;
     align-items: center !important;
-    padding: 20px !important; /* Ruang di dalam box */
+    padding: 20px !important; 
     background: #ffffff;
     border-radius: 12px;
     border-left: 5px solid #ee6c00;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    text-decoration: none !important;
+    transition: 0.3s;
+}
+
+.chord-list-item:hover {
+    transform: translateY(-3px);
+    background: #fffcf9;
 }
 
 .song-info {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    flex: 1; /* Biar dia ngambil sisa ruang yang ada */
-    padding-right: 10px; /* Jarak antara teks judul dan panah */
+    flex: 1;
+    padding-right: 10px;
+    text-align: left;
 }
 
 .song-title {
@@ -126,9 +126,27 @@
     gap: 8px;
 }
 
-/* --- Panah Tetap di Kanan --- */
+/* Ikon Panah Tetap di Kanan */
 .view-icon {
     color: #ccc;
     font-size: 1.2rem;
-    flex-shrink: 0; /* JANGAN biarkan panah mengecil atau turun */
+    flex-shrink: 0;
+}
+
+/* 6. Tombol Kembali (CTA) */
+.btn-back {
+    display: inline-block;
+    padding: 10px 0;
+    background-color: transparent !important;
+    color: #d35400 !important; /* Orange Tua */
+    text-decoration: underline !important; /* Underline sesuai request */
+    font-weight: 700;
+    border: none !important;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-back:hover {
+    color: #ee6c00 !important;
+    text-decoration: none !important;
 }
