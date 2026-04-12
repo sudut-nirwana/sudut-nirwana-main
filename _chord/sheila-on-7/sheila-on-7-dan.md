@@ -6,32 +6,26 @@ genre: "pop"
 permalink: /chord/sheila-on-7/Dan/
 ---
 Intro : G   G   G   G
-```
+
 [ Verse I ]
 C              Bm             Am
-Dan...Dan bila esok datang kembali
+Dan...Dan bila esok, datang kembali
              G
 Seperti sejak kala dimana kau bisa bercanda
 C                  Bm           Am
 Dan... Perlahan kau pun, lupakan aku
-            G
-Mimpi burukmu Di mana telah kutancapkan
-    C
-duri tajam...
-        Bm             Am - D
-Kau pun menangis, Menangis sedih
-           G
-Maafkan aku...
+            G                              C
+Mimpi burukmu Di mana telah kutancapkan duri tajam
+        Bm             Am - D           G
+Kau pun menangis, Menangis sedih Maafkan aku
 
 [ Pre-Chorus ]
 C                Bm            Am
-Dan...Bukan maksudku, Bukan inginku
-        G
-melukaimu, Sadarkah kau di sini ku pun 
-      C
-terluka...
+Dan...Bukan maksudku, Bukan inginku,
+        G                              C
+melukaimu, Sadarkah kau di sini ku pun terluka
           Bm         Am - D     Em
-Melupakanmu, Menepikanmu, Maafkan aku
+Melupakanmu, Menepikanmu, Maafkan aku...
 
 [ Chorus / Reff ]
                 G
@@ -55,13 +49,11 @@ Interlude : G   G   G   G
 
 [ Verse II ]
 C                Bm            Am
-Dan...Bukan maksudku, Bukan inginku
-        G
-melukaimu, Sadarkah kau di sini ku pun 
-      C
-terluka...
+Dan...Bukan maksudku, Bukan inginku,
+        G                              C
+melukaimu, Sadarkah kau di sini ku pun terluka
           Bm         Am - D     Em
-Melupakanmu, Menepikanmu, Maafkan aku
+Melupakanmu, Menepikanmu, Maafkan aku...
 
 [ Chorus / Reff ]
                 G
@@ -85,4 +77,3 @@ Oh-ho-ho-ho-ho-oh
 ===================================
 Chord Yang Digunakan :
 C   B   Am   G   F   D
-```
