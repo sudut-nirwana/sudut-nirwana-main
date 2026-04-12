@@ -71,21 +71,30 @@ layout: default
       <div class="custom-bit-wrapper">
    <div class="bit-icon"><i class="fa-solid fa-music"></i></div>
    
-   <div style="flex-grow: 1; text-align: center;">
-      <div id="bt-widget-wrapper" class="bandsintown-layout">
-         <a class="bit-widget-initializer"
-            id="bt-element"
-            data-artist-name="{{ page.artist }}"
-            data-display-local-dates="true"
-            data-display-past-dates="false"
-            data-auto-style="false" 
-            data-text-color="#333333"
-            data-link-color="#ff9800"
-            data-background-color="transparent"
-            data-display-limit="3">
-         </a>
+   <div class="container container-padding"> <div class="custom-bit-wrapper">
+      <div class="bit-icon"><i class="fa-solid fa-music"></i></div>
+      
+      <div style="flex-grow: 1; text-align: center;">
+         <div id="bt-widget-wrapper" class="bandsintown-layout">
+            <a class="bit-widget-initializer"
+               id="bt-element"
+               data-artist-name="{{ page.artist }}"
+               data-display-local-dates="true"
+               data-display-past-dates="false"
+               data-auto-style="false" 
+               data-text-color="#333333"
+               data-link-color="#ff9800"
+               data-background-color="transparent"
+               data-display-limit="1">
+            </a>
+            <span class="bit-placeholder">Follow {{ page.artist }}</span>
+         </div>
       </div>
+
+      <div class="bit-icon"><i class="fa-solid fa-volume-high"></i></div>
    </div>
+</div>
+
 
    <div class="bit-icon"><i class="fa-solid fa-volume-high"></i></div>
 </div>
