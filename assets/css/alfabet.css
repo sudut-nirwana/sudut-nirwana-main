@@ -1,145 +1,91 @@
-/* Container Utama */
+/* 1. Container Utama - Menghindari Header Tenggelam */
 .alphabet-page-content {
-    padding-top: 70px; 
+    padding-top: 100px !important; /* Ditambah agar tidak tertutup header */
     padding-bottom: 40px;
     min-height: 80vh;
     width: 100%;
-    /* Rata kiri untuk seluruh konten di dalam container ini */
     text-align: left; 
 }
 
-/* Judul Halaman */
+/* 2. Reset Warna Link - Menghilangkan Warna Biru */
+.alphabet-page-content a {
+    text-decoration: none !important;
+    color: inherit !important; /* Paksa mengikuti warna elemen induk (hitam/abu) */
+}
+
+/* 3. Header Section */
 .section-header {
     margin-bottom: 30px;
-    text-align: left; /* Memastikan header rata kiri */
+    padding: 0 15px;
 }
 
 .main-title {
     margin: 0;
     font-weight: 700;
-    color: #333; /* Warna Hitam untuk teks utama */
+    color: #333 !important; 
     font-size: 1.5rem;
 }
 
-/* Warna Orange untuk bagian inisial */
 .main-title .highlight {
-    color: #ee6c00; 
+    color: #ee6c00 !important; 
 }
 
-/* Memastikan wrapper list juga rata kiri */
-.chord-list-wrapper {
+/* 4. Grid Artis (Tampilan A-B, S-T, dst) */
+.artist-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
-    width: 100%;
-    text-align: left;
+    padding: 15px;
 }
 
-/* Responsif: 2 Kolom untuk Tablet/Desktop */
-@media screen and (min-width: 768px) {
-    .chord-list-wrapper {
-        grid-template-columns: 1fr 1fr;
+@media (min-width: 768px) {
+    .artist-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
-/* Item List / Card */
-.chord-list-item {
-    background: #ffffff;
-    border-radius: 8px;
-    border-left: 3px solid #ee6c00; 
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    height: auto;
-    margin-bottom: 15px;
-}
-
-.chord-list-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    background: #fffcf9;
-}
-
-.chord-list-item a {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px; /* Padding dalam kartu agar lega */
-    text-decoration: none;
-    color: inherit;
-}
-
-/* Teks Artis & Lagu */
-.artist-name {
-    margin: 0;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    line-height: 1.2;
-}
-
-.song-title {
-    margin-top: 6px;
-    opacity: 0.8;
-    display: flex;
-    align-items: center;
-    font-size: 0.9em;
-}
-
-/* Icon */
-.icon-artist {
-    color: #ee6c00;
-    margin-right: 12px;
-    width: 20px;
+.artist-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 20px;
     text-align: center;
-}
-
-.fa-music {
-    margin-right: 12px;
-    width: 20px;
-    text-align: center;
-    opacity: 0.6;
-}
-
-.view-icon {
-    color: #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: 0.3s;
-    margin-left: 10px;
 }
 
-.chord-list-item:hover .view-icon {
+.artist-card i {
+    display: block;
     color: #ee6c00;
-    transform: translateX(3px);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
 }
 
-
-/* --- Container Daftar Lagu --- */
+/* 5. Daftar Lagu Artis (Saat Artis Diklik) */
 .artist-songs-grid {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding: 10px 0;
+    padding: 15px;
 }
 
-/* --- Kartu Item Lagu --- */
 .chord-list-item {
     background: #ffffff;
     border-radius: 10px;
-    border-left: 5px solid #ee6c00; /* Warna khas Sudut Nirwana */
+    border-left: 5px solid #ee6c00;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
+    transition: 0.3s;
 }
 
 .chord-list-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     background: #fffcf9;
 }
 
-/* --- Info Judul & Artis --- */
 .song-info {
     display: flex;
     flex-direction: column;
@@ -150,67 +96,30 @@
     margin: 0;
     font-size: 1.1rem;
     font-weight: 700;
-    color: #333;
+    color: #333 !important; /* Judul Lagu Hitam */
 }
 
 .artist-name {
     margin: 0;
     font-size: 0.9rem;
-    color: #666;
+    color: #666 !important; /* Nama Artis Abu-abu */
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.artist-name i {
-    color: #ee6c00;
-    font-size: 0.8rem;
-}
-
-/* --- Ikon Panah di Kanan --- */
 .view-icon {
     color: #ccc;
     font-size: 1.2rem;
-    transition: transform 0.3s ease;
 }
 
-.chord-list-item:hover .view-icon {
-    color: #ee6c00;
-    transform: translateX(5px);
-}
-
-/* --- Tombol Kembali --- */
+/* 6. Tombol Kembali */
 .btn-back {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: transparent;
-    color: #ee6c00;
+    padding: 10px 25px;
+    color: #ee6c00 !important;
     border: 2px solid #ee6c00;
     border-radius: 25px;
-    text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-back:hover {
-    background-color: #ee6c00;
-    color: #fff;
-}
-
-/* --- Artist Card (Grid A-Z) --- */
-.artist-card {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    transition: 0.3s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.artist-card i {
-    display: block;
-    color: #ee6c00;
-    margin-bottom: 10px;
-    font-size: 1.5rem;
+    margin-top: 20px;
 }
