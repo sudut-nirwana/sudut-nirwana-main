@@ -1,6 +1,6 @@
 /* 1. Container Utama - Menghindari Header Tenggelam */
 .alphabet-page-content {
-    padding-top: 100px !important; /* Ditambah agar tidak tertutup header */
+    padding-top: 75px !important; /* Ditambah agar tidak tertutup header */
     padding-bottom: 40px;
     min-height: 80vh;
     width: 100%;
