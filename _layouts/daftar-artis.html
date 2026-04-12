@@ -16,6 +16,38 @@ layout: default
         </div>
     </div>
 </div>
+<div class="container">
+  <div class="artist-grid">
+    {% comment %} Ambil semua data artis unik dari seluruh file chord {% endcomment %}
+    {% assign all_artists = site.pages | where: "layout", "chord" | map: "artist" | uniq | sort %}
+    
+    {% for artist in all_artists %}
+      {% capture first_char %}{{ artist | slice: 0 | downcase }}{% endcapture %}
+      {% assign show_artist = false %}
+
+      {% comment %} Logika filter berdasarkan judul halaman (Inisial) {% endcomment %}
+      {% if page.title contains "S - T" %}
+        {% if first_char == "s" or first_char == "t" %} {% assign show_artist = true %} {% endif %}
+      {% elsif page.title contains "A - B" %}
+        {% if first_char == "a" or first_char == "b" %} {% assign show_artist = true %} {% endif %}
+      {% comment %} Kamu bisa tambah elsif C-D, E-F, dst di sini {% endcomment %}
+      {% else %}
+        {% assign show_artist = true %} {% comment %} Tampilkan semua jika di halaman utama artis {% endcomment %}
+      {% endif %}
+
+      {% if show_artist %}
+        <div class="chord-item-box" data-artist="{{ artist | slugify }}">
+          <a href="{{ '/artis/' | relative_url }}?artist={{ artist | slugify }}" class="artist-link">
+            <div class="artist-card">
+               <i class="fa-solid fa-microphone-lines"></i>
+               <span>{{ artist }}</span>
+            </div>
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
