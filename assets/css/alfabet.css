@@ -110,3 +110,31 @@
     color: #ee6c00;
     transform: translateX(3px);
 }
+
+
+.artist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 20px 0;
+}
+.artist-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.artist-card:hover {
+    border-color: #ee6c00;
+    transform: translateY(-3px);
+}
+.artist-card i {
+    display: block;
+    color: #ee6c00;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
