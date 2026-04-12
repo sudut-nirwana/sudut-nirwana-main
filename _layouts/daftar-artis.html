@@ -12,11 +12,26 @@ layout: default
     
         <div class="chord-list-wrapper" id="chord-list-container">
             {% assign sorted_chords = site.chord | sort: "artist" %}
-            {% assign allowed_initials = page.title | replace: " ", "" | split: "-" %}
-
+            
             {% for item in sorted_chords %}
-                {% assign initial = item.artist | slice: 0 | upcase %}
-                {% if allowed_initials contains initial %}
+                {% comment %} 
+                   Logika Filter: 
+                   1. Jika di halaman /chord/, tampilkan semua.
+                   2. Jika di halaman alfabet (A-B, dsb), saring berdasarkan huruf depan.
+                {% endcomment %}
+                
+                {% assign show_item = false %}
+                {% if page.permalink == '/chord/' %}
+                    {% assign show_item = true %}
+                {% else %}
+                    {% assign initial = item.artist | slice: 0 | upcase %}
+                    {% assign allowed_initials = page.title | replace: " ", "" | split: "-" %}
+                    {% if allowed_initials contains initial %}
+                        {% assign show_item = true %}
+                    {% endif %}
+                {% endif %}
+
+                {% if show_item %}
                     <div class="chord-list-item chord-item-box" data-artist="{{ item.artist | slugify }}">
                         <a href="{{ item.url | relative_url }}">
                             <div class="artist-content">
@@ -48,6 +63,7 @@ layout: default
             let found = false;
 
             items.forEach(item => {
+                // Sembunyikan semua yang tidak sesuai dengan filter artis di URL
                 if (item.getAttribute('data-artist') === artistFilter) {
                     item.style.display = 'block';
                     found = true;
@@ -56,7 +72,7 @@ layout: default
                 }
             });
 
-            // Update Judul & Deskripsi jika filter aktif
+            // Update Tampilan Judul jika sedang memfilter artis tertentu
             if (found) {
                 const displayArtist = artistFilter.replace(/-/g, ' ').toUpperCase();
                 const titleEl = document.querySelector('.main-title');
