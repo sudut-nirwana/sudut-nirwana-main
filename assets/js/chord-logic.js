@@ -167,11 +167,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const el = document.querySelector('.chord-content');
 let scale = 1;
 let initialDist = 0;
-let baseFontSize = 15; // Sesuaikan dengan font-size awal di CSS kamu
+let baseFontSize = 15; // Samakan dengan font-size awal di CSS
 
 el.addEventListener('touchstart', (e) => {
     if (e.touches.length === 2) {
-        // Matikan scroll hanya saat dua jari menempel
+        // Hanya hitung jarak jika ada dua jari (untuk zoom)
         initialDist = Math.hypot(
             e.touches[0].pageX - e.touches[1].pageX,
             e.touches[0].pageY - e.touches[1].pageY
@@ -181,7 +181,7 @@ el.addEventListener('touchstart', (e) => {
 
 el.addEventListener('touchmove', (e) => {
     if (e.touches.length === 2) {
-        // Cegah zoom seluruh body saat sedang mencubit area box
+        // HANYA jika dua jari, kita matikan fungsi scroll/zoom browser
         e.preventDefault(); 
 
         const currentDist = Math.hypot(
@@ -192,20 +192,20 @@ el.addEventListener('touchmove', (e) => {
         const diff = currentDist / initialDist;
         let newScale = scale * diff;
 
-        // Batasi zoom agar tidak terlalu kecil atau raksasa
+        // Batasi zoom
         if (newScale > 0.6 && newScale < 3) {
             el.style.fontSize = `${baseFontSize * newScale}px`;
         }
-    }
-    // Jika e.touches.length === 1, browser akan menjalankan scroll default
+    } 
+    // Jika cuma 1 jari, e.preventDefault() tidak dipanggil, 
+    // sehingga scroll bawaan browser tetap jalan.
 }, { passive: false });
 
 el.addEventListener('touchend', (e) => {
-    // Simpan posisi skala terakhir agar saat nyubit lagi tidak lompat ukurannya
+    // Update skala terakhir
     const currentFontSize = window.getComputedStyle(el).getPropertyValue('font-size');
     scale = parseFloat(currentFontSize) / baseFontSize;
 });
-    
-                    
+
 
 });
