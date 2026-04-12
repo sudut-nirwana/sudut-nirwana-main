@@ -17,16 +17,18 @@ Dan... Perlahan kau pun, lupakan aku
 Mimpi burukmu Di mana telah kutancapkan
     C
 duri tajam...
-        Bm              Am - D         G
-Kau pun menangis, Menangis sedih Maafkan aku
+        Bm             Am - D
+Kau pun menangis, Menangis sedih
+           G
+Maafkan aku...
 
 [ Pre-Chorus ]
 C                Bm            Am
 Dan...Bukan maksudku, Bukan inginku
         G
-melukaimu, Sadarkah kau di sini
-        C
-ku pun terluka...
+melukaimu, Sadarkah kau di sini ku pun 
+      C
+terluka...
           Bm         Am - D     Em
 Melupakanmu, Menepikanmu, Maafkan aku
 
@@ -51,14 +53,14 @@ Seperti dulu kala..oh-ho..
 Interlude : G   G   G   G
 
 [ Verse II ]
-C                  Bm           Am
-Dan... Perlahan kau pun, lupakan aku
-            G
-Mimpi burukmu Di mana telah kutancapkan
-    C
-duri tajam...
-        Bm              Am - D         G
-Kau pun menangis, Menangis sedih Maafkan aku
+C                Bm            Am
+Dan...Bukan maksudku, Bukan inginku
+        G
+melukaimu, Sadarkah kau di sini ku pun 
+      C
+terluka...
+          Bm         Am - D     Em
+Melupakanmu, Menepikanmu, Maafkan aku
 
 [ Chorus / Reff ]
                 G
@@ -79,8 +81,6 @@ Kembali bersinar dan berpijar
 Seperti dulu kala..oh-ho..
 
 Oh-ho-ho-ho-ho-oh
-
-==========================
+===================================
 Chord Yang Digunakan :
 C   B   Am   G   F   D
-==========================
