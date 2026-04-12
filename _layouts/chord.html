@@ -7,94 +7,108 @@ layout: default
 <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 <section class="content-chord" id="content-chord">
-   <div class="colom1">
-      <div class="container">
-         
-         <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-            <div class="breadcrumb-container">
-               <ul class="breadcrumb-list">
-                  <li><a href="/"><i class="fa-solid fa-house"></i> Beranda</a></li>
-                  <li><a href="{{ '/chord/' | relative_url }}">Chord</a></li>
-                  {% if page.artist %}
-                  <li>
-                     <a href="{{ '/artis/' | append: (page.artist | slugify) | append: '/' | relative_url }}">
-                        {{ page.artist }}
-                     </a>
-                  </li>
-                  {% endif %}
-
-                  <li class="active" aria-current="page">{{ page.title }}</li>
-               </ul>
-            </div>
-         </nav>
-
-         
-         <!--menampilkan judul kontent dan title artis di bawah judul chord pada layout chord -->
-         <header class="entry-header">
-            <h2 class="chord-title">{{ page.title }}</h2>
-            <div class="artist-subtitle">
-               <i class="fa-solid fa-microphone-lines"></i> Chord Gitar & Lirik: <span>{{ page.artist }}</span>
-            </div>
-         </header>
+  <div class="colom1">
+    <div class="container">
       
-         <!--untuk menampilkan google ads harus daftar dulu untuk mendapat code iklan nya di google.com/addsense-->
-         <div class="ad-container">
-            <small>Advertisement</small>
-            <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-12345"
-               data-ad-slot="67890"
-               data-ad-format="auto">
-            </ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-         </div>
-         
-         <!--mengambil wiget template dari bandsintown untuk menampilkan follow artis yg kunci gitar nya sednag di mainkan-->
-         <div id="bt-widget-wrapper" class="bandsintown-layout">
-            <a class="bit-widget-initializer" 
-               id="bt-element"
-               data-artist-name="{{ artist }}" 
-               data-background-color="transparent"
-               data-separator-color="#E1E1E1" 
-               data-text-color="#333333"
-               data-font="Arial, sans-serif"
-               data-auto-style="true">
-               Follow {{ page.artist }} on Bandsintown
-            </a>
-         </div>
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <div class="breadcrumb-container">
+          <ul class="breadcrumb-list">
+            <li><a href="{{ '/' | relative_url }}"><i class="fa-solid fa-house"></i> Beranda</a></li>
+            <li><a href="{{ '/chord/' | relative_url }}">Chord</a></li>
+
+            {% if page.artist %}
+            <li>
+              {% assign first_letter = page.artist | slice: 0 | downcase %}
+              {% if "abcdefghijklmnopqrstuvwxyz" contains first_letter %}
+                {% comment %} Logika untuk mengarahkan ke halaman abjad yang sesuai {% endcomment %}
+                {% if "ab" contains first_letter %}{% assign slug = "a-b" %}
+                {% elsif "cd" contains first_letter %}{% assign slug = "c-d" %}
+                {% elsif "ef" contains first_letter %}{% assign slug = "e-f" %}
+                {% elsif "gh" contains first_letter %}{% assign slug = "g-h" %}
+                {% elsif "ij" contains first_letter %}{% assign slug = "i-j" %}
+                {% elsif "kl" contains first_letter %}{% assign slug = "k-l" %}
+                {% elsif "mn" contains first_letter %}{% assign slug = "m-n" %}
+                {% elsif "op" contains first_letter %}{% assign slug = "o-p" %}
+                {% elsif "qr" contains first_letter %}{% assign slug = "q-r" %}
+                {% elsif "st" contains first_letter %}{% assign slug = "s-t" %}
+                {% elsif "uv" contains first_letter %}{% assign slug = "u-v" %}
+                {% elsif "wx" contains first_letter %}{% assign slug = "w-x" %}
+                {% elsif "yz" contains first_letter %}{% assign slug = "y-z" %}
+                {% endif %}
+              {% else %}
+                {% assign slug = "a-b" %}
+              {% endif %}
+
+              <a href="{{ '/artis/' | append: slug | append: '/' | relative_url }}?artist={{ page.artist | slugify }}">
+                {{ page.artist }}
+              </a>
+            </li>
+            {% endif %}
+
+            <li class="active">{{ page.title }}</li>
+          </ul>
+        </div>
+      </nav>
+
+      <header class="entry-header">
+        <h2 class="chord-title">{{ page.title }}</h2>
+        <div class="artist-subtitle">
+          <i class="fa-solid fa-microphone-lines"></i> Chord Gitar & Lirik: <span>{{ page.artist }}</span>
+        </div>
+      </header>
+    
+      <div class="ad-container">
+        <small>Advertisement</small>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-12345"
+             data-ad-slot="67890"
+             data-ad-format="auto">
+        </ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
       
-         <!-- panel transpose nada-->
-         <div class="chord-controls">
-            <span class="control-label"><i class="fa-solid fa-music"></i> Nada Dasar</span>
-            <div class="control-group">
-               <div class="transpose-buttons">
-                  <button onclick="transpose(-1)" class="btn-transpose" title="Turunkan Nada"><i class="fa-solid fa-minus"></i>
-                  </button>
-         
-                  <span id="pitch-indicator">0</span>
-                  <button onclick="transpose(1)" class="btn-transpose" title="Naikkan Nada"><i class="fa-solid fa-plus"></i>
-                  </button>
-               </div>
-            </div>
-            <button id="reset-btn" onclick="resetTranspose()" class="btn-reset"><i class="fa-solid fa-rotate-right"></i> Reset
+      <div id="bt-widget-wrapper" class="bandsintown-layout">
+        <a class="bit-widget-initializer" 
+           id="bt-element"
+           data-artist-name="{{ page.artist }}" 
+           data-background-color="transparent"
+           data-separator-color="#E1E1E1" 
+           data-text-color="#333333"
+           data-font="Arial, sans-serif"
+           data-auto-style="true">
+           Follow {{ page.artist }} on Bandsintown
+        </a>
+      </div>
+    
+      <div class="chord-controls">
+        <span class="control-label"><i class="fa-solid fa-music"></i> Nada Dasar</span>
+        <div class="control-group">
+          <div class="transpose-buttons">
+            <button onclick="transpose(-1)" class="btn-transpose" title="Turunkan Nada">
+              <i class="fa-solid fa-minus"></i>
             </button>
-         </div>
-         
-         <!--isi dari kontent untama lirik lagu dan chord gitar mengambil dari file md-->
-         <pre class="chord-content" id="chord-content">{{ content }}</pre>
+            <span id="pitch-indicator">0</span>
+            <button onclick="transpose(1)" class="btn-transpose" title="Naikkan Nada">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <button id="reset-btn" onclick="resetTranspose()" class="btn-reset">
+          <i class="fa-solid fa-rotate-right"></i> Reset
+        </button>
       </div>
-   </div>
-   
-   <!--menampilkan menu lain nya seperti lagu update dan nav alfabet-->
-   <div class="colom2">
-      <div id="bt-widget-wrapper">
-         <div class="container">
-            
-         </div>
-      </div>
-   </div>
+      
+      <pre class="chord-content" id="chord-content">{{ content }}</pre>
+    </div>
+  </div>
+  
+  <div class="colom2">
+    <div class="container">
+      {% comment %} Isi sidebar bisa diletakkan di sini {% endcomment %}
+    </div>
+  </div>
 </section>
-
 
 <div id="autoscroll-container">
   <div class="controls-wrapper">
