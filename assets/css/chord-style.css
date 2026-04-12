@@ -210,16 +210,16 @@ body{
     text-align: center;
 }
 
-.bit-custom-link {
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-}
-
 .bit-custom-link .follow-text {
-    color: #2ecc71; /* Warna hijau khas */
+    color: #ee6c00; /* Warna Oranye Khas Sudut Nirwana */
     font-weight: bold;
     font-size: 15px;
+    text-transform: capitalize; /* Biar huruf depannya saja yang besar, lebih rapi */
+}
+
+/* Tambahan: Efek saat link ditekan biar makin interaktif */
+.bit-custom-link:active .follow-text {
+    color: #c45a00; /* Oranye agak gelap saat diklik */
 }
 
 .bit-custom-link .sub-text {
