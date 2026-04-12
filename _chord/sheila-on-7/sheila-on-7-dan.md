@@ -6,6 +6,7 @@ genre: "pop"
 permalink: /chord/sheila-on-7/Dan/
 ---
 Intro : G   G   G   G
+```
 [ Verse I ]
 C              Bm             Am
 Dan...Dan bila esok datang kembali
@@ -84,3 +85,4 @@ Oh-ho-ho-ho-ho-oh
 ===================================
 Chord Yang Digunakan :
 C   B   Am   G   F   D
+```
