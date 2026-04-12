@@ -71,22 +71,34 @@
 
 /* --- Perbaikan List Lagu Agar Sejajar & Berjarak --- */
 
-.chord-list-item {
+/*.chord-list-item {
     background: #ffffff;
     border-radius: 10px;
     border-left: 5px solid #ee6c00;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     
-    /* KUNCI UTAMA: Biar panah gak turun & ada jarak */
+    
     display: flex !important; 
-    flex-direction: row !important; /* Paksa satu baris */
+    flex-direction: row !important;
     justify-content: space-between !important;
     align-items: center !important;
     
-    padding: 15px 20px !important; /* Padding biar gak mepet */
+    padding: 15px 20px !important;
     margin-bottom: 15px;
     width: 100%;
-    box-sizing: border-box; /* Biar padding gak nambah lebar box */
+    box-sizing: border-box;
+}*/
+
+.chord-list-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 20px !important; /* Ruang di dalam box */
+    background: #ffffff;
+    border-radius: 12px;
+    border-left: 5px solid #ee6c00;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-decoration: none !important;
 }
 
 .song-info {
