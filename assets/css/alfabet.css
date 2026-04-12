@@ -112,59 +112,105 @@
 }
 
 
-/* Container Utama */
-.alphabet-page-content {
-    padding: 30px 0;
-}
-
-/* Grid Artis */
-.artist-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 Kolom untuk HP */
-    gap: 15px;
-    padding: 10px; /* Jarak agar tidak terpotong di pinggir layar */
-}
-
-@media (min-width: 768px) {
-    .artist-grid {
-        grid-template-columns: repeat(4, 1fr); /* 4 Kolom untuk Desktop */
-    }
-}
-
-/* Kartu Artis */
-.artist-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px 10px;
-    text-align: center;
-    border: 1px solid #eee;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: 0.3s ease;
-    height: 100%;
+/* --- Container Daftar Lagu --- */
+.artist-songs-grid {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    gap: 12px;
+    padding: 10px 0;
 }
 
-.artist-card:hover {
-    border-color: #ee6c00;
-    transform: translateY(-5px);
+/* --- Kartu Item Lagu --- */
+.chord-list-item {
+    background: #ffffff;
+    border-radius: 10px;
+    border-left: 5px solid #ee6c00; /* Warna khas Sudut Nirwana */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.chord-list-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background: #fffcf9;
+}
+
+/* --- Info Judul & Artis --- */
+.song-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.song-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.artist-name {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.artist-name i {
+    color: #ee6c00;
+    font-size: 0.8rem;
+}
+
+/* --- Ikon Panah di Kanan --- */
+.view-icon {
+    color: #ccc;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.chord-list-item:hover .view-icon {
+    color: #ee6c00;
+    transform: translateX(5px);
+}
+
+/* --- Tombol Kembali --- */
+.btn-back {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #ee6c00;
+    border: 2px solid #ee6c00;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    background-color: #ee6c00;
+    color: #fff;
+}
+
+/* --- Artist Card (Grid A-Z) --- */
+.artist-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .artist-card i {
+    display: block;
     color: #ee6c00;
-    font-size: 1.5rem;
     margin-bottom: 10px;
-}
-
-.artist-card span {
-    font-weight: bold;
-    color: #333;
-    font-size: 0.9rem;
-}
-
-/* Link */
-.artist-link {
-    text-decoration: none;
+    font-size: 1.5rem;
 }
