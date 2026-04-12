@@ -105,7 +105,12 @@ layout: default
   
   <div class="colom2">
     <div class="container">
-      {% comment %} Isi sidebar bisa diletakkan di sini {% endcomment %}
+      {% comment %}
+      <div class="sidebar-content">
+        {% include related-chord.html %}
+        {% include chord-terbaru.html %}
+      </div>
+      {% endcomment %}
     </div>
   </div>
 </section>
