@@ -73,7 +73,6 @@ Kembali bersinar dan berpijar
        F        D      G
 Seperti dulu kala..oh-ho..
 
-Oh-ho-ho-ho-ho-oh
 ===================================
 Chord Yang Digunakan :
 C   B   Am   G   F   D
