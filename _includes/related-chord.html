@@ -1,11 +1,11 @@
 <section class="related-chord">
-   <h3 style="margin-bottom: 15px;">Lainnya dari <span style="color: #ff9800;">{{ page.artist }}</span></h3>
+   <h3 style="margin-bottom: 15px;">Lainnya dari <span style="color: #ee6c00;">{{ page.artist }}</span></h3>
    <div class="wrapper-related">
       {% assign related_songs = site.chord | where: "artist", page.artist | sample: 6 %}
       {% for song in related_songs %}
          {% if song.url != page.url %}
             <div class="card-related" style="background: #f9f9f9; padding: 12px; margin-bottom: 10px; border-left: 4px solid #ff9800; border-radius: 6px;">
-               <a href="{{ song.url | relative_url }}" style="text-decoration: none; color: #333; font-weight: bold; display: block;">
+               <a href="{{ song.url | relative_url }}" style="text-decoration: none; color: #333; font-weight: 300; display: block;">
                   Chord {{ song.title }} - {{ song.artist }}
                </a>
             </div>
