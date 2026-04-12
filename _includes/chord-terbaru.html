@@ -1,11 +1,11 @@
 <section class="new-update" style="margin-top: 30px;">
-   <h3 style="margin-bottom: 15px;">Mungkin kamu <span style="color: #ff9800;">Suka</span></h3>
+   <h3 style="margin-bottom: 15px;">Mungkin kamu <span style="color: #ee6c00;">Suka</span></h3>
    <div class="wrapper-related">
       {% assign latest_songs = site.chord | sort: 'date' | reverse %}
       {% for song in latest_songs limit: 6 %}
          {% if song.artist != page.artist %}
             <div class="card-related" style="background: #f9f9f9; padding: 12px; margin-bottom: 10px; border-left: 4px solid #333; border-radius: 6px;">
-               <a href="{{ song.url | relative_url }}" style="text-decoration: none; color: #333; font-weight: bold; display: block;">
+               <a href="{{ song.url | relative_url }}" style="text-decoration: none; color: #333; font-weight: 300; display: block;">
                   Chord {{ song.title }} - {{ song.artist }}
                </a>
             </div>
