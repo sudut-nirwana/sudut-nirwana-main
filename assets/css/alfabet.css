@@ -1,152 +1,131 @@
 /* ==========================================
    DAFTAR ARTIS & LAGU - SUDUT NIRWANA
    ========================================== */
-
-/* 1. Container Utama - Biar Gak Tertutup Header */
+/* --- 1. Container & Penyelarasan --- */
 .alphabet-page-content {
-    padding-top: 75px !important; /* Jarak aman dari header fixed */
+    padding-top: 75px !important; /* Sesuai permintaan: 75px */
     padding-bottom: 40px;
     min-height: 80vh;
-    width: 100%;
-    text-align: left; 
 }
 
-/* 2. Reset Link - Menghilangkan Warna Biru Browser */
+.alphabet-page-content .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px; /* Menyesuaikan rata kiri logo */
+}
+
+/* --- 2. Reset Link (Anti Biru) --- */
 .alphabet-page-content a {
     text-decoration: none !important;
     color: inherit !important;
 }
 
-/* 3. Header Section */
+/* --- 3. Header Section --- */
 .section-header {
-    margin-bottom: 30px;
-    padding: 0 15px;
+    margin-bottom: 25px;
+    text-align: left;
 }
 
 .main-title {
-    margin: 0;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: #333 !important; 
-    font-size: 1.5rem;
+    color: #333 !important;
 }
 
 .main-title .highlight {
-    color: #ee6c00 !important; 
+    color: #ee6c00 !important;
 }
 
-/* 4. Grid Artis (Tampilan Inisial A-Z) */
+/* --- 4. Grid Kartu Artis (A-B, S-T) --- */
 .artist-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Mobile: 2 Kolom */
-    gap: 15px;
-    padding: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
 }
 
 @media (min-width: 768px) {
     .artist-grid {
-        grid-template-columns: repeat(4, 1fr); /* Desktop: 4 Kolom */
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
 .artist-card {
     background: #fff;
     border: 1px solid #eee;
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: 10px;
+    padding: 15px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transition: 0.3s;
 }
 
-.artist-card i {
-    display: block;
-    color: #ee6c00;
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-}
-
-/* 5. Daftar Lagu Artis (Tampilan List Lagu) */
+/* --- 5. List Lagu (Dibuat Ramping/Ceper) --- */
 .artist-songs-grid {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding: 15px;
+    gap: 10px;
 }
 
-/* Responsif: Daftar Lagu jadi 2 Kolom di Desktop */
+/* Desktop: 2 Kolom Sejajar */
 @media screen and (min-width: 768px) {
     .artist-songs-grid {
         display: grid !important;
-        grid-template-columns: 1fr 1fr !important; /* 2 Kolom Sejajar */
-        gap: 20px !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 15px !important;
     }
 }
 
 .chord-list-item {
     display: flex !important;
-    flex-direction: row !important;
     justify-content: space-between !important;
     align-items: center !important;
-    padding: 20px !important; 
+    /* Padding diperkecil: Atas-Bawah 10px, Kiri-Kanan 15px */
+    padding: 10px 15px !important; 
     background: #ffffff;
-    border-radius: 12px;
-    border-left: 5px solid #ee6c00;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    border-left: 4px solid #ee6c00;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     transition: 0.3s;
 }
 
 .chord-list-item:hover {
-    transform: translateY(-3px);
     background: #fffcf9;
 }
 
 .song-info {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    flex: 1;
-    padding-right: 10px;
+    gap: 2px; /* Jarak antar teks makin rapat */
     text-align: left;
 }
 
 .song-title {
     margin: 0 !important;
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1rem; /* Ukuran font disesuaikan agar proporsional */
     color: #333 !important;
-    line-height: 1.2;
+    font-weight: 700;
 }
 
 .artist-name {
     margin: 0 !important;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #666 !important;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
-/* Ikon Panah Tetap di Kanan */
 .view-icon {
     color: #ccc;
-    font-size: 1.2rem;
+    font-size: 1rem;
     flex-shrink: 0;
 }
 
-/* 6. Tombol Kembali (CTA) */
+/* --- 6. Tombol CTA (Orange Tua & Underline) --- */
 .btn-back {
     display: inline-block;
-    padding: 10px 0;
-    background-color: transparent !important;
+    margin-top: 25px;
     color: #d35400 !important; /* Orange Tua */
-    text-decoration: underline !important; /* Underline sesuai request */
+    text-decoration: underline !important;
     font-weight: 700;
+    font-size: 0.95rem;
+    background: none !important;
     border: none !important;
-    transition: 0.3s;
     cursor: pointer;
-}
-
-.btn-back:hover {
-    color: #ee6c00 !important;
-    text-decoration: none !important;
 }
