@@ -15,15 +15,13 @@ layout: default
             {% endif %}
         </div>
 
-        <div class="artist-grid">
-            {% comment %} Menarik semua data artis unik dari dokumen {% endcomment %}
+        <div class="artist-grid" id="artist-cards-wrapper">
             {% assign all_artists = site.documents | where: "layout", "chord" | map: "artist" | uniq | sort %}
 
             {% for artist in all_artists %}
                 {% capture first_char %}{{ artist | slice: 0 | downcase }}{% endcapture %}
                 {% assign show_artist = false %}
 
-                {% comment %} Logika filter otomatis berdasarkan Judul Halaman (.md) {% endcomment %}
                 {% if page.title == "Daftar Artis" %}
                     {% assign show_artist = true %}
                 {% elsif page.title contains "A - B" %}
@@ -55,8 +53,8 @@ layout: default
                 {% endif %}
 
                 {% if show_artist %}
-                <div class="chord-item-box" data-artist="{{ artist | slugify }}">
-                    <a href="{{ '/artis/' | relative_url }}?artist={{ artist | slugify }}" class="artist-link">
+                <div class="artist-card-item">
+                    <a href="{{ page.url | relative_url }}?artist={{ artist | slugify }}" class="artist-link">
                         <div class="artist-card">
                             <i class="fa-solid fa-microphone-lines"></i>
                             <span>{{ artist }}</span>
@@ -66,25 +64,53 @@ layout: default
                 {% endif %}
             {% endfor %}
         </div>
+
+        <div id="song-list-container" style="display: none; margin-top: 20px;">
+            <div class="artist-songs-grid">
+                {% assign all_chords = site.documents | where: "layout", "chord" | sort: "title" %}
+                {% for chord in all_chords %}
+                    <div class="chord-item-box song-item" data-artist="{{ chord.artist | slugify }}" style="display: none;">
+                        <a href="{{ chord.url | relative_url }}" class="chord-link">
+                            <div class="chord-list-item">
+                                <div class="song-info">
+                                    <h3 class="song-title">{{ chord.title }}</h3>
+                                    <p class="artist-name"><i class="fa-solid fa-microphone"></i> {{ chord.artist }}</p>
+                                </div>
+                                <i class="fa-solid fa-chevron-right view-icon"></i>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="{{ page.url | relative_url }}" class="btn-back"> Kembali ke Daftar Inisial</a>
+            </div>
+        </div>
     </div>
 </div>
 
-{% comment %} Script tetap untuk filter dinamis jika URL memiliki parameter ?artist= {% endcomment %}
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
         const artistFilter = urlParams.get('artist');
         
+        const artistGrid = document.getElementById('artist-cards-wrapper');
+        const songContainer = document.getElementById('song-list-container');
+        const songs = document.querySelectorAll('.song-item');
+
         if (artistFilter) {
-            const items = document.querySelectorAll('.chord-item-box');
             let found = false;
 
-            items.forEach(item => {
-                if (item.getAttribute('data-artist') === artistFilter) {
-                    item.style.display = 'block';
+            // Sembunyikan Grid Artis, Tampilkan Container Lagu
+            artistGrid.style.display = 'none';
+            songContainer.style.display = 'block';
+
+            songs.forEach(song => {
+                if (song.getAttribute('data-artist') === artistFilter) {
+                    song.style.display = 'block';
                     found = true;
                 } else {
-                    item.style.display = 'none';
+                    song.style.display = 'none';
                 }
             });
 
