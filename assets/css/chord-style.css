@@ -267,10 +267,10 @@ body{
    padding: 15px;
    margin-bottom: 40px;
    font-weight: 300;
-   touch-action: pan-x pan-y; /* Izinkan scroll satu jari bawaan browser */
-   overflow: auto;            /* Aktifkan scroll horizontal & vertikal */
+   touch-action: auto;       /* Izinkan browser mengatur scroll & zoom dasar */
+   overflow: auto;           /* Aktifkan scroll di dalam box */
+   -webkit-overflow-scrolling: touch; /* Biar scroll di iPhone/Android mulus (momentum) */
    user-select: none;
-   -webkit-user-drag: none;
 }
 
 /* Ini adalah class yang otomatis dibuat oleh JS */
