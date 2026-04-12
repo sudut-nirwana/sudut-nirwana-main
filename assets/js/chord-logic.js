@@ -167,22 +167,23 @@ document.addEventListener("DOMContentLoaded", function() {
     const el = document.querySelector('.chord-content');
 let scale = 1;
 let initialDist = 0;
-let baseFontSize = 15; // Samakan dengan font-size awal di CSS
+const baseFontSize = 15; // Font-size awal kamu
 
 el.addEventListener('touchstart', (e) => {
+    // Jika dua jari, hitung jarak untuk persiapan zoom
     if (e.touches.length === 2) {
-        // Hanya hitung jarak jika ada dua jari (untuk zoom)
         initialDist = Math.hypot(
             e.touches[0].pageX - e.touches[1].pageX,
             e.touches[0].pageY - e.touches[1].pageY
         );
     }
-}, { passive: false });
+}, { passive: true }); // Ubah ke true agar tidak menghambat scroll
 
 el.addEventListener('touchmove', (e) => {
+    // HANYA JIKA DUA JARI: Lakukan Zoom
     if (e.touches.length === 2) {
-        // HANYA jika dua jari, kita matikan fungsi scroll/zoom browser
-        e.preventDefault(); 
+        // e.cancelable cek apakah event bisa dihentikan
+        if (e.cancelable) e.preventDefault(); 
 
         const currentDist = Math.hypot(
             e.touches[0].pageX - e.touches[1].pageX,
@@ -192,20 +193,19 @@ el.addEventListener('touchmove', (e) => {
         const diff = currentDist / initialDist;
         let newScale = scale * diff;
 
-        // Batasi zoom
+        // Batasi skala zoom
         if (newScale > 0.6 && newScale < 3) {
             el.style.fontSize = `${baseFontSize * newScale}px`;
         }
-    } 
-    // Jika cuma 1 jari, e.preventDefault() tidak dipanggil, 
-    // sehingga scroll bawaan browser tetap jalan.
-}, { passive: false });
+    }
+    // Jika hanya satu jari, script ini diam saja (tidak ada e.preventDefault)
+    // Maka browser akan melakukan scroll di dalam box secara otomatis.
+}, { passive: false }); // False di sini wajib agar preventDefault zoom jalan
 
 el.addEventListener('touchend', (e) => {
-    // Update skala terakhir
+    // Update skala referensi saat jari diangkat
     const currentFontSize = window.getComputedStyle(el).getPropertyValue('font-size');
     scale = parseFloat(currentFontSize) / baseFontSize;
 });
-
 
 });
