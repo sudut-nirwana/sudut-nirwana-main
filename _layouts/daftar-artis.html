@@ -6,49 +6,13 @@ layout: default
 <div class="alphabet-page-content">
     <div class="container">
         <div class="section-header">
+            {% if page.url contains '/genre/' %}
+            <h2 class="main-title">Daftar Chord <span class="highlight">Genre {{ page.title }}</span></h2>
+            <p>Temukan koleksi lagu terbaik dengan aliran musik {{ page.title }}</p>
+            {% else %}
             <h2 class="main-title">Daftar Artis <span class="highlight">Inisial {{ page.title }}</span></h2>
             <p>Temukan chord gitar berdasarkan nama artis {{ page.title }}</p>
-        </div>
-    
-        <div class="chord-list-wrapper" id="chord-list-container">
-            {% assign sorted_chords = site.chord | sort: "artist" %}
-            
-            {% for item in sorted_chords %}
-                {% comment %} 
-                   Logika Filter: 
-                   1. Jika di halaman /chord/, tampilkan semua.
-                   2. Jika di halaman alfabet (A-B, dsb), saring berdasarkan huruf depan.
-                {% endcomment %}
-                
-                {% assign show_item = false %}
-                {% if page.permalink == '/chord/' %}
-                    {% assign show_item = true %}
-                {% else %}
-                    {% assign initial = item.artist | slice: 0 | upcase %}
-                    {% assign allowed_initials = page.title | replace: " ", "" | split: "-" %}
-                    {% if allowed_initials contains initial %}
-                        {% assign show_item = true %}
-                    {% endif %}
-                {% endif %}
-
-                {% if show_item %}
-                    <div class="chord-list-item chord-item-box" data-artist="{{ item.artist | slugify }}">
-                        <a href="{{ item.url | relative_url }}">
-                            <div class="artist-content">
-                                <p class="artist-name">
-                                    <i class="fas fa-user-circle icon-artist"></i> {{ item.artist }}
-                                </p>
-                                <span class="song-title">
-                                    <i class="fas fa-music"></i> {{ item.title }}
-                                </span>
-                            </div>
-                            <div class="view-icon">
-                                <i class="fas fa-chevron-right"></i>
-                            </div>
-                        </a>
-                    </div>
-                {% endif %}
-            {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>
