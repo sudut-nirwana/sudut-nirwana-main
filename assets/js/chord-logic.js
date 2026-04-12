@@ -163,4 +163,47 @@ document.addEventListener("DOMContentLoaded", function() {
     checkArtistWidget();
     initializeChords();
 
+    const el = document.querySelector('.chord-content');
+let scale = 1;
+let initialDist = 0;
+
+el.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 2) {
+        // Menghitung jarak awal antara dua jari
+        initialDist = Math.hypot(
+            e.touches[0].pageX - e.touches[1].pageX,
+            e.touches[0].pageY - e.touches[1].pageY
+        );
+    }
+});
+
+el.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 2) {
+        e.preventDefault(); // Stop body agar tidak ikut goyang/zoom
+
+        const currentDist = Math.hypot(
+            e.touches[0].pageX - e.touches[1].pageX,
+            e.touches[0].pageY - e.touches[1].pageY
+        );
+
+        // Hitung perubahan jarak
+        const diff = currentDist / initialDist;
+        
+        // Update font size berdasarkan cubitan
+        let newScale = scale * diff;
+        
+        // Batasi zoom (min 0.5x, max 3x)
+        if (newScale > 0.5 && newScale < 3) {
+            el.style.fontSize = `calc(15px * ${newScale})`;
+        }
+    }
+});
+
+el.addEventListener('touchend', (e) => {
+    // Simpan skala terakhir saat jari dilepas
+    const style = window.getComputedStyle(el).getPropertyValue('font-size');
+    scale = parseFloat(style) / 15; // 15 adalah font-size dasar kamu
+});
+                    
+
 });
