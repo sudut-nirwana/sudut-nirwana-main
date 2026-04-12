@@ -5,30 +5,66 @@ layout: default
 
 <div class="alphabet-page-content">
     <div class="container">
-    <div class="section-header">
-        <h2 class="main-title">Daftar Artis <span class="highlight">Inisial {{ page.title }}</span></h2>
-        <p>Temukan chord gitar berdasarkan nama artis {{ page.title }}</p>
-    </div>
+        <div class="section-header">
+            <h2 class="main-title">Daftar Artis <span class="highlight">Inisial {{ page.title }}</span></h2>
+            <p>Temukan chord gitar berdasarkan nama artis {{ page.title }}</p>
+        </div>
     
-        <div class="chord-list-wrapper">
-        {% assign sorted_chords = site.chord | sort: "artist" %}
-        {% assign allowed_initials = page.title | replace: " ", "" | split: "-" %}
+        <div class="chord-list-wrapper" id="chord-list-container">
+            {% assign sorted_chords = site.chord | sort: "artist" %}
+            {% assign allowed_initials = page.title | replace: " ", "" | split: "-" %}
 
-        {% for item in sorted_chords %}
-            {% assign initial = item.artist | slice: 0 | upcase %}
-            {% if allowed_initials contains initial %}
-            <div class="chord-list-item">
-                <a href="{{ item.url | relative_url }}">
-                    <div class="artist-content">
-                        <p class="artist-name"><i class="fas fa-user-circle icon-artist"></i> {{ item.artist }}</p>
-                        <span class="song-title"><i class="fas fa-music"></i> {{ item.title }}</span>
+            {% for item in sorted_chords %}
+                {% assign initial = item.artist | slice: 0 | upcase %}
+                {% if allowed_initials contains initial %}
+                    <div class="chord-list-item chord-item-box" data-artist="{{ item.artist | slugify }}">
+                        <a href="{{ item.url | relative_url }}">
+                            <div class="artist-content">
+                                <p class="artist-name">
+                                    <i class="fas fa-user-circle icon-artist"></i> {{ item.artist }}
+                                </p>
+                                <span class="song-title">
+                                    <i class="fas fa-music"></i> {{ item.title }}
+                                </span>
+                            </div>
+                            <div class="view-icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="view-icon"><i class="fas fa-chevron-right"></i></div>
-                </a>
-            </div>
-            {% endif %}
+                {% endif %}
             {% endfor %}
         </div>
     </div>
 </div>
-</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const artistFilter = urlParams.get('artist');
+        
+        if (artistFilter) {
+            const items = document.querySelectorAll('.chord-item-box');
+            let found = false;
+
+            items.forEach(item => {
+                if (item.getAttribute('data-artist') === artistFilter) {
+                    item.style.display = 'block';
+                    found = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Update Judul & Deskripsi jika filter aktif
+            if (found) {
+                const displayArtist = artistFilter.replace(/-/g, ' ').toUpperCase();
+                const titleEl = document.querySelector('.main-title');
+                const descEl = document.querySelector('.section-header p');
+                
+                if (titleEl) titleEl.innerHTML = `Chord <span class="highlight">${displayArtist}</span>`;
+                if (descEl) descEl.innerText = `Menampilkan semua lagu dari ${displayArtist}`;
+            }
+        }
+    });
+</script>
