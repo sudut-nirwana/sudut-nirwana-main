@@ -19,7 +19,8 @@ layout: default
 <div class="container">
   <div class="artist-grid">
     {% comment %} Ambil semua data artis unik dari seluruh file chord {% endcomment %}
-    {% assign all_artists = site.pages | where: "layout", "chord" | map: "artist" | uniq | sort %}
+    {% assign all_artists = site.documents | where: "layout", "chord" | map: "artist" | uniq | sort %}
+
     
     {% for artist in all_artists %}
       {% capture first_char %}{{ artist | slice: 0 | downcase }}{% endcapture %}
