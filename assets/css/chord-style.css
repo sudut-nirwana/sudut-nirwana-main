@@ -463,14 +463,10 @@ body{
 .speed-btn:active { transform: scale(0.85); }
 
 
-/* ... (Bagian atas tetap sama seperti milik Anda) ... */
-
-/* ... (Gunakan kode CSS awal Anda untuk bagian atas) ... */
-
-/* --- Style Popup Diagram Chord --- */
+/* --- POPUP DIAGRAM CHORD --- */
 #chord-popup {
     position: absolute;
-    width: 130px;
+    width: 135px;
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
@@ -483,29 +479,29 @@ body{
 #chord-name-display {
     font-weight: 800;
     color: #ee6c00;
-    font-size: 15px;
-    margin-bottom: 8px;
+    font-size: 16px;
+    margin-bottom: 5px;
     border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
 }
 
 #close-chord-btn {
     position: absolute;
-    top: 2px;
-    right: 6px;
+    top: 0px;
+    right: 5px;
     cursor: pointer;
     font-size: 18px;
-    color: #bbb;
+    color: #999;
 }
 
 #chord-diagram-container img {
-    width: 100%;
+    width: 110px;
     height: auto;
     display: block;
+    margin: 0 auto;
 }
 
-
-#autoscroll-container {
-    z-index: 999;
+/* Indikasi chord bisa diklik */
+.chord-node {
+    cursor: pointer;
+    border-bottom: 1px dashed rgba(238, 108, 0, 0.4);
 }
-
