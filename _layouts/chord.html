@@ -15,10 +15,12 @@ layout: default
           <ul class="breadcrumb-list">
             <li><a href="{{ '/' | relative_url }}"><i class="fa-solid fa-house"></i> Beranda</a></li>
             <li><a href="{{ '/chord/' | relative_url }}">Chord</a></li>
+
             {% if page.artist %}
             <li>
               {% assign first_letter = page.artist | slice: 0 | downcase %}
               {% if "abcdefghijklmnopqrstuvwxyz" contains first_letter %}
+                {% comment %} Logika untuk mengarahkan ke halaman abjad yang sesuai {% endcomment %}
                 {% if "ab" contains first_letter %}{% assign slug = "a-b" %}
                 {% elsif "cd" contains first_letter %}{% assign slug = "c-d" %}
                 {% elsif "ef" contains first_letter %}{% assign slug = "e-f" %}
@@ -36,9 +38,13 @@ layout: default
               {% else %}
                 {% assign slug = "a-b" %}
               {% endif %}
-              <a href="{{ '/artis/' | append: slug | append: '/' | relative_url }}?artist={{ page.artist | slugify }}">{{ page.artist }}</a>
+
+              <a href="{{ '/artis/' | append: slug | append: '/' | relative_url }}?artist={{ page.artist | slugify }}">
+                {{ page.artist }}
+              </a>
             </li>
             {% endif %}
+
             <li class="active">{{ page.title }}</li>
           </ul>
         </div>
@@ -51,16 +57,47 @@ layout: default
         </div>
       </header>
     
+      <div class="ad-container">
+        <small>Advertisement</small>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-12345"
+             data-ad-slot="67890"
+             data-ad-format="auto">
+        </ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      
+      <div class="container">
+        <div class="custom-bit-wrapper">
+          <div class="bit-icon"><i class="fa-solid fa-music"></i></div>
+          <div class="bit-center-content">
+            <a href="https://www.bandsintown.com/a/{{ page.artist | url_encode }}" target="_blank" class="bit-custom-link">
+              <span class="follow-text">Follow {{ page.artist }}</span>
+              <span class="sub-text">on Bandsintown</span>
+            </a>
+          </div>
+          <div class="bit-icon"><i class="fa-solid fa-volume-high"></i></div>
+        </div>
+      </div>
+
+    
       <div class="chord-controls">
         <span class="control-label"><i class="fa-solid fa-music"></i> Nada Dasar</span>
         <div class="control-group">
           <div class="transpose-buttons">
-            <button onclick="transpose(-1)" class="btn-transpose"><i class="fa-solid fa-minus"></i></button>
+            <button onclick="transpose(-1)" class="btn-transpose" title="Turunkan Nada">
+              <i class="fa-solid fa-minus"></i>
+            </button>
             <span id="pitch-indicator">0</span>
-            <button onclick="transpose(1)" class="btn-transpose"><i class="fa-solid fa-plus"></i></button>
+            <button onclick="transpose(1)" class="btn-transpose" title="Naikkan Nada">
+              <i class="fa-solid fa-plus"></i>
+            </button>
           </div>
         </div>
-        <button id="reset-btn" onclick="resetTranspose()" class="btn-reset"><i class="fa-solid fa-rotate-right"></i> Reset</button>
+        <button id="reset-btn" onclick="resetTranspose()" class="btn-reset">
+          <i class="fa-solid fa-rotate-right"></i> Reset
+        </button>
       </div>
       
       <pre class="chord-content" id="chord-content">{{ content }}</pre>
@@ -69,22 +106,16 @@ layout: default
   
   <div class="colom2">
     <div class="container">
+      
       <div class="sidebar-content">
         {% include related-chord.html %}
         {% include chord-terbaru.html %}
         {% include inisial-artis.html %}
       </div>
+      
     </div>
   </div>
 </section>
-
-<div id="chord-popup" style="display: none;">
-    <div class="popup-content">
-        <span id="close-chord-btn">&times;</span>
-        <div id="chord-name-display"></div>
-        <div id="chord-diagram-container"></div>
-    </div>
-</div>
 
 <div id="autoscroll-container">
   <div class="controls-wrapper">
@@ -94,10 +125,15 @@ layout: default
     </div>
     <button id="btn-minus" class="speed-btn">-</button>
   </div>
+  
   <div id="scroll-trigger">
     <span id="trigger-text" style="font-size: 1.2rem;"><i class="fas fa-gear"></i></span>
   </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
+
+<script charset="utf-8" src="https://widget.bandsintown.com/main.min.js"></script>
+
