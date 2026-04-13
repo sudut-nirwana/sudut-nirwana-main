@@ -1,5 +1,5 @@
 <section class="related-chord">
-   <h3 style="margin-bottom: 15px;">Lainnya dari <span style="color: #ee6c00;">{{ page.artist }}</span></h3>
+   <h2 style="margin-bottom: 15px;">Lainnya dari <span style="color: #ee6c00;">{{ page.artist }}</span></h2>
    <div class="wrapper-related">
       {% assign related_songs = site.chord | where: "artist", page.artist | sample: 6 %}
       {% for song in related_songs %}
