@@ -461,3 +461,54 @@ body{
 }
 
 .speed-btn:active { transform: scale(0.85); }
+
+
+/* ... (Bagian atas tetap sama seperti milik Anda) ... */
+
+/* [TAMBAHAN] Gaya Popup Chord Tooltip 130px */
+#chord-popup {
+    position: absolute;
+    width: 130px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 1001; /* Di atas autoscroll (999) */
+    padding: 12px 8px;
+    text-align: center;
+    border: 2px solid #ee6c00;
+    pointer-events: auto;
+}
+
+#chord-name-display {
+    font-weight: 800;
+    color: #ee6c00;
+    font-size: 15px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+#close-chord-btn {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #bbb;
+    line-height: 1;
+}
+
+/* Efek visual agar chord terlihat bisa diklik */
+.chord-node {
+    cursor: pointer;
+    border-bottom: 1px dashed rgba(238, 108, 0, 0.4);
+    color: #ee6c00;
+}
+
+/* Memastikan autoscroll tidak menutupi popup diagram */
+#autoscroll-container {
+    z-index: 999;
+}
+
+/* ... (Sisa kode CSS asli Anda jangan dihapus) ... */
+
