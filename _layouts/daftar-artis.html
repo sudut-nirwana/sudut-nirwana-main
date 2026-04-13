@@ -22,8 +22,17 @@ layout: default
                 {% capture first_char %}{{ artist | slice: 0 | downcase }}{% endcapture %}
                 {% assign show_artist = false %}
 
+                {% comment %} LOGIKA FILTER: Daftar Artis, Genre, atau Alfabet {% endcomment %}
                 {% if page.title == "Daftar Artis" %}
                     {% assign show_artist = true %}
+                
+                {% elsif page.url contains '/genre/' %}
+                    {% comment %} Cek apakah artis ini punya setidaknya satu lagu dengan genre yang sesuai {% endcomment %}
+                    {% assign match_genre = site.documents | where: "layout", "chord" | where: "artist", artist | where: "genre", page.title | first %}
+                    {% if match_genre %}
+                        {% assign show_artist = true %}
+                    {% endif %}
+
                 {% elsif page.title contains "A - B" %}
                     {% if first_char == "a" or first_char == "b" %} {% assign show_artist = true %} {% endif %}
                 {% elsif page.title contains "C - D" %}
@@ -83,7 +92,7 @@ layout: default
                 {% endfor %}
             </div>
             <div style="text-align: center; margin-top: 30px;">
-                <a href="{{ page.url | relative_url }}" class="btn-back"> Kembali ke Daftar Inisial</a>
+                <a href="{{ page.url | relative_url }}" class="btn-back"> Kembali ke Daftar</a>
             </div>
         </div>
     </div>
@@ -101,7 +110,6 @@ layout: default
         if (artistFilter) {
             let found = false;
 
-            // Sembunyikan Grid Artis, Tampilkan Container Lagu
             artistGrid.style.display = 'none';
             songContainer.style.display = 'block';
 
@@ -109,13 +117,11 @@ layout: default
                 if (song.getAttribute('data-artist') === artistFilter) {
                     song.style.display = 'block';
                     found = true;
-                } else {
-                    song.style.display = 'none';
                 }
             });
 
             if (found) {
-                const displayArtist = artistFilter.replace(/-/g, ' ').toUpperCase();
+                const displayArtist = artistFilter.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
                 const titleEl = document.querySelector('.main-title');
                 const descEl = document.querySelector('.section-header p');
                 
