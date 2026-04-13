@@ -1,7 +1,7 @@
 <section class="chordwrapper" id="chordwrapper">
       <div class="container">
-         <h2 class="reveal up"><span>Update</span> <strong>Kunci Gitar</strong> Terkini</h2>
-         <p class="reveal up">Mainkan juga <strong>chord</strong> lagu terupdate.</p>
+         <h2 class="reveal up"><strong>Chord</strong> <span>Update</span></h2>
+         <p class="reveal up">Mainkan juga <strong>chord</strong> terupdate.</p>
          <div class="box-chord-terbaru reveal up">
             {% for item in site.chord limit:10 %}
             <div class="chord-item">
@@ -20,7 +20,7 @@
             {% endfor %}
          </div>
          
-         <h2 class="reveal up"><strong>Kunci Gitar</strong> <span>Populer</span></h2>
+         <!--<h2 class="reveal up"><strong>Kunci Gitar</strong> <span>Populer</span></h2>
          <p class="reveal up"><strong>Chord Gitar</strong> paling banyak di mainkan.</p>
          <div class="box-chord-terbanyak reveal up">
             {% for item in site.chord limit:10 %}
@@ -28,6 +28,6 @@
             <a href="{{ item.url }}">Chord {{ item.title }} - {{ item.artist }}</a>
             </div>
             {% endfor %}
-         </div>
+         </div>-->
       </div>
    </section>
