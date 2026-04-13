@@ -2,7 +2,7 @@
 layout: chord
 artist: "Sheila On 7"
 title: "Tertatih"
-genre: "pop 90an"
+genre: "Pop"
 permalink: /chord/sheila-on-7/Tertatih/
 ---
 
