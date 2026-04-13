@@ -22,43 +22,39 @@ layout: default
                 {% capture first_char %}{{ artist | slice: 0 | downcase }}{% endcapture %}
                 {% assign show_artist = false %}
 
-                {% comment %} LOGIKA FILTER: Daftar Artis, Genre, atau Alfabet {% endcomment %}
                 {% if page.title == "Daftar Artis" %}
                     {% assign show_artist = true %}
-                
                 {% elsif page.url contains '/genre/' %}
-                    {% comment %} Cek apakah artis ini punya setidaknya satu lagu dengan genre yang sesuai {% endcomment %}
                     {% assign match_genre = site.documents | where: "layout", "chord" | where: "artist", artist | where: "genre", page.title | first %}
                     {% if match_genre %}
                         {% assign show_artist = true %}
                     {% endif %}
-
                 {% elsif page.title contains "A - B" %}
-                    {% if first_char == "a" or first_char == "b" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "a" or first_char == "b" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "C - D" %}
-                    {% if first_char == "c" or first_char == "d" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "c" or first_char == "d" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "E - F" %}
-                    {% if first_char == "e" or first_char == "f" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "e" or first_char == "f" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "G - H" %}
-                    {% if first_char == "g" or first_char == "h" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "g" or first_char == "h" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "I - J" %}
-                    {% if first_char == "i" or first_char == "j" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "i" or first_char == "j" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "K - L" %}
-                    {% if first_char == "k" or first_char == "l" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "k" or first_char == "l" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "M - N" %}
-                    {% if first_char == "m" or first_char == "n" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "m" or first_char == "n" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "O - P" %}
-                    {% if first_char == "o" or first_char == "p" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "o" or first_char == "p" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "Q - R" %}
-                    {% if first_char == "q" or first_char == "r" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "q" or first_char == "r" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "S - T" %}
-                    {% if first_char == "s" or first_char == "t" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "s" or first_char == "t" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "U - V" %}
-                    {% if first_char == "u" or first_char == "v" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "u" or first_char == "v" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "W - X" %}
-                    {% if first_char == "w" or first_char == "x" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "w" or first_char == "x" %}{% assign show_artist = true %}{% endif %}
                 {% elsif page.title contains "Y - Z" %}
-                    {% if first_char == "y" or first_char == "z" %} {% assign show_artist = true %} {% endif %}
+                    {% if first_char == "y" or first_char == "z" %}{% assign show_artist = true %}{% endif %}
                 {% endif %}
 
                 {% if show_artist %}
@@ -92,7 +88,7 @@ layout: default
                 {% endfor %}
             </div>
             <div style="text-align: center; margin-top: 30px;">
-                <a href="{{ page.url | relative_url }}" class="btn-back"> Kembali ke Daftar</a>
+                <a href="{{ page.url | relative_url }}" class="btn-back">Kembali ke Daftar</a>
             </div>
         </div>
     </div>
@@ -102,14 +98,12 @@ layout: default
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
         const artistFilter = urlParams.get('artist');
-        
         const artistGrid = document.getElementById('artist-cards-wrapper');
         const songContainer = document.getElementById('song-list-container');
         const songs = document.querySelectorAll('.song-item');
 
         if (artistFilter) {
             let found = false;
-
             artistGrid.style.display = 'none';
             songContainer.style.display = 'block';
 
@@ -124,7 +118,6 @@ layout: default
                 const displayArtist = artistFilter.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
                 const titleEl = document.querySelector('.main-title');
                 const descEl = document.querySelector('.section-header p');
-                
                 if (titleEl) titleEl.innerHTML = `Chord <span class="highlight">${displayArtist}</span>`;
                 if (descEl) descEl.innerText = `Menampilkan semua lagu dari ${displayArtist}`;
             }
