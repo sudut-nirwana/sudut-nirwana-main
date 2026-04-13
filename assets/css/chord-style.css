@@ -71,10 +71,9 @@ body{
 }
 
 /* Menargetkan bagian terakhir dari breadcrumb */
-.breadcrumb li:last-child, 
-.breadcrumb span:last-child {
+.breadcrumb-list li:last-child {
     display: inline-block;
-    max-width: 150px; /* Atur lebar maksimal sesuai keinginan */
+    max-width: 120px; /* Saya perkecil sedikit agar lebih pas di HP */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
