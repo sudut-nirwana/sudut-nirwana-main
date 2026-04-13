@@ -68,7 +68,7 @@ html.no-scroll{
 }
 .container{
    width: 100%;
-   padding: 0 5px;
+   padding: 0 10px;
    overflow: hidden;
 }
 /*global style end*/
@@ -579,7 +579,7 @@ html.no-scroll{
 /*media query layar tablet*/
 @media(min-width: 768px){
    .container{
-      padding: 0 8px;
+      padding: 0 15px;
       margin: auto;
    }
 /*header style*/
@@ -663,7 +663,7 @@ html.no-scroll{
 @media(min-width: 1024px){
    .container{
       max-width: 1200px;
-      padding: 0 10px;
+      padding: 0 20px;
       margin: auto;
    }
 /*header style*/
