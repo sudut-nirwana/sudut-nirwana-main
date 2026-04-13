@@ -467,14 +467,14 @@ body{
 
 /* ... (Gunakan kode CSS awal Anda untuk bagian atas) ... */
 
-/* [TAMBAHAN] Style untuk Popup Chord Tooltip 130px */
+/* --- Style Popup Diagram Chord --- */
 #chord-popup {
     position: absolute;
     width: 130px;
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    z-index: 1001; /* Di atas autoscroll agar tidak tertutup */
+    z-index: 1001;
     padding: 12px 8px;
     text-align: center;
     border: 2px solid #ee6c00;
@@ -498,12 +498,12 @@ body{
     color: #bbb;
 }
 
-/* Indikasi chord bisa diklik */
-.chord-node {
-    cursor: pointer;
-    border-bottom: 1px dashed rgba(238, 108, 0, 0.4);
-    color: #ee6c00;
+#chord-diagram-container img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
+
 
 #autoscroll-container {
     z-index: 999;
