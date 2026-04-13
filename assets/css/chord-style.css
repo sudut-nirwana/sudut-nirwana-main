@@ -461,47 +461,4 @@ body{
 }
 
 .speed-btn:active { transform: scale(0.85); }
-
-
-/* --- POPUP DIAGRAM CHORD --- */
-#chord-popup {
-    position: absolute;
-    width: 135px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    z-index: 1001;
-    padding: 12px 8px;
-    text-align: center;
-    border: 2px solid #ee6c00;
-}
-
-#chord-name-display {
-    font-weight: 800;
-    color: #ee6c00;
-    font-size: 16px;
-    margin-bottom: 5px;
-    border-bottom: 1px solid #eee;
-}
-
-#close-chord-btn {
-    position: absolute;
-    top: 0px;
-    right: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    color: #999;
-}
-
-#chord-diagram-container img {
-    width: 110px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-/* Indikasi chord bisa diklik */
-.chord-node {
-    cursor: pointer;
-    border-bottom: 1px dashed rgba(238, 108, 0, 0.4);
-}
+   
