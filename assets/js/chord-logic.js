@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
+    
+    // === 1. VARIABEL ===
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     let currentPitch = 0;
     let isScrolling = false;
@@ -9,22 +11,23 @@ document.addEventListener("DOMContentLoaded", function() {
     const chordDisplay = document.getElementById('chord-name-display');
     const diagramContainer = document.getElementById('chord-diagram-container');
     const autoscrollContainer = document.getElementById('autoscroll-container');
-    const textScroll = document.getElementById('trigger-text');
+    const triggerText = document.getElementById('trigger-text');
     const slider = document.getElementById('speed-slider');
 
-    // === FUNGSI DIAGRAM CHORD ===
+    // === 2. FUNGSI DIAGRAM (API Gambar - Lebih Stabil) ===
     function showDiagram(elem) {
         const chordName = elem.innerText.trim();
         const rect = elem.getBoundingClientRect();
         
         popup.style.display = 'block';
         popup.style.left = (rect.left + window.scrollX - 65 + (rect.width / 2)) + 'px';
-        popup.style.top = (rect.top + window.scrollY - 175) + 'px';
+        popup.style.top = (rect.top + window.scrollY - 185) + 'px';
         
         chordDisplay.innerText = chordName;
-        // Menggunakan API Gambar (Paling Stabil)
-        const apiName = chordName.replace('#', 's');
-        diagramContainer.innerHTML = `<img src="https://chordgenerator.net/${apiName}.png?size=2" alt="${chordName}">`;
+        
+        // Menggunakan API pihak ketiga agar pasti muncul di HP
+        const apiChord = chordName.replace('#', 's');
+        diagramContainer.innerHTML = `<img src="https://chordgenerator.net/${apiChord}.png?size=2" alt="${chordName}">`;
     }
 
     function initializeChords() {
@@ -41,12 +44,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Tutup popup jika klik luar
+    // Tutup popup
     document.addEventListener('click', (e) => {
         if (popup && !popup.contains(e.target)) popup.style.display = 'none';
     });
+    document.getElementById('close-chord-btn').onclick = () => popup.style.display = 'none';
 
-    // === FUNGSI AUTOSCROLL (FIXED Tanpa jQuery Conflict) ===
+    // === 3. FUNGSI AUTOSCROLL (FIXED - No jQuery Conflict) ===
     function updateScroll() {
         if (!isScrolling) return;
         const speeds = { 1: 0.3, 2: 0.7, 3: 1.2, 4: 2.0, 5: 3.5 };
@@ -54,24 +58,24 @@ document.addEventListener("DOMContentLoaded", function() {
         scrollRequest = requestAnimationFrame(updateScroll);
     }
 
-    window.toggleScroll = function() {
+    function toggleAutoScroll() {
         const isOpen = autoscrollContainer.classList.toggle('open');
         if (isOpen) {
             isScrolling = true;
             autoscrollContainer.classList.add('active');
-            textScroll.innerHTML = '<i class="fas fa-stop"></i>';
+            triggerText.innerHTML = '<i class="fas fa-stop"></i>'; // Pakai JS murni, bukan jQuery
             updateScroll();
         } else {
             isScrolling = false;
             autoscrollContainer.classList.remove('active');
-            textScroll.innerHTML = '<i class="fas fa-gear"></i>';
+            triggerText.innerHTML = '<i class="fas fa-gear"></i>';
             cancelAnimationFrame(scrollRequest);
         }
-    };
+    }
 
-    document.getElementById('scroll-trigger').addEventListener('click', window.toggleScroll);
+    document.getElementById('scroll-trigger').addEventListener('click', toggleAutoScroll);
 
-    // Tetapkan fungsi transpose Anda
+    // === 4. TRANSPOSE ===
     window.transpose = function(steps) {
         currentPitch += steps;
         document.getElementById('pitch-indicator').innerText = (currentPitch > 0 ? '+' : '') + currentPitch;
@@ -81,16 +85,16 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     function shiftChord(chord, steps) {
-        return chord.replace(/[A-G][b#]?/g, (match) => {
+        return chord.replace(/[A-G][b#]?/g, function(match) {
             let i = notes.indexOf(match);
             if (i === -1) {
                 const flats = { 'Bb': 10, 'Eb': 3, 'Ab': 8, 'Db': 1, 'Gb': 6 };
                 i = flats[match] !== undefined ? flats[match] : -1;
             }
             if (i === -1) return match;
-            let newI = (i + steps) % 12;
-            while (newI < 0) newI += 12;
-            return notes[newI];
+            let newIndex = (i + steps) % 12;
+            while (newIndex < 0) newIndex += 12; 
+            return notes[newIndex];
         });
     }
 
@@ -100,6 +104,23 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('pitch-indicator').innerText = '0';
     };
 
-    // Eksekusi
+    // === 5. ZOOM DUA JARI ===
+    const el = containerChord;
+    let scale = 1, initialDist = 0, baseFontSize = 15;
+    if(el) {
+        el.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) initialDist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+        }, { passive: true });
+        el.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                if (e.cancelable) e.preventDefault();
+                const dist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+                let newScale = scale * (dist / initialDist);
+                if (newScale > 0.6 && newScale < 3) el.style.fontSize = `${baseFontSize * newScale}px`;
+            }
+        }, { passive: false });
+        el.addEventListener('touchend', () => { scale = parseFloat(window.getComputedStyle(el).fontSize) / baseFontSize; });
+    }
+
     initializeChords();
 });
