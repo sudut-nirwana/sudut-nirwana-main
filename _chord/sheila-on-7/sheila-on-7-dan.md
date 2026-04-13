@@ -2,7 +2,7 @@
 layout: chord
 artist: "Sheila On 7"
 title: "Dan"
-genre: "pop"
+genre: "Pop"
 permalink: /chord/sheila-on-7/Dan/
 ---
 Intro : G   G   G   G
