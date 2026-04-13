@@ -70,6 +70,18 @@ body{
    transition: color 0.2s;
 }
 
+/* Menargetkan bagian terakhir dari breadcrumb */
+.breadcrumb li:last-child, 
+.breadcrumb span:last-child {
+    display: inline-block;
+    max-width: 150px; /* Atur lebar maksimal sesuai keinginan */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+}
+
+
 /* Warna Oranye Pekat Anda saat di-hover */
 .breadcrumb-list li a:hover {
    color: #ee6c00;
