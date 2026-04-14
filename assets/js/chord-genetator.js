@@ -1,16 +1,46 @@
 const chordDB = {
+    // === KUNCI MAYOR ===
     "C": { frets: [null, 3, 2, 0, 1, 0] },
     "C#": { frets: [null, 4, 3, 1, 2, 1] },
     "D": { frets: [null, null, 0, 2, 3, 2] },
-    "Dm": { frets: [null, null, 0, 2, 3, 1] },
+    "D#": { frets: [null, null, 1, 3, 4, 3] },
     "E": { frets: [0, 2, 2, 1, 0, 0] },
-    "Em": { frets: [0, 2, 2, 0, 0, 0] },
     "F": { frets: [1, 3, 3, 2, 1, 1] },
+    "F#": { frets: [2, 4, 4, 3, 2, 2] },
     "G": { frets: [3, 2, 0, 0, 0, 3] },
+    "G#": { frets: [4, 6, 6, 5, 4, 4] },
     "A": { frets: [null, 0, 2, 2, 2, 0] },
-    "Am": { frets: [null, 0, 2, 2, 1, 0] },
+    "A#": { frets: [null, 1, 3, 3, 3, 1] },
     "B": { frets: [null, 2, 4, 4, 4, 2] },
-    "Bm": { frets: [null, 2, 4, 4, 3, 2] }
+
+    // === KUNCI MINOR ===
+    "Cm": { frets: [null, 3, 5, 5, 4, 3] },
+    "C#m": { frets: [null, 4, 6, 6, 5, 4] },
+    "Dm": { frets: [null, null, 0, 2, 3, 1] },
+    "D#m": { frets: [null, null, 1, 3, 4, 2] },
+    "Em": { frets: [0, 2, 2, 0, 0, 0] },
+    "Fm": { frets: [1, 3, 3, 1, 1, 1] },
+    "F#m": { frets: [2, 4, 4, 2, 2, 2] },
+    "Gm": { frets: [3, 5, 5, 3, 3, 3] },
+    "G#m": { frets: [4, 6, 6, 4, 4, 4] },
+    "Am": { frets: [null, 0, 2, 2, 1, 0] },
+    "A#m": { frets: [null, 1, 3, 3, 2, 1] },
+    "Bm": { frets: [null, 2, 4, 4, 3, 2] },
+
+    // === KUNCI DOMINANT 7 ===
+    "C7": { frets: [null, 3, 2, 3, 1, 0] },
+    "D7": { frets: [null, null, 0, 2, 1, 2] },
+    "E7": { frets: [0, 2, 0, 1, 0, 0] },
+    "G7": { frets: [3, 2, 0, 0, 0, 1] },
+    "A7": { frets: [null, 0, 2, 0, 2, 0] },
+    "B7": { frets: [null, 2, 1, 2, 0, 2] },
+    
+    // === KUNCI FLAT (Alternatif Nama) ===
+    "Bb": { frets: [null, 1, 3, 3, 3, 1] },
+    "Eb": { frets: [null, null, 1, 3, 4, 3] },
+    "Ab": { frets: [4, 6, 6, 5, 4, 4] },
+    "Db": { frets: [null, 4, 3, 1, 2, 1] },
+    "Gb": { frets: [2, 4, 4, 3, 2, 2] }
 };
 
 function generateChordSVG(name) {
