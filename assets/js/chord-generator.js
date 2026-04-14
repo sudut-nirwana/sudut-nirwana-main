@@ -73,7 +73,7 @@ function generateChordSVG(chordName) {
 }
 
 // 3. FUNGSI OTOMATIS UNTUK HALAMAN TUTORIAL (GRID)
-function renderAllChords() {
+/*function renderAllChords() {
     const gridContainer = document.getElementById('all-chords-grid');
     if (!gridContainer) return; // Hanya jalan jika elemen ini ada
 
@@ -87,7 +87,39 @@ function renderAllChords() {
         `;
         gridContainer.appendChild(card);
     });
+}*/
+function renderAllChords() {
+    const gridContainer = document.getElementById('all-chords-grid');
+    if (!gridContainer) return;
+
+    gridContainer.innerHTML = ""; // Bersihkan kontainer
+
+    Object.keys(chordDB).forEach((chord, index) => {
+        const card = document.createElement('div');
+        card.className = 'chord-card';
+        
+        // --- TAMBAHKAN STYLE AWAL DI SINI ---
+        card.style.opacity = "0";
+        card.style.transform = "translateY(20px)";
+        card.style.transition = "all 0.5s ease";
+        // ------------------------------------
+
+        card.innerHTML = `
+            <div class="chord-card-name">${chord}</div>
+            <div class="chord-card-svg">${generateChordSVG(chord)}</div>
+        `;
+
+        gridContainer.appendChild(card);
+
+        // JALANKAN ANIMASI REVEAL
+        // Gunakan setTimeout agar muncul satu per satu (staggered)
+        setTimeout(() => {
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+        }, index * 100); // 100ms adalah jeda antar kartu
+    });
 }
+
 
 // Jalankan fungsi grid saat halaman dimuat
 document.addEventListener('DOMContentLoaded', renderAllChords);
