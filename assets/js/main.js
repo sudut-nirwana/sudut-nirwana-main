@@ -69,10 +69,10 @@ $(document).ready(function() {
          $sidebar.addClass('active');
       
       // (Kode kloning Anda tetap di sini)
-         if ($sidebar.find('.nav-link-item').length === 0) {
+         /*if ($sidebar.find('.nav-link-item').length === 0) {
             $('.navigasi a').clone().addClass('nav-link-item').prependTo($sidebar);
             $('.icon-sosialmedia a').clone().addClass('sosmed-link-item').appendTo('.wrapper-sosmed');
-         }
+         }*/
    
             // Jalankan animasi masuk bertahap
             $sidebar.find('a, p').each(function(i) {
