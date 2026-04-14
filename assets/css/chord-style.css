@@ -355,8 +355,9 @@ body{
    display: inline-block;
    width: fit-content;
    height: fit-content;
-   padding: 0 5px;
-   background: rgba(238,108,0,0.2) !important;
+   padding: 0 8px;
+   background: rgba(238,108,0,0.02) !important;
+   border-radius: 3px;
 }
 
 
