@@ -92,7 +92,7 @@ function renderAllChords() {
 }
 
 // Deteksi Klik pada .chord-node (Lirik)
-/*document.addEventListener('click', function(event) {
+document.addEventListener('click', function(event) {
     // Cari apakah yang diklik adalah .chord-node atau anak di dalamnya
     const chordElement = event.target.closest('.chord-node');
     
@@ -110,4 +110,4 @@ function renderAllChords() {
             console.error("Fungsi showChordPanel tidak ditemukan!");
         }
     }
-});*/
+});
