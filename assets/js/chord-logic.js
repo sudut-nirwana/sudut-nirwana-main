@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!isScrolling) return;
 
         const speeds = {
-            1: 0.3, 2: 0.7, 3: 1.5, 4: 2.3, 5: 3.8 
+            1: 0.3, 2: 0.7, 3: 1.2, 4: 2.0, 5: 3.5 
         };
         
         const speed = speeds[parseInt(slider.value)] || 1;
