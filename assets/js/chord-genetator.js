@@ -92,18 +92,22 @@ function renderAllChords() {
 }
 
 // Deteksi Klik pada .chord-node (Lirik)
-document.addEventListener('click', function(e) {
-    // Mencari elemen .chord-node terdekat dari lokasi klik
-    const targetChord = e.target.closest('.chord-node');
+document.addEventListener('click', function(event) {
+    // Cari apakah yang diklik adalah .chord-node atau anak di dalamnya
+    const chordElement = event.target.closest('.chord-node');
     
-    if (targetChord) {
-        // Ambil teks chord-nya (misal: "G" atau "Am")
-        const chordName = targetChord.innerText.trim();
+    if (chordElement) {
+        // Ambil teks chord-nya
+        const rawName = chordElement.innerText.trim();
         
-        // Debugging: Muncul di console Eruda kamu jika berhasil diklik
-        console.log("Membuka diagram untuk chord:", chordName); 
+        // LOG UNTUK TESTING (Akan muncul di Eruda)
+        console.log("Sistem mendeteksi klik pada chord:", rawName);
         
-        // Panggil fungsi untuk menampilkan panel
-        showChordPanel(chordName);
+        // Panggil fungsi untuk memunculkan panel
+        if (typeof showChordPanel === "function") {
+            showChordPanel(rawName);
+        } else {
+            console.error("Fungsi showChordPanel tidak ditemukan!");
+        }
     }
 });
