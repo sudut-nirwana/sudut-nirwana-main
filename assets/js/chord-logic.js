@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
         containerChord.innerHTML = rawText.replace(chordRegex, '<span class="chord-node">$1</span>');
 
         // 2. Pasang Logika Klik (Hanya jika belum terpasang)
-        /*if (!containerChord.dataset.listener) {
+        if (!containerChord.dataset.listener) {
             containerChord.addEventListener('click', function(e) {
                 // Pastikan yang diklik adalah span chord
                 if (e.target && e.target.classList.contains('chord-node')) {
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             // Tandai sudah ada listener agar tidak duplikat saat transpose
             containerChord.dataset.listener = "true";
-        }*/
+        }
     }
 
     // 3. Buat fungsi bantuan di luar (agar rapi)
