@@ -92,38 +92,40 @@ function renderAllChords() {
     const gridContainer = document.getElementById('all-chords-grid');
     if (!gridContainer) return;
 
-    gridContainer.innerHTML = ""; // Bersihkan kontainer
+    gridContainer.innerHTML = ""; 
 
-    const chords = Object.keys(chordDB);
-    
-    chords.forEach((chord, index) => {
+    // 1. Setup Pengawas Scroll (Observer)
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.2 // Animasi jalan saat 20% bagian kartu masuk layar
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // Tambahkan class active saat kartu terlihat di layar
+                entry.target.classList.add('active');
+                // Berhenti mengawasi kartu ini jika sudah muncul
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // 2. Render Kartu
+    Object.keys(chordDB).forEach((chord) => {
         const card = document.createElement('div');
-        card.className = 'chord-card';
+        card.className = 'chord-card'; 
         
-        // Paksa opacity 0 sejak awal agar tidak berkedip
-        card.style.opacity = "0";
-
         card.innerHTML = `
             <div class="chord-card-name">${chord}</div>
             <div class="chord-card-svg">${generateChordSVG(chord)}</div>
         `;
 
         gridContainer.appendChild(card);
-
-        // Jalankan animasi menggunakan Web Animations API (Lebih stabil)
-        setTimeout(() => {
-            card.animate([
-                // Keyframes
-                { opacity: 0, transform: 'translateY(20px)' }, 
-                { opacity: 1, transform: 'translateY(0)' }
-            ], {
-                // Timing options
-                duration: 500,
-                fill: 'forwards',
-                easing: 'ease-out',
-                delay: index * 50 // Jeda antar kartu
-            });
-        }, 10);
+        
+        // 3. Daftarkan kartu ke pengawas scroll
+        observer.observe(card);
     });
 }
 
