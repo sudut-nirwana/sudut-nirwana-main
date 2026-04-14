@@ -47,3 +47,11 @@
 .close-chord-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #888; }
 .cta-learn { display: block; text-align: center; margin: 10px 15px; padding: 8px; background: #f8f8f8; color: #666; border-radius: 8px; font-size: 12px; text-decoration: none; border: 1px solid #eee; }
 
+.chord-node {
+    color: #ee6c00 !important; /* Warna oranye Sudut Nirwana */
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 2px;
+    border-radius: 4px;
+    background-color: rgba(238, 108, 0, 0.1); /* Background tipis agar mudah diklik */
+}
