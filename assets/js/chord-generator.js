@@ -54,9 +54,9 @@ function generateChordSVG(chordName) {
     data.frets.forEach((fret, i) => {
         const x = 10 + (i * 16);
         if (fret === null) {
-            dots += `<text x="${x}" y="8" font-size="10" text-anchor="middle" fill="#999">×</text>`;
+            dots += `<text x="${x}" y="8" font-size="10" text-anchor="middle" fill="#888">×</text>`;
         } else if (fret === 0) {
-            dots += `<circle cx="${x}" cy="8" r="3" fill="none" stroke="#666" stroke-width="1"/>`;
+            dots += `<circle cx="${x}" cy="8" r="3" fill="none" stroke="#444" stroke-width="1"/>`;
         } else {
             const y = 15 + (fret * 20) - 10;
             dots += `<circle cx="${x}" cy="${y}" r="6" fill="#ee6c00" />`;
@@ -65,9 +65,9 @@ function generateChordSVG(chordName) {
 
     return `<svg width="100%" height="120" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
         <line x1="10" y1="15" x2="90" y2="15" stroke="#333" stroke-width="3"/>
-        <rect x="10" y="15" width="80" height="100" fill="none" stroke="#ccc" />
-        ${[35, 55, 75, 95].map(y => `<line x1="10" y1="${y}" x2="90" y2="${y}" stroke="#ccc" />`).join('')}
-        ${[10, 26, 42, 58, 74, 90].map(x => `<line x1="${x}" y1="15" x2="${x}" y2="115" stroke="#ccc" />`).join('')}
+        <rect x="10" y="15" width="80" height="100" fill="none" stroke="#aaa" />
+        ${[35, 55, 75, 95].map(y => `<line x1="10" y1="${y}" x2="90" y2="${y}" stroke="#aaa" />`).join('')}
+        ${[10, 26, 42, 58, 74, 90].map(x => `<line x1="${x}" y1="15" x2="${x}" y2="115" stroke="#aaa" />`).join('')}
         ${dots}
     </svg>`;
 }
@@ -98,7 +98,7 @@ window.showChordPanel = function(chordName) {
     const title = document.getElementById('chord-title-display');
     const renderArea = document.getElementById('chord-svg-render');
     if (panel && title && renderArea) {
-        title.innerText = "Chord " + chordName;
+        title.innerText = "Chord :  " + chordName;
         renderArea.innerHTML = generateChordSVG(chordName);
         panel.classList.add('show');
     }
@@ -110,3 +110,4 @@ document.addEventListener('click', (e) => {
     const target = e.target.closest('.chord-node');
     if (target) showChordPanel(target.innerText.trim());
 });
+   
