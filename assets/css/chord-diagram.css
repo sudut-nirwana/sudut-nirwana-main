@@ -106,53 +106,36 @@
 
 /* Styling untuk Halaman Tutorial Grid */
 /* Container Utama */
+/* Judul Grid */
+.chord-grid-title {
+    /* Mengikuti standar heading di style.css */
+    font-size: 1.25rem; /* Ukuran dasar */
+    margin-bottom: 20px;
+    padding-left: 10px;
+    color: #333;
+}
+
+/* Container Grid Utama */
 .chord-grid-container {
     display: grid;
-    /* Default untuk HP: 2 kolom sama besar */
+    /* HP: Paksa 2 kolom agar tidak tumpah */
     grid-template-columns: repeat(2, 1fr); 
-    gap: 15px;
-    padding: 15px 0; /* Hindari padding kiri-kanan jika container induk sudah ada padding */
+    gap: 12px;
     width: 100%;
-    max-width: 100%; /* Kunci agar tidak tumpah ke samping */
     box-sizing: border-box;
 }
 
-/* Card Satuan */
-.chord-card {
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    padding: 15px 10px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,.05);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 0; /* Mencegah overflow konten di dalam grid item */
-}
-
-.chord-card:hover {
-    transform: translateY(-3px);
-    border-color: #ee6c00;
-    box-shadow: 0 4px 12px rgba(238, 108, 0, 0.15);
-}
-
-.chord-card-name {
-    font-weight: 800;
-    color: #333;
-    margin-bottom: 8px;
-    font-size: 1.1rem;
-    font-family: "Nunito", sans-serif;
-}
-
-/* Responsif untuk Layar Tablet & Desktop (>= 768px) */
+/* Tablet & Desktop (Min 768px) */
 @media (min-width: 768px) {
+    .chord-grid-title {
+        /* Ukuran font akan membesar otomatis di layar lebar */
+        font-size: 1.5rem; 
+    }
+    
     .chord-grid-container {
-        /* Kembali ke mode auto-fill agar fleksibel di sidebar atau main content */
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 20px;
+        /* Kembali ke repeat auto jika di layar lebar */
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 15px;
     }
 }
 
