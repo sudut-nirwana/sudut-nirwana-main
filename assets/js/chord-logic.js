@@ -49,19 +49,24 @@ document.addEventListener("DOMContentLoaded", function() {
         containerChord.innerHTML = rawText.replace(chordRegex, '<span class="chord-node">$1</span>');
 
         // 2. Pasang Logika Klik (Hanya jika belum terpasang)
-        if (!containerChord.dataset.listener) {
-            containerChord.addEventListener('click', function(e) {
-                // Pastikan yang diklik adalah span chord
-                if (e.target && e.target.classList.contains('chord-node')) {
-                    const currentChord = e.target.innerText;
-                    
-                    // Panggil fungsi untuk menampilkan diagram
-                    tampilkanDiagram(currentChord);
+            // 2. Pasang Logika Klik
+    if (!containerChord.dataset.listener) {
+        containerChord.addEventListener('click', function(e) {
+            // Gunakan closest agar klik lebih akurat
+            const chordElement = e.target.closest('.chord-node');
+            
+            if (chordElement) {
+                const currentChord = chordElement.innerText.trim();
+                
+                // Panggil fungsi penampil milik chord-generator.js
+                if (typeof showChordPanel === "function") {
+                    showChordPanel(currentChord);
                 }
-            });
-            // Tandai sudah ada listener agar tidak duplikat saat transpose
-            containerChord.dataset.listener = "true";
-        }
+            }
+        });
+        containerChord.dataset.listener = "true";
+    }
+
     }
 
     // 3. Buat fungsi bantuan di luar (agar rapi)
