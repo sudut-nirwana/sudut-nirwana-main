@@ -31,27 +31,28 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     }*/
-    function initializeChords() {
-        const container = document.getElementById('chord-content');
-        if (!container) return;
-
-        let content = container.innerHTML;
-        
-        // Regex yang lebih aman untuk menangkap chord A-G, m, #, 7, dll
-        const chordRegex = /\b([A-G][b#]?(m|maj|7|sus|dim|add)?\d?)\b/g;
-        
-        // Membungkus chord dengan span class chord-node
-        content = content.replace(chordRegex, function(match) {
-            return `<span class="chord-node">${match}</span>`;
-        });
-
-        container.innerHTML = content;
-        console.log("Lirik berhasil diproses!"); // Cek di Eruda
-    }
     checkArtistWidget(); 
     initializeChords();
-    // === 3. FUNGSI MANAJEMEN CHORD & TRANSPOSE ===
+    function initializeChords() {
+    const container = document.getElementById('chord-content');
+    if (!container) return;
 
+    let content = container.innerHTML;
+    
+    // Regex sakti: mencari A-G, menangkap # atau b, dan variasi minor/7
+    const chordRegex = /\b([A-G][b#]?(m|maj|7|sus|dim|add)?\d?)\b/g;
+    
+    content = content.replace(chordRegex, function(match) {
+        // Membungkus chord dengan span agar bisa dideteksi generator.js
+        return `<span class="chord-node">${match}</span>`;
+    });
+
+    container.innerHTML = content;
+}
+
+    
+    
+    // === 3. FUNGSI MANAJEMEN CHORD & TRANSPOSE ===
     /**
      * Mendeteksi teks chord di dalam kontainer lirik dan membungkusnya dengan span
      */
