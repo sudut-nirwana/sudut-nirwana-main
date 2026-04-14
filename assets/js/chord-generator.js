@@ -73,7 +73,7 @@ function generateChordSVG(chordName) {
 }
 
 // 3. FUNGSI OTOMATIS UNTUK HALAMAN TUTORIAL (GRID)
-/*function renderAllChords() {
+function renderAllChords() {
     const gridContainer = document.getElementById('all-chords-grid');
     if (!gridContainer) return; // Hanya jalan jika elemen ini ada
 
@@ -87,49 +87,7 @@ function generateChordSVG(chordName) {
         `;
         gridContainer.appendChild(card);
     });
-}*/
-
-function renderAllChords() {
-    const gridContainer = document.getElementById('all-chords-grid');
-    if (!gridContainer) return;
-
-    gridContainer.innerHTML = ""; 
-
-    // 1. Buat Pengawas (Observer)
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            // Logika: Jika elemen masuk layar (isIntersecting)
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target); 
-            }
-        });
-    }, {
-        root: null,
-        // rootMargin '0px -20px' memastikan animasi tidak terpotong di pinggir
-        rootMargin: '0px 0px -10% 0px', 
-        threshold: 0.1 
-    });
-
-    // 2. Render Kartu
-    Object.keys(chordDB).forEach((chord) => {
-        const card = document.createElement('div');
-        card.className = 'chord-card'; 
-        
-        card.innerHTML = `
-            <div class="chord-card-name">${chord}</div>
-            <div class="chord-card-svg">${generateChordSVG(chord)}</div>
-        `;
-
-        gridContainer.appendChild(card);
-        
-        // 3. Beri jeda 10ms agar browser sadar elemen sudah ada di halaman
-        setTimeout(() => {
-            observer.observe(card);
-        }, 10);
-    });
 }
-
 
 
 
