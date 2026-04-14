@@ -36,15 +36,41 @@ document.addEventListener("DOMContentLoaded", function() {
     /**
      * Mendeteksi teks chord di dalam kontainer lirik dan membungkusnya dengan span
      */
+        /**
+     * Mendeteksi teks chord di dalam kontainer lirik dan membungkusnya dengan span
+     */
     function initializeChords() {
         if (!containerChord) return;
         let rawText = containerChord.innerHTML;
-        // Regex untuk mendeteksi chord (A-G) dengan variasi minor, mayor, angka, dll.
+        // Regex untuk mendeteksi chord
         const chordRegex = /\b([A-G][b#]?(maj|min|m|M|add|sus|dim|aug|maj7|7|m7|sus4)?[0-9]*)\b/g;
         
-        // Membungkus chord agar bisa dimanipulasi oleh fungsi transpose
+        // 1. Membungkus chord agar bisa dimanipulasi
         containerChord.innerHTML = rawText.replace(chordRegex, '<span class="chord-node">$1</span>');
+
+        // 2. Pasang Logika Klik (Hanya jika belum terpasang)
+        if (!containerChord.dataset.listener) {
+            containerChord.addEventListener('click', function(e) {
+                // Pastikan yang diklik adalah span chord
+                if (e.target && e.target.classList.contains('chord-node')) {
+                    const currentChord = e.target.innerText;
+                    
+                    // Panggil fungsi untuk menampilkan diagram
+                    tampilkanDiagram(currentChord);
+                }
+            });
+            // Tandai sudah ada listener agar tidak duplikat saat transpose
+            containerChord.dataset.listener = "true";
+        }
     }
+
+    // 3. Buat fungsi bantuan di luar (agar rapi)
+    function tampilkanDiagram(namaChord) {
+        console.log("Mencari diagram untuk: " + namaChord);
+        // Di sini nanti kita isi logika panggil gambar atau modal
+        // Contoh: alert("Munculkan diagram: " + namaChord);
+    }
+
 
     /**
      * Menggeser nada berdasarkan langkah (steps) yang ditentukan
