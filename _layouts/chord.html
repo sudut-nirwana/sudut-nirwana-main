@@ -5,6 +5,9 @@ layout: default
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/css/chord-diagram.css' | relative_url }}">
+
+
 
 <section class="content-chord" id="content-chord">
   <div class="colom1">
@@ -115,6 +118,7 @@ layout: default
       
     </div>
   </div>
+  {% include chord-viewer.html %}
 </section>
 
 <div id="autoscroll-container">
@@ -134,6 +138,8 @@ layout: default
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/chord-generator.js' | relative_url }}"></script>
+
 
 <script charset="utf-8" src="https://widget.bandsintown.com/main.min.js"></script>
 
