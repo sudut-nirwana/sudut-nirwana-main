@@ -138,10 +138,16 @@ layout: default
 
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/chord-generator.js' | relative_url }}"></script>
+<script>
+  // Pastikan fungsi pembungkus chord jalan SEGERA setelah halaman siap
+  $(document).ready(function() {
+      if (typeof initializeChords === "function") {
+          initializeChords(); 
+          console.log("Sistem: Chord telah siap diklik.");
+      }
+  });
+</script>
 
 <script charset="utf-8" src="https://widget.bandsintown.com/main.min.js"></script>
-
-<script src="//cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>
 
 
