@@ -32,12 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // === 3. FUNGSI MANAJEMEN CHORD & TRANSPOSE ===
-
-    /**
-     * Mendeteksi teks chord di dalam kontainer lirik dan membungkusnya dengan span
-     */
-        /**
-     * Mendeteksi teks chord di dalam kontainer lirik dan membungkusnya dengan span
+     /*Mendeteksi teks chord di dalam kontainer lirik dan membungkusnya dengan span
      */
     function initializeChords() {
         if (!containerChord) return;
@@ -50,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // 2. Pasang Logika Klik (Hanya jika belum terpasang)
             // 2. Pasang Logika Klik
-    if (!containerChord.dataset.listener) {
+        if (!containerChord.dataset.listener) {
         containerChord.addEventListener('click', function(e) {
             // Gunakan closest agar klik lebih akurat
             const chordElement = e.target.closest('.chord-node');
@@ -65,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
         containerChord.dataset.listener = "true";
-    }
+       }
 
     }
 
