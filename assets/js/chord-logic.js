@@ -1,84 +1,63 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // === 1. INISIALISASI VARIABEL GLOBAL ===
+    // === 1. VARIABEL GLOBAL ===
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     let currentPitch = 0;
     let isScrolling = false;
     let scrollRequest = null;
 
     // Elemen UI
+    const containerChord = document.getElementById('chord-content');
     const widgetElement = document.getElementById('bt-element');
     const wrapper = document.getElementById('bt-widget-wrapper');
-    const containerChord = document.getElementById('chord-content');
+    const pitchIndicator = document.getElementById('pitch-indicator');
+    
+    // Elemen Kontrol Scroll
     const autoscrollContainer = document.getElementById('autoscroll-container');
+    const slider = document.getElementById('speed-slider');
     const triggerScroll = document.getElementById('scroll-trigger');
     const textScroll = document.getElementById('trigger-text');
-    const slider = document.getElementById('speed-slider');
     const btnPlus = document.getElementById('btn-plus');
     const btnMinus = document.getElementById('btn-minus');
-    const pitchIndicator = document.getElementById('pitch-indicator');
 
-    // === 2. FUNGSI WIDGET CHECKER ===
-    function checkArtistWidget() {
-        if (widgetElement && wrapper) {
-            const artistName = widgetElement.getAttribute('data-artist-name');
-            if (!artistName || artistName.trim() === "" || artistName.includes("{{")) {
-                wrapper.style.display = 'none';
-            } else {
-                wrapper.style.display = 'block';
-            }
-        }
-    }
-
-    // === 3. FUNGSI TRANSPOSE & PEMBUNGKUS CHORD ===
+    // === 2. FUNGSI TRANSPOSE & PEMBUNGKUS ===
     window.transpose = function(n) {
         if (!containerChord) return;
-        
-        // Update nilai pitch global
         currentPitch += n;
         
-        // Ambil isi konten saat ini
-        let content = containerChord.innerHTML;
-        
-        // Regex untuk mencari Chord (A-G, #, b, m, 7, maj, dsb)
-        // Kita gunakan pengenalan pola yang tidak merusak tag span yang sudah ada
+        let text = containerChord.innerText;
         const chordRegex = /\b([A-G][b#]?(m|maj|7|sus|dim|add)?\d?)\b/g;
 
-        // Proses penggantian teks menjadi span yang bisa diklik
-        let newContent = content.replace(chordRegex, function(match) {
-            // Ekstrak nada dasar (misal dari Am7 ambil A)
+        let processed = text.replace(chordRegex, function(match) {
             let baseMatch = match.match(/[A-G][b#]?/);
             if (!baseMatch) return match;
             
             let baseNote = baseMatch[0];
             let suffix = match.replace(baseNote, '');
-            
             let index = notes.indexOf(baseNote);
+            
             if (index === -1) return match;
 
-            // Hitung nada baru
             let newIndex = (index + n + 12) % 12;
             let newNote = notes[newIndex] + suffix;
 
-            // Bungkus dengan class chord-node untuk dideteksi chord-generator.js
             return `<span class="chord-node">${newNote}</span>`;
         });
 
-        containerChord.innerHTML = newContent;
-        
-        if (pitchIndicator) {
-            pitchIndicator.innerText = (currentPitch > 0 ? "+" : "") + currentPitch;
-        }
+        containerChord.innerHTML = processed;
+        if (pitchIndicator) pitchIndicator.innerText = (currentPitch > 0 ? "+" : "") + currentPitch;
     };
 
-    // === 4. EKSEKUSI AWAL ===
-    checkArtistWidget();
-    
-    // PENTING: Jalankan transpose(0) agar saat halaman dimuat, 
-    // lirik langsung di-scan dan chord dibungkus span agar bisa diklik.
+    // === 3. EKSEKUSI AWAL ===
+    if (widgetElement && wrapper) {
+        const artist = widgetElement.getAttribute('data-artist-name');
+        wrapper.style.display = (!artist || artist.includes("{{")) ? 'none' : 'block';
+    }
+
+    // Jalankan transpose(0) agar chord langsung aktif
     transpose(0);
 
-    // === 5. FITUR ZOOM AREA (TOUCH GESTURE) ===
+    // === 4. FITUR ZOOM AREA (TOUCH) ===
     let initialDist = 0;
     let scale = 1;
     const baseFontSize = 15;
@@ -101,23 +80,21 @@ document.addEventListener("DOMContentLoaded", function() {
             );
             const diff = currentDist / initialDist;
             let newScale = scale * diff;
-            
-            // Batasan zoom minimal dan maksimal
             if (newScale > 0.6 && newScale < 3) {
                 containerChord.style.fontSize = `${baseFontSize * newScale}px`;
             }
         }
     }, { passive: false });
 
-    containerChord.addEventListener('touchend', (e) => {
-        const style = window.getComputedStyle(containerChord).getPropertyValue('font-size');
-        scale = parseFloat(style) / baseFontSize;
+    containerChord.addEventListener('touchend', () => {
+        const fs = window.getComputedStyle(containerChord).fontSize;
+        scale = parseFloat(fs) / baseFontSize;
     });
 
-    // === 6. FITUR AUTOSCROLL ===
+    // === 5. LOGIKA AUTOSCROLL (DIPERBAIKI) ===
     function autoScroll() {
         if (!isScrolling) return;
-        let speed = parseInt(slider.value);
+        let speed = parseFloat(slider.value) || 1;
         window.scrollBy(0, speed);
         scrollRequest = requestAnimationFrame(autoScroll);
     }
@@ -137,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Kontrol tombol Plus/Minus untuk Slider
     if (btnPlus) {
         btnPlus.addEventListener('click', () => {
             let val = parseInt(slider.value);
@@ -152,7 +130,5 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Fungsi Reset Nada (Global)
-window.resetTranspose = function() {
-    location.reload();
-};
+window.resetTranspose = () => location.reload();
+                    
