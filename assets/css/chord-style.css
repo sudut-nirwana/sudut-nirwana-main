@@ -352,6 +352,7 @@ body{
    color: var(--primary-orange);
    font-weight: 600;
    transition: all 0.3s ease;
+   background: rgba(238,108,0,0.141);
 }
 
 
