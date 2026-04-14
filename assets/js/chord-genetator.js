@@ -66,10 +66,20 @@ function generateChordSVG(name) {
 
 window.showChordPanel = function(name) {
     const p = document.getElementById('chord-panel');
-    document.getElementById('chord-title-display').innerText = "Chord " + name;
-    document.getElementById('chord-svg-render').innerHTML = generateChordSVG(name);
-    p.classList.add('show');
+    const titleDisplay = document.getElementById('chord-title-display');
+    const renderArea = document.getElementById('chord-svg-render');
+
+    if (p && titleDisplay && renderArea) {
+        // Membersihkan teks dari kurung atau spasi agar cocok dengan chordDB
+        // Contoh: "(Am)" menjadi "Am"
+        const cleanName = name.replace(/[()]/g, '').trim();
+
+        titleDisplay.innerText = "Chord " + cleanName;
+        renderArea.innerHTML = generateChordSVG(cleanName);
+        p.classList.add('show');
+    }
 };
+
 
 window.hideChordPanel = () => document.getElementById('chord-panel').classList.remove('show');
 
