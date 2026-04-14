@@ -104,10 +104,9 @@ layout: default
       </div>
       
       <pre class="chord-content" id="chord-content">{{ content }}</pre>
-      {% include chord-viewer.html %}
     </div>
   </div>
- <span>G</span>
+  
   <div class="colom2">
     <div class="container">
       
@@ -116,10 +115,11 @@ layout: default
         {% include chord-terbaru.html %}
         {% include inisial-artis.html %}
       </div>
+      
     </div>
   </div>
 </section>
-
+{% include chord-viewer.html %}
 <div id="autoscroll-container">
   <div class="controls-wrapper">
     <button id="btn-plus" class="speed-btn">+</button>
@@ -138,17 +138,5 @@ layout: default
 
 <script src="{{ '/assets/js/chord-logic.js' | relative_url }}"></script>
 <script src="{{ '/assets/js/chord-generator.js' | relative_url }}"></script>
-<script>
-  // Pastikan fungsi pembungkus chord jalan SEGERA setelah halaman siap
-  $(document).ready(function() {
-      if (typeof initializeChords === "function") {
-          initializeChords(); 
-          console.log("Sistem: Chord telah siap diklik.");
-      }
-  });
-</script>
 
 <script charset="utf-8" src="https://widget.bandsintown.com/main.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/eruda"></script>
-
-
