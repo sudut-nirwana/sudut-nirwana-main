@@ -94,15 +94,14 @@ function renderAllChords() {
 
     gridContainer.innerHTML = ""; // Bersihkan kontainer
 
-    Object.keys(chordDB).forEach((chord, index) => {
+    const chords = Object.keys(chordDB);
+    
+    chords.forEach((chord, index) => {
         const card = document.createElement('div');
         card.className = 'chord-card';
         
-        // --- TAMBAHKAN STYLE AWAL DI SINI ---
+        // Paksa opacity 0 sejak awal agar tidak berkedip
         card.style.opacity = "0";
-        card.style.transform = "translateY(20px)";
-        card.style.transition = "all 0.5s ease";
-        // ------------------------------------
 
         card.innerHTML = `
             <div class="chord-card-name">${chord}</div>
@@ -111,12 +110,20 @@ function renderAllChords() {
 
         gridContainer.appendChild(card);
 
-        // JALANKAN ANIMASI REVEAL
-        // Gunakan setTimeout agar muncul satu per satu (staggered)
+        // Jalankan animasi menggunakan Web Animations API (Lebih stabil)
         setTimeout(() => {
-            card.style.opacity = "1";
-            card.style.transform = "translateY(0)";
-        }, index * 100); // 100ms adalah jeda antar kartu
+            card.animate([
+                // Keyframes
+                { opacity: 0, transform: 'translateY(20px)' }, 
+                { opacity: 1, transform: 'translateY(0)' }
+            ], {
+                // Timing options
+                duration: 500,
+                fill: 'forwards',
+                easing: 'ease-out',
+                delay: index * 50 // Jeda antar kartu
+            });
+        }, 10);
     });
 }
 
