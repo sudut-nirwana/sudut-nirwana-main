@@ -7,146 +7,205 @@ document.addEventListener("DOMContentLoaded", function() {
     let scrollRequest = null;
 
     // Elemen UI
-    const containerChord = document.getElementById('chord-content');
     const widgetElement = document.getElementById('bt-element');
     const wrapper = document.getElementById('bt-widget-wrapper');
-    const pitchIndicator = document.getElementById('pitch-indicator');
-    
-    // Elemen Kontrol Scroll
+    const containerChord = document.getElementById('chord-content');
     const autoscrollContainer = document.getElementById('autoscroll-container');
-    const slider = document.getElementById('speed-slider');
     const triggerScroll = document.getElementById('scroll-trigger');
     const textScroll = document.getElementById('trigger-text');
+    const slider = document.getElementById('speed-slider');
     const btnPlus = document.getElementById('btn-plus');
     const btnMinus = document.getElementById('btn-minus');
+    const pitchIndicator = document.getElementById('pitch-indicator');
 
-    // Simpan teks asli lirik saat pertama kali dimuat agar transpose selalu akurat
-    const originalText = containerChord ? containerChord.innerText : "";
-
-    // === 2. FUNGSI TRANSPOSE & PEMBUNGKUS CHORD ===
-    window.transpose = function(n) {
-        if (!containerChord) return;
-        
-        // Update nilai pitch total
-        currentPitch += n;
-        
-        // Selalu mulai dari teks asli agar tidak terjadi penumpukan karakter (#)
-        const chordRegex = /\b([A-G][b#]?(m|maj|7|sus|dim|add)?\d?)\b/g;
-
-        let processed = originalText.replace(chordRegex, function(match) {
-            let baseMatch = match.match(/[A-G][b#]?/);
-            if (!baseMatch) return match;
-            
-            let baseNote = baseMatch[0];
-            let suffix = match.replace(baseNote, '');
-            
-            // Normalisasi nada (convert flat ke sharp agar ketemu di array notes)
-            if (baseNote === 'Gb') baseNote = 'F#';
-            if (baseNote === 'Db') baseNote = 'C#';
-            if (baseNote === 'Ab') baseNote = 'G#';
-            if (baseNote === 'Eb') baseNote = 'D#';
-            if (baseNote === 'Bb') baseNote = 'A#';
-
-            let index = notes.indexOf(baseNote);
-            if (index === -1) return match;
-
-            // Hitung nada baru berdasarkan pitch total
-            let newIndex = (index + currentPitch) % 12;
-            if (newIndex < 0) newIndex += 12;
-            
-            let newNote = notes[newIndex] + suffix;
-
-            // Bungkus dengan span agar bisa diklik untuk diagram
-            return `<span class="chord-node">${newNote}</span>`;
-        });
-
-        containerChord.innerHTML = processed;
-        
-        if (pitchIndicator) {
-            pitchIndicator.innerText = (currentPitch > 0 ? "+" : "") + currentPitch;
+    // === 2. FUNGSI WIDGET CHECKER ===
+    // Mengecek apakah widget artis harus ditampilkan atau disembunyikan
+    function checkArtistWidget() {
+        if (widgetElement && wrapper) {
+            const artistName = widgetElement.getAttribute('data-artist-name');
+            if (!artistName || artistName.trim() === "" || artistName.includes("{{")) {
+                wrapper.style.display = 'none';
+            } else {
+                wrapper.style.display = 'block';
+            }
         }
+    }
+
+    // === 3. FUNGSI MANAJEMEN CHORD & TRANSPOSE ===
+
+    /**
+     * Mendeteksi teks chord di dalam kontainer lirik dan membungkusnya dengan span
+     */
+    function initializeChords() {
+        if (!containerChord) return;
+        let rawText = containerChord.innerHTML;
+        // Regex untuk mendeteksi chord (A-G) dengan variasi minor, mayor, angka, dll.
+        const chordRegex = /\b([A-G][b#]?(maj|min|m|M|add|sus|dim|aug|maj7|7|m7|sus4)?[0-9]*)\b/g;
+        
+        // Membungkus chord agar bisa dimanipulasi oleh fungsi transpose
+        containerChord.innerHTML = rawText.replace(chordRegex, '<span class="chord-node">$1</span>');
+    }
+
+    /**
+     * Menggeser nada berdasarkan langkah (steps) yang ditentukan
+     */
+    window.transpose = function(steps) {
+        currentPitch += steps;
+        if (pitchIndicator) {
+            pitchIndicator.innerText = (currentPitch > 0 ? '+' : '') + currentPitch;
+        }
+        
+        const chordNodes = document.querySelectorAll('.chord-node');
+        chordNodes.forEach(node => {
+            node.innerText = shiftChord(node.innerText, steps);
+        });
     };
 
-    // === 3. EKSEKUSI AWAL ===
-    if (widgetElement && wrapper) {
-        const artist = widgetElement.getAttribute('data-artist-name');
-        wrapper.style.display = (!artist || artist.includes("{{")) ? 'none' : 'block';
-    }
-
-    // Jalankan transpose 0 agar chord langsung terbungkus span saat halaman dibuka
-    transpose(0);
-
-    // === 4. FITUR ZOOM AREA (TOUCH) ===
-    let initialDist = 0;
-    let scale = 1;
-    const baseFontSize = 15;
-
-    containerChord.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 2) {
-            initialDist = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
-            );
-        }
-    }, { passive: true });
-
-    containerChord.addEventListener('touchmove', (e) => {
-        if (e.touches.length === 2) {
-            if (e.cancelable) e.preventDefault(); 
-            const currentDist = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
-            );
-            const diff = currentDist / initialDist;
-            let newScale = scale * diff;
-            if (newScale > 0.6 && newScale < 3) {
-                containerChord.style.fontSize = `${baseFontSize * newScale}px`;
+    /**
+     * Logika matematika untuk mengubah string chord ke nada baru
+     */
+    function shiftChord(chord, steps) {
+        return chord.replace(/[A-G][b#]?/g, function(match) {
+            let i = notes.indexOf(match);
+            // Penanganan khusus untuk nada Flat (b) yang tidak ada di array Sharp (#)
+            if (i === -1) {
+                const flats = { 'Bb': 10, 'Eb': 3, 'Ab': 8, 'Db': 1, 'Gb': 6 };
+                i = flats[match] !== undefined ? flats[match] : -1;
             }
-        }
-    }, { passive: false });
+            if (i === -1) return match; // Jika tidak ketemu, biarkan tetap
 
-    containerChord.addEventListener('touchend', () => {
-        const fs = window.getComputedStyle(containerChord).fontSize;
-        scale = parseFloat(fs) / baseFontSize;
-    });
-
-    // === 5. FITUR AUTOSCROLL ===
-    function autoScroll() {
-        if (!isScrolling) return;
-        let speed = parseFloat(slider.value) || 1;
-        window.scrollBy(0, speed);
-        scrollRequest = requestAnimationFrame(autoScroll);
-    }
-
-    if (triggerScroll) {
-        triggerScroll.addEventListener('click', () => {
-            isScrolling = !isScrolling;
-            if (isScrolling) {
-                textScroll.innerHTML = '<i class="fas fa-pause"></i>';
-                autoscrollContainer.classList.add('active');
-                autoScroll();
-            } else {
-                textScroll.innerHTML = '<i class="fas fa-gear"></i>';
-                autoscrollContainer.classList.remove('active');
-                cancelAnimationFrame(scrollRequest);
-            }
+            // Rumus modulo 12 untuk rotasi nada musik
+            let newIndex = (i + steps) % 12;
+            while (newIndex < 0) newIndex += 12; 
+            return notes[newIndex];
         });
     }
 
+    /**
+     * Mengembalikan nada ke posisi awal (0)
+     */
+    window.resetTranspose = function() {
+        transpose(-currentPitch);
+        currentPitch = 0;
+        if (pitchIndicator) pitchIndicator.innerText = '0';
+    };
+
+    // === 4. FUNGSI AUTOSCROLL ===
+
+    /**
+     * Menjalankan animasi scroll halus menggunakan requestAnimationFrame
+     */
+    function updateScroll() {
+        if (!isScrolling) return;
+
+        const speeds = {
+            1: 0.3, 2: 0.7, 3: 1.2, 4: 2.0, 5: 3.5 
+        };
+        
+        const speed = speeds[parseInt(slider.value)] || 1;
+        window.scrollBy(0, speed);
+        scrollRequest = requestAnimationFrame(updateScroll);
+    }
+
+    /**
+     * Mulai proses scroll
+     */
+    function startScroll() {
+        isScrolling = true;
+        if (autoscrollContainer) autoscrollContainer.classList.add('active');
+        if (textScroll) {
+            $(textScroll).html('<i class="fas fa-stop"></i>').css({ fontSize: "1.2rem" });
+        }
+        updateScroll();
+    }
+
+    /**
+     * Berhenti dari proses scroll
+     */
+    function stopScroll() {
+        isScrolling = false;
+        if (autoscrollContainer) autoscrollContainer.classList.remove('active');
+        if (textScroll) {
+            $(textScroll).html('<i class="fas fa-cog"></i>').css({ fontSize: "1.2rem" });
+        }
+        cancelAnimationFrame(scrollRequest);
+    }
+
+    // === 5. EVENT LISTENERS ===
+
+    // Tombol Toggle Auto Scroll
+    if (triggerScroll) {
+        triggerScroll.addEventListener('click', () => {
+            const isOpen = autoscrollContainer.classList.toggle('open');
+            if (isOpen) startScroll(); else stopScroll();
+        });
+    }
+
+    // Tombol Kecepatan (+)
     if (btnPlus) {
-        btnPlus.addEventListener('click', () => {
+        btnPlus.addEventListener('click', (e) => {
+            e.stopPropagation();
             let val = parseInt(slider.value);
             if (val < 5) slider.value = val + 1;
         });
     }
 
+    // Tombol Kecepatan (-)
     if (btnMinus) {
-        btnMinus.addEventListener('click', () => {
+        btnMinus.addEventListener('click', (e) => {
+            e.stopPropagation();
             let val = parseInt(slider.value);
             if (val > 1) slider.value = val - 1;
         });
     }
+
+    // === 6. EKSEKUSI AWAL ===
+    checkArtistWidget();
+    initializeChords();
+
+    //agar layar kontent bisa di zoom tanpa kena semua body
+    const el = document.querySelector('.chord-content');
+let scale = 1;
+let initialDist = 0;
+const baseFontSize = 15; // Font-size awal kamu
+
+el.addEventListener('touchstart', (e) => {
+    // Jika dua jari, hitung jarak untuk persiapan zoom
+    if (e.touches.length === 2) {
+        initialDist = Math.hypot(
+            e.touches[0].pageX - e.touches[1].pageX,
+            e.touches[0].pageY - e.touches[1].pageY
+        );
+    }
+}, { passive: true }); // Ubah ke true agar tidak menghambat scroll
+
+el.addEventListener('touchmove', (e) => {
+    // HANYA JIKA DUA JARI: Lakukan Zoom
+    if (e.touches.length === 2) {
+        // e.cancelable cek apakah event bisa dihentikan
+        if (e.cancelable) e.preventDefault(); 
+
+        const currentDist = Math.hypot(
+            e.touches[0].pageX - e.touches[1].pageX,
+            e.touches[0].pageY - e.touches[1].pageY
+        );
+
+        const diff = currentDist / initialDist;
+        let newScale = scale * diff;
+
+        // Batasi skala zoom
+        if (newScale > 0.6 && newScale < 3) {
+            el.style.fontSize = `${baseFontSize * newScale}px`;
+        }
+    }
+    // Jika hanya satu jari, script ini diam saja (tidak ada e.preventDefault)
+    // Maka browser akan melakukan scroll di dalam box secara otomatis.
+}, { passive: false }); // False di sini wajib agar preventDefault zoom jalan
+
+el.addEventListener('touchend', (e) => {
+    // Update skala referensi saat jari diangkat
+    const currentFontSize = window.getComputedStyle(el).getPropertyValue('font-size');
+    scale = parseFloat(currentFontSize) / baseFontSize;
 });
 
-window.resetTranspose = () => location.reload();
-                          
+});
