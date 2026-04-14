@@ -350,9 +350,12 @@ body{
 /* Ini adalah class yang otomatis dibuat oleh JS */
 .chord-node {
    color: var(--primary-orange);
-   font-weight: 600;
+   font-weight: 800;
    transition: all 0.3s ease;
-   background: rgba(238,108,0,0.141);
+   display: inline-block;
+   width: fit-content;
+   padding: 0 3px;
+   background: rgba(238,108,0,0.141) !important;
 }
 
 
