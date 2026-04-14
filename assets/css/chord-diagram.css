@@ -8,7 +8,7 @@
   flex-direction: column;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid #f0f0f0;
-  visibility: hidden;
+  visibility: show;
   opacity: 1;
 }
 
