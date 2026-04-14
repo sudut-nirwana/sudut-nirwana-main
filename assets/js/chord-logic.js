@@ -33,27 +33,34 @@ document.addEventListener("DOMContentLoaded", function() {
     // === 3. FUNGSI TRANSPOSE & PEMBUNGKUS CHORD ===
     window.transpose = function(n) {
         if (!containerChord) return;
+        
+        // Update nilai pitch global
         currentPitch += n;
         
-        // Ambil isi teks mentah (agar tidak menumpuk tag span di dalam span)
-        // Jika sudah ada span, kita ambil textContent-nya saja
+        // Ambil isi konten saat ini
         let content = containerChord.innerHTML;
         
         // Regex untuk mencari Chord (A-G, #, b, m, 7, maj, dsb)
+        // Kita gunakan pengenalan pola yang tidak merusak tag span yang sudah ada
         const chordRegex = /\b([A-G][b#]?(m|maj|7|sus|dim|add)?\d?)\b/g;
 
         // Proses penggantian teks menjadi span yang bisa diklik
         let newContent = content.replace(chordRegex, function(match) {
-            let baseNote = match.match(/[A-G][b#]?/)[0];
+            // Ekstrak nada dasar (misal dari Am7 ambil A)
+            let baseMatch = match.match(/[A-G][b#]?/);
+            if (!baseMatch) return match;
+            
+            let baseNote = baseMatch[0];
             let suffix = match.replace(baseNote, '');
             
             let index = notes.indexOf(baseNote);
             if (index === -1) return match;
 
+            // Hitung nada baru
             let newIndex = (index + n + 12) % 12;
             let newNote = notes[newIndex] + suffix;
 
-            // Membungkus dengan class chord-node untuk dideteksi chord-generator.js
+            // Bungkus dengan class chord-node untuk dideteksi chord-generator.js
             return `<span class="chord-node">${newNote}</span>`;
         });
 
@@ -64,12 +71,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
 
-    // === 4. EKSEKUSI AWAL (PENTING) ===
+    // === 4. EKSEKUSI AWAL ===
     checkArtistWidget();
-    // Jalankan transpose(0) agar saat loading chord langsung terbungkus span & bisa diklik
+    
+    // PENTING: Jalankan transpose(0) agar saat halaman dimuat, 
+    // lirik langsung di-scan dan chord dibungkus span agar bisa diklik.
     transpose(0);
 
-    // === 5. FITUR ZOOM AREA (TOUCH) ===
+    // === 5. FITUR ZOOM AREA (TOUCH GESTURE) ===
     let initialDist = 0;
     let scale = 1;
     const baseFontSize = 15;
@@ -92,6 +101,8 @@ document.addEventListener("DOMContentLoaded", function() {
             );
             const diff = currentDist / initialDist;
             let newScale = scale * diff;
+            
+            // Batasan zoom minimal dan maksimal
             if (newScale > 0.6 && newScale < 3) {
                 containerChord.style.fontSize = `${baseFontSize * newScale}px`;
             }
@@ -128,19 +139,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (btnPlus) {
         btnPlus.addEventListener('click', () => {
-            if (parseInt(slider.value) < 5) slider.value = parseInt(slider.value) + 1;
+            let val = parseInt(slider.value);
+            if (val < 5) slider.value = val + 1;
         });
     }
 
     if (btnMinus) {
         btnMinus.addEventListener('click', () => {
-            if (parseInt(slider.value) > 1) slider.value = parseInt(slider.value) - 1;
+            let val = parseInt(slider.value);
+            if (val > 1) slider.value = val - 1;
         });
     }
 });
 
-// Fungsi Reset (Global)
+// Fungsi Reset Nada (Global)
 window.resetTranspose = function() {
     location.reload();
 };
-                
