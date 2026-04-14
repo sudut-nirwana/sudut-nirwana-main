@@ -123,13 +123,6 @@
     margin-top: 20px;
 }
 
-/* Kondisi awal konten tersembunyi */
-.chord-card {
-    opacity: 1;
-    transform: translateY(50px); /* Lebih rendah agar efek naik lebih terasa */
-    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
 .chord-card {
     background: #fff;
     border: 1px solid #eee;
@@ -137,12 +130,7 @@
     padding: 10px;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0,0,0,.1);
-}
-
-/* Kondisi saat animasi aktif */
-.chord-card.reveal-active {
-    opacity: 1 !important;
-    transform: translateY(0);
+    transition: all 0.3s ease-in;
 }
 
 .chord-card:hover {
