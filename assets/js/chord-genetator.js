@@ -93,13 +93,17 @@ function renderAllChords() {
 
 // Deteksi Klik pada .chord-node (Lirik)
 document.addEventListener('click', function(e) {
-    // Mencari apakah yang diklik adalah .chord-node
+    // Mencari elemen .chord-node terdekat dari lokasi klik
     const targetChord = e.target.closest('.chord-node');
     
     if (targetChord) {
-        // Ambil teks chord-nya
+        // Ambil teks chord-nya (misal: "G" atau "Am")
         const chordName = targetChord.innerText.trim();
-        console.log("Memanggil chord:", chordName); // Untuk testing di console
+        
+        // Debugging: Muncul di console Eruda kamu jika berhasil diklik
+        console.log("Membuka diagram untuk chord:", chordName); 
+        
+        // Panggil fungsi untuk menampilkan panel
         showChordPanel(chordName);
     }
 });
