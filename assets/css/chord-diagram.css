@@ -105,25 +105,10 @@
 
 
 /* Styling untuk Halaman Tutorial Grid */
-/* Container Utama */
-/* Judul Grid */
-.chord-grid-title {
-    /* Mengikuti standar heading di style.css */
-    font-size: 1.25rem; /* Ukuran dasar */
-    margin-bottom: 20px;
-    padding-left: 10px;
-    color: #333;
-}
-
-/* Container Grid Utama */
-
 .chord-grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 20px;
-    padding: 10px;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .chord-card {
@@ -143,12 +128,7 @@
 
 .chord-card-name {
     font-weight: 800;
-    color: #333;
+    color: #ee6c00;
     margin-bottom: 10px;
     font-size: 1.2rem;
-}
-
-span{
-   background: linear-gradient( to right, rgba(238,108,0,0.161), rgba(238,108,0,0.120) )
-  padding: 0 3px;
 }
