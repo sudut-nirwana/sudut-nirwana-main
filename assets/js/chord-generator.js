@@ -88,29 +88,28 @@ function generateChordSVG(chordName) {
         gridContainer.appendChild(card);
     });
 }*/
+
 function renderAllChords() {
     const gridContainer = document.getElementById('all-chords-grid');
     if (!gridContainer) return;
 
     gridContainer.innerHTML = ""; 
 
-    // 1. Setup Pengawas Scroll (Observer)
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.2 // Animasi jalan saat 20% bagian kartu masuk layar
-    };
-
+    // 1. Buat Pengawas (Observer)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
+            // Logika: Jika elemen masuk layar (isIntersecting)
             if (entry.isIntersecting) {
-                // Tambahkan class active saat kartu terlihat di layar
                 entry.target.classList.add('active');
-                // Berhenti mengawasi kartu ini jika sudah muncul
-                observer.unobserve(entry.target);
+                observer.unobserve(entry.target); 
             }
         });
-    }, observerOptions);
+    }, {
+        root: null,
+        // rootMargin '0px -20px' memastikan animasi tidak terpotong di pinggir
+        rootMargin: '0px 0px -10% 0px', 
+        threshold: 0.1 
+    });
 
     // 2. Render Kartu
     Object.keys(chordDB).forEach((chord) => {
@@ -124,10 +123,14 @@ function renderAllChords() {
 
         gridContainer.appendChild(card);
         
-        // 3. Daftarkan kartu ke pengawas scroll
-        observer.observe(card);
+        // 3. Beri jeda 10ms agar browser sadar elemen sudah ada di halaman
+        setTimeout(() => {
+            observer.observe(card);
+        }, 10);
     });
 }
+
+
 
 
 // Jalankan fungsi grid saat halaman dimuat
