@@ -116,30 +116,7 @@
 }
 
 /* Container Grid Utama */
-.chord-grid-container {
-    display: grid;
-    /* HP: Paksa 2 kolom agar tidak tumpah */
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 12px;
-    width: 100%;
-    box-sizing: border-box;
-}
 
-/* Tablet & Desktop (Min 768px) */
-@media (min-width: 768px) {
-    .chord-grid-title {
-        /* Ukuran font akan membesar otomatis di layar lebar */
-        font-size: 1.5rem; 
-    }
-    
-    .chord-grid-container {
-        /* Kembali ke repeat auto jika di layar lebar */
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        gap: 15px;
-    }
-}
-
-/*
 .chord-grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -169,7 +146,7 @@
     color: #333;
     margin-bottom: 10px;
     font-size: 1.2rem;
-}*/
+}
 
 span{
    background: linear-gradient( to right, rgba(238,108,0,0.161), rgba(238,108,0,0.120) )
