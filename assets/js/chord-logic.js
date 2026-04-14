@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     
+    
     // === 1. INISIALISASI VARIABEL GLOBAL ===
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     let currentPitch = 0;
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // === 2. FUNGSI WIDGET CHECKER ===
     // Mengecek apakah widget artis harus ditampilkan atau disembunyikan
-    function checkArtistWidget() {
+    /*function checkArtistWidget() {
         if (widgetElement && wrapper) {
             const artistName = widgetElement.getAttribute('data-artist-name');
             if (!artistName || artistName.trim() === "" || artistName.includes("{{")) {
@@ -29,8 +30,26 @@ document.addEventListener("DOMContentLoaded", function() {
                 wrapper.style.display = 'block';
             }
         }
-    }
+    }*/
+    function initializeChords() {
+        const container = document.getElementById('chord-content');
+        if (!container) return;
 
+        let content = container.innerHTML;
+        
+        // Regex yang lebih aman untuk menangkap chord A-G, m, #, 7, dll
+        const chordRegex = /\b([A-G][b#]?(m|maj|7|sus|dim|add)?\d?)\b/g;
+        
+        // Membungkus chord dengan span class chord-node
+        content = content.replace(chordRegex, function(match) {
+            return `<span class="chord-node">${match}</span>`;
+        });
+
+        container.innerHTML = content;
+        console.log("Lirik berhasil diproses!"); // Cek di Eruda
+    }
+    checkArtistWidget(); 
+    initializeChords();
     // === 3. FUNGSI MANAJEMEN CHORD & TRANSPOSE ===
 
     /**
