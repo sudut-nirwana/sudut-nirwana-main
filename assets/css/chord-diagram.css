@@ -137,5 +137,6 @@
 }
 
 span{
-   font-size: 30px;
+   background: linear-gradient( to right, rgba(238,108,0,0.161), rgba(238,108,0,0.120) )
+  padding: 0 3px;
 }
