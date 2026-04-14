@@ -92,8 +92,14 @@ function renderAllChords() {
 }
 
 // Deteksi Klik pada .chord-node (Lirik)
-document.addEventListener('click', e => {
-    const t = e.target.closest('.chord-node');
-    if (t) showChordPanel(t.innerText.trim());
+document.addEventListener('click', function(e) {
+    // Mencari apakah yang diklik adalah .chord-node
+    const targetChord = e.target.closest('.chord-node');
+    
+    if (targetChord) {
+        // Ambil teks chord-nya
+        const chordName = targetChord.innerText.trim();
+        console.log("Memanggil chord:", chordName); // Untuk testing di console
+        showChordPanel(chordName);
+    }
 });
-
