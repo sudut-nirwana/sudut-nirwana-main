@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // === 1. VARIABEL GLOBAL ===
+    // === 1. INISIALISASI VARIABEL GLOBAL ===
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     let currentPitch = 0;
     let isScrolling = false;
@@ -20,32 +20,51 @@ document.addEventListener("DOMContentLoaded", function() {
     const btnPlus = document.getElementById('btn-plus');
     const btnMinus = document.getElementById('btn-minus');
 
-    // === 2. FUNGSI TRANSPOSE & PEMBUNGKUS ===
+    // Simpan teks asli lirik saat pertama kali dimuat agar transpose selalu akurat
+    const originalText = containerChord ? containerChord.innerText : "";
+
+    // === 2. FUNGSI TRANSPOSE & PEMBUNGKUS CHORD ===
     window.transpose = function(n) {
         if (!containerChord) return;
+        
+        // Update nilai pitch total
         currentPitch += n;
         
-        let text = containerChord.innerText;
+        // Selalu mulai dari teks asli agar tidak terjadi penumpukan karakter (#)
         const chordRegex = /\b([A-G][b#]?(m|maj|7|sus|dim|add)?\d?)\b/g;
 
-        let processed = text.replace(chordRegex, function(match) {
+        let processed = originalText.replace(chordRegex, function(match) {
             let baseMatch = match.match(/[A-G][b#]?/);
             if (!baseMatch) return match;
             
             let baseNote = baseMatch[0];
             let suffix = match.replace(baseNote, '');
-            let index = notes.indexOf(baseNote);
             
+            // Normalisasi nada (convert flat ke sharp agar ketemu di array notes)
+            if (baseNote === 'Gb') baseNote = 'F#';
+            if (baseNote === 'Db') baseNote = 'C#';
+            if (baseNote === 'Ab') baseNote = 'G#';
+            if (baseNote === 'Eb') baseNote = 'D#';
+            if (baseNote === 'Bb') baseNote = 'A#';
+
+            let index = notes.indexOf(baseNote);
             if (index === -1) return match;
 
-            let newIndex = (index + n + 12) % 12;
+            // Hitung nada baru berdasarkan pitch total
+            let newIndex = (index + currentPitch) % 12;
+            if (newIndex < 0) newIndex += 12;
+            
             let newNote = notes[newIndex] + suffix;
 
+            // Bungkus dengan span agar bisa diklik untuk diagram
             return `<span class="chord-node">${newNote}</span>`;
         });
 
         containerChord.innerHTML = processed;
-        if (pitchIndicator) pitchIndicator.innerText = (currentPitch > 0 ? "+" : "") + currentPitch;
+        
+        if (pitchIndicator) {
+            pitchIndicator.innerText = (currentPitch > 0 ? "+" : "") + currentPitch;
+        }
     };
 
     // === 3. EKSEKUSI AWAL ===
@@ -54,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
         wrapper.style.display = (!artist || artist.includes("{{")) ? 'none' : 'block';
     }
 
-    // Jalankan transpose(0) agar chord langsung aktif
+    // Jalankan transpose 0 agar chord langsung terbungkus span saat halaman dibuka
     transpose(0);
 
     // === 4. FITUR ZOOM AREA (TOUCH) ===
@@ -91,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function() {
         scale = parseFloat(fs) / baseFontSize;
     });
 
-    // === 5. LOGIKA AUTOSCROLL (DIPERBAIKI) ===
+    // === 5. FITUR AUTOSCROLL ===
     function autoScroll() {
         if (!isScrolling) return;
         let speed = parseFloat(slider.value) || 1;
@@ -114,7 +133,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Kontrol tombol Plus/Minus untuk Slider
     if (btnPlus) {
         btnPlus.addEventListener('click', () => {
             let val = parseInt(slider.value);
@@ -131,4 +149,4 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 window.resetTranspose = () => location.reload();
-                    
+                          
