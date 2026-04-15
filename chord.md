@@ -11,7 +11,7 @@ permalink: /chord/
   </div>
 
   <div class="row">
-    {% assign artists = site.posts | map: 'artist' | uniq | sort %}
+    {% assign artists = site.chord | map: 'artist' | uniq | sort %}
     {% for artist in artists %}
       {% if artist %}
       <div class="col-md-4 col-sm-6 mb-3">
