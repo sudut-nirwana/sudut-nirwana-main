@@ -1,6 +1,6 @@
 ---
 layout: daftar-artis
-title: "Daftar Lengkap Artis"
+title: "Lengkap A-Z"
 permalink: /chord/
 ---
 
