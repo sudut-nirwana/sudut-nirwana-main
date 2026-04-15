@@ -1,28 +1,27 @@
 ---
 layout: daftar-artis
-title: "Semua Chord"
+title: "Daftar Lengkap Artis"
 permalink: /chord/
 ---
 
-<section class="content-section">
-  <div class="container">
-    <header class="entry-header">
-      <h2 class="entry-title">Daftar Artis <span>Semua Chord</span></h2>
-      <p>Temukan chord gitar berdasarkan nama artis favorit anda secara lengkap.</p>
-    </header>
-    <div class="artist-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
-      {% assign artists = site.posts | map: 'artist' | uniq | sort %}
-      {% for artist in artists %}
-        {% if artist %}
-          <a href="{{ '/artis/' | append: artist | slugify | append: '/' | relative_url }}" class="artist-card" style="text-decoration: none; color: inherit;">
-            <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: #fff; display: flex; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-              <i class="fa-solid fa-microphone-lines" style="margin-right: 10px; color: #888;"></i>
-              <span style="font-weight: 500;">{{ artist }}</span>
-            </div>
-          </a>
-        {% endif %}
-      {% endfor %}
-    </div>
+<div class="container">
+  <div class="entry-header mb-4">
+    <h2 class="entry-title">Daftar Lengkap <span>Semua Artis</span></h2>
+    <p>Temukan kunci gitar dan lirik lagu berdasarkan nama artis favorit Anda secara lengkap dari A sampai Z.</p>
   </div>
-</section>
 
+  <div class="row">
+    {% assign artists = site.posts | map: 'artist' | uniq | sort %}
+    {% for artist in artists %}
+      {% if artist %}
+      <div class="col-md-4 col-sm-6 mb-3">
+        <div class="artist-card">
+          <a href="{{ '/artis/' | append: artist | slugify | append: '/' | relative_url }}" class="btn btn-outline-light btn-block text-left p-3 shadow-sm" style="color: #333; border: 1px solid #eee; background: #fff; border-radius: 8px; display: block;">
+            <i class="fa-solid fa-microphone-lines mr-2 text-secondary"></i> {{ artist }}
+          </a>
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
