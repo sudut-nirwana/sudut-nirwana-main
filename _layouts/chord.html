@@ -41,10 +41,9 @@ layout: default
                 {% assign slug = "a-b" %}
               {% endif %}
 
-              <!--<a href="{{ '/artis/' | append: slug | append: '/' | relative_url }}?artist={{ page.artist | slugify }}">
+              <<a href="{{ '/artis/' | append: slug | append: '/' | relative_url }}?artist={{ page.artist | slugify }}">
                 {{ page.artist }}
-              </a>-->
-              {{ page.artist }}
+              </a>
             </li>
             {% endif %}
 
